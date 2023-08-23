@@ -1,5 +1,6 @@
 package gregtech.common.gui.modularui.widget;
 
+import appeng.util.item.AEItemStack;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.inventory.Slot;
 
@@ -9,7 +10,6 @@ import com.gtnewhorizons.modularui.common.widget.SlotWidget;
 
 import appeng.client.render.AppEngRenderItem;
 import appeng.core.AELog;
-import appeng.util.Platform;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -25,7 +25,7 @@ public class AESlotWidget extends SlotWidget {
         final AppEngRenderItem aeRenderItem = new AppEngRenderItem();
         final RenderItem pIR = this.setItemRender(aeRenderItem);
         try {
-            aeRenderItem.setAeStack(Platform.getAEStackInSlot(slotIn));
+            aeRenderItem.setAeStack(AEItemStack.create(slotIn.getStack()));
             super.drawSlot(slotIn, false);
         } catch (final Exception err) {
             AELog.warn("[AppEng] AE prevented crash while drawing slot: " + err);

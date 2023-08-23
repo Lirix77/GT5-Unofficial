@@ -1,7 +1,6 @@
 package gregtech.loaders.preload;
 
 import static gregtech.api.enums.MetaTileEntityIDs.*;
-import static gregtech.api.enums.Mods.Forestry;
 
 import net.minecraft.util.EnumChatFormatting;
 
@@ -38,7 +37,6 @@ import gregtech.api.util.GT_OreDictUnificator;
 import gregtech.common.tileentities.automation.GT_MetaTileEntity_ChestBuffer;
 import gregtech.common.tileentities.automation.GT_MetaTileEntity_Filter;
 import gregtech.common.tileentities.automation.GT_MetaTileEntity_ItemDistributor;
-import gregtech.common.tileentities.automation.GT_MetaTileEntity_RecipeFilter;
 import gregtech.common.tileentities.automation.GT_MetaTileEntity_Regulator;
 import gregtech.common.tileentities.automation.GT_MetaTileEntity_SuperBuffer;
 import gregtech.common.tileentities.automation.GT_MetaTileEntity_TypeFilter;
@@ -68,7 +66,6 @@ import gregtech.common.tileentities.machines.GT_MetaTileEntity_Hatch_Output_ME;
 import gregtech.common.tileentities.machines.basic.GT_MetaTileEntity_AdvSeismicProspector;
 import gregtech.common.tileentities.machines.basic.GT_MetaTileEntity_Boxinator;
 import gregtech.common.tileentities.machines.basic.GT_MetaTileEntity_Charger;
-import gregtech.common.tileentities.machines.basic.GT_MetaTileEntity_IndustrialApiary;
 import gregtech.common.tileentities.machines.basic.GT_MetaTileEntity_Massfabricator;
 import gregtech.common.tileentities.machines.basic.GT_MetaTileEntity_MicrowaveEnergyTransmitter;
 import gregtech.common.tileentities.machines.basic.GT_MetaTileEntity_Miner;
@@ -755,14 +752,6 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
     }
 
     private static void registerIndustrialApiary() {
-        if (Forestry.isModLoaded()) {
-            ItemList.Machine_IndustrialApiary.set(
-                new GT_MetaTileEntity_IndustrialApiary(
-                    INDUSTRIAL_APIARY.ID,
-                    "basicmachine.industrialapiary",
-                    "Industrial Apiary",
-                    8).getStackForm(1L));
-        }
     }
 
     private static void registerMassFab() {
@@ -1394,66 +1383,7 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
     }
 
     private static void registerRecipeFilter() {
-        ItemList.Automation_RecipeFilter_ULV.set(
-            new GT_MetaTileEntity_RecipeFilter(
-                RECIPE_FILTER_ULV.ID,
-                "automation.recipefilter.tier.00",
-                "Ultra Low Voltage Recipe Filter",
-                0).getStackForm(1L));
-        ItemList.Automation_RecipeFilter_LV.set(
-            new GT_MetaTileEntity_RecipeFilter(
-                RECIPE_FILTER_LV.ID,
-                "automation.recipefilter.tier.01",
-                "Low Voltage Recipe Filter",
-                1).getStackForm(1L));
-        ItemList.Automation_RecipeFilter_MV.set(
-            new GT_MetaTileEntity_RecipeFilter(
-                RECIPE_FILTER_MV.ID,
-                "automation.recipefilter.tier.02",
-                "Medium Voltage Recipe Filter",
-                2).getStackForm(1L));
-        ItemList.Automation_RecipeFilter_HV.set(
-            new GT_MetaTileEntity_RecipeFilter(
-                RECIPE_FILTER_HV.ID,
-                "automation.recipefilter.tier.03",
-                "High Voltage Recipe Filter",
-                3).getStackForm(1L));
-        ItemList.Automation_RecipeFilter_EV.set(
-            new GT_MetaTileEntity_RecipeFilter(
-                RECIPE_FILTER_EV.ID,
-                "automation.recipefilter.tier.04",
-                "Extreme Voltage Recipe Filter",
-                4).getStackForm(1L));
-        ItemList.Automation_RecipeFilter_IV.set(
-            new GT_MetaTileEntity_RecipeFilter(
-                RECIPE_FILTER_IV.ID,
-                "automation.recipefilter.tier.05",
-                "Insane Voltage Recipe Filter",
-                5).getStackForm(1L));
-        ItemList.Automation_RecipeFilter_LuV.set(
-            new GT_MetaTileEntity_RecipeFilter(
-                RECIPE_FILTER_LuV.ID,
-                "automation.recipefilter.tier.06",
-                "Ludicrous Voltage Recipe Filter",
-                6).getStackForm(1L));
-        ItemList.Automation_RecipeFilter_ZPM.set(
-            new GT_MetaTileEntity_RecipeFilter(
-                RECIPE_FILTER_ZPM.ID,
-                "automation.recipefilter.tier.07",
-                "ZPM Voltage Recipe Filter",
-                7).getStackForm(1L));
-        ItemList.Automation_RecipeFilter_UV.set(
-            new GT_MetaTileEntity_RecipeFilter(
-                RECIPE_FILTER_UV.ID,
-                "automation.recipefilter.tier.08",
-                "Ultimate Voltage Recipe Filter",
-                8).getStackForm(1L));
-        ItemList.Automation_RecipeFilter_MAX.set(
-            new GT_MetaTileEntity_RecipeFilter(
-                RECIPE_FILTER_UHV.ID,
-                "automation.recipefilter.tier.09",
-                "Highly Ultimate Voltage Recipe Filter",
-                9).getStackForm(1L));
+
     }
 
     private static void registerMachineHull() {

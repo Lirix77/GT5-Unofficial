@@ -6,7 +6,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 import forestry.api.apiculture.EnumBeeChromosome;
-import forestry.api.core.IClimateProvider;
 import forestry.api.genetics.AlleleManager;
 import forestry.api.genetics.IAllele;
 import forestry.api.genetics.IAlleleArea;
@@ -146,7 +145,7 @@ public class GT_Bees {
 
         @Override
         public float getChance(World world, int x, int y, int z, IAllele allele0, IAllele allele1, IGenome genome0,
-            IGenome genome1, IClimateProvider climate) {
+            IGenome genome1) {
             if (world.provider.dimensionId == dimID) return 1;
             return 0;
         }
@@ -169,8 +168,8 @@ public class GT_Bees {
 
         @Override
         public float getChance(World world, int x, int y, int z, IAllele allele0, IAllele allele1, IGenome genome0,
-            IGenome genome1, IClimateProvider climate) {
-            if (climate.getBiome().biomeID == biomeID) return 1;
+            IGenome genome1) {
+            if (world.provider.getBiomeGenForCoords(x,z).biomeID == biomeID) return 1;
             return 0;
         }
 

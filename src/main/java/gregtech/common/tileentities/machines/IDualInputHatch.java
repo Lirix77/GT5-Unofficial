@@ -11,6 +11,4 @@ public interface IDualInputHatch {
     Iterator<? extends IDualInputInventory> inventories();
 
     void updateTexture(int id);
-
-    void updateCraftingIcon(ItemStack icon);
 }

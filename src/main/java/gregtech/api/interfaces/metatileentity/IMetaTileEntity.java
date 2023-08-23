@@ -22,7 +22,6 @@ import net.minecraftforge.fluids.IFluidTank;
 
 import com.gtnewhorizons.modularui.api.forge.ItemStackHandler;
 
-import appeng.api.crafting.ICraftingIconProvider;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gregtech.api.enums.Dyes;
@@ -44,7 +43,7 @@ import gregtech.common.power.Power;
  * Don't implement this yourself and expect it to work. Extend @MetaTileEntity itself.
  */
 public interface IMetaTileEntity extends ISidedInventory, IFluidTank, IFluidHandler, IGearEnergyTileEntity,
-    IMachineBlockUpdateable, IGregtechWailaProvider, IGetGUITextureSet, ICraftingIconProvider {
+    IMachineBlockUpdateable, IGregtechWailaProvider, IGetGUITextureSet {
 
     /**
      * This determines the BaseMetaTileEntity belonging to this MetaTileEntity by using the Meta ID of the Block itself.
@@ -520,8 +519,4 @@ public interface IMetaTileEntity extends ISidedInventory, IFluidTank, IFluidHand
      */
     default void addAdditionalTooltipInformation(ItemStack stack, List<String> tooltip) {}
 
-    @Override
-    default ItemStack getMachineCraftingIcon() {
-        return null;
-    }
 }

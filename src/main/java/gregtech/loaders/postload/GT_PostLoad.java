@@ -36,7 +36,6 @@ import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.SubTag;
-import gregtech.api.util.GT_CLS_Compat;
 import gregtech.api.util.GT_Forestry_Compat;
 import gregtech.api.util.GT_Log;
 import gregtech.api.util.GT_ModHandler;
@@ -434,19 +433,10 @@ public class GT_PostLoad {
 
         ProgressManager.ProgressBar progressBar = ProgressManager
             .push("Register materials", replaceVanillaItemsSet.size());
-        if (GT_Values.cls_enabled) {
-            try {
-                GT_CLS_Compat.doActualRegistrationCLS(progressBar, replaceVanillaItemsSet);
-                GT_CLS_Compat.pushToDisplayProgress();
-            } catch (InvocationTargetException | IllegalAccessException e) {
-                GT_Mod.GT_FML_LOGGER.catching(e);
-            }
-        } else {
-            replaceVanillaItemsSet.forEach(m -> {
-                progressBar.step(m.mDefaultLocalName);
-                doActualRegistration(m);
-            });
-        }
+        replaceVanillaItemsSet.forEach(m -> {
+            progressBar.step(m.mDefaultLocalName);
+            doActualRegistration(m);
+        });
         ProgressManager.pop(progressBar);
         // noinspection UnstableApiUsage// stable enough for project
         GT_Mod.GT_FML_LOGGER.info("Replaced Vanilla Materials (" + stopwatch.stop() + "). Have a Cake.");

@@ -147,7 +147,6 @@ import gregtech.api.objects.GT_ItemStack;
 import gregtech.api.objects.GT_UO_DimensionList;
 import gregtech.api.objects.ItemData;
 import gregtech.api.util.GT_BlockMap;
-import gregtech.api.util.GT_CLS_Compat;
 import gregtech.api.util.GT_ChunkAssociatedData;
 import gregtech.api.util.GT_ClientPreference;
 import gregtech.api.util.GT_CoverBehaviorBase;
@@ -2929,14 +2928,9 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler, IG
         this.mOreDictActivated = true;
         ProgressManager.ProgressBar progressBar = ProgressManager.push("Register materials", mEvents.size());
 
-        if (BetterLoadingScreen.isModLoaded()) {
-            GT_Values.cls_enabled = true;
-            try {
-                GT_CLS_Compat.stepMaterialsCLS(mEvents, progressBar);
-            } catch (IllegalAccessException e) {
-                GT_FML_LOGGER.catching(e);
-            }
-        } else GT_Proxy.stepMaterialsVanilla(this.mEvents, progressBar);
+        if (!BetterLoadingScreen.isModLoaded()) {
+            GT_Proxy.stepMaterialsVanilla(this.mEvents, progressBar);
+        }
     }
 
     @Deprecated

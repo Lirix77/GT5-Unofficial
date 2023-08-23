@@ -62,7 +62,6 @@ public class UniversiumRenderer extends GT_GeneratedMaterial_Renderer {
             GL11.glEnable(GL11.GL_ALPHA_TEST);
 
             if (tIcon != null) {
-                markNeedsAnimationUpdate(tIcon);
                 magicRenderMethod(type, aStack, tIcon, false, data);
             }
 
@@ -71,7 +70,6 @@ public class UniversiumRenderer extends GT_GeneratedMaterial_Renderer {
             if (tOverlay != null) {
                 GL11.glColor3f(1.0F, 1.0F, 1.0F);
                 TextureUtils.bindAtlas(aItem.getSpriteNumber());
-                markNeedsAnimationUpdate(tOverlay);
                 renderItemOverlay(type, tOverlay);
             }
 

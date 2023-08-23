@@ -572,7 +572,7 @@ public class GT_Utility {
         if (TE_CHECK && tileEntity instanceof IItemDuct) return true;
         if (BC_CHECK && tileEntity instanceof buildcraft.api.transport.IPipeTile pipeTile)
             return pipeTile.isPipeConnected(side);
-        return GregTech_API.mTranslocator && tileEntity instanceof codechicken.translocator.TileItemTranslocator;
+        return false;
     }
 
     /**

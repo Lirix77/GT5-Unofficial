@@ -1,8 +1,5 @@
 package gregtech;
 
-import static gregtech.GT_Version.VERSION_MAJOR;
-import static gregtech.GT_Version.VERSION_MINOR;
-import static gregtech.GT_Version.VERSION_PATCH;
 import static gregtech.api.GregTech_API.registerCircuitProgrammer;
 import static gregtech.api.enums.Mods.Forestry;
 
@@ -126,7 +123,6 @@ import ic2.api.recipe.RecipeOutput;
     version = "MC1710",
     guiFactory = "gregtech.client.GT_GuiFactory",
     dependencies = " required-after:IC2;" + " required-after:structurelib;"
-        + " required-after:gtnhlib@[0.0.8,);"
         + " required-after:modularui@[1.1.12,);"
         + " after:dreamcraft;"
         + " after:Forestry;"
@@ -167,11 +163,11 @@ import ic2.api.recipe.RecipeOutput;
 public class GT_Mod implements IGT_Mod {
 
     @Deprecated // Keep for use in BaseMetaTileEntity
-    public static final int VERSION = VERSION_MAJOR, SUBVERSION = VERSION_MINOR;
+    public static final int VERSION = 5, SUBVERSION = 9;
 
     @Deprecated
     public static final int TOTAL_VERSION = calculateTotalGTVersion(VERSION, SUBVERSION);
-    public static final int NBT_VERSION = calculateTotalGTVersion(VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
+    public static final int NBT_VERSION = calculateTotalGTVersion(VERSION, SUBVERSION, 43);
 
     @Deprecated
     public static final int REQUIRED_IC2 = 624;

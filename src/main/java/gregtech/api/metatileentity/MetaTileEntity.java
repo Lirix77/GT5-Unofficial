@@ -1179,18 +1179,6 @@ public abstract class MetaTileEntity implements IMetaTileEntity, ICleanroomRecei
 
     public void gridChanged() {}
 
-    @Override
-    public ItemStack getMachineCraftingIcon() {
-        final IGregTechTileEntity mte = getBaseMetaTileEntity();
-        if (mte == null) {
-            return null;
-        }
-        return mte.getDrops()
-            .stream()
-            .findAny()
-            .orElse(null);
-    }
-
     // === Waila compat ===
 
     @Override
@@ -1209,9 +1197,7 @@ public abstract class MetaTileEntity implements IMetaTileEntity, ICleanroomRecei
             final boolean isPowered = tag.getBoolean("isPowered");
             final boolean isBooting = tag.getBoolean("isBooting");
 
-            if (isBooting) {
-                currenttip.add(WailaText.Booting.getLocal());
-            } else if (isActive && isPowered) {
+            if (isActive && isPowered) {
                 currenttip.add(WailaText.DeviceOnline.getLocal());
             } else if (isPowered) {
                 currenttip.add(WailaText.DeviceMissingChannel.getLocal());
@@ -1228,10 +1214,8 @@ public abstract class MetaTileEntity implements IMetaTileEntity, ICleanroomRecei
             // adapted from PowerStateWailaDataProvider
             final boolean isActive = state.isActive();
             final boolean isPowered = state.isPowered();
-            final boolean isBooting = state.isBooting();
             tag.setBoolean("isActive", isActive);
             tag.setBoolean("isPowered", isPowered);
-            tag.setBoolean("isBooting", isBooting);
         }
     }
 

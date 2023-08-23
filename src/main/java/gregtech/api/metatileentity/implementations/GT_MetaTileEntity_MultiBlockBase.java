@@ -1422,10 +1422,8 @@ public abstract class GT_MetaTileEntity_MultiBlockBase extends MetaTileEntity
         if (aMetaTileEntity == null) return false;
         if (aMetaTileEntity instanceof GT_MetaTileEntity_Hatch hatch) {
             hatch.updateTexture(aBaseCasingIndex);
-            hatch.updateCraftingIcon(this.getMachineCraftingIcon());
         }
         if (aMetaTileEntity instanceof IDualInputHatch hatch) {
-            hatch.updateCraftingIcon(this.getMachineCraftingIcon());
             return mDualInputHatches.add(hatch);
         }
         if (aMetaTileEntity instanceof GT_MetaTileEntity_Hatch_Input) {
@@ -1457,7 +1455,6 @@ public abstract class GT_MetaTileEntity_MultiBlockBase extends MetaTileEntity
         if (aMetaTileEntity == null) return false;
         if (aMetaTileEntity instanceof GT_MetaTileEntity_Hatch_Maintenance hatch) {
             hatch.updateTexture(aBaseCasingIndex);
-            hatch.updateCraftingIcon(this.getMachineCraftingIcon());
             return mMaintenanceHatches.add(hatch);
         }
         return false;
@@ -1471,7 +1468,6 @@ public abstract class GT_MetaTileEntity_MultiBlockBase extends MetaTileEntity
         if (aMetaTileEntity == null) return false;
         if (aMetaTileEntity instanceof GT_MetaTileEntity_Hatch_Energy hatch) {
             hatch.updateTexture(aBaseCasingIndex);
-            hatch.updateCraftingIcon(this.getMachineCraftingIcon());
             return mEnergyHatches.add(hatch);
         }
         return false;
@@ -1484,7 +1480,6 @@ public abstract class GT_MetaTileEntity_MultiBlockBase extends MetaTileEntity
         if (aMetaTileEntity instanceof GT_MetaTileEntity_Hatch hatch
             && GT_ExoticEnergyInputHelper.isExoticEnergyInput(aMetaTileEntity)) {
             hatch.updateTexture(aBaseCasingIndex);
-            hatch.updateCraftingIcon(this.getMachineCraftingIcon());
             return mExoticEnergyHatches.add(hatch);
         }
         return false;
@@ -1496,7 +1491,6 @@ public abstract class GT_MetaTileEntity_MultiBlockBase extends MetaTileEntity
         if (aMetaTileEntity == null) return false;
         if (aMetaTileEntity instanceof GT_MetaTileEntity_Hatch_Dynamo hatch) {
             hatch.updateTexture(aBaseCasingIndex);
-            hatch.updateCraftingIcon(this.getMachineCraftingIcon());
             return mDynamoHatches.add(hatch);
         }
         return false;
@@ -1508,7 +1502,6 @@ public abstract class GT_MetaTileEntity_MultiBlockBase extends MetaTileEntity
         if (aMetaTileEntity == null) return false;
         if (aMetaTileEntity instanceof GT_MetaTileEntity_Hatch_Muffler hatch) {
             hatch.updateTexture(aBaseCasingIndex);
-            hatch.updateCraftingIcon(this.getMachineCraftingIcon());
             return mMufflerHatches.add(hatch);
         }
         return false;
@@ -1531,13 +1524,11 @@ public abstract class GT_MetaTileEntity_MultiBlockBase extends MetaTileEntity
         if (aMetaTileEntity instanceof IDualInputHatch hatch) {
             if (!supportsCraftingMEBuffer()) return false;
             hatch.updateTexture(aBaseCasingIndex);
-            hatch.updateCraftingIcon(this.getMachineCraftingIcon());
             return mDualInputHatches.add(hatch);
         }
 
         if (aMetaTileEntity instanceof GT_MetaTileEntity_Hatch_InputBus hatch) {
             hatch.updateTexture(aBaseCasingIndex);
-            hatch.updateCraftingIcon(this.getMachineCraftingIcon());
             hatch.mRecipeMap = getRecipeMap();
             return mInputBusses.add(hatch);
         }
@@ -1550,7 +1541,6 @@ public abstract class GT_MetaTileEntity_MultiBlockBase extends MetaTileEntity
         if (aMetaTileEntity == null) return false;
         if (aMetaTileEntity instanceof GT_MetaTileEntity_Hatch_OutputBus hatch) {
             hatch.updateTexture(aBaseCasingIndex);
-            hatch.updateCraftingIcon(this.getMachineCraftingIcon());
             return mOutputBusses.add(hatch);
         }
         return false;
@@ -1562,7 +1552,6 @@ public abstract class GT_MetaTileEntity_MultiBlockBase extends MetaTileEntity
         if (aMetaTileEntity == null) return false;
         if (aMetaTileEntity instanceof GT_MetaTileEntity_Hatch_Input hatch) {
             hatch.updateTexture(aBaseCasingIndex);
-            hatch.updateCraftingIcon(this.getMachineCraftingIcon());
             hatch.mRecipeMap = getRecipeMap();
             return mInputHatches.add(hatch);
         }
@@ -1575,7 +1564,6 @@ public abstract class GT_MetaTileEntity_MultiBlockBase extends MetaTileEntity
         if (aMetaTileEntity == null) return false;
         if (aMetaTileEntity instanceof GT_MetaTileEntity_Hatch_Output hatch) {
             hatch.updateTexture(aBaseCasingIndex);
-            hatch.updateCraftingIcon(this.getMachineCraftingIcon());
             return mOutputHatches.add(hatch);
         }
         return false;

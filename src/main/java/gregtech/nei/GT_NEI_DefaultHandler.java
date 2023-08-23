@@ -49,7 +49,6 @@ import codechicken.nei.recipe.GuiRecipe;
 import codechicken.nei.recipe.GuiUsageRecipe;
 import codechicken.nei.recipe.ICraftingHandler;
 import codechicken.nei.recipe.IUsageHandler;
-import codechicken.nei.recipe.RecipeCatalysts;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 import gregtech.GT_Mod;
 import gregtech.api.enums.GT_Values;
@@ -265,25 +264,6 @@ public class GT_NEI_DefaultHandler extends RecipeMapHandler {
         }
     }
 
-    @Override
-    public IUsageHandler getUsageAndCatalystHandler(String inputId, Object... ingredients) {
-        if (inputId.equals("item")) {
-            ItemStack candidate = (ItemStack) ingredients[0];
-            GT_NEI_DefaultHandler handler = (GT_NEI_DefaultHandler) newInstance();
-            if (RecipeCatalysts.containsCatalyst(handler, candidate)) {
-                IMetaTileEntity gtTileEntity = GT_Item_Machines.getMetaTileEntity(candidate);
-                Power power;
-                if (gtTileEntity != null) {
-                    power = gtTileEntity.getPower();
-                } else {
-                    power = null;
-                }
-                handler.loadCraftingRecipes(getOverlayIdentifier(), power);
-                return handler;
-            }
-        }
-        return this.getUsageHandler(inputId, ingredients);
-    }
 
     @Override
     public ICraftingHandler getRecipeHandler(String outputId, Object... results) {
@@ -381,17 +361,12 @@ public class GT_NEI_DefaultHandler extends RecipeMapHandler {
     }
 
     @Override
-    public String getRecipeTabName() {
-        return GT_LanguageManager.getTranslation(this.mRecipeMap.mUnlocalizedName);
-    }
-
-    @Override
     public String getGuiTexture() {
         return this.mRecipeMap.mNEIGUIPath;
     }
 
     @Override
-    public List<String> handleItemTooltip(GuiRecipe<?> gui, ItemStack aStack, List<String> currentTip,
+    public List<String> handleItemTooltip(GuiRecipe gui, ItemStack aStack, List<String> currentTip,
         int aRecipeIndex) {
         CachedRecipe tObject = this.arecipes.get(aRecipeIndex);
         if (tObject instanceof CachedDefaultRecipe) {
