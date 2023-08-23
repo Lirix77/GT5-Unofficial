@@ -2446,4 +2446,9 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
     public int[] getTimeStatistics() {
         return mTimeStatistics;
     }
+
+    @Override
+    public boolean shouldJoinIc2Enet(){
+        return true;
+    }
 }
