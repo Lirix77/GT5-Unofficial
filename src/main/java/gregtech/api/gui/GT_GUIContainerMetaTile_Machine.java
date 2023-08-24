@@ -262,7 +262,7 @@ public class GT_GUIContainerMetaTile_Machine extends GT_GUIContainer implements 
     }
 
     private void onCircuitSelected(ItemStack selected) {
-        GT_Values.NW.sendToServer(new GT_Packet_SetConfigurationCircuit(mContainer.mTileEntity, selected));
+        GT_Values.NW.sendToServer(new GT_Packet_SetConfigurationCircuit(mContainer.mTileEntity, selected.getItemDamage()));
         // we will not do any validation on client side
         // it doesn't get to actually decide what inventory contains anyway
         IConfigurationCircuitSupport ccs = (IConfigurationCircuitSupport) mContainer.mTileEntity.getMetaTileEntity();

@@ -29,21 +29,21 @@ public class GT_Packet_SetConfigurationCircuit extends GT_Packet_New {
     protected int mZ;
     protected int dimId;
 
-    protected ItemStack circuit;
+    protected int circuit;
 
     public GT_Packet_SetConfigurationCircuit() {
         super(true);
     }
 
-    public GT_Packet_SetConfigurationCircuit(IGregTechTileEntity tile, ItemStack circuit) {
+    public GT_Packet_SetConfigurationCircuit(IGregTechTileEntity tile, int circuit) {
         this(tile.getXCoord(), tile.getYCoord(), tile.getZCoord(), circuit);
     }
 
-    public GT_Packet_SetConfigurationCircuit(BaseTileEntity tile, ItemStack circuit) {
+    public GT_Packet_SetConfigurationCircuit(BaseTileEntity tile, int circuit) {
         this(tile.getXCoord(), tile.getYCoord(), tile.getZCoord(), circuit);
     }
 
-    public GT_Packet_SetConfigurationCircuit(int x, short y, int z, ItemStack circuit) {
+    public GT_Packet_SetConfigurationCircuit(int x, short y, int z, int circuit) {
         super(false);
 
         this.mX = x;
@@ -63,9 +63,7 @@ public class GT_Packet_SetConfigurationCircuit extends GT_Packet_New {
         aOut.writeInt(mX);
         aOut.writeShort(mY);
         aOut.writeInt(mZ);
-
-        // no null check needed. ByteBufUtils will handle it
-        ByteBufUtils.writeItemStack(aOut, this.circuit);
+        aOut.writeInt(circuit);
     }
 
     @Override
@@ -87,7 +85,7 @@ public class GT_Packet_SetConfigurationCircuit extends GT_Packet_New {
             aData.readInt(),
             aData.readShort(),
             aData.readInt(),
-            ISerializableObject.readItemStackFromGreggyByteBuf(aData));
+            aData.readInt());
     }
 
     @Override
@@ -103,7 +101,7 @@ public class GT_Packet_SetConfigurationCircuit extends GT_Packet_New {
         if (!machine.allowSelectCircuit()) return;
         machine.getConfigurationCircuits()
             .stream()
-            .filter(stack -> GT_Utility.areStacksEqual(stack, circuit))
+            .filter(stack -> GT_Utility.areStacksEqual(stack, GT_Utility.getIntegratedCircuit(circuit)))
             .findFirst()
             .ifPresent(stack -> ((IHasInventory) tile).setInventorySlotContents(machine.getCircuitSlot(), stack));
     }

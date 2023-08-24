@@ -69,7 +69,7 @@ import mrtjp.projectred.api.IScrewdriver;
         @Optional.Interface(iface = "buildcraft.api.tools.IToolWrench", modid = "BuildCraftAPI|tools"),
         @Optional.Interface(iface = "crazypants.enderio.api.tool.ITool", modid = "EnderIOAPI|Tools"), })
 public abstract class GT_MetaGenerated_Tool extends GT_MetaBase_Item
-    implements IDamagableItem, IToolGrafter, IToolCrowbar, IToolWrench, ITool, IScrewdriver {
+    implements IDamagableItem, IToolGrafter, IToolCrowbar, IToolWrench, ITool {
 
     /**
      * All instances of this Item Class are listed here. This gets used to register the Renderer to all Items of this

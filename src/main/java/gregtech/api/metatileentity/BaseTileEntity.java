@@ -956,7 +956,7 @@ public abstract class BaseTileEntity extends TileEntity implements IHasWorldObje
 
         if (!(this instanceof IInventory inv)) return;
 
-        GT_Values.NW.sendToServer(new GT_Packet_SetConfigurationCircuit(this, selected));
+        GT_Values.NW.sendToServer(new GT_Packet_SetConfigurationCircuit(this, selected.getItemDamage()));
         // we will not do any validation on client side
         // it doesn't get to actually decide what inventory contains anyway
         inv.setInventorySlotContents(ccs.getCircuitSlot(), selected);
