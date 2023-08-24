@@ -67,8 +67,7 @@ import mrtjp.projectred.api.IScrewdriver;
         @Optional.Interface(iface = "forestry.api.arboriculture.IToolGrafter", modid = "ForestryAPI|arboriculture"),
         @Optional.Interface(iface = "mods.railcraft.api.core.items.IToolCrowbar", modid = "RailcraftAPI|items"),
         @Optional.Interface(iface = "buildcraft.api.tools.IToolWrench", modid = "BuildCraftAPI|tools"),
-        @Optional.Interface(iface = "crazypants.enderio.api.tool.ITool", modid = "EnderIOAPI|Tools"),
-        @Optional.Interface(iface = "mrtjp.projectred.api.IScrewdriver", modid = "ProjRed|Core"), })
+        @Optional.Interface(iface = "crazypants.enderio.api.tool.ITool", modid = "EnderIOAPI|Tools"), })
 public abstract class GT_MetaGenerated_Tool extends GT_MetaBase_Item
     implements IDamagableItem, IToolGrafter, IToolCrowbar, IToolWrench, ITool, IScrewdriver {
 
@@ -763,23 +762,6 @@ public abstract class GT_MetaGenerated_Tool extends GT_MetaBase_Item
     @Override
     public boolean canUse(ItemStack stack, EntityPlayer player, int x, int y, int z) {
         return canWrench(player, x, y, z);
-    }
-
-    // ProjectRed screwdriver
-    @Override
-    public boolean canUse(EntityPlayer player, ItemStack stack) {
-        if (player == null) return false;
-        if (GT_Utility.isStackInvalid(stack) || !isItemStackUsable(stack)) return false;
-        IToolStats tStats = getToolStats(stack);
-        return tStats != null && tStats.isScrewdriver();
-    }
-
-    @Override
-    public void damageScrewdriver(EntityPlayer player, ItemStack stack) {
-        if (player == null) return;
-        if (GT_Utility.isStackInvalid(stack) || !isItemStackUsable(stack)) return;
-        IToolStats tStats = getToolStats(stack);
-        if (tStats != null) doDamage(stack, tStats.getToolDamagePerEntityAttack());
     }
 
     @Override
