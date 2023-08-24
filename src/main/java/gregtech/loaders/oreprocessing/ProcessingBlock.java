@@ -35,7 +35,8 @@ public class ProcessingBlock implements gregtech.api.interfaces.IOreRecipeRegist
         if (aMaterial != Materials.Clay && aMaterial != Materials.Basalt
             && aMaterial != MaterialsBotania.Livingrock
             && aMaterial != MaterialsBotania.Livingwood
-            && aMaterial != MaterialsBotania.Dreamwood) {
+            && aMaterial != MaterialsBotania.Dreamwood
+            && aMaterial != Materials.Obsidian) {
             if (aMaterial.getProcessingMaterialTierEU() < TierEU.IV
                 && GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial, 1L) != null) {
 

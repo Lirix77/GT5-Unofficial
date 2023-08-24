@@ -1190,6 +1190,28 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler, IG
         addFullHazmatToGeneralItem(Avaritia.ID, "Infinity_Pants", 1L);
         addFullHazmatToGeneralItem(Avaritia.ID, "Infinity_Shoes", 1L);
 
+        // Cubix EA Hazmat
+        addFullHazmatToGeneralItem("energyadditions", "eananoarmorboots", 1L);
+        addFullHazmatToGeneralItem("energyadditions", "eananoarmorleggings", 1L);
+        addFullHazmatToGeneralItem("energyadditions", "eananoarmorchest", 1L);
+        addFullHazmatToGeneralItem("energyadditions", "eananoarmorhelmet", 1L);
+
+        addFullHazmatToGeneralItem("energyadditions", "eairidiumarmorboots", 1L);
+        addFullHazmatToGeneralItem("energyadditions", "eairidiumarmorleggings", 1L);
+        addFullHazmatToGeneralItem("energyadditions", "eairidiumarmorchest", 1L);
+        addFullHazmatToGeneralItem("energyadditions", "eairidiumarmorhelmet", 1L);
+
+        addFullHazmatToGeneralItem("energyadditions", "aevoarmorboots", 1L);
+        addFullHazmatToGeneralItem("energyadditions", "aevoarmorleggings", 1L);
+        addFullHazmatToGeneralItem("energyadditions", "aevoarmorchest", 1L);
+        addFullHazmatToGeneralItem("energyadditions", "aevoarmorhelmet", 1L);
+
+        addFullHazmatToGeneralItem("energyadditions", "aenergyarmorboots", 1L);
+        addFullHazmatToGeneralItem("energyadditions", "aenergyarmorleggings", 1L);
+        addFullHazmatToGeneralItem("energyadditions", "aenergyarmorchest", 1L);
+        addFullHazmatToGeneralItem("energyadditions", "aenergyarmorhelmet", 1L);
+        //TODO move it to config
+
         // EnderIO Hazmat
         addFullHazmatToGeneralItem(EnderIO.ID, "item.endSteel_helmet", 1L);
         addFullHazmatToGeneralItem(EnderIO.ID, "item.endSteel_chestplate", 1L);
@@ -2928,9 +2950,7 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler, IG
         this.mOreDictActivated = true;
         ProgressManager.ProgressBar progressBar = ProgressManager.push("Register materials", mEvents.size());
 
-        if (!BetterLoadingScreen.isModLoaded()) {
-            GT_Proxy.stepMaterialsVanilla(this.mEvents, progressBar);
-        }
+        GT_Proxy.stepMaterialsVanilla(this.mEvents, progressBar);
     }
 
     @Deprecated

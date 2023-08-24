@@ -54,7 +54,7 @@ public class GT_Loader_MultiTileEntities implements Runnable {
 
     @Override
     public void run() {
-        if (Mods.NewHorizonsCoreMod.isModLoaded()) {
+        if (!Mods.NewHorizonsCoreMod.isModLoaded()) {
             return;
         }
         GT_FML_LOGGER.info("GT_Mod: Registering MultiTileEntities");

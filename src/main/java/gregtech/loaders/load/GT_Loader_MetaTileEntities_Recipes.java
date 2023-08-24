@@ -221,6 +221,82 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                     GT_MetaTileEntity_BasicMachine_GT_Recipe.X.CIRCUIT, 'W',
                     GT_MetaTileEntity_BasicMachine_GT_Recipe.X.WIRE, 'C',
                     GT_MetaTileEntity_BasicMachine_GT_Recipe.X.COIL_HEATING_DOUBLE }).getStackForm(1L));
+
+        ItemList.Machine_LuV_AlloySmelter.set(
+            new GT_MetaTileEntity_BasicMachine_GT_Recipe(
+                ALLOY_SMELTER_LuV.ID,
+                "basicmachine.alloysmelter.tier.06",
+                "Elite Alloy Smelter",
+                6,
+                MachineType.ALLOY_SMELTER.tooltipDescription(),
+                GT_Recipe.GT_Recipe_Map.sAlloySmelterRecipes,
+                2,
+                1,
+                false,
+                0,
+                1,
+                "AlloySmelter.png",
+                SoundResource.IC2_MACHINES_INDUCTION_LOOP,
+                false,
+                false,
+                SpecialEffects.NONE,
+                "ALLOY_SMELTER",
+                new Object[] { "ECE", aTextCableHull, aTextWireCoil, 'M',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.HULL, 'E',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.CIRCUIT, 'W',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.WIRE, 'C',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.COIL_HEATING_DOUBLE }).getStackForm(1L));
+
+        ItemList.AlloySmelterZPM.set(
+            new GT_MetaTileEntity_BasicMachine_GT_Recipe(
+                ALLOY_SMELTER_ZPM.ID,
+                "basicmachine.alloysmelter.tier.07",
+                "Elite Alloy Smelter II",
+                7,
+                MachineType.ALLOY_SMELTER.tooltipDescription(),
+                GT_Recipe.GT_Recipe_Map.sAlloySmelterRecipes,
+                2,
+                1,
+                false,
+                0,
+                1,
+                "AlloySmelter.png",
+                SoundResource.IC2_MACHINES_INDUCTION_LOOP,
+                false,
+                false,
+                SpecialEffects.NONE,
+                "ALLOY_SMELTER",
+                new Object[] { "ECE", aTextCableHull, aTextWireCoil, 'M',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.HULL, 'E',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.CIRCUIT, 'W',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.WIRE, 'C',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.COIL_HEATING_DOUBLE }).getStackForm(1L));
+
+        ItemList.AlloySmelterUV.set(
+            new GT_MetaTileEntity_BasicMachine_GT_Recipe(
+                ALLOY_SMELTER_UV.ID,
+                "basicmachine.alloysmelter.tier.08",
+                "Ultimate Alloy Integrator",
+                8,
+                MachineType.ALLOY_SMELTER.tooltipDescription(),
+                GT_Recipe.GT_Recipe_Map.sAlloySmelterRecipes,
+                2,
+                1,
+                false,
+                0,
+                1,
+                "AlloySmelter.png",
+                SoundResource.IC2_MACHINES_INDUCTION_LOOP,
+                false,
+                false,
+                SpecialEffects.NONE,
+                "ALLOY_SMELTER",
+                new Object[] { "ECE", aTextCableHull, aTextWireCoil, 'M',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.HULL, 'E',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.CIRCUIT, 'W',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.WIRE, 'C',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.COIL_HEATING_DOUBLE }).getStackForm(1L));
+
     }
 
     private static void registerArcFurnace() {
@@ -347,6 +423,80 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                     GT_MetaTileEntity_BasicMachine_GT_Recipe.X.CIRCUIT, 'W',
                     GT_MetaTileEntity_BasicMachine_GT_Recipe.X.WIRE4, 'G', OrePrefixes.cell.get(Materials.Graphite) })
                         .getStackForm(1L));
+        ItemList.ArcFurnaceLuV.set(
+            new GT_MetaTileEntity_BasicMachine_GT_Recipe(
+                ARC_FURNACE_LuV.ID,
+                "basicmachine.arcfurnace.tier.06",
+                "Elite Arc Furnace",
+                6,
+                MachineType.ARC_FURNACE.tooltipDescription(),
+                GT_Recipe.GT_Recipe_Map.sArcFurnaceRecipes,
+                1,
+                9,
+                true,
+                0,
+                1,
+                "ArcFurnace.png",
+                SoundResource.IC2_MACHINES_INDUCTION_LOOP,
+                false,
+                false,
+                SpecialEffects.NONE,
+                "ARC_FURNACE",
+                new Object[] { "WGW", aTextCableHull, aTextPlate, 'M', GT_MetaTileEntity_BasicMachine_GT_Recipe.X.HULL,
+                    'P', GT_MetaTileEntity_BasicMachine_GT_Recipe.X.PLATE, 'C',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.CIRCUIT, 'W',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.WIRE4, 'G', OrePrefixes.cell.get(Materials.Graphite) })
+                .getStackForm(1L));
+
+        ItemList.ArcFurnaceZPM.set(
+            new GT_MetaTileEntity_BasicMachine_GT_Recipe(
+                ARC_FURNACE_ZPM.ID,
+                "basicmachine.arcfurnace.tier.07",
+                "Elite Arc Furnace II",
+                7,
+                MachineType.ARC_FURNACE.tooltipDescription(),
+                GT_Recipe.GT_Recipe_Map.sArcFurnaceRecipes,
+                1,
+                9,
+                true,
+                0,
+                1,
+                "ArcFurnace.png",
+                SoundResource.IC2_MACHINES_INDUCTION_LOOP,
+                false,
+                false,
+                SpecialEffects.NONE,
+                "ARC_FURNACE",
+                new Object[] { "WGW", aTextCableHull, aTextPlate, 'M', GT_MetaTileEntity_BasicMachine_GT_Recipe.X.HULL,
+                    'P', GT_MetaTileEntity_BasicMachine_GT_Recipe.X.PLATE, 'C',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.CIRCUIT, 'W',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.WIRE4, 'G', OrePrefixes.cell.get(Materials.Graphite) })
+                .getStackForm(1L));
+
+        ItemList.ArcFurnaceUV.set(
+            new GT_MetaTileEntity_BasicMachine_GT_Recipe(
+                ARC_FURNACE_UV.ID,
+                "basicmachine.arcfurnace.tier.08",
+                "Ultimate Short Circuit Heater",
+                8,
+                MachineType.ARC_FURNACE.tooltipDescription(),
+                GT_Recipe.GT_Recipe_Map.sArcFurnaceRecipes,
+                1,
+                9,
+                true,
+                0,
+                1,
+                "ArcFurnace.png",
+                SoundResource.IC2_MACHINES_INDUCTION_LOOP,
+                false,
+                false,
+                SpecialEffects.NONE,
+                "ARC_FURNACE",
+                new Object[] { "WGW", aTextCableHull, aTextPlate, 'M', GT_MetaTileEntity_BasicMachine_GT_Recipe.X.HULL,
+                    'P', GT_MetaTileEntity_BasicMachine_GT_Recipe.X.PLATE, 'C',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.CIRCUIT, 'W',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.WIRE4, 'G', OrePrefixes.cell.get(Materials.Graphite) })
+                .getStackForm(1L));
     }
 
     private static void registerAssembler() {
@@ -579,6 +729,84 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 "basicmachine.autoclave.tier.05",
                 "Advanced Autoclave IV",
                 5,
+                MachineType.AUTOCLAVE.tooltipDescription(),
+                GT_Recipe.GT_Recipe_Map.sAutoclaveRecipes,
+                2,
+                4,
+                true,
+                0,
+                1,
+                "Autoclave4.png",
+                SoundResource.NONE,
+                false,
+                false,
+                SpecialEffects.NONE,
+                "AUTOCLAVE",
+                new Object[] { "IGI", "IMI", "CPC", 'M', GT_MetaTileEntity_BasicMachine_GT_Recipe.X.HULL, 'P',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.PUMP, 'C',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.CIRCUIT, 'W',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.WIRE, 'I',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.PLATE, 'G',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.GLASS }).getStackForm(1L));
+
+        ItemList.AutoclaveLuV.set(
+            new GT_MetaTileEntity_BasicMachine_GT_Recipe(
+                AUTOCLAVE_LuV.ID,
+                "basicmachine.autoclave.tier.06",
+                "Elite Autoclave",
+                6,
+                MachineType.AUTOCLAVE.tooltipDescription(),
+                GT_Recipe.GT_Recipe_Map.sAutoclaveRecipes,
+                2,
+                4,
+                true,
+                0,
+                1,
+                "Autoclave4.png",
+                SoundResource.NONE,
+                false,
+                false,
+                SpecialEffects.NONE,
+                "AUTOCLAVE",
+                new Object[] { "IGI", "IMI", "CPC", 'M', GT_MetaTileEntity_BasicMachine_GT_Recipe.X.HULL, 'P',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.PUMP, 'C',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.CIRCUIT, 'W',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.WIRE, 'I',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.PLATE, 'G',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.GLASS }).getStackForm(1L));
+
+        ItemList.AutoclaveZPM.set(
+            new GT_MetaTileEntity_BasicMachine_GT_Recipe(
+                AUTOCLAVE_ZPM.ID,
+                "basicmachine.autoclave.tier.07",
+                "Elite Autoclave II",
+                7,
+                MachineType.AUTOCLAVE.tooltipDescription(),
+                GT_Recipe.GT_Recipe_Map.sAutoclaveRecipes,
+                2,
+                4,
+                true,
+                0,
+                1,
+                "Autoclave4.png",
+                SoundResource.NONE,
+                false,
+                false,
+                SpecialEffects.NONE,
+                "AUTOCLAVE",
+                new Object[] { "IGI", "IMI", "CPC", 'M', GT_MetaTileEntity_BasicMachine_GT_Recipe.X.HULL, 'P',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.PUMP, 'C',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.CIRCUIT, 'W',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.WIRE, 'I',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.PLATE, 'G',
+                    GT_MetaTileEntity_BasicMachine_GT_Recipe.X.GLASS }).getStackForm(1L));
+
+        ItemList.AutoclaveUV.set(
+            new GT_MetaTileEntity_BasicMachine_GT_Recipe(
+                AUTOCLAVE_UV.ID,
+                "basicmachine.autoclave.tier.08",
+                "Ultimate Pressure Cooker",
+                8,
                 MachineType.AUTOCLAVE.tooltipDescription(),
                 GT_Recipe.GT_Recipe_Map.sAutoclaveRecipes,
                 2,

@@ -2793,27 +2793,20 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
 
         makeWires(Materials.RedAlloy, 2000, 0L, 1L, 1L, gregtech.api.enums.GT_Values.V[0], true, false);
 
-        makeWires(Materials.Cobalt, 1200, 2L, 4L, 2L, gregtech.api.enums.GT_Values.V[1], true, false);
-        makeWires(Materials.Lead, 1220, 2L, 4L, 2L, gregtech.api.enums.GT_Values.V[1], true, false);
-        makeWires(Materials.Tin, 1240, 1L, 2L, 1L, gregtech.api.enums.GT_Values.V[1], true, false);
+        makeWires(Materials.Cobalt, 1200, bEC ? 1L : 2L, bEC ? 2L : 4L, 2L, gregtech.api.enums.GT_Values.V[1], true, false);
+        makeWires(Materials.Lead, 1220, bEC ? 1L : 2L, bEC ? 2L : 4L, 2L, gregtech.api.enums.GT_Values.V[1], true, false);
+        makeWires(Materials.Tin, 1240, bEC ? 0L : 1L, bEC ? 1L : 2L, 1L, gregtech.api.enums.GT_Values.V[1], true, false);
 
-        makeWires(Materials.Zinc, 1260, 1L, 2L, 1L, gregtech.api.enums.GT_Values.V[1], true, false);
-        makeWires(Materials.SolderingAlloy, 1280, 1L, 2L, 1L, gregtech.api.enums.GT_Values.V[1], true, false);
+        makeWires(Materials.Zinc, 1260, bEC ? 0L : 1L, bEC ? 1L : 2L, 1L, gregtech.api.enums.GT_Values.V[1], true, false);
+        makeWires(Materials.SolderingAlloy, 1280, bEC ? 0L : 1L, bEC ? 1L : 2L, 1L, gregtech.api.enums.GT_Values.V[1], true, false);
 
         makeWires(
-            Materials.Iron,
-            1300,
-            bEC ? 3L : 4L,
-            bEC ? 6L : 8L,
-            2L,
-            gregtech.api.enums.GT_Values.V[2],
-            true,
-            false);
+            Materials.Iron, 1300, bEC ? 2L : 3L, bEC ? 4L : 6L, 2L, gregtech.api.enums.GT_Values.V[2], true, false);
         makeWires(
             Materials.Nickel,
             1320,
-            bEC ? 3L : 5L,
-            bEC ? 6L : 10L,
+            bEC ? 2L : 3L,
+            bEC ? 4L : 6L,
             3L,
             gregtech.api.enums.GT_Values.V[2],
             true,
@@ -2821,8 +2814,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Cupronickel,
             1340,
-            bEC ? 3L : 4L,
-            bEC ? 6L : 8L,
+            bEC ? 2L : 3L,
+            bEC ? 4L : 6L,
             2L,
             gregtech.api.enums.GT_Values.V[2],
             true,
@@ -2830,8 +2823,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Copper,
             1360,
-            bEC ? 2L : 3L,
-            bEC ? 4L : 6L,
+            bEC ? 1L : 2L,
+            bEC ? 2L : 4L,
             1L,
             gregtech.api.enums.GT_Values.V[2],
             true,
@@ -2839,8 +2832,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.AnnealedCopper,
             1380,
+            bEC ? 0L : 1L,
             bEC ? 1L : 2L,
-            bEC ? 2L : 4L,
             1L,
             gregtech.api.enums.GT_Values.V[2],
             true,
@@ -2849,8 +2842,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Kanthal,
             1400,
-            bEC ? 3L : 8L,
-            bEC ? 6L : 16L,
+            bEC ? 2L : 3L,
+            bEC ? 4L : 6L,
             4L,
             gregtech.api.enums.GT_Values.V[3],
             true,
@@ -2858,8 +2851,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Gold,
             1420,
-            bEC ? 2L : 6L,
-            bEC ? 4L : 12L,
+            bEC ? 1L : 2L,
+            bEC ? 2L : 4L,
             3L,
             gregtech.api.enums.GT_Values.V[3],
             true,
@@ -2867,8 +2860,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Electrum,
             1440,
-            bEC ? 2L : 5L,
-            bEC ? 4L : 10L,
+            bEC ? 1L : 2L,
+            bEC ? 2L : 4L,
             2L,
             gregtech.api.enums.GT_Values.V[3],
             true,
@@ -2876,8 +2869,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Silver,
             1460,
-            bEC ? 1L : 4L,
-            bEC ? 2L : 8L,
+            1L,
+            bEC ? 1L : 2L,
             1L,
             gregtech.api.enums.GT_Values.V[3],
             true,
@@ -2885,8 +2878,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.BlueAlloy,
             1480,
-            bEC ? 1L : 4L,
-            bEC ? 2L : 8L,
+            1L,
+            bEC ? 1L : 2L,
             2L,
             gregtech.api.enums.GT_Values.V[3],
             true,
@@ -2895,8 +2888,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Nichrome,
             1500,
-            bEC ? 4L : 32L,
-            bEC ? 8L : 64L,
+            bEC ? 2L : 4L,
+            bEC ? 4L : 8L,
             3L,
             gregtech.api.enums.GT_Values.V[4],
             true,
@@ -2904,8 +2897,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Steel,
             1520,
-            bEC ? 2L : 16L,
-            bEC ? 4L : 32L,
+            2L,
+            bEC ? 4L : 6L,
             2L,
             gregtech.api.enums.GT_Values.V[4],
             true,
@@ -2913,8 +2906,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.BlackSteel,
             1540,
-            bEC ? 2L : 14L,
-            bEC ? 4L : 28L,
+            bEC ? 2L : 4L,
+            bEC ? 4L : 8L,
             3L,
             gregtech.api.enums.GT_Values.V[4],
             true,
@@ -2922,8 +2915,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Titanium,
             1560,
-            bEC ? 2L : 12L,
-            bEC ? 4L : 24L,
+            2L,
+            bEC ? 4L : 5L,
             4L,
             gregtech.api.enums.GT_Values.V[4],
             true,
@@ -2931,8 +2924,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Aluminium,
             1580,
-            bEC ? 1L : 8L,
-            bEC ? 2L : 16L,
+            1L,
+            bEC ? 2L : 3L,
             1L,
             gregtech.api.enums.GT_Values.V[4],
             true,
@@ -2941,8 +2934,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Graphene,
             1600,
-            bEC ? 1L : 16L,
-            bEC ? 2L : 32L,
+            1L,
+            bEC ? 1L : 2L,
             1L,
             gregtech.api.enums.GT_Values.V[5],
             false,
@@ -2950,8 +2943,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Osmium,
             1620,
-            bEC ? 2L : 32L,
-            bEC ? 4L : 64L,
+            bEC ? 1L : 2L,
+            bEC ? 3L : 5L,
             4L,
             gregtech.api.enums.GT_Values.V[5],
             true,
@@ -2959,8 +2952,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Platinum,
             1640,
-            bEC ? 1L : 16L,
-            bEC ? 2L : 32L,
+            bEC ? 1L : 2L,
+            bEC ? 2L : 3L,
             2L,
             gregtech.api.enums.GT_Values.V[5],
             true,
@@ -2968,8 +2961,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.TungstenSteel,
             1660,
-            bEC ? 2L : 14L,
-            bEC ? 4L : 28L,
+            bEC ? 2L : 3L,
+            bEC ? 4L : 5L,
             3L,
             gregtech.api.enums.GT_Values.V[5],
             true,
@@ -2977,8 +2970,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Tungsten,
             1680,
-            bEC ? 2L : 12L,
-            bEC ? 4L : 24L,
+            bEC ? 2L : 3L,
+            bEC ? 4L : 5L,
             2L,
             gregtech.api.enums.GT_Values.V[5],
             true,
@@ -2987,8 +2980,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.HSSG,
             1700,
-            bEC ? 2L : 128L,
-            bEC ? 4L : 256L,
+            bEC ? 2L : 3L,
+            bEC ? 4L : 5L,
             4L,
             gregtech.api.enums.GT_Values.V[6],
             true,
@@ -2996,8 +2989,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.NiobiumTitanium,
             1720,
-            bEC ? 2L : 128L,
-            bEC ? 4L : 256L,
+            bEC ? 2L : 3L,
+            bEC ? 4L : 5L,
             4L,
             gregtech.api.enums.GT_Values.V[6],
             true,
@@ -3005,8 +2998,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.VanadiumGallium,
             1740,
-            bEC ? 2L : 128L,
-            bEC ? 4L : 256L,
+            bEC ? 2L : 3L,
+            bEC ? 4L : 5L,
             4L,
             gregtech.api.enums.GT_Values.V[6],
             true,
@@ -3014,8 +3007,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.YttriumBariumCuprate,
             1760,
-            bEC ? 4L : 256L,
-            bEC ? 8L : 512L,
+            bEC ? 3L : 5L,
+            bEC ? 6L : 9L,
             4L,
             gregtech.api.enums.GT_Values.V[6],
             true,
@@ -3024,8 +3017,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Naquadah,
             1780,
-            bEC ? 2L : 64L,
-            bEC ? 4L : 128L,
+            bEC ? 2L : 3L,
+            bEC ? 4L : 5L,
             2L,
             gregtech.api.enums.GT_Values.V[7],
             true,
@@ -3034,8 +3027,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.NaquadahAlloy,
             1800,
-            bEC ? 4L : 64L,
-            bEC ? 8L : 128L,
+            bEC ? 3L : 5L,
+            bEC ? 6L : 9L,
             2L,
             gregtech.api.enums.GT_Values.V[8],
             true,
@@ -3043,8 +3036,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Duranium,
             1820,
-            bEC ? 8L : 64L,
-            bEC ? 16L : 128L,
+            bEC ? 5L : 6L,
+            bEC ? 10L : 12L,
             1L,
             gregtech.api.enums.GT_Values.V[8],
             true,
@@ -3052,8 +3045,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.TPV,
             1840,
-            bEC ? 1L : 14L,
-            bEC ? 2L : 28L,
+            bEC ? 1L : 2L,
+            bEC ? 2L : 4L,
             6L,
             gregtech.api.enums.GT_Values.V[4],
             true,
@@ -3134,7 +3127,15 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
             gregtech.api.enums.GT_Values.V[11],
             false,
             false);
-        makeWires(Materials.SuperconductorUMVBase, 2072, 2L, 1048576L, 32L, GT_Values.V[12], false, false);
+        makeWires(
+            Materials.SuperconductorUMVBase,
+            2072,
+            2L,
+            1048576L,
+            32L,
+            gregtech.api.enums.GT_Values.V[12],
+            false,
+            false);
 
         // Actual superconductors.
         makeWires(Materials.SuperconductorMV, 2320, 0L, 0L, 4L, gregtech.api.enums.GT_Values.V[2], false, true);
@@ -3150,7 +3151,25 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(Materials.SuperconductorUMV, 2089, 0L, 0L, 64L, gregtech.api.enums.GT_Values.V[12], false, true);
 
         makeWires(Materials.Ichorium, 2600, 2L, 2L, 12L, GT_Values.V[9], false, true);
-        makeWires(MaterialsUEVplus.SpaceTime, 2606, 0L, 0L, 1_000_000L, GT_Values.V[14], false, true);
+        //makeWires(Materials.SpaceTime, 2606, 0L, 0L, 1_000_000L, GT_Values.V[14], false, true);
+
+        makeWires(Materials.ElectricalSteel, 11490, bEC ? 1L : 2L, bEC ? 2L : 4L, 2L, GT_Values.V[2], true, false);
+        makeWires(Materials.EnergeticAlloy, 11510, bEC ? 2L : 5L, bEC ? 4L : 10L, 2L, gregtech.api.enums.GT_Values.V[3], true, false);
+        makeWires(Materials.VibrantAlloy, 11530, bEC ? 2L : 8L, bEC ? 4L : 16L, 4L, gregtech.api.enums.GT_Values.V[4], true, false);
+        makeWires(Materials.MelodicAlloy, 11550, bEC ? 2L : 16L, bEC ? 4L : 32L, 4L, gregtech.api.enums.GT_Values.V[5], true, false);
+        makeWires(Materials.StellarAlloy, 11570, bEC ? 4L : 16L, bEC ? 8L : 32L, 6L, gregtech.api.enums.GT_Values.V[6], true, false);
+        makeWires(Materials.Trinium, 11450, bEC ? 4L : 16L, bEC ? 8L : 32L, 6L, GT_Values.V[7], true, false);
+        makeWires(Materials.ElectrumFlux, 1900, 1L, 2L, 3L, GT_Values.V[8], true, false);
+        makeWires(Materials.Bedrockium, 11310, bEC ? 1L : 16L, bEC ? 32L : 64L, 2L, GT_Values.V[9], true, false);
+        makeWires(Materials.Osmiridium, 11610, bEC ? 1L : 2L, bEC ? 2L : 4L, 8L, GT_Values.V[6], true, false);
+        makeWires(Materials.HSSE, 11590, bEC ? 2L : 4L, bEC ? 4L : 8L, 6L, GT_Values.V[6], true, false);
+        makeWires(Materials.HSSS, 11470, bEC ? 4L : 16L, bEC ? 8L : 32L, 6L, GT_Values.V[9], true, false);
+        makeWires(Materials.Draconium, 11330, bEC ? 4L : 16L, bEC ? 32L : 64L, 8L, GT_Values.V[10], true, false);
+        makeWires(Materials.NetherStar, 11350, bEC ? 4L : 16L, bEC ? 16L : 32L, 4L, GT_Values.V[11], true, false);
+        makeWires(Materials.Quantium, 11370, bEC ? 4L : 16L, bEC ? 16L : 32L, 2L, GT_Values.V[12], true, false);
+        makeWires(Materials.BlackPlutonium, 11390, bEC ? 4L : 16L, bEC ? 16L : 32L, 1L, GT_Values.V[13], false, false);
+        makeWires(Materials.DraconiumAwakened, 11410, bEC ? 4L : 16L, bEC ? 16L : 32L, 1L, GT_Values.V[14], false, false);
+        makeWires(Materials.Infinity, 11430, 0L, 0L, 8192L, GT_Values.V[14], false, true);
 
         GT_OreDictUnificator.registerOre(
             OrePrefixes.pipeSmall.get(Materials.Wood),

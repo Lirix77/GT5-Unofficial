@@ -49,13 +49,11 @@ public class GT_MetaTileEntity_PyrolyseOven
     extends GT_MetaTileEntity_EnhancedMultiBlockBase<GT_MetaTileEntity_PyrolyseOven> implements ISurvivalConstructable {
 
     private HeatingCoilLevel coilHeat;
-    private static final int CASING_INDEX = 1090;
+    private static final int CASING_INDEX = 1093;
     private static final IStructureDefinition<GT_MetaTileEntity_PyrolyseOven> STRUCTURE_DEFINITION = createStructureDefinition();
 
     private static IStructureDefinition<GT_MetaTileEntity_PyrolyseOven> createStructureDefinition() {
-        IStructureElement<GT_MetaTileEntity_PyrolyseOven> tCasingElement = NewHorizonsCoreMod.isModLoaded()
-            ? ofBlockUnlocalizedName(NewHorizonsCoreMod.ID, "gt.blockcasingsNH", 2)
-            : ofBlock(GregTech_API.sBlockCasings1, 0);
+        IStructureElement<GT_MetaTileEntity_PyrolyseOven> tCasingElement = ofBlock(GregTech_API.sBlockCasingsNH, 5);
 
         return StructureDefinition.<GT_MetaTileEntity_PyrolyseOven>builder()
             .addShape(
@@ -125,7 +123,7 @@ public class GT_MetaTileEntity_PyrolyseOven
     public ITexture[] getTexture(IGregTechTileEntity baseMetaTileEntity, ForgeDirection sideDirection,
         ForgeDirection facingDirection, int colorIndex, boolean active, boolean redstoneLevel) {
         if (sideDirection == facingDirection) {
-            if (active) return new ITexture[] { BlockIcons.casingTexturePages[8][66], TextureFactory.builder()
+            if (active) return new ITexture[] { BlockIcons.casingTexturePages[8][69], TextureFactory.builder()
                 .addIcon(OVERLAY_FRONT_PYROLYSE_OVEN_ACTIVE)
                 .extFacing()
                 .build(),
@@ -134,7 +132,7 @@ public class GT_MetaTileEntity_PyrolyseOven
                     .extFacing()
                     .glow()
                     .build() };
-            return new ITexture[] { BlockIcons.casingTexturePages[8][66], TextureFactory.builder()
+            return new ITexture[] { BlockIcons.casingTexturePages[8][69], TextureFactory.builder()
                 .addIcon(OVERLAY_FRONT_PYROLYSE_OVEN)
                 .extFacing()
                 .build(),
@@ -144,7 +142,7 @@ public class GT_MetaTileEntity_PyrolyseOven
                     .glow()
                     .build() };
         }
-        return new ITexture[] { Textures.BlockIcons.casingTexturePages[8][66] };
+        return new ITexture[] { Textures.BlockIcons.casingTexturePages[8][69] };
     }
 
     @Override

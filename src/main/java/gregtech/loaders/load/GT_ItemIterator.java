@@ -39,24 +39,6 @@ public class GT_ItemIterator implements Runnable {
         ItemStack tStack2;
         ItemStack tStack;
         if (null != (tStack = GT_ModHandler.getRecipeOutput(
-            tStack2 = GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Bronze, 1L),
-            tStack2,
-            tStack2,
-            tStack2,
-            null,
-            tStack2,
-            tStack2,
-            tStack2,
-            tStack2))) {
-            GT_ModHandler.addPulverisationRecipe(
-                tStack,
-                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Bronze, 8L),
-                null,
-                0,
-                false);
-            GT_ModHandler.addSmeltingRecipe(tStack, GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Bronze, 8L));
-        }
-        if (null != (tStack = GT_ModHandler.getRecipeOutput(
             tStack2 = GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Bronze, 1L),
             tStack2,
             tStack2,

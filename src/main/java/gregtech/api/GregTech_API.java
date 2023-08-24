@@ -268,7 +268,7 @@ public class GregTech_API {
         sBlockMetal9, sBlockGem1, sBlockGem2, sBlockGem3, sBlockReinforced;
     public static Block sBlockGranites, sBlockConcretes, sBlockStones;
     public static Block sBlockCasings1, sBlockCasings2, sBlockCasings3, sBlockCasings4, sBlockCasings5, sBlockCasings6,
-        sBlockCasings8, sBlockCasings9, sSolenoidCoilCasings;
+        sBlockCasings8, sBlockCasings9, sBlockCasingsNH, sSolenoidCoilCasings;
     public static Block sBlockLongDistancePipes;
     /**
      * Getting assigned by the Config

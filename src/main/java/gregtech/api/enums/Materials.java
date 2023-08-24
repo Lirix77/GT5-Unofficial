@@ -828,6 +828,8 @@ public class Materials implements IColorModulationContainer, ISubTagContainer {
     public static Materials BloodInfusedIron        = new Materials( 977, TextureSet.SET_METALLIC          ,  10.0F,    384,  2, 1|2          |64|128      ,  69,   9,  10,   0,   "BloodInfusedIron"        ,   "Blood Infused Iron"            ,    0,       0,       2400,    0, false, false,   3,   1,   1, Dyes.dyeRed         , Arrays.asList(new TC_AspectStack(TC_Aspects.METALLUM, 3),  new TC_AspectStack(TC_Aspects.PRAECANTATIO, 1)));
     public static Materials Shadow                  = new Materials( 368, TextureSet.SET_METALLIC          ,  32.0F,   8192,  4, 1|2  |8      |64|128      ,  16,   3,  66,   0,   "Shadow"                  ,   "Shadow Metal"                  ,    0,       0,       1800, 1800,  true, false,   3,   4,   3, Dyes.dyeBlue        );
 
+    public static Materials Xenoxene                = new MaterialBuilder(-1, TextureSet.SET_DULL, "Xenoxene").setRGB(133, 130, 128).addFluid().constructMaterial();
+
     /**
      * Galaxy Space 1.10 compat from Version 2.6
      */
