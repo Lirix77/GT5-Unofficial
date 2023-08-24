@@ -2767,7 +2767,7 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
                 5).getStackForm(1L));
         ItemList.Generator_Plasma_ZPMV.set(
             new GT_MetaTileEntity_PlasmaGenerator(
-                PLASMA_GENERATOR_ZPM.ID,
+                PLASMA_GENERATOR_ZPMV.ID,
                 "basicgenerator.plasmagenerator.tier.07",
                 "Plasma Generator Mark III",
                 6).getStackForm(1L));
