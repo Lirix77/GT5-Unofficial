@@ -48,6 +48,8 @@ import java.util.function.Supplier;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.init.Blocks;
@@ -815,6 +817,7 @@ public class GT_Recipe implements Comparable<GT_Recipe> {
      */
     @SuppressWarnings("DeprecatedIsStillUsed")
     @Deprecated
+    @SideOnly(Side.CLIENT)
     public ArrayList<PositionedStack> getInputPositionedStacks() {
         return null;
     }
@@ -824,6 +827,7 @@ public class GT_Recipe implements Comparable<GT_Recipe> {
      */
     @SuppressWarnings("DeprecatedIsStillUsed")
     @Deprecated
+    @SideOnly(Side.CLIENT)
     public ArrayList<PositionedStack> getOutputPositionedStacks() {
         return null;
     }
@@ -2006,6 +2010,7 @@ public class GT_Recipe implements Comparable<GT_Recipe> {
             }
 
             @Override
+            @SideOnly(Side.CLIENT)
             protected List<String> handleNEIItemInputTooltip(List<String> currentTip,
                 GT_NEI_DefaultHandler.FixedPositionedStack pStack) {
                 super.handleNEIItemOutputTooltip(currentTip, pStack);
@@ -2015,6 +2020,7 @@ public class GT_Recipe implements Comparable<GT_Recipe> {
             }
 
             @Override
+            @SideOnly(Side.CLIENT)
             public void drawNEIOverlays(GT_NEI_DefaultHandler.CachedDefaultRecipe neiCachedRecipe) {
                 for (PositionedStack stack : neiCachedRecipe.mInputs) {
                     if (stack instanceof GT_NEI_DefaultHandler.FixedPositionedStack && stack.item != null
@@ -4464,7 +4470,7 @@ public class GT_Recipe implements Comparable<GT_Recipe> {
                 drawNEIText(recipeInfo, text, 10);
             }
         }
-
+        @SideOnly(Side.CLIENT)
         public List<String> handleNEIItemTooltip(ItemStack stack, List<String> currentTip,
             GT_NEI_DefaultHandler.CachedDefaultRecipe neiCachedRecipe) {
             for (PositionedStack pStack : neiCachedRecipe.mInputs) {
@@ -4489,7 +4495,7 @@ public class GT_Recipe implements Comparable<GT_Recipe> {
             }
             return currentTip;
         }
-
+        @SideOnly(Side.CLIENT)
         protected List<String> handleNEIItemInputTooltip(List<String> currentTip,
             GT_NEI_DefaultHandler.FixedPositionedStack pStack) {
             if (pStack.isNotConsumed()) {
@@ -4497,7 +4503,7 @@ public class GT_Recipe implements Comparable<GT_Recipe> {
             }
             return currentTip;
         }
-
+        @SideOnly(Side.CLIENT)
         protected List<String> handleNEIItemOutputTooltip(List<String> currentTip,
             GT_NEI_DefaultHandler.FixedPositionedStack pStack) {
             if (pStack.isChanceBased()) {
@@ -4505,7 +4511,7 @@ public class GT_Recipe implements Comparable<GT_Recipe> {
             }
             return currentTip;
         }
-
+        @SideOnly(Side.CLIENT)
         public void drawNEIOverlays(GT_NEI_DefaultHandler.CachedDefaultRecipe neiCachedRecipe) {
             for (PositionedStack stack : neiCachedRecipe.mInputs) {
                 if (stack instanceof GT_NEI_DefaultHandler.FixedPositionedStack) {
@@ -4518,19 +4524,19 @@ public class GT_Recipe implements Comparable<GT_Recipe> {
                 }
             }
         }
-
+        @SideOnly(Side.CLIENT)
         protected void drawNEIOverlayForInput(GT_NEI_DefaultHandler.FixedPositionedStack stack) {
             if (stack.isNotConsumed()) {
                 drawNEIOverlayText("NC", stack);
             }
         }
-
+        @SideOnly(Side.CLIENT)
         protected void drawNEIOverlayForOutput(GT_NEI_DefaultHandler.FixedPositionedStack stack) {
             if (stack.isChanceBased()) {
                 drawNEIOverlayText(stack.getChanceText(), stack);
             }
         }
-
+        @SideOnly(Side.CLIENT)
         @SuppressWarnings("SameParameterValue")
         protected void drawNEIOverlayText(String text, PositionedStack stack, int color, float scale, boolean shadow,
             Alignment alignment) {
@@ -4546,7 +4552,7 @@ public class GT_Recipe implements Comparable<GT_Recipe> {
             fontRenderer.drawString(text, x, y, color, shadow);
             GlStateManager.popMatrix();
         }
-
+        @SideOnly(Side.CLIENT)
         protected void drawNEIOverlayText(String text, PositionedStack stack) {
             drawNEIOverlayText(
                 text,
@@ -4577,6 +4583,7 @@ public class GT_Recipe implements Comparable<GT_Recipe> {
          * instead
          */
         @Deprecated
+        @SideOnly(Side.CLIENT)
         public ArrayList<PositionedStack> getInputPositionedStacks(GT_Recipe recipe) {
             return null;
         }
@@ -4585,6 +4592,7 @@ public class GT_Recipe implements Comparable<GT_Recipe> {
          * Use {@link #getItemOutputPositions} or {@link #getFluidOutputPositions} instead
          */
         @Deprecated
+        @SideOnly(Side.CLIENT)
         public ArrayList<PositionedStack> getOutputPositionedStacks(GT_Recipe recipe) {
             return null;
         }
