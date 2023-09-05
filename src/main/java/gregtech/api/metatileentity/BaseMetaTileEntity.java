@@ -44,6 +44,7 @@ import appeng.api.networking.IGridNode;
 import appeng.api.networking.security.IActionHost;
 import appeng.api.util.AECableType;
 import appeng.api.util.DimensionalCoord;
+import appeng.helpers.ICustomNameObject;
 import appeng.me.helpers.AENetworkProxy;
 import appeng.me.helpers.IGridProxyable;
 import appeng.tile.TileEvent;
@@ -87,7 +88,7 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
  */
 public class BaseMetaTileEntity extends CommonMetaTileEntity
     implements IGregTechTileEntity, IActionHost, IGridProxyable, IAlignmentProvider, IConstructableProvider,
-    IDebugableTileEntity, IGregtechWailaProvider, ICleanroomReceiver {
+    IDebugableTileEntity, IGregtechWailaProvider, ICleanroomReceiver, ICustomNameObject {
 
     private static final Field ENTITY_ITEM_HEALTH_FIELD = ReflectionHelper
         .findField(EntityItem.class, "health", "field_70291_e");
@@ -2450,5 +2451,16 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
     @Override
     public boolean shouldJoinIc2Enet(){
         return true;
+    }
+
+    @Override
+    public String getCustomName() {
+        return getMetaTileEntity() instanceof ICustomNameObject customNameObject ? customNameObject.getCustomName()
+            : null;
+    }
+
+    @Override
+    public boolean hasCustomName() {
+        return getMetaTileEntity() instanceof ICustomNameObject customNameObject && customNameObject.hasCustomName();
     }
 }
