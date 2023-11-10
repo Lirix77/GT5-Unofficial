@@ -31,7 +31,6 @@ public class ProcessingDye implements IOreRecipeRegistrator {
         ItemStack stack) {
         Dyes aDye = Dyes.get(oreDictName);
         if ((aDye.mIndex >= 0) && (aDye.mIndex < 16) && (GT_Utility.getContainerItem(stack, true) == null)) {
-            registerAlloySmelter(stack, aDye);
             registerMixer(stack, aDye);
             registerChemicalReactor(stack, aDye);
         }

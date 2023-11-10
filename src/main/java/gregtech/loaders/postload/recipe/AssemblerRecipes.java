@@ -1,10 +1,9 @@
 package gregtech.loaders.postload.recipe;
 
-import static gregtech.api.enums.GT_Values.MOD_ID_DC;
 import static gregtech.api.enums.GT_Values.W;
 import static gregtech.api.enums.Materials.Xenoxene;
 
-import gregtech.loaders.postload.GT_MachineRecipeLoader;
+import gregtech.GT_Mod;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -31,6 +30,16 @@ public class AssemblerRecipes implements Runnable {
         registerMixedMetalIngotRecipes();
         registerReinforcedIronAlloyPlates();
         registerSolderingAlloyRecipes();
+        registerGregTechRecipes();
+
+        if (Loader.isModLoaded("Forestry")) {
+            GT_Values.RA.addAssemblerRecipe(
+                ItemList.Casing_LV.get(1L),
+                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Bronze, 4L),
+                GT_Values.NF,
+                ItemList.FR_Casing_Sturdy.get(1L),
+                32, 16);
+        }
         GT_Values.RA.addAssemblerRecipe(
             new ItemStack[]{
                 GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 2L),
@@ -52,13 +61,6 @@ public class AssemblerRecipes implements Runnable {
             }, GT_Values.NF,
             new ItemStack(Blocks.bookshelf),
             300, 16);
-        GT_Values.RA.addAssemblerRecipe(
-            new ItemStack[]{
-                GT_OreDictUnificator.get(OrePrefixes.craft, Materials.Wood, 2L),
-                GT_OreDictUnificator.get(OrePrefixes.spring, Materials.Iron, 1L)
-            }, GT_Values.NF,
-            new ItemStack(Blocks.wooden_pressure_plate, 2),
-            100, 8);
         GT_Values.RA.addAssemblerRecipe(
             new ItemStack[]{
                 GT_OreDictUnificator.get(OrePrefixes.slab, Materials.Stone, 2L),
@@ -611,7 +613,7 @@ public class AssemblerRecipes implements Runnable {
                     GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.Copper, 4),
                     GT_Utility.getIntegratedCircuit(5) },
                 FluidRegistry.getFluidStack("glue", 576),
-                ItemList.Circuit_Parts_Resistor.get(4L),
+                ItemList.Circuit_Parts_Resistor.get(12L),
                 320,
                 16);
             GT_Values.RA.addAssemblerRecipe(
@@ -620,7 +622,7 @@ public class AssemblerRecipes implements Runnable {
                     GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.Copper, 4),
                     GT_Utility.getIntegratedCircuit(5) },
                 FluidRegistry.getFluidStack("glue", 576),
-                ItemList.Circuit_Parts_Resistor.get(4L),
+                ItemList.Circuit_Parts_Resistor.get(12L),
                 320,
                 16);
             GT_Values.RA.addAssemblerRecipe(
@@ -629,7 +631,7 @@ public class AssemblerRecipes implements Runnable {
                     GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.Copper, 4),
                     GT_Utility.getIntegratedCircuit(5) },
                 FluidRegistry.getFluidStack("glue", 576),
-                ItemList.Circuit_Parts_Resistor.get(4L),
+                ItemList.Circuit_Parts_Resistor.get(12L),
                 320,
                 16);
             GT_Values.RA.addAssemblerRecipe(
@@ -638,7 +640,7 @@ public class AssemblerRecipes implements Runnable {
                     GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.Copper, 4),
                     GT_Utility.getIntegratedCircuit(5) },
                 FluidRegistry.getFluidStack("glue", 576),
-                ItemList.Circuit_Parts_Resistor.get(4L),
+                ItemList.Circuit_Parts_Resistor.get(12L),
                 320,
                 16);
             GT_Values.RA.addAssemblerRecipe(
@@ -647,7 +649,7 @@ public class AssemblerRecipes implements Runnable {
                     GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.AnnealedCopper, 4),
                     GT_Utility.getIntegratedCircuit(5) },
                 FluidRegistry.getFluidStack("glue", 576),
-                ItemList.Circuit_Parts_Resistor.get(8L),
+                ItemList.Circuit_Parts_Resistor.get(12L),
                 320,
                 16);
             GT_Values.RA.addAssemblerRecipe(
@@ -656,7 +658,7 @@ public class AssemblerRecipes implements Runnable {
                     GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.AnnealedCopper, 4),
                     GT_Utility.getIntegratedCircuit(5) },
                 FluidRegistry.getFluidStack("glue", 576),
-                ItemList.Circuit_Parts_Resistor.get(8L),
+                ItemList.Circuit_Parts_Resistor.get(12L),
                 320,
                 16);
             GT_Values.RA.addAssemblerRecipe(
@@ -665,7 +667,7 @@ public class AssemblerRecipes implements Runnable {
                     GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.AnnealedCopper, 4),
                     GT_Utility.getIntegratedCircuit(5) },
                 FluidRegistry.getFluidStack("glue", 576),
-                ItemList.Circuit_Parts_Resistor.get(8L),
+                ItemList.Circuit_Parts_Resistor.get(12L),
                 320,
                 16);
             GT_Values.RA.addAssemblerRecipe(
@@ -674,7 +676,7 @@ public class AssemblerRecipes implements Runnable {
                     GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.AnnealedCopper, 4),
                     GT_Utility.getIntegratedCircuit(5) },
                 FluidRegistry.getFluidStack("glue", 576),
-                ItemList.Circuit_Parts_Resistor.get(8L),
+                ItemList.Circuit_Parts_Resistor.get(12L),
                 320,
                 16);
         }
@@ -1707,27 +1709,6 @@ public class AssemblerRecipes implements Runnable {
             ItemList.Cover_Screen.get(1L),
             100, 5);
 
-        // Nukes
-        GT_Values.RA.addAssemblerRecipe(
-            new ItemStack[] { GT_Utility.getIntegratedCircuit(21),
-                GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.Lead, 4L),
-                GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.Titanium, 2L),
-                GT_ModHandler.getModItem("IC2", "itemPartAlloy", 2L),
-                GT_ModHandler.getModItem("IC2", "blockMachine", 1L, 12) },
-            GT_Values.NF,
-            GT_ModHandler.getModItem("IC2", "blockReactorChamber", 1L),
-            1200, 480);
-        GT_Values.RA.addAssemblerRecipe(
-            new ItemStack[] { GT_Utility.getIntegratedCircuit(22),
-                GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.Lead, 2L),
-                GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.Titanium, 2L),
-                GT_ModHandler.getModItem("IC2", "blockReactorChamber", 3L),
-                GT_OreDictUnificator.get(OrePrefixes.cableGt08, Materials.Platinum, 1L),
-                GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Data, 1L) },
-            GT_Values.NF,
-            GT_ModHandler.getModItem("IC2", "blockGenerator", 1L, 5),
-            1200, 960);
-
         // Irradiant Glass Pane
         GT_Values.RA.addAssemblerRecipe(
             new ItemStack[] { GT_ModHandler.getModItem("AdvancedSolarPanel", "asp_crafting_items", 4L, 2),
@@ -2052,344 +2033,6 @@ public class AssemblerRecipes implements Runnable {
                 2400, 480);
         }
 
-        if (Loader.isModLoaded("Forestry")) {
-
-            GT_Values.RA.addAssemblerRecipe(
-                ItemList.Casing_LV.get(1L),
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Bronze, 4L),
-                GT_Values.NF,
-                ItemList.FR_Casing_Sturdy.get(1L),
-                32, 16);
-
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] {
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
-                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Copper, 2L)
-                },
-                Materials.Glass.getMolten(576L),
-                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 0),
-                200, 30);
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] {
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
-                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.AnnealedCopper, 2L)
-                },
-                Materials.Glass.getMolten(576L),
-                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 0),
-                200, 30);
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] {
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
-                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Tin, 2L)
-                },
-                Materials.Glass.getMolten(576L),
-                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 1),
-                200, 30);
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] {
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
-                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Bronze, 2L)
-                },
-                Materials.Glass.getMolten(576L),
-                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 2),
-                200, 30);
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] {
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
-                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Iron, 2L)
-                },
-                Materials.Glass.getMolten(576L),
-                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 3),
-                200, 30);
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] {
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
-                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.WroughtIron, 2L)
-                },
-                Materials.Glass.getMolten(576L),
-                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 3),
-                200, 30);
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] {
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
-                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Gold, 2L)
-                },
-                Materials.Glass.getMolten(576L),
-                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 4),
-                200, 30);
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] {
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
-                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Diamond, 2L)
-                },
-                Materials.Glass.getMolten(576L),
-                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 5),
-                200, 30);
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] {
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
-                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Obsidian, 2L)
-                },
-                Materials.Glass.getMolten(576L),
-                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 6),
-                200, 30);
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] {
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
-                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Blaze, 2L)
-                },
-                Materials.Glass.getMolten(576L),
-                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 7),
-                200, 30);
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] {
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
-                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Rubber, 2L)
-                },
-                Materials.Glass.getMolten(576L),
-                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 8),
-                200, 30);
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] {
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
-                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Emerald, 2L)
-                },
-                Materials.Glass.getMolten(576L),
-                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 9),
-                200, 30);
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] {
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
-                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Apatite, 2L)
-                },
-                Materials.Glass.getMolten(576L),
-                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 10),
-                200, 30);
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] {
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
-                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Lapis, 2L)
-                },
-                Materials.Glass.getMolten(576L),
-                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 11),
-                200, 30);
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] {
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
-                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.EnderEye, 2L)
-                },
-                Materials.Glass.getMolten(576L),
-                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 12),
-                200, 30);
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] {
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.EnderEye, 1L),
-                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Uranium, 2L)
-                },
-                Materials.Glass.getMolten(576L),
-                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 13),
-                200, 30);
-
-            ItemStack alveary = GT_ModHandler.getModItem("Forestry", "alveary", 1L, 0);
-
-            // Impregnated Frame
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] { GT_ModHandler.getModItem("Railcraft", "slab", 3L, 38),
-                    GT_ModHandler.getModItem("harvestcraft", "wovencottonItem", 1L),
-                    GT_ModHandler.getModItem("Forestry", "oakStick", 5L, 0) },
-                Materials.SeedOil.getFluid(100L),
-                GT_ModHandler.getModItem("Forestry", "frameImpregnated", 1L, 0),
-                1200, 64);
-
-            // Apiary
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] { GT_ModHandler.getModItem("Forestry", "frameImpregnated", 1L, 0),
-                    GT_OreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.slab, Materials.Wood, 2L),
-                    GT_ModHandler.getModItem("Forestry", "beeCombs", 1L, W),
-                    GT_ModHandler.getModItem("Forestry", "apiculture", 2L, 2),
-                    new ItemStack(Blocks.fence, 1, 0).splitStack(2)},
-                Materials.SeedOil.getFluid(1000L),
-                GT_ModHandler.getModItem("Forestry", "apiculture", 1L, 0),
-                1200, 64);
-
-            // Scented Paneling
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Gold, 2L),
-                    GT_ModHandler.getModItem("Forestry", "royalJelly", 1L, 0),
-                    GT_ModHandler.getModItem("Forestry", "oakStick", 3L, 0),
-                    GT_ModHandler.getModItem("Forestry", "beeswax", 2L, 0),
-                    GT_ModHandler.getModItem("Forestry", "pollen", 1L, W) },
-                Materials.Honey.getFluid(1000L),
-                GT_ModHandler.getModItem("Forestry", "craftingMaterial", 1L, 6),
-                1200, 64);
-
-            // Swarmer
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 5),
-                    GT_OreDictUnificator.get(OrePrefixes.foil, Materials.RoseGold, 2L),
-                    GT_ModHandler.getModItem("Forestry", "royalJelly", 2L, 0),
-                    GT_ModHandler.getModItem("Forestry", "frameImpregnated", 1L, 0) },
-                Materials.Honey.getFluid(2500L),
-                GT_ModHandler.getModItem("Forestry", "alveary", 1L, 2),
-                1200, 120);
-
-            // Alveary Fan
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 11),
-                    ItemList.SteelBars.get(3L),
-                    GT_OreDictUnificator.get(OrePrefixes.rotor, Materials.Bronze, 1L),
-                    ItemList.Electric_Motor_MV.get(1L) },
-                Materials.Honey.getFluid(2500L),
-                GT_ModHandler.getModItem("Forestry", "alveary", 1L, 3),
-                1200, 120);
-
-            // Alveary Heater
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 7),
-                    ItemList.SteelBars.get(1L), GT_ModHandler.getModItem("IC2", "itemRecipePart", 3L),
-                    ItemList.Electric_Motor_MV.get(1L) },
-                Materials.Honey.getFluid(2500L),
-                GT_ModHandler.getModItem("Forestry", "alveary", 1L, 4),
-                1200, 120);
-
-            // Alveary Hygroregulator
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 6),
-                    GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Good, 1L),
-                    GT_ModHandler.getModItem("extracells", "certustank", 2L, 0),
-                    GT_OreDictUnificator.get(OrePrefixes.pipeMedium, Materials.StainlessSteel, 1L),
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L) },
-                Materials.Honey.getFluid(2500L),
-                GT_ModHandler.getModItem("Forestry", "alveary", 1L, 5),
-                1200, 120);
-
-            // Alveary Stabiliser
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 4),
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
-                    ItemList.Component_Filter.get(2L),
-                    GT_ModHandler.getModItem("Forestry", "royalJelly", 1L, 0) },
-                Materials.Honey.getFluid(2500L),
-                GT_ModHandler.getModItem("Forestry", "alveary", 1L, 6),
-                1200, 120);
-
-            // Alveary Sieve
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 3),
-                    GT_ModHandler.getModItem("Forestry", "craftingMaterial", 4L, 3),
-                    GT_ModHandler.getModItem("Forestry", "pollenFertile", 1L) },
-                Materials.Honey.getFluid(2500L),
-                GT_ModHandler.getModItem("Forestry", "alveary", 1L, 7),
-                1200, 120);
-        }
-
-        if (Loader.isModLoaded("ExtraBees")) {
-            ItemStack alveary = GT_ModHandler.getModItem("Forestry", "alveary", 1L, 0);
-
-            // Mutator
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 12),
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.EnderEye, 2L),
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.EnderPearl, 2L),
-                    GT_ModHandler.getModItem("ExtraBees", "hiveFrame.soul", 1L, 0) },
-                Materials.Honey.getFluid(3750L),
-                GT_ModHandler.getModItem("ExtraBees", "alveary", 1L, 0),
-                1200, 120);
-
-            // Frame Housing
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 10),
-                    GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.WoodSealed, 1L),
-                    GT_ModHandler.getModItem("Forestry", "frameImpregnated", 1L, 0),
-                    GT_ModHandler.getModItem("Forestry", "frameImpregnated", 1L, 0),
-                    GT_ModHandler.getModItem("Forestry", "frameImpregnated", 1L, 0),
-                    GT_ModHandler.getModItem("Forestry", "frameImpregnated", 1L, 0) },
-                Materials.Honey.getFluid(3750L),
-                GT_ModHandler.getModItem("ExtraBees", "alveary", 1L, 1),
-                1200, 120);
-
-            // Rain Shield
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 8),
-                    GT_ModHandler.getModItem("IC2", "blockRubber", 4L),
-                    new ItemStack(Blocks.brick_block, 1, 0), },
-                Materials.Honey.getFluid(3750L),
-                GT_ModHandler.getModItem("ExtraBees", "alveary", 1L, 2),
-                1200, 120);
-
-            // Alveary Lighting
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 2),
-                    new ItemStack(Blocks.stained_glass, 4, W),
-                    new ItemStack(Blocks.redstone_lamp, 1, 0) },
-                Materials.Honey.getFluid(3750L),
-                GT_ModHandler.getModItem("ExtraBees", "alveary", 1L, 3),
-                1200, 120);
-
-            // Electrical Stimulator
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 1),
-                    GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.Silver, 2L),
-                    GT_ModHandler.getModItem("Forestry", "chipsets", 2L, 2),
-                    ItemList.Electric_Motor_HV.get(1L) },
-                Materials.Honey.getFluid(3750L),
-                GT_ModHandler.getModItem("ExtraBees", "alveary", 1L, 4),
-                1200, 120);
-
-            // Hatchery
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 3),
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Redstone, 2L),
-                    ItemList.Conveyor_Module_MV.get(2L),
-                    GT_ModHandler.getModItem("Forestry", "apiculture", 1L, 0) },
-                Materials.Honey.getFluid(3750L),
-                GT_ModHandler.getModItem("ExtraBees", "alveary", 1L, 5),
-                1200, 120);
-
-            // Alveary Transmission
-            GT_Values.RA.addAssemblerRecipe(
-                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 0),
-                    GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Advanced, 1L),
-                    GT_OreDictUnificator.get(OrePrefixes.cableGt02, Materials.Aluminium, 3L),
-                    ItemList.Hull_HV.get(1L) },
-                Materials.Honey.getFluid(3750L),
-                GT_ModHandler.getModItem("ExtraBees", "alveary", 1L, 6),
-                1200, 120);
-        }
-
         if (Loader.isModLoaded("appliedenergistics2") && Loader.isModLoaded("TConstruct")) {
             GT_Values.RA.addAssemblerRecipe(
                 new ItemStack[] { GT_ModHandler.getModItem("TConstruct", "GlassPane", 1L, 0),
@@ -2555,7 +2198,319 @@ public class AssemblerRecipes implements Runnable {
             100, 7864320);
     }
 
-    private static final void registerMixedMetalIngotRecipes() {
+    private static void registerGregTechRecipes() {
+        if (Loader.isModLoaded("Forestry")) {
+
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] {
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
+                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Copper, 2L)
+                },
+                Materials.Glass.getMolten(576L),
+                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 0),
+                200, 30);
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] {
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
+                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.AnnealedCopper, 2L)
+                },
+                Materials.Glass.getMolten(576L),
+                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 0),
+                200, 30);
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] {
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
+                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Tin, 2L)
+                },
+                Materials.Glass.getMolten(576L),
+                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 1),
+                200, 30);
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] {
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
+                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Bronze, 2L)
+                },
+                Materials.Glass.getMolten(576L),
+                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 2),
+                200, 30);
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] {
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
+                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Iron, 2L)
+                },
+                Materials.Glass.getMolten(576L),
+                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 3),
+                200, 30);
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] {
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
+                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.WroughtIron, 2L)
+                },
+                Materials.Glass.getMolten(576L),
+                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 3),
+                200, 30);
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] {
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
+                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Gold, 2L)
+                },
+                Materials.Glass.getMolten(576L),
+                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 4),
+                200, 30);
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] {
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
+                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Diamond, 2L)
+                },
+                Materials.Glass.getMolten(576L),
+                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 5),
+                200, 30);
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] {
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
+                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Obsidian, 2L)
+                },
+                Materials.Glass.getMolten(576L),
+                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 6),
+                200, 30);
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] {
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
+                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Blaze, 2L)
+                },
+                Materials.Glass.getMolten(576L),
+                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 7),
+                200, 30);
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] {
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
+                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Rubber, 2L)
+                },
+                Materials.Glass.getMolten(576L),
+                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 8),
+                200, 30);
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] {
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
+                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Emerald, 2L)
+                },
+                Materials.Glass.getMolten(576L),
+                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 9),
+                200, 30);
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] {
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
+                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Apatite, 2L)
+                },
+                Materials.Glass.getMolten(576L),
+                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 10),
+                200, 30);
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] {
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
+                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Lapis, 2L)
+                },
+                Materials.Glass.getMolten(576L),
+                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 11),
+                200, 30);
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] {
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
+                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.EnderEye, 2L)
+                },
+                Materials.Glass.getMolten(576L),
+                GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 12),
+                200, 30);
+
+            ItemStack alveary = GT_ModHandler.getModItem("Forestry", "alveary", 1L, 0);
+            // Apiary
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] { GT_ModHandler.getModItem("Forestry", "frameImpregnated", 1L, 0),
+                    GT_OreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.slab, Materials.Wood, 2L),
+                    GT_ModHandler.getModItem("Forestry", "beeCombs", 1L, W),
+                    GT_ModHandler.getModItem("Forestry", "apiculture", 2L, 2),
+                    new ItemStack(Blocks.fence, 1, 0).splitStack(2)},
+                Materials.SeedOil.getFluid(1000L),
+                GT_ModHandler.getModItem("Forestry", "apiculture", 1L, 0),
+                1200, 64);
+
+            // Scented Paneling
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Gold, 2L),
+                    GT_ModHandler.getModItem("Forestry", "royalJelly", 1L, 0),
+                    GT_ModHandler.getModItem("Forestry", "oakStick", 3L, 0),
+                    GT_ModHandler.getModItem("Forestry", "beeswax", 2L, 0),
+                    GT_ModHandler.getModItem("Forestry", "pollen", 1L, W) },
+                Materials.Honey.getFluid(1000L),
+                GT_ModHandler.getModItem("Forestry", "craftingMaterial", 1L, 6),
+                1200, 64);
+
+            // Swarmer
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 5),
+                    GT_OreDictUnificator.get(OrePrefixes.foil, Materials.RoseGold, 2L),
+                    GT_ModHandler.getModItem("Forestry", "royalJelly", 2L, 0),
+                    GT_ModHandler.getModItem("Forestry", "frameImpregnated", 1L, 0) },
+                Materials.Honey.getFluid(2500L),
+                GT_ModHandler.getModItem("Forestry", "alveary", 1L, 2),
+                1200, 120);
+
+            // Alveary Fan
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 11),
+                    ItemList.SteelBars.get(3L),
+                    GT_OreDictUnificator.get(OrePrefixes.rotor, Materials.Bronze, 1L),
+                    ItemList.Electric_Motor_MV.get(1L) },
+                Materials.Honey.getFluid(2500L),
+                GT_ModHandler.getModItem("Forestry", "alveary", 1L, 3),
+                1200, 120);
+
+            // Alveary Heater
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 7),
+                    ItemList.SteelBars.get(1L), GT_ModHandler.getModItem("IC2", "itemRecipePart", 3L),
+                    ItemList.Electric_Motor_MV.get(1L) },
+                Materials.Honey.getFluid(2500L),
+                GT_ModHandler.getModItem("Forestry", "alveary", 1L, 4),
+                1200, 120);
+
+            // Alveary Hygroregulator
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 6),
+                    GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Good, 1L),
+                    GT_ModHandler.getModItem("extracells", "certustank", 2L, 0),
+                    GT_OreDictUnificator.get(OrePrefixes.pipeMedium, Materials.StainlessSteel, 1L),
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L) },
+                Materials.Honey.getFluid(2500L),
+                GT_ModHandler.getModItem("Forestry", "alveary", 1L, 5),
+                1200, 120);
+
+            // Alveary Stabiliser
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 4),
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
+                    ItemList.Component_Filter.get(2L),
+                    GT_ModHandler.getModItem("Forestry", "royalJelly", 1L, 0) },
+                Materials.Honey.getFluid(2500L),
+                GT_ModHandler.getModItem("Forestry", "alveary", 1L, 6),
+                1200, 120);
+
+            // Alveary Sieve
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 3),
+                    GT_ModHandler.getModItem("Forestry", "craftingMaterial", 4L, 3),
+                    GT_ModHandler.getModItem("Forestry", "pollenFertile", 1L) },
+                Materials.Honey.getFluid(2500L),
+                GT_ModHandler.getModItem("Forestry", "alveary", 1L, 7),
+                1200, 120);
+        }
+        if (Loader.isModLoaded("ExtraBees")) {
+            ItemStack alveary = GT_ModHandler.getModItem("Forestry", "alveary", 1L, 0);
+
+            // Mutator
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 12),
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.EnderEye, 2L),
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.EnderPearl, 2L),
+                    GT_ModHandler.getModItem("ExtraBees", "hiveFrame.soul", 1L, 0) },
+                Materials.Honey.getFluid(3750L),
+                GT_ModHandler.getModItem("ExtraBees", "alveary", 1L, 0),
+                1200, 120);
+
+            // Frame Housing
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 10),
+                    GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.WoodSealed, 1L),
+                    GT_ModHandler.getModItem("Forestry", "frameImpregnated", 1L, 0),
+                    GT_ModHandler.getModItem("Forestry", "frameImpregnated", 1L, 0),
+                    GT_ModHandler.getModItem("Forestry", "frameImpregnated", 1L, 0),
+                    GT_ModHandler.getModItem("Forestry", "frameImpregnated", 1L, 0) },
+                Materials.Honey.getFluid(3750L),
+                GT_ModHandler.getModItem("ExtraBees", "alveary", 1L, 1),
+                1200, 120);
+
+            // Rain Shield
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 8),
+                    GT_ModHandler.getModItem("IC2", "blockRubber", 4L),
+                    new ItemStack(Blocks.brick_block, 1, 0), },
+                Materials.Honey.getFluid(3750L),
+                GT_ModHandler.getModItem("ExtraBees", "alveary", 1L, 2),
+                1200, 120);
+
+            // Alveary Lighting
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 2),
+                    new ItemStack(Blocks.stained_glass, 4, W),
+                    new ItemStack(Blocks.redstone_lamp, 1, 0) },
+                Materials.Honey.getFluid(3750L),
+                GT_ModHandler.getModItem("ExtraBees", "alveary", 1L, 3),
+                1200, 120);
+
+            // Electrical Stimulator
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 1),
+                    GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.Silver, 2L),
+                    GT_ModHandler.getModItem("Forestry", "chipsets", 2L, 2),
+                    ItemList.Electric_Motor_HV.get(1L) },
+                Materials.Honey.getFluid(3750L),
+                GT_ModHandler.getModItem("ExtraBees", "alveary", 1L, 4),
+                1200, 120);
+
+            // Hatchery
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 3),
+                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Redstone, 2L),
+                    ItemList.Conveyor_Module_MV.get(2L),
+                    GT_ModHandler.getModItem("Forestry", "apiculture", 1L, 0) },
+                Materials.Honey.getFluid(3750L),
+                GT_ModHandler.getModItem("ExtraBees", "alveary", 1L, 5),
+                1200, 120);
+
+            // Alveary Transmission
+            GT_Values.RA.addAssemblerRecipe(
+                new ItemStack[] { alveary, GT_ModHandler.getModItem("Forestry", "thermionicTubes", 4L, 0),
+                    GT_OreDictUnificator.get(OrePrefixes.circuit, Materials.Advanced, 1L),
+                    GT_OreDictUnificator.get(OrePrefixes.cableGt02, Materials.Aluminium, 3L),
+                    ItemList.Hull_HV.get(1L) },
+                Materials.Honey.getFluid(3750L),
+                GT_ModHandler.getModItem("ExtraBees", "alveary", 1L, 6),
+                1200, 120);
+        }
+    }
+
+    private static void registerMixedMetalIngotRecipes() {
         GT_Values.RA.addAssemblerRecipe(
             new ItemStack[] { GT_Utility.getIntegratedCircuit(3),
                 GT_OreDictUnificator.get(OrePrefixes.plate, Materials.AnyIron, 1),
@@ -3297,64 +3252,57 @@ public class AssemblerRecipes implements Runnable {
             ItemList.Casing_Coil_Cupronickel.get(1L),
             100, 7);
 
-        // TODO: Rework other stuff (that depends on certain Heat Levels, mostly LuV+ stuff) so this can be wrapped into a oneliner.
-        GT_Values.RA.addAssemblerRecipe(
-            new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.wireGt02, Materials.Cupronickel, 8L),
-                ItemList.MicaInsulatorFoil.get(8L), GT_Utility.getIntegratedCircuit(3) },
-            Materials.Tin.getMolten(144L),
-            ItemList.Casing_Coil_Cupronickel.get(1L),
-            200, 30);
         GT_Values.RA.addAssemblerRecipe(
             new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.wireGt02, Materials.Kanthal, 8L),
-                ItemList.MicaInsulatorFoil.get(12L), GT_Utility.getIntegratedCircuit(3) },
+                ItemList.AluminoSilicateWool.get(16L), GT_Utility.getIntegratedCircuit(3) },
             Materials.Cupronickel.getMolten(144L),
             ItemList.Casing_Coil_Kanthal.get(1L),
             300, 120);
         GT_Values.RA.addAssemblerRecipe(
             new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.wireGt02, Materials.Nichrome, 8L),
-                ItemList.MicaInsulatorFoil.get(16L), GT_Utility.getIntegratedCircuit(3) },
+                ItemList.AluminoSilicateWool.get(20L), GT_Utility.getIntegratedCircuit(3) },
             Materials.Kanthal.getMolten(144L),
             ItemList.Casing_Coil_Nichrome.get(1L),
             400, 480);
         GT_Values.RA.addAssemblerRecipe(
             new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.wireGt02, Materials.TPV, 8L),
-                ItemList.MicaInsulatorFoil.get(20L), GT_Utility.getIntegratedCircuit(3) },
+                ItemList.AluminoSilicateWool.get(24L), GT_Utility.getIntegratedCircuit(3) },
             Materials.Nichrome.getMolten(144L),
             ItemList.Casing_Coil_TungstenSteel.get(1L),
             500, 1920);
         GT_Values.RA.addAssemblerRecipe(
             new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.wireGt02, Materials.HSSG, 8L),
-                ItemList.MicaInsulatorFoil.get(24L), GT_Utility.getIntegratedCircuit(3) },
+                ItemList.AluminoSilicateWool.get(28L), GT_Utility.getIntegratedCircuit(3) },
             Materials.TPV.getMolten(144L),
             ItemList.Casing_Coil_HSSG.get(1L),
             600, 7680);
         GT_Values.RA.addAssemblerRecipe(
             new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.wireGt02, Materials.HSSS, 8L),
-                ItemList.MicaInsulatorFoil.get(28L), GT_Utility.getIntegratedCircuit(3) },
+                ItemList.AluminoSilicateWool.get(32L), GT_Utility.getIntegratedCircuit(3) },
             Materials.HSSG.getMolten(144L),
             ItemList.Casing_Coil_HSSS.get(1L),
             700, 7680);
         GT_Values.RA.addAssemblerRecipe(
             new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.wireGt02, Materials.Naquadah, 8L),
-                ItemList.MicaInsulatorFoil.get(32L), GT_Utility.getIntegratedCircuit(3) },
+                ItemList.AluminoSilicateWool.get(36L), GT_Utility.getIntegratedCircuit(3) },
             Materials.HSSS.getMolten(144L),
             ItemList.Casing_Coil_Naquadah.get(1L),
             800, 30720);
         GT_Values.RA.addAssemblerRecipe(
             new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.wireGt02, Materials.NaquadahAlloy, 8L),
-                ItemList.MicaInsulatorFoil.get(36L), GT_Utility.getIntegratedCircuit(3) },
+                ItemList.AluminoSilicateWool.get(40L), GT_Utility.getIntegratedCircuit(3) },
             Materials.Naquadah.getMolten(144L),
             ItemList.Casing_Coil_NaquadahAlloy.get(1L),
             900, 30720);
         GT_Values.RA.addAssemblerRecipe(
             new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.wireGt02, Materials.Trinium, 8L),
-                ItemList.MicaInsulatorFoil.get(40L), GT_Utility.getIntegratedCircuit(3) },
+                ItemList.AluminoSilicateWool.get(40L), GT_Utility.getIntegratedCircuit(3) },
             Materials.NaquadahAlloy.getMolten(144L),
             ItemList.Casing_Coil_Trinium.get(1L),
             1000, 122880);
         GT_Values.RA.addAssemblerRecipe(
             new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.wireGt02, Materials.ElectrumFlux, 8L),
-                ItemList.MicaInsulatorFoil.get(44L), GT_Utility.getIntegratedCircuit(3) },
+                ItemList.AluminoSilicateWool.get(44L), GT_Utility.getIntegratedCircuit(3) },
             Materials.Trinium.getMolten(144L),
             ItemList.Casing_Coil_ElectrumFlux.get(1L),
             1100, 500000);

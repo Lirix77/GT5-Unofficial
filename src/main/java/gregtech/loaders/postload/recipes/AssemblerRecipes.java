@@ -960,68 +960,6 @@ public class AssemblerRecipes implements Runnable {
             .addTo(sAssemblerRecipes);
 
         GT_Values.RA.stdBuilder()
-            .itemInputs(getModItem(TwilightForest.ID, "item.charmOfLife1", 4L, 0), GT_Utility.getIntegratedCircuit(4))
-            .itemOutputs(getModItem(TwilightForest.ID, "item.charmOfLife2", 1L, 0))
-            .noFluidInputs()
-            .noFluidOutputs()
-            .duration(5 * SECONDS)
-            .eut(8)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                getModItem(TwilightForest.ID, "item.charmOfKeeping1", 4L, 0),
-                GT_Utility.getIntegratedCircuit(4))
-            .itemOutputs(getModItem(TwilightForest.ID, "item.charmOfKeeping2", 1L, 0))
-            .noFluidInputs()
-            .noFluidOutputs()
-            .duration(5 * SECONDS)
-            .eut(8)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                getModItem(TwilightForest.ID, "item.charmOfKeeping2", 4L, 0),
-                GT_Utility.getIntegratedCircuit(4))
-            .itemOutputs(getModItem(TwilightForest.ID, "item.charmOfKeeping3", 1L, 0))
-            .noFluidInputs()
-            .noFluidOutputs()
-            .duration(5 * SECONDS)
-            .eut(8)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(getModItem(TwilightForest.ID, "item.charmOfLife2", 1L, 0), GT_Utility.getIntegratedCircuit(1))
-            .itemOutputs(getModItem(TwilightForest.ID, "item.charmOfLife1", 4L, 0))
-            .noFluidInputs()
-            .noFluidOutputs()
-            .duration(5 * SECONDS)
-            .eut(8)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                getModItem(TwilightForest.ID, "item.charmOfKeeping2", 1L, 0),
-                GT_Utility.getIntegratedCircuit(1))
-            .itemOutputs(getModItem(TwilightForest.ID, "item.charmOfKeeping1", 4L, 0))
-            .noFluidInputs()
-            .noFluidOutputs()
-            .duration(5 * SECONDS)
-            .eut(8)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                getModItem(TwilightForest.ID, "item.charmOfKeeping3", 1L, 0),
-                GT_Utility.getIntegratedCircuit(1))
-            .itemOutputs(getModItem(TwilightForest.ID, "item.charmOfKeeping2", 4L, 0))
-            .noFluidInputs()
-            .noFluidOutputs()
-            .duration(5 * SECONDS)
-            .eut(8)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
             .itemInputs(
                 getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1L, 16),
                 getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1L, 20))
@@ -2690,15 +2628,6 @@ public class AssemblerRecipes implements Runnable {
             .addTo(sAssemblerRecipes);
 
         GT_Values.RA.stdBuilder()
-            .itemInputs(GT_ModHandler.getIC2Item("waterMill", 2), GT_Utility.getIntegratedCircuit(2))
-            .itemOutputs(GT_ModHandler.getIC2Item("generator", 1))
-            .noFluidInputs()
-            .noFluidOutputs()
-            .duration(5 * MINUTES + 20 * SECONDS)
-            .eut(8)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
             .itemInputs(GT_ModHandler.getIC2Item("batPack", 1L, 32767), GT_Utility.getIntegratedCircuit(1))
             .itemOutputs(ItemList.IC2_ReBattery.get(6))
             .noFluidInputs()
@@ -2718,17 +2647,6 @@ public class AssemblerRecipes implements Runnable {
 
         GT_Values.RA.stdBuilder()
             .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Aluminium, 4),
-                GT_ModHandler.getIC2Item("generator", 1))
-            .itemOutputs(GT_ModHandler.getIC2Item("waterMill", 2))
-            .noFluidInputs()
-            .noFluidOutputs()
-            .duration(5 * MINUTES + 20 * SECONDS)
-            .eut(8)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
                 GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Iron, 5),
                 new ItemStack(Blocks.chest, 1, 32767))
             .itemOutputs(new ItemStack(Blocks.hopper))
@@ -2769,17 +2687,6 @@ public class AssemblerRecipes implements Runnable {
             .noFluidOutputs()
             .duration(8 * SECONDS)
             .eut(20)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Magnalium, 2),
-                GT_ModHandler.getIC2Item("generator", 1))
-            .itemOutputs(GT_ModHandler.getIC2Item("windMill", 1))
-            .noFluidInputs()
-            .noFluidOutputs()
-            .duration(5 * MINUTES + 20 * SECONDS)
-            .eut(8)
             .addTo(sAssemblerRecipes);
 
         GT_Values.RA.stdBuilder()
@@ -2957,17 +2864,6 @@ public class AssemblerRecipes implements Runnable {
 
         GT_Values.RA.stdBuilder()
             .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.toolHeadSword, Materials.Steel, 1),
-                GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 1))
-            .itemOutputs(ItemList.Tool_Sword_Steel.getUndamaged(1))
-            .noFluidInputs()
-            .noFluidOutputs()
-            .duration(5 * SECONDS)
-            .eut(16)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
                 GT_OreDictUnificator.get(OrePrefixes.toolHeadPickaxe, Materials.Wood, 1),
                 GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 2))
             .itemOutputs(new ItemStack(Items.wooden_pickaxe, 1))
@@ -3026,17 +2922,6 @@ public class AssemblerRecipes implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.toolHeadPickaxe, Materials.Bronze, 1),
                 GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 2))
             .itemOutputs(ItemList.Tool_Pickaxe_Bronze.getUndamaged(1))
-            .noFluidInputs()
-            .noFluidOutputs()
-            .duration(5 * SECONDS)
-            .eut(16)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.toolHeadPickaxe, Materials.Steel, 1),
-                GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 2))
-            .itemOutputs(ItemList.Tool_Pickaxe_Steel.getUndamaged(1))
             .noFluidInputs()
             .noFluidOutputs()
             .duration(5 * SECONDS)
@@ -3111,17 +2996,6 @@ public class AssemblerRecipes implements Runnable {
 
         GT_Values.RA.stdBuilder()
             .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.toolHeadShovel, Materials.Steel, 1),
-                GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 2))
-            .itemOutputs(ItemList.Tool_Shovel_Steel.getUndamaged(1))
-            .noFluidInputs()
-            .noFluidOutputs()
-            .duration(5 * SECONDS)
-            .eut(16)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
                 GT_OreDictUnificator.get(OrePrefixes.toolHeadAxe, Materials.Wood, 1),
                 GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 2))
             .itemOutputs(new ItemStack(Items.wooden_axe, 1))
@@ -3188,17 +3062,6 @@ public class AssemblerRecipes implements Runnable {
 
         GT_Values.RA.stdBuilder()
             .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.toolHeadAxe, Materials.Steel, 1),
-                GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 2))
-            .itemOutputs(ItemList.Tool_Axe_Steel.getUndamaged(1))
-            .noFluidInputs()
-            .noFluidOutputs()
-            .duration(5 * SECONDS)
-            .eut(16)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
                 GT_OreDictUnificator.get(OrePrefixes.toolHeadHoe, Materials.Wood, 1),
                 GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 2))
             .itemOutputs(new ItemStack(Items.wooden_hoe, 1))
@@ -3257,17 +3120,6 @@ public class AssemblerRecipes implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.toolHeadHoe, Materials.Bronze, 1),
                 GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 2))
             .itemOutputs(ItemList.Tool_Hoe_Bronze.getUndamaged(1))
-            .noFluidInputs()
-            .noFluidOutputs()
-            .duration(5 * SECONDS)
-            .eut(16)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.toolHeadHoe, Materials.Steel, 1),
-                GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 2))
-            .itemOutputs(ItemList.Tool_Hoe_Steel.getUndamaged(1))
             .noFluidInputs()
             .noFluidOutputs()
             .duration(5 * SECONDS)
@@ -3563,7 +3415,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_ULV.get(1),
-                    getModItem(NewHorizonsCoreMod.ID, "BabyChest", 1),
+                    new ItemStack(Blocks.chest),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_Bus_ULV.get(1))
                 .fluidInputs(Materials.Glue.getFluid(1 * INGOTS))
@@ -3575,7 +3427,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_ULV.get(1),
-                    getModItem(NewHorizonsCoreMod.ID, "BabyChest", 1),
+                    new ItemStack(Blocks.chest),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_Bus_ULV.get(1))
                 .fluidInputs(Materials.Plastic.getMolten(1 * HALF_INGOT))
@@ -3587,7 +3439,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_ULV.get(1),
-                    getModItem(NewHorizonsCoreMod.ID, "BabyChest", 1),
+                    new ItemStack(Blocks.chest),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_Bus_ULV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(1 * EIGHTH_INGOT))
@@ -3599,7 +3451,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_ULV.get(1),
-                    getModItem(NewHorizonsCoreMod.ID, "BabyChest", 1),
+                    new ItemStack(Blocks.chest),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_Bus_ULV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(4))

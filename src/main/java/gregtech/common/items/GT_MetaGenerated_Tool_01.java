@@ -550,7 +550,7 @@ public class GT_MetaGenerated_Tool_01 extends GT_MetaGenerated_Tool {
         addTool(TURBINE, "Turbine", "Turbine Rotors for your power station", new GT_Tool_Turbine_Normal());
         addTool(TURBINE_LARGE, "Large Turbine", "Turbine Rotors for your power station", new GT_Tool_Turbine_Large());
         addTool(TURBINE_HUGE, "Huge Turbine", "Turbine Rotors for your power station", new GT_Tool_Turbine_Huge());
-
+/*
         addTool(
             POCKET_MULTITOOL,
             "Pocket Multitool",
@@ -619,7 +619,7 @@ public class GT_MetaGenerated_Tool_01 extends GT_MetaGenerated_Tool {
             new TC_Aspects.TC_AspectStack(TC_Aspects.INSTRUMENTUM, 6),
             new TC_Aspects.TC_AspectStack(TC_Aspects.FABRICO, 3),
             new TC_Aspects.TC_AspectStack(TC_Aspects.ORDO, 3));
-
+*/
         GT_ModHandler.addCraftingRecipe(
             INSTANCE.getToolWithStats(MORTAR, 1, Materials.Flint, Materials.Stone, null),
             GT_ModHandler.RecipeBits.NOT_REMOVABLE,

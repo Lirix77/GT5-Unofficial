@@ -37,36 +37,6 @@ public class ProcessingPlank implements gregtech.api.interfaces.IOreRecipeRegist
                 .eut(8)
                 .addTo(sLatheRecipes);
             GT_Values.RA.stdBuilder()
-                .itemInputs(
-                    GT_Utility.copyAmount(1L, aStack),
-                    GT_OreDictUnificator.get(OrePrefixes.screw, Materials.Iron, 1L))
-                .itemOutputs(ItemList.Crate_Empty.get(1L))
-                .noFluidInputs()
-                .noFluidOutputs()
-                .duration(10 * SECONDS)
-                .eut(1)
-                .addTo(sAssemblerRecipes);
-            GT_Values.RA.stdBuilder()
-                .itemInputs(
-                    GT_Utility.copyAmount(1L, aStack),
-                    GT_OreDictUnificator.get(OrePrefixes.screw, Materials.WroughtIron, 1L))
-                .itemOutputs(ItemList.Crate_Empty.get(1L))
-                .noFluidInputs()
-                .noFluidOutputs()
-                .duration(10 * SECONDS)
-                .eut(1)
-                .addTo(sAssemblerRecipes);
-            GT_Values.RA.stdBuilder()
-                .itemInputs(
-                    GT_Utility.copyAmount(1L, aStack),
-                    GT_OreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L))
-                .itemOutputs(ItemList.Crate_Empty.get(1L))
-                .noFluidInputs()
-                .noFluidOutputs()
-                .duration(10 * SECONDS)
-                .eut(1)
-                .addTo(sAssemblerRecipes);
-            GT_Values.RA.stdBuilder()
                 .itemInputs(GT_Utility.copyAmount(8L, aStack), GT_Utility.getIntegratedCircuit(8))
                 .itemOutputs(new ItemStack(Blocks.chest, 1))
                 .noFluidInputs()

@@ -212,22 +212,6 @@ public class CentrifugeRecipes implements Runnable {
             300,
             30);
 
-        // Liquid Fertilizer reverse recipe
-        GT_Values.RA.addCentrifugeRecipe(
-            GT_Utility.getIntegratedCircuit(1),
-            null,
-            FluidRegistry.getFluidStack("fluid.fertiliser", 144),
-            null,
-            ItemList.IC2_Fertilizer.get(1L),
-            null,
-            null,
-            null,
-            null,
-            null,
-            new int[] { 10000 },
-            40,
-            16);
-
         if (Loader.isModLoaded("TConstruct")) {
             // Centrifuge
             GT_Values.RA.addCentrifugeRecipe(

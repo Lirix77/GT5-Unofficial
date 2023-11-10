@@ -87,25 +87,6 @@ public class ProcessingToolHead implements gregtech.api.interfaces.IOreRecipeReg
                     GT_MetaGenerated_Tool_01.INSTANCE
                         .getToolWithStats(GT_MetaGenerated_Tool_01.AXE, 1, aMaterial, aMaterial.mHandleMaterial, null),
                     new Object[] { aOreDictName, OrePrefixes.stick.get(aMaterial.mHandleMaterial) });
-                if (GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L) != null) {
-                    GT_Values.RA.stdBuilder()
-                        .itemInputs(
-                            GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.toolHeadAxe, aMaterial, 1L),
-                            GT_Utility.getIntegratedCircuit(2))
-                        .itemOutputs(
-                            GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(
-                                GT_MetaGenerated_Tool_01.AXE,
-                                1,
-                                aMaterial,
-                                aMaterial.mHandleMaterial,
-                                null))
-                        .noFluidInputs()
-                        .noFluidOutputs()
-                        .duration(10 * SECONDS)
-                        .eut(TierEU.RECIPE_MV)
-                        .addTo(sAssemblerRecipes);
-                }
                 if (aSpecialRecipeReq1) GT_ModHandler.addCraftingRecipe(
                     GT_OreDictUnificator.get(OrePrefixes.toolHeadAxe, aMaterial, 1L),
                     GT_Proxy.tBits,
@@ -579,25 +560,6 @@ public class ProcessingToolHead implements gregtech.api.interfaces.IOreRecipeReg
                         }
                     }
                 }
-                if (GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L) != null) {
-                    GT_Values.RA.stdBuilder()
-                        .itemInputs(
-                            GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.toolHeadFile, aMaterial, 1L),
-                            GT_Utility.getIntegratedCircuit(15))
-                        .itemOutputs(
-                            GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(
-                                GT_MetaGenerated_Tool_01.FILE,
-                                1,
-                                aMaterial,
-                                aMaterial.mHandleMaterial,
-                                null))
-                        .noFluidInputs()
-                        .noFluidOutputs()
-                        .duration(10 * SECONDS)
-                        .eut(calculateRecipeEU(aMaterial, (int) TierEU.RECIPE_MV))
-                        .addTo(sAssemblerRecipes);
-                }
             }
             case toolHeadHoe -> {
                 if (aMaterial.getProcessingMaterialTierEU() < TierEU.IV) {
@@ -609,25 +571,6 @@ public class ProcessingToolHead implements gregtech.api.interfaces.IOreRecipeReg
                             aMaterial.mHandleMaterial,
                             null),
                         new Object[] { aOreDictName, OrePrefixes.stick.get(aMaterial.mHandleMaterial) });
-                }
-                if (GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L) != null) {
-                    GT_Values.RA.stdBuilder()
-                        .itemInputs(
-                            GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.toolHeadHoe, aMaterial, 1L),
-                            GT_Utility.getIntegratedCircuit(16))
-                        .itemOutputs(
-                            GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(
-                                GT_MetaGenerated_Tool_01.HOE,
-                                1,
-                                aMaterial,
-                                aMaterial.mHandleMaterial,
-                                null))
-                        .noFluidInputs()
-                        .noFluidOutputs()
-                        .duration(10 * SECONDS)
-                        .eut(calculateRecipeEU(aMaterial, (int) TierEU.RECIPE_MV))
-                        .addTo(sAssemblerRecipes);
                 }
                 if (aSpecialRecipeReq1) GT_ModHandler.addCraftingRecipe(
                     GT_OreDictUnificator.get(OrePrefixes.toolHeadHoe, aMaterial, 1L),
@@ -662,25 +605,6 @@ public class ProcessingToolHead implements gregtech.api.interfaces.IOreRecipeReg
                         GT_Proxy.tBits,
                         new Object[] { "GGG", "f  ", 'G', OrePrefixes.gem.get(aMaterial) });
                 }
-                if (GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L) != null) {
-                    GT_Values.RA.stdBuilder()
-                        .itemInputs(
-                            GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.toolHeadPickaxe, aMaterial, 1L),
-                            GT_Utility.getIntegratedCircuit(5))
-                        .itemOutputs(
-                            GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(
-                                GT_MetaGenerated_Tool_01.PICKAXE,
-                                1,
-                                aMaterial,
-                                aMaterial.mHandleMaterial,
-                                null))
-                        .noFluidInputs()
-                        .noFluidOutputs()
-                        .duration(10 * SECONDS)
-                        .eut(calculateRecipeEU(aMaterial, (int) TierEU.RECIPE_MV))
-                        .addTo(sAssemblerRecipes);
-                }
             }
             case toolHeadPlow -> {
                 if (aMaterial.getProcessingMaterialTierEU() < TierEU.IV) {
@@ -703,25 +627,6 @@ public class ProcessingToolHead implements gregtech.api.interfaces.IOreRecipeReg
                         GT_OreDictUnificator.get(OrePrefixes.toolHeadPlow, aMaterial, 1L),
                         GT_Proxy.tBits,
                         new Object[] { "GG", "GG", " f", 'G', OrePrefixes.gem.get(aMaterial) });
-                }
-                if (GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L) != null) {
-                    GT_Values.RA.stdBuilder()
-                        .itemInputs(
-                            GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.toolHeadPlow, aMaterial, 1L),
-                            GT_Utility.getIntegratedCircuit(6))
-                        .itemOutputs(
-                            GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(
-                                GT_MetaGenerated_Tool_01.PLOW,
-                                1,
-                                aMaterial,
-                                aMaterial.mHandleMaterial,
-                                null))
-                        .noFluidInputs()
-                        .noFluidOutputs()
-                        .duration(10 * SECONDS)
-                        .eut(calculateRecipeEU(aMaterial, (int) TierEU.RECIPE_MV))
-                        .addTo(sAssemblerRecipes);
                 }
             }
             case toolHeadSaw -> {
@@ -747,25 +652,6 @@ public class ProcessingToolHead implements gregtech.api.interfaces.IOreRecipeReg
                         GT_Proxy.tBits,
                         new Object[] { "GGf", 'G', OrePrefixes.gem.get(aMaterial) });
                 }
-                if (GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L) != null) {
-                    GT_Values.RA.stdBuilder()
-                        .itemInputs(
-                            GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.toolHeadSaw, aMaterial, 1L),
-                            GT_Utility.getIntegratedCircuit(7))
-                        .itemOutputs(
-                            GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(
-                                GT_MetaGenerated_Tool_01.SAW,
-                                1,
-                                aMaterial,
-                                aMaterial.mHandleMaterial,
-                                null))
-                        .noFluidInputs()
-                        .noFluidOutputs()
-                        .duration(10 * SECONDS)
-                        .eut(calculateRecipeEU(aMaterial, (int) TierEU.RECIPE_MV))
-                        .addTo(sAssemblerRecipes);
-                }
             }
             case toolHeadSense -> {
                 if (aMaterial.getProcessingMaterialTierEU() < TierEU.IV) {
@@ -790,25 +676,6 @@ public class ProcessingToolHead implements gregtech.api.interfaces.IOreRecipeReg
                         GT_Proxy.tBits,
                         new Object[] { "GGG", " f ", "   ", 'G', OrePrefixes.gem.get(aMaterial) });
                 }
-                if (GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L) != null) {
-                    GT_Values.RA.stdBuilder()
-                        .itemInputs(
-                            GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.toolHeadSense, aMaterial, 1L),
-                            GT_Utility.getIntegratedCircuit(8))
-                        .itemOutputs(
-                            GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(
-                                GT_MetaGenerated_Tool_01.SENSE,
-                                1,
-                                aMaterial,
-                                aMaterial.mHandleMaterial,
-                                null))
-                        .noFluidInputs()
-                        .noFluidOutputs()
-                        .duration(10 * SECONDS)
-                        .eut(calculateRecipeEU(aMaterial, (int) TierEU.RECIPE_MV))
-                        .addTo(sAssemblerRecipes);
-                }
             }
             case toolHeadShovel -> {
                 GT_ModHandler.addShapelessCraftingRecipe(
@@ -819,25 +686,6 @@ public class ProcessingToolHead implements gregtech.api.interfaces.IOreRecipeReg
                         aMaterial.mHandleMaterial,
                         null),
                     new Object[] { aOreDictName, OrePrefixes.stick.get(aMaterial.mHandleMaterial) });
-                if (GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L) != null) {
-                    GT_Values.RA.stdBuilder()
-                        .itemInputs(
-                            GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.toolHeadShovel, aMaterial, 1L),
-                            GT_Utility.getIntegratedCircuit(9))
-                        .itemOutputs(
-                            GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(
-                                GT_MetaGenerated_Tool_01.SHOVEL,
-                                1,
-                                aMaterial,
-                                aMaterial.mHandleMaterial,
-                                null))
-                        .noFluidInputs()
-                        .noFluidOutputs()
-                        .duration(10 * SECONDS)
-                        .eut(calculateRecipeEU(aMaterial, (int) TierEU.RECIPE_MV))
-                        .addTo(sAssemblerRecipes);
-                }
                 if (aSpecialRecipeReq1) GT_ModHandler.addCraftingRecipe(
                     GT_OreDictUnificator.get(OrePrefixes.toolHeadShovel, aMaterial, 1L),
                     GT_Proxy.tBits,
@@ -871,25 +719,6 @@ public class ProcessingToolHead implements gregtech.api.interfaces.IOreRecipeReg
                         GT_Proxy.tBits,
                         new Object[] { " G", "fG", 'G', OrePrefixes.gem.get(aMaterial) });
                 }
-                if (GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L) != null) {
-                    GT_Values.RA.stdBuilder()
-                        .itemInputs(
-                            GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.toolHeadSword, aMaterial, 1L),
-                            GT_Utility.getIntegratedCircuit(10))
-                        .itemOutputs(
-                            GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(
-                                GT_MetaGenerated_Tool_01.SWORD,
-                                1,
-                                aMaterial,
-                                aMaterial.mHandleMaterial,
-                                null))
-                        .noFluidInputs()
-                        .noFluidOutputs()
-                        .duration(10 * SECONDS)
-                        .eut(calculateRecipeEU(aMaterial, (int) TierEU.RECIPE_MV))
-                        .addTo(sAssemblerRecipes);
-                }
             }
             case toolHeadUniversalSpade -> {
                 GT_ModHandler.addShapelessCraftingRecipe(
@@ -897,27 +726,6 @@ public class ProcessingToolHead implements gregtech.api.interfaces.IOreRecipeReg
                         .getToolWithStats(GT_MetaGenerated_Tool_01.UNIVERSALSPADE, 1, aMaterial, aMaterial, null),
                     new Object[] { aOreDictName, OrePrefixes.stick.get(aMaterial), OrePrefixes.screw.get(aMaterial),
                         ToolDictNames.craftingToolScrewdriver });
-                if (GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L) != null
-                    && GT_OreDictUnificator.get(OrePrefixes.screw, aMaterial, 1L) != null) {
-                    GT_Values.RA.stdBuilder()
-                        .itemInputs(
-                            GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.screw, aMaterial, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.toolHeadUniversalSpade, aMaterial, 1L),
-                            GT_Utility.getIntegratedCircuit(11))
-                        .itemOutputs(
-                            GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(
-                                GT_MetaGenerated_Tool_01.UNIVERSALSPADE,
-                                1,
-                                aMaterial,
-                                aMaterial.mHandleMaterial,
-                                null))
-                        .noFluidInputs()
-                        .noFluidOutputs()
-                        .duration(10 * SECONDS)
-                        .eut(calculateRecipeEU(aMaterial, (int) TierEU.RECIPE_MV))
-                        .addTo(sAssemblerRecipes);
-                }
                 if (aSpecialRecipeReq2) GT_ModHandler.addCraftingRecipe(
                     GT_OreDictUnificator.get(OrePrefixes.toolHeadUniversalSpade, aMaterial, 1L),
                     GT_Proxy.tBits,
@@ -1171,26 +979,6 @@ public class ProcessingToolHead implements gregtech.api.interfaces.IOreRecipeReg
                         OrePrefixes.screw.get(Materials.Steel) });
             }
             case toolHeadHammer, toolHeadMallet -> {
-                if (GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L) != null) {
-                    GT_Values.RA.stdBuilder()
-                        .itemInputs(
-                            GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial.mHandleMaterial, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.toolHeadHammer, aMaterial, 1L),
-                            GT_Utility.getIntegratedCircuit(14))
-                        .itemOutputs(
-                            GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(
-                                aProducesSoftMallet ? GT_MetaGenerated_Tool_01.SOFTMALLET
-                                    : GT_MetaGenerated_Tool_01.HARDHAMMER,
-                                1,
-                                aMaterial,
-                                aMaterial.mHandleMaterial,
-                                null))
-                        .noFluidInputs()
-                        .noFluidOutputs()
-                        .duration(10 * SECONDS)
-                        .eut(calculateRecipeEU(aMaterial, (int) TierEU.RECIPE_MV))
-                        .addTo(sAssemblerRecipes);
-                }
                 if ((aMaterial != Materials.Stone) && (aMaterial != Materials.Flint)) {
                     GT_ModHandler.addShapelessCraftingRecipe(
                         GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(

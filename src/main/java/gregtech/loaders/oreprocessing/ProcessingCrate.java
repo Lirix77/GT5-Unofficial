@@ -18,10 +18,10 @@ import gregtech.common.GT_Proxy;
 public class ProcessingCrate implements gregtech.api.interfaces.IOreRecipeRegistrator {
 
     public ProcessingCrate() {
-        OrePrefixes.crateGtDust.add(this);
-        OrePrefixes.crateGtIngot.add(this);
-        OrePrefixes.crateGtGem.add(this);
-        OrePrefixes.crateGtPlate.add(this);
+        //OrePrefixes.crateGtDust.add(this);
+        //OrePrefixes.crateGtIngot.add(this);
+        //OrePrefixes.crateGtGem.add(this);
+        //OrePrefixes.crateGtPlate.add(this);
     }
 
     @Override

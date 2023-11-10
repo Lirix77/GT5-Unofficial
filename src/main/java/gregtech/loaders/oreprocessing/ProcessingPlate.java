@@ -534,17 +534,6 @@ public class ProcessingPlate implements gregtech.api.interfaces.IOreRecipeRegist
         if (GT_OreDictUnificator.get(OrePrefixes.ingot, aMaterial, 1L) != null) {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
-                    GT_OreDictUnificator.get(OrePrefixes.ingot, aMaterial, 2L),
-                    ItemList.Shape_Mold_Casing.get(0L))
-                .itemOutputs(GT_Utility.copyAmount(3L, aStack))
-                .noFluidInputs()
-                .noFluidOutputs()
-                .duration(6 * SECONDS + 8 * TICKS)
-                .eut(calculateRecipeEU(aMaterial, 15))
-                .addTo(sAlloySmelterRecipes);
-
-            GT_Values.RA.stdBuilder()
-                .itemInputs(
                     GT_OreDictUnificator.get(OrePrefixes.ingot, aMaterial, 1L),
                     ItemList.Shape_Extruder_Casing.get(0L))
                 .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.itemCasing, aMaterial, 2L))
@@ -609,14 +598,6 @@ public class ProcessingPlate implements gregtech.api.interfaces.IOreRecipeRegist
 
         switch (aOreDictName) {
             case "plateAlloyCarbon" -> {
-                GT_Values.RA.stdBuilder()
-                    .itemInputs(GT_ModHandler.getIC2Item("generator", 1L), GT_Utility.copyAmount(4L, aStack))
-                    .itemOutputs(GT_ModHandler.getIC2Item("windMill", 1L))
-                    .noFluidInputs()
-                    .noFluidOutputs()
-                    .duration(5 * MINUTES + 20 * SECONDS)
-                    .eut(8)
-                    .addTo(sAssemblerRecipes);
 
                 GT_Values.RA.stdBuilder()
                     .itemInputs(GT_Utility.copyAmount(1L, aStack), new ItemStack(Blocks.glass, 3, W))

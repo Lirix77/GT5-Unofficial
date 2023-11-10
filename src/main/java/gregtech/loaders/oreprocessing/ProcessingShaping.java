@@ -59,17 +59,6 @@ public class ProcessingShaping implements gregtech.api.interfaces.IOreRecipeRegi
                         .eut(calculateRecipeEU(aMaterial, 8 * tVoltageMultiplier))
                         .addTo(sExtruderRecipes);
 
-                    // Allow creation of alloy smelter recipes for material recycling if < IV tier.
-                    if (tTrueVoltage < TierEU.IV) {
-                        GT_Values.RA.stdBuilder()
-                            .itemInputs(GT_Utility.copyAmount(9L, aStack), ItemList.Shape_Mold_Block.get(0L))
-                            .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.block, aMaterial.mSmeltInto, tAmount))
-                            .noFluidInputs()
-                            .noFluidOutputs()
-                            .duration((5 * tAmount) * TICKS)
-                            .eut(calculateRecipeEU(aMaterial, 4 * tVoltageMultiplier))
-                            .addTo(sAlloySmelterRecipes);
-                    }
                 }
                 if ((aPrefix != OrePrefixes.ingot || aMaterial != aMaterial.mSmeltInto)
                     && GT_OreDictUnificator.get(OrePrefixes.ingot, aMaterial.mSmeltInto, 1L) != null) {
@@ -457,49 +446,6 @@ public class ProcessingShaping implements gregtech.api.interfaces.IOreRecipeRegi
                         .addTo(sExtruderRecipes);
                 }
 
-                if (!(aMaterial == Materials.StyreneButadieneRubber || aMaterial == Materials.Silicone)) {
-                    if (aMaterial.getProcessingMaterialTierEU() < TierEU.IV) {
-                        if (GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial.mSmeltInto, 1L) != null) {
-                            GT_Values.RA.stdBuilder()
-                                .itemInputs(GT_Utility.copyAmount(2L, aStack), ItemList.Shape_Mold_Plate.get(0L))
-                                .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial.mSmeltInto, tAmount))
-                                .noFluidInputs()
-                                .noFluidOutputs()
-                                .duration(((int) Math.max(aMaterialMass * 2L * tAmount, tAmount)) * TICKS)
-                                .eut(calculateRecipeEU(aMaterial, 2 * tVoltageMultiplier))
-                                .addTo(sAlloySmelterRecipes);
-                        }
-                    }
-                } else {
-                    // If tier < IV then add ability to turn ingots into plates via alloy smelter.
-                    if (tTrueVoltage < TierEU.IV) {
-                        if (GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial.mSmeltInto, 1L) != null) {
-                            GT_Values.RA.stdBuilder()
-                                .itemInputs(GT_Utility.copyAmount(1L, aStack), ItemList.Shape_Mold_Plate.get(0L))
-                                .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial.mSmeltInto, tAmount))
-                                .noFluidInputs()
-                                .noFluidOutputs()
-                                .duration(((int) Math.max(aMaterialMass * 2L * tAmount, tAmount)) * TICKS)
-                                .eut(calculateRecipeEU(aMaterial, 2 * tVoltageMultiplier))
-                                .addTo(sAlloySmelterRecipes);
-                        }
-                    }
-                }
-
-                // If tier < IV then add ability to turn ingots into gears via alloy smelter.
-                if (tTrueVoltage < TierEU.IV) {
-                    if (GT_OreDictUnificator.get(OrePrefixes.gearGt, aMaterial.mSmeltInto, 1L) != null) {
-                        GT_Values.RA.stdBuilder()
-                            .itemInputs(GT_Utility.copyAmount(8L, aStack), ItemList.Shape_Mold_Gear.get(0L))
-                            .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.gearGt, aMaterial.mSmeltInto, tAmount))
-                            .noFluidInputs()
-                            .noFluidOutputs()
-                            .duration(((int) Math.max(aMaterialMass * 10L * tAmount, tAmount)) * TICKS)
-                            .eut(calculateRecipeEU(aMaterial, 2 * tVoltageMultiplier))
-                            .addTo(sAlloySmelterRecipes);
-                    }
-                }
-
                 switch (aMaterial.mSmeltInto.mName) {
                     case "Glass" -> {
                         GT_Values.RA.stdBuilder()
@@ -538,16 +484,6 @@ public class ProcessingShaping implements gregtech.api.interfaces.IOreRecipeRegi
                                 .eut(3 * tVoltageMultiplier)
                                 .addTo(sExtruderRecipes);
                         }
-                        if (tAmount * 2 <= 64) {
-                            GT_Values.RA.stdBuilder()
-                                .itemInputs(GT_Utility.copyAmount(2L, aStack), ItemList.Shape_Mold_Casing.get(0L))
-                                .itemOutputs(GT_ModHandler.getIC2Item("casingadviron", tAmount * 3))
-                                .noFluidInputs()
-                                .noFluidOutputs()
-                                .duration((tAmount * 128) * TICKS)
-                                .eut(1 * tVoltageMultiplier)
-                                .addTo(sAlloySmelterRecipes);
-                        }
                     }
                     case "Iron", "WroughtIron" -> {
                         GT_Values.RA.stdBuilder()
@@ -567,26 +503,6 @@ public class ProcessingShaping implements gregtech.api.interfaces.IOreRecipeRegi
                                 .duration((tAmount * 32) * TICKS)
                                 .eut(3 * tVoltageMultiplier)
                                 .addTo(sExtruderRecipes);
-                        }
-                        if (tAmount * 2 <= 64) {
-                            GT_Values.RA.stdBuilder()
-                                .itemInputs(GT_Utility.copyAmount(2L, aStack), ItemList.Shape_Mold_Casing.get(0L))
-                                .itemOutputs(GT_ModHandler.getIC2Item("casingiron", tAmount * 3))
-                                .noFluidInputs()
-                                .noFluidOutputs()
-                                .duration((tAmount * 128) * TICKS)
-                                .eut(1 * tVoltageMultiplier)
-                                .addTo(sAlloySmelterRecipes);
-                        }
-                        if (tAmount * 31 <= 64) {
-                            GT_Values.RA.stdBuilder()
-                                .itemInputs(GT_Utility.copyAmount(31L, aStack), ItemList.Shape_Mold_Anvil.get(0L))
-                                .itemOutputs(new ItemStack(Blocks.anvil, 1, 0))
-                                .noFluidInputs()
-                                .noFluidOutputs()
-                                .duration((tAmount * 512) * TICKS)
-                                .eut(4 * tVoltageMultiplier)
-                                .addTo(sAlloySmelterRecipes);
                         }
                     }
                     case "Tin" -> {
@@ -608,16 +524,6 @@ public class ProcessingShaping implements gregtech.api.interfaces.IOreRecipeRegi
                                 .eut(3 * tVoltageMultiplier)
                                 .addTo(sExtruderRecipes);
                         }
-                        if (tAmount * 2 <= 64) {
-                            GT_Values.RA.stdBuilder()
-                                .itemInputs(GT_Utility.copyAmount(2L, aStack), ItemList.Shape_Mold_Casing.get(0L))
-                                .itemOutputs(GT_ModHandler.getIC2Item("casingtin", tAmount * 3))
-                                .noFluidInputs()
-                                .noFluidOutputs()
-                                .duration((tAmount * 128) * TICKS)
-                                .eut(1 * tVoltageMultiplier)
-                                .addTo(sAlloySmelterRecipes);
-                        }
                     }
                     case "Lead" -> {
                         if (tAmount * 2 <= 64) {
@@ -629,16 +535,6 @@ public class ProcessingShaping implements gregtech.api.interfaces.IOreRecipeRegi
                                 .duration((tAmount * 32) * TICKS)
                                 .eut(3 * tVoltageMultiplier)
                                 .addTo(sExtruderRecipes);
-                        }
-                        if (tAmount * 2 <= 64) {
-                            GT_Values.RA.stdBuilder()
-                                .itemInputs(GT_Utility.copyAmount(2L, aStack), ItemList.Shape_Mold_Casing.get(0L))
-                                .itemOutputs(GT_ModHandler.getIC2Item("casinglead", tAmount * 3))
-                                .noFluidInputs()
-                                .noFluidOutputs()
-                                .duration((tAmount * 128) * TICKS)
-                                .eut(1 * tVoltageMultiplier)
-                                .addTo(sAlloySmelterRecipes);
                         }
                     }
                     case "Copper", "AnnealedCopper" -> {
@@ -652,16 +548,6 @@ public class ProcessingShaping implements gregtech.api.interfaces.IOreRecipeRegi
                                 .eut(3 * tVoltageMultiplier)
                                 .addTo(sExtruderRecipes);
                         }
-                        if (tAmount * 2 <= 64) {
-                            GT_Values.RA.stdBuilder()
-                                .itemInputs(GT_Utility.copyAmount(2L, aStack), ItemList.Shape_Mold_Casing.get(0L))
-                                .itemOutputs(GT_ModHandler.getIC2Item("casingcopper", tAmount * 3))
-                                .noFluidInputs()
-                                .noFluidOutputs()
-                                .duration((tAmount * 128) * TICKS)
-                                .eut(1 * tVoltageMultiplier)
-                                .addTo(sAlloySmelterRecipes);
-                        }
                     }
                     case "Bronze" -> {
                         if (tAmount * 2 <= 64) {
@@ -674,16 +560,6 @@ public class ProcessingShaping implements gregtech.api.interfaces.IOreRecipeRegi
                                 .eut(3 * tVoltageMultiplier)
                                 .addTo(sExtruderRecipes);
                         }
-                        if (tAmount * 2 <= 64) {
-                            GT_Values.RA.stdBuilder()
-                                .itemInputs(GT_Utility.copyAmount(2L, aStack), ItemList.Shape_Mold_Casing.get(0L))
-                                .itemOutputs(GT_ModHandler.getIC2Item("casingbronze", tAmount * 3))
-                                .noFluidInputs()
-                                .noFluidOutputs()
-                                .duration((tAmount * 128) * TICKS)
-                                .eut(1 * tVoltageMultiplier)
-                                .addTo(sAlloySmelterRecipes);
-                        }
                     }
                     case "Gold" -> {
                         if (tAmount * 2 <= 64) {
@@ -695,16 +571,6 @@ public class ProcessingShaping implements gregtech.api.interfaces.IOreRecipeRegi
                                 .duration((tAmount * 32) * TICKS)
                                 .eut(3 * tVoltageMultiplier)
                                 .addTo(sExtruderRecipes);
-                        }
-                        if (tAmount * 2 <= 64) {
-                            GT_Values.RA.stdBuilder()
-                                .itemInputs(GT_Utility.copyAmount(2L, aStack), ItemList.Shape_Mold_Casing.get(0L))
-                                .itemOutputs(GT_ModHandler.getIC2Item("casinggold", tAmount * 3))
-                                .noFluidInputs()
-                                .noFluidOutputs()
-                                .duration((tAmount * 128) * TICKS)
-                                .eut(1 * tVoltageMultiplier)
-                                .addTo(sAlloySmelterRecipes);
                         }
                     }
                     case "Polytetrafluoroethylene" -> {
