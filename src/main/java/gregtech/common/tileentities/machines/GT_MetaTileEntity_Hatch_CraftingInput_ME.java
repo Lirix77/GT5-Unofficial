@@ -1,8 +1,17 @@
 package gregtech.common.tileentities.machines;
 
-import static gregtech.api.enums.Textures.BlockIcons.*;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_ME_CRAFTING_INPUT_BUFFER;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_ME_CRAFTING_INPUT_BUS;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
@@ -17,6 +26,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
@@ -54,6 +64,7 @@ import appeng.api.storage.data.IAEFluidStack;
 import appeng.api.storage.data.IAEItemStack;
 import appeng.api.util.AECableType;
 import appeng.api.util.DimensionalCoord;
+import appeng.api.util.IInterfaceViewable;
 import appeng.core.AppEng;
 import appeng.core.sync.GuiBridge;
 import appeng.helpers.ICustomNameObject;
@@ -66,7 +77,6 @@ import appeng.util.IWideReadableNumberConverter;
 import appeng.util.Platform;
 import appeng.util.ReadableNumberConverter;
 import gregtech.GT_Mod;
-import gregtech.api.GregTech_API;
 import gregtech.api.enums.ItemList;
 import gregtech.api.gui.modularui.GT_UITextures;
 import gregtech.api.interfaces.IConfigurationCircuitSupport;
@@ -83,7 +93,7 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
 
 public class GT_MetaTileEntity_Hatch_CraftingInput_ME extends GT_MetaTileEntity_Hatch_InputBus
     implements IConfigurationCircuitSupport, IAddGregtechLogo, IAddUIWidgets, IPowerChannelState, ICraftingProvider,
-    IGridProxyable, IDualInputHatch, ICustomNameObject {
+    IGridProxyable, IDualInputHatch, ICustomNameObject, IInterfaceViewable {
 
     // Each pattern slot in the crafting input hatch has its own internal inventory
     public static class PatternSlot implements IDualInputInventory {
@@ -307,7 +317,6 @@ public class GT_MetaTileEntity_Hatch_CraftingInput_ME extends GT_MetaTileEntity_
     private static final int SLOT_CIRCUIT = MAX_PATTERN_COUNT;
     private static final int SLOT_MANUAL_START = SLOT_CIRCUIT + 1;
     private static final int MANUAL_SLOT_WINDOW = 10;
-
     private BaseActionSource requestSource = null;
     private @Nullable AENetworkProxy gridProxy = null;
 
@@ -322,6 +331,7 @@ public class GT_MetaTileEntity_Hatch_CraftingInput_ME extends GT_MetaTileEntity_
 
     private String customName = null;
     private boolean supportFluids;
+    private boolean additionalConnection = false;
 
     public GT_MetaTileEntity_Hatch_CraftingInput_ME(int aID, String aName, String aNameRegional,
         boolean supportFluids) {
@@ -333,7 +343,8 @@ public class GT_MetaTileEntity_Hatch_CraftingInput_ME extends GT_MetaTileEntity_
             MAX_INV_COUNT,
             new String[] { "Advanced item input for Multiblocks", "Processes patterns directly from ME",
                 supportFluids ? "It supports patterns including fluids"
-                    : "It does not support patterns including fluids" });
+                    : "It does not support patterns including fluids",
+                "Change ME connection behavior by right-clicking with wire cutter" });
         disableSort = true;
         this.supportFluids = supportFluids;
     }
@@ -365,8 +376,13 @@ public class GT_MetaTileEntity_Hatch_CraftingInput_ME extends GT_MetaTileEntity_
     public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTimer) {
         super.onPostTick(aBaseMetaTileEntity, aTimer);
 
-        if (needPatternSync && aTimer % 10 == 0 && getBaseMetaTileEntity().isServerSide()) {
-            needPatternSync = !postMEPatternChange();
+        if (getBaseMetaTileEntity().isServerSide()) {
+            if (needPatternSync && aTimer % 10 == 0) {
+                needPatternSync = !postMEPatternChange();
+            }
+            if (aTimer % 20 == 0) {
+                getBaseMetaTileEntity().setActive(isActive());
+            }
         }
     }
 
@@ -386,14 +402,38 @@ public class GT_MetaTileEntity_Hatch_CraftingInput_ME extends GT_MetaTileEntity_
         return isOutputFacing(forgeDirection) ? AECableType.SMART : AECableType.NONE;
     }
 
+    private void updateValidGridProxySides() {
+        if (additionalConnection) {
+            getProxy().setValidSides(EnumSet.complementOf(EnumSet.of(ForgeDirection.UNKNOWN)));
+        } else {
+            getProxy().setValidSides(EnumSet.of(getBaseMetaTileEntity().getFrontFacing()));
+        }
+    }
+
+    @Override
+    public void onFacingChange() {
+        updateValidGridProxySides();
+    }
+
     @Override
     public void securityBreak() {}
+
+    @Override
+    public boolean onWireCutterRightClick(ForgeDirection side, ForgeDirection wrenchingSide, EntityPlayer aPlayer,
+        float aX, float aY, float aZ) {
+        additionalConnection = !additionalConnection;
+        updateValidGridProxySides();
+        aPlayer.addChatComponentMessage(
+            new ChatComponentTranslation("GT5U.hatch.additionalConnection." + additionalConnection));
+        return true;
+    }
 
     @Override
     public AENetworkProxy getProxy() {
         if (gridProxy == null) {
             gridProxy = new AENetworkProxy(this, "proxy", ItemList.Hatch_CraftingInput_Bus_ME.get(1), true);
             gridProxy.setFlags(GridFlags.REQUIRE_CHANNEL);
+            updateValidGridProxySides();
             if (getBaseMetaTileEntity().getWorld() != null) gridProxy.setOwner(
                 getBaseMetaTileEntity().getWorld()
                     .getPlayerEntityByName(getBaseMetaTileEntity().getOwnerName()));
@@ -411,16 +451,32 @@ public class GT_MetaTileEntity_Hatch_CraftingInput_ME extends GT_MetaTileEntity_
             getBaseMetaTileEntity().getZCoord());
     }
 
-    public IInventory getPatterns(int i) {
+    @Override
+    public int rows() {
+        return 4;
+    }
+
+    @Override
+    public int rowSize() {
+        return 9;
+    }
+
+    @Override
+    public IInventory getPatterns() {
         return this;
     }
 
+    @Override
     public String getName() {
         if (hasCustomName()) {
             return getCustomName();
         }
         StringBuilder name = new StringBuilder();
-        name.append(getInventoryName());
+        if (getCrafterIcon() != null) {
+            name.append(getCrafterIcon().getDisplayName());
+        } else {
+            name.append(getInventoryName());
+        }
 
         if (mInventory[SLOT_CIRCUIT] != null) {
             name.append(" - ");
@@ -433,8 +489,14 @@ public class GT_MetaTileEntity_Hatch_CraftingInput_ME extends GT_MetaTileEntity_
         return name.toString();
     }
 
+    @Override
     public TileEntity getTileEntity() {
         return (TileEntity) getBaseMetaTileEntity();
+    }
+
+    @Override
+    public boolean shouldDisplay() {
+        return false;
     }
 
     @Override
@@ -469,9 +531,8 @@ public class GT_MetaTileEntity_Hatch_CraftingInput_ME extends GT_MetaTileEntity_
         }
         aNBT.setTag("internalInventory", internalInventoryNBT);
         if (customName != null) aNBT.setString("customName", customName);
-        if (GregTech_API.mAE2) {
-            getProxy().writeToNBT(aNBT);
-        }
+        aNBT.setBoolean("additionalConnection", additionalConnection);
+        getProxy().writeToNBT(aNBT);
     }
 
     @Override
@@ -520,10 +581,9 @@ public class GT_MetaTileEntity_Hatch_CraftingInput_ME extends GT_MetaTileEntity_
         }
 
         if (aNBT.hasKey("customName")) customName = aNBT.getString("customName");
+        additionalConnection = aNBT.getBoolean("additionalConnection");
 
-        if (GregTech_API.mAE2) {
-            getProxy().readFromNBT(aNBT);
-        }
+        getProxy().readFromNBT(aNBT);
     }
 
     @Override
@@ -541,44 +601,42 @@ public class GT_MetaTileEntity_Hatch_CraftingInput_ME extends GT_MetaTileEntity_
 
     @Override
     public String[] getInfoData() {
-        if (GregTech_API.mAE2) {
-            var ret = new ArrayList<String>();
-            ret.add(
-                "The bus is " + ((getProxy() != null && getProxy().isActive()) ? EnumChatFormatting.GREEN + "online"
-                    : EnumChatFormatting.RED + "offline" + getAEDiagnostics()) + EnumChatFormatting.RESET);
-            ret.add("Internal Inventory: ");
-            var i = 0;
-            for (var slot : internalInventory) {
-                if (slot == null) continue;
-                IWideReadableNumberConverter nc = ReadableNumberConverter.INSTANCE;
+        var ret = new ArrayList<String>();
+        ret.add(
+            "The bus is " + ((getProxy() != null && getProxy().isActive()) ? EnumChatFormatting.GREEN + "online"
+                : EnumChatFormatting.RED + "offline" + getAEDiagnostics()) + EnumChatFormatting.RESET);
+        ret.add("Internal Inventory: ");
+        var i = 0;
+        for (var slot : internalInventory) {
+            if (slot == null) continue;
+            IWideReadableNumberConverter nc = ReadableNumberConverter.INSTANCE;
 
-                i += 1;
+            i += 1;
+            ret.add(
+                "Slot " + i
+                    + " "
+                    + EnumChatFormatting.BLUE
+                    + describePattern(slot.patternDetails)
+                    + EnumChatFormatting.RESET);
+            for (var item : slot.itemInventory) {
+                if (item == null || item.stackSize == 0) continue;
                 ret.add(
-                    "Slot " + i
-                        + " "
-                        + EnumChatFormatting.BLUE
-                        + describePattern(slot.patternDetails)
+                    item.getItem()
+                        .getItemStackDisplayName(item) + ": "
+                        + EnumChatFormatting.GOLD
+                        + nc.toWideReadableForm(item.stackSize)
                         + EnumChatFormatting.RESET);
-                for (var item : slot.itemInventory) {
-                    if (item == null || item.stackSize == 0) continue;
-                    ret.add(
-                        item.getItem()
-                            .getItemStackDisplayName(item) + ": "
-                            + EnumChatFormatting.GOLD
-                            + nc.toWideReadableForm(item.stackSize)
-                            + EnumChatFormatting.RESET);
-                }
-                for (var fluid : slot.fluidInventory) {
-                    if (fluid == null || fluid.amount == 0) continue;
-                    ret.add(
-                        fluid.getLocalizedName() + ": "
-                            + EnumChatFormatting.AQUA
-                            + nc.toWideReadableForm(fluid.amount)
-                            + EnumChatFormatting.RESET);
-                }
             }
-            return ret.toArray(new String[0]);
-        } else return new String[] {};
+            for (var fluid : slot.fluidInventory) {
+                if (fluid == null || fluid.amount == 0) continue;
+                ret.add(
+                    fluid.getLocalizedName() + ": "
+                        + EnumChatFormatting.AQUA
+                        + nc.toWideReadableForm(fluid.amount)
+                        + EnumChatFormatting.RESET);
+            }
+        }
+        return ret.toArray(new String[0]);
     }
 
     @Override
@@ -706,7 +764,7 @@ public class GT_MetaTileEntity_Hatch_CraftingInput_ME extends GT_MetaTileEntity_
         needPatternSync = true;
     }
 
-    private ItemStack[] getSharedItems() {
+    public ItemStack[] getSharedItems() {
         ItemStack[] sharedItems = new ItemStack[SLOT_MANUAL_SIZE + 1];
         sharedItems[0] = mInventory[SLOT_CIRCUIT];
         System.arraycopy(mInventory, SLOT_MANUAL_START, sharedItems, 1, SLOT_MANUAL_SIZE);
@@ -859,6 +917,30 @@ public class GT_MetaTileEntity_Hatch_CraftingInput_ME extends GT_MetaTileEntity_
         aPlayer.addChatMessage(new ChatComponentText("Saved Link Data to Data Stick"));
     }
 
+    @Override
+    public boolean onRightclick(IGregTechTileEntity aBaseMetaTileEntity, EntityPlayer aPlayer, ForgeDirection side,
+        float aX, float aY, float aZ) {
+        final ItemStack is = aPlayer.inventory.getCurrentItem();
+        if (is != null && is.getItem() instanceof ToolQuartzCuttingKnife) {
+            if (ForgeEventFactory.onItemUseStart(aPlayer, is, 1) <= 0) return false;
+            var te = getBaseMetaTileEntity();
+            aPlayer.openGui(
+                AppEng.instance(),
+                GuiBridge.GUI_RENAMER.ordinal() << 5 | (side.ordinal()),
+                te.getWorld(),
+                te.getXCoord(),
+                te.getYCoord(),
+                te.getZCoord());
+            return true;
+        }
+        return super.onRightclick(aBaseMetaTileEntity, aPlayer, side, aX, aY, aZ);
+    }
+
+    @Override
+    public ItemStack getCrafterIcon() {
+        return getMachineCraftingIcon();
+    }
+
     private boolean postMEPatternChange() {
         // don't post until it's active
         if (!getProxy().isActive()) return false;
@@ -913,5 +995,23 @@ public class GT_MetaTileEntity_Hatch_CraftingInput_ME extends GT_MetaTileEntity_
     @Override
     public boolean hasCustomName() {
         return customName != null;
+    }
+
+    @Override
+    public void setCustomName(String name) {
+        customName = name;
+    }
+
+    @Override
+    public Optional<IDualInputInventory> getFirstNonEmptyInventory() {
+        for (PatternSlot slot : internalInventory) {
+            if (slot != null && !slot.isEmpty()) return Optional.of(slot);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean supportsFluids() {
+        return this.supportFluids;
     }
 }

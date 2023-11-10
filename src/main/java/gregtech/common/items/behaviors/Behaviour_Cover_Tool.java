@@ -31,6 +31,7 @@ public class Behaviour_Cover_Tool extends Behaviour_None {
 
     private ISerializableObject mStoredData = GregTech_API.sNoBehavior.createDataObject();
     private int mCoverType;
+    private int mTickRateAddition = 0;
 
     @Override
     public boolean onItemUseFirst(GT_MetaBase_Item aItem, ItemStack aStack, EntityPlayer aPlayer, World aWorld, int aX,
@@ -65,6 +66,7 @@ public class Behaviour_Cover_Tool extends Behaviour_None {
             NBTBase tData = aNBT.getTag("mCoverData");
             if (tData != null) mStoredData = tBehavior.createDataObject(tData);
             else mStoredData = GregTech_API.sNoBehavior.createDataObject();
+            mTickRateAddition = aNBT.hasKey("mTickRateAddition") ? aNBT.getInteger("mTickRateAddition") : 0;
         }
     }
 
@@ -72,6 +74,7 @@ public class Behaviour_Cover_Tool extends Behaviour_None {
         aNBT.setInteger("mCoverType", mCoverType);
         if (mStoredData == null) mStoredData = GregTech_API.sNoBehavior.createDataObject();
         aNBT.setTag("mCoverData", mStoredData.saveDataToNBT());
+        aNBT.setInteger("mTickRateAddition", mTickRateAddition);
     }
 
     @SuppressWarnings("rawtypes")
@@ -112,22 +115,35 @@ public class Behaviour_Cover_Tool extends Behaviour_None {
                     ? GT_Utility.determineWrenchingSide(side, hitX, hitY, hitZ)
                     : ForgeDirection.UNKNOWN;
             if (tSide != ForgeDirection.UNKNOWN) {
-                mStoredData = tCoverable.getComplexCoverDataAtSide(tSide);
-                mCoverType = tCoverable.getCoverIDAtSide(tSide);
-                aList.add("Block Side: " + EnumChatFormatting.AQUA + tSide.name() + EnumChatFormatting.RESET);
-                aList.add(
-                    "Cover Type: " + EnumChatFormatting.GREEN
-                        + tCoverable.getCoverItemAtSide(tSide)
-                            .getDisplayName()
-                        + EnumChatFormatting.RESET);
+                if (tCoverable.getCoverBehaviorAtSideNew(tSide)
+                    .allowsCopyPasteTool()) {
+                    mStoredData = tCoverable.getComplexCoverDataAtSide(tSide);
+                    mCoverType = tCoverable.getCoverIDAtSide(tSide);
+                    mTickRateAddition = tCoverable.getCoverInfoAtSide(tSide)
+                        .getTickRateAddition();
+
+                    aList.add("Block Side: " + EnumChatFormatting.AQUA + tSide.name() + EnumChatFormatting.RESET);
+                    aList.add(
+                        "Cover Type: " + EnumChatFormatting.GREEN
+                            + tCoverable.getCoverItemAtSide(tSide)
+                                .getDisplayName()
+                            + EnumChatFormatting.RESET);
+                } else {
+                    mStoredData = GregTech_API.sNoBehavior.createDataObject();
+                    mCoverType = 0;
+                    mTickRateAddition = 0;
+                    aList.add("Copy unavailable for this cover type");
+                }
             } else {
                 mStoredData = GregTech_API.sNoBehavior.createDataObject();
                 mCoverType = 0;
+                mTickRateAddition = 0;
                 aList.add("No Cover Found");
             }
         } else {
             mStoredData = GregTech_API.sNoBehavior.createDataObject();
             mCoverType = 0;
+            mTickRateAddition = 0;
             aList.add("No Cover Found");
         }
     }
@@ -147,6 +163,8 @@ public class Behaviour_Cover_Tool extends Behaviour_None {
                 int tCoverID = tCoverable.getCoverIDAtSide(tSide);
                 if (tCoverID == mCoverType) {
                     tCoverable.setCoverDataAtSide(tSide, mStoredData);
+                    tCoverable.getCoverInfoAtSide(tSide)
+                        .setTickRateAddition(mTickRateAddition);
                     GT_Utility.sendChatToPlayer(aPlayer, "Cover Data Pasted.");
                 } else {
                     GT_Utility.sendChatToPlayer(aPlayer, "Not Matched Cover.");

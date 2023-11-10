@@ -59,7 +59,7 @@ public final class CheckRecipeResultRegistry {
     /**
      * Code crashed.
      */
-    public static final CheckRecipeResult CRASH = SimpleCheckRecipeResult.ofFailure("crash");
+    public static final CheckRecipeResult CRASH = SimpleCheckRecipeResult.ofFailurePersistOnShutdown("crash");
     /**
      * Cannot find valid fuel for generator.
      */
@@ -84,6 +84,13 @@ public final class CheckRecipeResultRegistry {
      * Machine had an internal error
      */
     public static final CheckRecipeResult INTERNAL_ERROR = SimpleCheckRecipeResult.ofFailure("internal_error");
+    /** Multiblock ore drill has no drilling fluid */
+    public static final CheckRecipeResult NO_DRILLING_FLUID = SimpleCheckRecipeResult.ofFailure("no_drilling_fluid");
+    /** Multiblock drill is missing mining pipe */
+    public static final CheckRecipeResult MISSING_MINING_PIPE = SimpleCheckRecipeResult.ofFailure("no_mining_pipe");
+    /** Concrete backfiller is out of concrete */
+    public static final CheckRecipeResult BACKFILLER_NO_CONCRETE = SimpleCheckRecipeResult
+        .ofFailure("backfiller_no_concrete");
 
     /**
      * Cannot process recipe because the machine cannot handle required EUt.
@@ -114,7 +121,7 @@ public final class CheckRecipeResultRegistry {
     }
 
     static {
-        register(new SimpleCheckRecipeResult(false, ""));
+        register(new SimpleCheckRecipeResult(false, "", false));
         register(new ResultInsufficientPower(0));
         register(new ResultInsufficientHeat(0));
         register(new ResultInsufficientMachineTier(0));

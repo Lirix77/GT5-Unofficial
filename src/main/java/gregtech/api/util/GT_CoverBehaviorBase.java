@@ -2,6 +2,8 @@ package gregtech.api.util;
 
 import static gregtech.api.enums.GT_Values.E;
 
+import java.lang.ref.WeakReference;
+import java.util.List;
 import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
@@ -16,6 +18,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 
+import org.jetbrains.annotations.NotNull;
+
+import com.google.common.collect.ImmutableList;
 import com.gtnewhorizons.modularui.api.ModularUITextures;
 import com.gtnewhorizons.modularui.api.drawable.ItemDrawable;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
@@ -27,10 +32,12 @@ import gregtech.api.enums.GT_Values;
 import gregtech.api.gui.GT_GUIColorOverride;
 import gregtech.api.gui.modularui.GT_CoverUIBuildContext;
 import gregtech.api.gui.modularui.GT_UIInfos;
+import gregtech.api.gui.widgets.GT_CoverTickRateButton;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.tileentity.ICoverable;
 import gregtech.api.net.GT_Packet_TileEntityCoverGUI;
 import gregtech.api.objects.GT_ItemStack;
+import gregtech.common.covers.CoverInfo;
 
 /**
  * For Covers with a special behavior.
@@ -39,7 +46,7 @@ import gregtech.api.objects.GT_ItemStack;
  */
 public abstract class GT_CoverBehaviorBase<T extends ISerializableObject> {
 
-    public EntityPlayer lastPlayer = null;
+    public WeakReference<EntityPlayer> lastPlayer = null;
     private final Class<T> typeToken;
     private final ITexture coverFGTexture;
 
@@ -385,6 +392,19 @@ public abstract class GT_CoverBehaviorBase<T extends ISerializableObject> {
         ICoverable aTileEntity) {
         return getDropImpl(side, aCoverID, forceCast(aCoverVariable), aTileEntity);
     }
+
+    /**
+     * Called when the cover is initially attached to a machine.
+     *
+     * @param player      The attaching player
+     * @param aCover      An {@link ItemStack} containing the cover
+     * @param aTileEntity The machine receiving the cover
+     * @param side        Which side the cover is attached to
+     */
+    public void onPlayerAttach(EntityPlayer player, ItemStack aCover, ICoverable aTileEntity, ForgeDirection side) {
+        // Do nothing by default.
+    }
+
     // endregion
 
     // region UI stuff
@@ -430,6 +450,15 @@ public abstract class GT_CoverBehaviorBase<T extends ISerializableObject> {
                     ButtonWidget.closeWindowButton(true)
                         .setPos(getGUIWidth() - 15, 3));
             }
+
+            final CoverInfo coverInfo = uiBuildContext.getTile()
+                .getCoverInfoAtSide(uiBuildContext.getCoverSide());
+            final GT_CoverBehaviorBase<?> behavior = coverInfo.getCoverBehavior();
+            if (coverInfo.getMinimumTickRate() > 0 && behavior.allowsTickRateAddition()) {
+                builder.widget(
+                    new GT_CoverTickRateButton(coverInfo, builder).setPos(getGUIWidth() - 24, getGUIHeight() - 24));
+            }
+
             return builder.build();
         }
 
@@ -592,7 +621,7 @@ public abstract class GT_CoverBehaviorBase<T extends ISerializableObject> {
     protected boolean onCoverShiftRightClickImpl(ForgeDirection side, int aCoverID, T aCoverVariable,
         ICoverable aTileEntity, EntityPlayer aPlayer) {
         if (hasCoverGUI() && aPlayer instanceof EntityPlayerMP) {
-            lastPlayer = aPlayer;
+            lastPlayer = new WeakReference<>(aPlayer);
             if (useModularUI()) {
                 GT_UIInfos.openCoverUI(aTileEntity, aPlayer, side);
             } else {
@@ -814,6 +843,29 @@ public abstract class GT_CoverBehaviorBase<T extends ISerializableObject> {
     @Deprecated
     public String trans(String aNr, String aEnglish) {
         return GT_Utility.trans(aNr, aEnglish);
+    }
+
+    public boolean allowsCopyPasteTool() {
+        return true;
+    }
+
+    public boolean allowsTickRateAddition() {
+        return true;
+    }
+
+    @NotNull
+    public final List<String> getAdditionalTooltip(ISerializableObject coverData) {
+        return getAdditionalTooltipImpl(forceCast(coverData));
+    }
+
+    /**
+     * Override to add to the tooltip generated when a user hovers over the cover on the left side of a machine's UI.
+     *
+     * @param coverData The cover data associated with the cover on a particular side.
+     * @return A list of new tooltip entries. Entries are inserted at the top, just after the name and direction line.
+     */
+    protected List<String> getAdditionalTooltipImpl(T coverData) {
+        return ImmutableList.of();
     }
     // endregion
 }

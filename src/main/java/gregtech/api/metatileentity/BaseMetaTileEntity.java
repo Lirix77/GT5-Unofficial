@@ -27,6 +27,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -71,6 +72,8 @@ import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_BasicMachin
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch;
 import gregtech.api.net.GT_Packet_TileEntity;
 import gregtech.api.objects.GT_ItemStack;
+import gregtech.api.objects.blockupdate.BlockUpdateHandler;
+import gregtech.api.util.GT_CoverBehaviorBase;
 import gregtech.api.util.GT_Log;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
@@ -95,6 +98,7 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
     private final boolean[] mActiveEUInputs = new boolean[] { false, false, false, false, false, false };
     private final boolean[] mActiveEUOutputs = new boolean[] { false, false, false, false, false, false };
     private final int[] mTimeStatistics = new int[GregTech_API.TICKS_FOR_LAG_AVERAGING];
+    private boolean hasTimeStatisticsStarted;
     public long mLastSoundTick = 0;
     public boolean mWasShutdown = false;
     protected MetaTileEntity mMetaTileEntity;
@@ -283,7 +287,12 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
         }
 
         mRunningThroughTick = true;
-        long tTime = System.nanoTime();
+        long tTime;
+        if (hasTimeStatisticsStarted) {
+            tTime = System.nanoTime();
+        } else {
+            tTime = 0;
+        }
         final boolean aSideServer = isServerSide();
         final boolean aSideClient = isClientSide();
 
@@ -325,8 +334,11 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
                     }
 
                     if (mNeedsUpdate) {
-                        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-                        // worldObj.func_147479_m(xCoord, yCoord, zCoord);
+                        if (GT_Mod.gregtechproxy.mUseBlockUpdateHandler) {
+                            BlockUpdateHandler.Instance.enqueueBlockUpdate(worldObj, getLocation());
+                        } else {
+                            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                        }
                         mNeedsUpdate = false;
                     }
                 }
@@ -604,10 +616,10 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
             }
         }
 
-        if (aSideServer && hasValidMetaTileEntity()) {
+        if (aSideServer && hasTimeStatisticsStarted && hasValidMetaTileEntity()) {
             tTime = System.nanoTime() - tTime;
-            if (mTimeStatistics.length > 0) mTimeStatistics[mTimeStatisticsIndex = (mTimeStatisticsIndex + 1)
-                % mTimeStatistics.length] = (int) tTime;
+            mTimeStatisticsIndex = (mTimeStatisticsIndex + 1) % mTimeStatistics.length;
+            mTimeStatistics[mTimeStatisticsIndex] = (int) tTime;
             if (tTime > 0 && tTime > (GregTech_API.MILLISECOND_THRESHOLD_UNTIL_LAG_WARNING * 1_000_000L)
                 && mTickTimer > 1000
                 && getMetaTileEntity().doTickProfilingMessageDuringThisTick()
@@ -801,33 +813,44 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
                         ? EnumChatFormatting.RED + " MetaTileEntity == null!" + EnumChatFormatting.RESET
                         : " "));
         }
-        if (aLogLevel > 1) {
-            if (mTimeStatistics.length > 0) {
+        if (aLogLevel > 1 && mMetaTileEntity != null) {
+            if (hasTimeStatisticsStarted) {
                 double tAverageTime = 0;
                 double tWorstTime = 0;
+                int amountOfZero = 0;
                 for (int tTime : mTimeStatistics) {
                     tAverageTime += tTime;
                     if (tTime > tWorstTime) {
                         tWorstTime = tTime;
                     }
+                    if (tTime == 0) {
+                        amountOfZero += 1;
+                    }
                     // Uncomment this line to print out tick-by-tick times.
                     // tList.add("tTime " + tTime);
                 }
-                tList.add(
-                    "Average CPU load of ~" + GT_Utility.formatNumbers(tAverageTime / mTimeStatistics.length)
-                        + "ns over "
-                        + GT_Utility.formatNumbers(mTimeStatistics.length)
-                        + " ticks with worst time of "
-                        + GT_Utility.formatNumbers(tWorstTime)
-                        + "ns.");
-                tList.add(
-                    "Recorded " + GT_Utility.formatNumbers(mMetaTileEntity.mSoundRequests)
-                        + " sound requests in "
-                        + GT_Utility.formatNumbers(mTickTimer - mLastCheckTick)
-                        + " ticks.");
-                mLastCheckTick = mTickTimer;
-                mMetaTileEntity.mSoundRequests = 0;
+                // tick time zero means it has not been updated yet
+                int samples = mTimeStatistics.length - amountOfZero;
+                if (samples > 0) {
+                    tList.add(
+                        "Average CPU load of ~" + GT_Utility.formatNumbers(tAverageTime / samples)
+                            + "ns over "
+                            + GT_Utility.formatNumbers(samples)
+                            + " ticks with worst time of "
+                            + GT_Utility.formatNumbers(tWorstTime)
+                            + "ns.");
+                }
+            } else {
+                startTimeStatistics();
+                tList.add("Just started tick time statistics.");
             }
+            tList.add(
+                "Recorded " + GT_Utility.formatNumbers(mMetaTileEntity.mSoundRequests)
+                    + " sound requests in "
+                    + GT_Utility.formatNumbers(mTickTimer - mLastCheckTick)
+                    + " ticks.");
+            mLastCheckTick = mTickTimer;
+            mMetaTileEntity.mSoundRequests = 0;
             if (mLagWarningCount > 0) {
                 tList.add(
                     "Caused " + (mLagWarningCount >= 10 ? "more than 10" : mLagWarningCount)
@@ -955,7 +978,7 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
         tileEntityInvalid = false;
         leaveEnet();
         if (canAccessData()) {
-            if (GregTech_API.mAE2) invalidateAE();
+            invalidateAE();
             mMetaTileEntity.onRemoval();
             mMetaTileEntity.setBaseMetaTileEntity(null);
         }
@@ -965,7 +988,7 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
     @Override
     public void onChunkUnload() {
         super.onChunkUnload();
-        if (GregTech_API.mAE2) onChunkUnloadAE();
+        onChunkUnloadAE();
     }
 
     @Override
@@ -1643,10 +1666,14 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
 
                     if (getCoverIDAtSide(coverSide) == 0) {
                         if (GT_Utility.isStackInList(tCurrentItem, GregTech_API.sCovers.keySet())) {
-                            if (GregTech_API.getCoverBehaviorNew(tCurrentItem)
-                                .isCoverPlaceable(coverSide, tCurrentItem, this)
+                            final GT_CoverBehaviorBase<?> coverBehavior = GregTech_API
+                                .getCoverBehaviorNew(tCurrentItem);
+                            if (coverBehavior.isCoverPlaceable(coverSide, tCurrentItem, this)
                                 && mMetaTileEntity.allowCoverOnSide(coverSide, new GT_ItemStack(tCurrentItem))) {
+
                                 setCoverItemAtSide(coverSide, tCurrentItem);
+                                coverBehavior.onPlayerAttach(aPlayer, tCurrentItem, this, coverSide);
+
                                 if (!aPlayer.capabilities.isCreativeMode) tCurrentItem.stackSize--;
                                 GT_Utility.sendSoundToPlayers(
                                     worldObj,
@@ -1674,6 +1701,31 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
                                 dropCover(coverSide, side, false);
                             }
                             return true;
+                        } else if (GT_Utility.isStackInList(tCurrentItem, GregTech_API.sJackhammerList)) {
+                            // Configuration of delicate electronics calls for a tool with precision and subtlety.
+                            if (GT_ModHandler.damageOrDechargeItem(tCurrentItem, 1, 1000, aPlayer)) {
+                                final CoverInfo info = getCoverInfoAtSide(coverSide);
+                                if (info != CoverInfo.EMPTY_INFO) {
+                                    final GT_CoverBehaviorBase<?> behavior = info.getCoverBehavior();
+                                    if (behavior.allowsTickRateAddition()) {
+                                        info.onCoverJackhammer(aPlayer);
+                                        GT_Utility.sendSoundToPlayers(
+                                            worldObj,
+                                            SoundResource.IC2_TOOLS_DRILL_DRILL_SOFT,
+                                            1.0F,
+                                            1,
+                                            xCoord,
+                                            yCoord,
+                                            zCoord);
+
+                                    } else {
+                                        GT_Utility.sendChatToPlayer(
+                                            aPlayer,
+                                            StatCollector.translateToLocal("gt.cover.info.chat.tick_rate_not_allowed"));
+                                    }
+                                    return true;
+                                }
+                            }
                         }
                     }
                     // End item != null
@@ -2364,7 +2416,6 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
 
     @Override
     public IGridNode getGridNode(ForgeDirection forgeDirection) {
-        if (mFacing != forgeDirection) return null;
         final AENetworkProxy gp = getProxy();
         return gp != null ? gp.getNode() : null;
     }
@@ -2454,6 +2505,20 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
     }
 
     @Override
+    public void startTimeStatistics() {
+        hasTimeStatisticsStarted = true;
+    }
+
+    @Nullable
+    @Override
+    public List<ItemStack> getItemsForHoloGlasses() {
+        if (canAccessData()) {
+            return mMetaTileEntity.getItemsForHoloGlasses();
+        }
+        return null;
+    }
+
+    @Override
     public String getCustomName() {
         return getMetaTileEntity() instanceof ICustomNameObject customNameObject ? customNameObject.getCustomName()
             : null;
@@ -2462,5 +2527,10 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
     @Override
     public boolean hasCustomName() {
         return getMetaTileEntity() instanceof ICustomNameObject customNameObject && customNameObject.hasCustomName();
+    }
+
+    @Override
+    public void setCustomName(String name) {
+        if (getMetaTileEntity() instanceof ICustomNameObject customNameObject) customNameObject.setCustomName(name);
     }
 }

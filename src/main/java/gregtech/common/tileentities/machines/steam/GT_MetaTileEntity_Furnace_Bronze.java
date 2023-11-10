@@ -35,10 +35,6 @@ public class GT_MetaTileEntity_Furnace_Bronze extends GT_MetaTileEntity_BasicMac
         super(aID, aName, aNameRegional, "Smelting things with compressed Steam", 1, 1, false);
     }
 
-    public GT_MetaTileEntity_Furnace_Bronze(String aName, String aDescription, ITexture[][][] aTextures) {
-        super(aName, aDescription, aTextures, 1, 1, false);
-    }
-
     public GT_MetaTileEntity_Furnace_Bronze(String aName, String[] aDescription, ITexture[][][] aTextures) {
         super(aName, aDescription, aTextures, 1, 1, false);
     }
@@ -72,7 +68,7 @@ public class GT_MetaTileEntity_Furnace_Bronze extends GT_MetaTileEntity_BasicMac
     protected boolean allowPutStackValidated(IGregTechTileEntity aBaseMetaTileEntity, int aIndex, ForgeDirection side,
         ItemStack aStack) {
         return super.allowPutStackValidated(aBaseMetaTileEntity, aIndex, side, aStack)
-            && GT_ModHandler.getSmeltingOutput(GT_Utility.copyAmount(64L, aStack), false, null) != null;
+            && GT_ModHandler.getSmeltingOutput(GT_Utility.copyAmount(64, aStack), false, null) != null;
     }
 
     @Override

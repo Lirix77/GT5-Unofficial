@@ -113,7 +113,6 @@ dependencies {
 
     compileOnly("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev")
     compileOnly("com.azanor.baubles:Baubles:1.7.10-1.0.1.10:deobf")
-    implementation("appeng:appliedenergistics2:rv3-beta-6:dev")
     compileOnly("applecore:AppleCore:1.7.10-3.1.1:deobf")
 
     compileOnly("org.jetbrains:annotations:24.0.1")

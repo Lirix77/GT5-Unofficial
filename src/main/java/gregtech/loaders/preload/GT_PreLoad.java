@@ -1,10 +1,9 @@
 package gregtech.loaders.preload;
 
 import static gregtech.GT_Mod.GT_FML_LOGGER;
-import static gregtech.api.enums.Mods.AppliedEnergistics2;
+import static gregtech.api.enums.Mods.Avaritia;
 import static gregtech.api.enums.Mods.CraftTweaker;
 import static gregtech.api.enums.Mods.EnderIO;
-import static gregtech.api.enums.Mods.EternalSingularity;
 import static gregtech.api.enums.Mods.GTPlusPlus;
 import static gregtech.api.enums.Mods.GalacticraftCore;
 import static gregtech.api.enums.Mods.GregTech;
@@ -45,6 +44,7 @@ import gregtech.api.util.GT_Config;
 import gregtech.api.util.GT_LanguageManager;
 import gregtech.api.util.GT_Log;
 import gregtech.api.util.GT_ModHandler;
+import gregtech.api.util.GT_RecipeBuilder;
 import gregtech.api.util.GT_Utility;
 import gregtech.common.tileentities.machines.long_distance.GT_MetaTileEntity_LongDistancePipelineBase;
 import gregtech.common.tileentities.machines.multi.GT_MetaTileEntity_Cleanroom;
@@ -137,9 +137,8 @@ public class GT_PreLoad {
         GregTech_API.mTranslocator = Translocator.isModLoaded();
         GregTech_API.mTConstruct = TinkerConstruct.isModLoaded();
         GregTech_API.mGalacticraft = GalacticraftCore.isModLoaded();
-        GregTech_API.mAE2 = AppliedEnergistics2.isModLoaded();
         GregTech_API.mHodgepodge = HodgePodge.isModLoaded();
-        GregTech_API.mEternalSingularity = EternalSingularity.isModLoaded();
+        GregTech_API.mAvaritia = Avaritia.isModLoaded();
     }
 
     public static void createLogFiles(File parentFile, Configuration tMainConfig) {
@@ -513,8 +512,6 @@ public class GT_PreLoad {
             .getBoolean(true);
         GT_Mod.gregtechproxy.mAchievements = tMainConfig.get(GT_Mod.aTextGeneral, "EnableAchievements", true)
             .getBoolean(true);
-        GT_Mod.gregtechproxy.mAE2Integration = GregTech_API.sSpecialFile
-            .get(ConfigCategories.general, "EnableAE2Integration", GregTech_API.mAE2);
         GT_Mod.gregtechproxy.mNerfedCombs = tMainConfig.get(GT_Mod.aTextGeneral, "NerfCombs", true)
             .getBoolean(true);
         GT_Mod.gregtechproxy.mNerfedCrops = tMainConfig.get(GT_Mod.aTextGeneral, "NerfCrops", true)
@@ -716,6 +713,8 @@ public class GT_PreLoad {
         GT_Mod.gregtechproxy.costlyCableConnection = tMainConfig
             .get("general", "CableConnectionRequiresSolderingMaterial", false)
             .getBoolean(false);
+        GT_Mod.gregtechproxy.crashOnNullRecipeInput = tMainConfig.get("general", "crashOnNullRecipeInput", false)
+            .getBoolean(false);
         GT_LanguageManager.i18nPlaceholder = tMainConfig
             .get("general", "EnablePlaceholderForMaterialNamesInLangFile", true)
             .getBoolean(true);
@@ -809,6 +808,8 @@ public class GT_PreLoad {
             Arrays.asList(
                 tMainConfig.get("general", "ctm_block_blacklist", new String[] { "team.chisel.block.BlockRoadLine" })
                     .getStringList()));
+
+        GT_RecipeBuilder.onConfigLoad();
     }
 
     public static void loadClientConfig() {
@@ -839,6 +840,8 @@ public class GT_PreLoad {
             .get("render", "RenderItemDurabilityBar", true);
         GT_Mod.gregtechproxy.mRenderItemChargeBar = GregTech_API.sClientDataFile
             .get("render", "RenderItemChargeBar", true);
+        GT_Mod.gregtechproxy.mUseBlockUpdateHandler = GregTech_API.sClientDataFile
+            .get("render", "UseBlockUpdateHandler", false);
 
         GT_Mod.gregtechproxy.mCoverTabsVisible = GregTech_API.sClientDataFile
             .get("interface", "DisplayCoverTabs", true);

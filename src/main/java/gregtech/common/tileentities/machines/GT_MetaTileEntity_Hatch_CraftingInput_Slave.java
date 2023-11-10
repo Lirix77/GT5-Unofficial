@@ -1,8 +1,13 @@
 package gregtech.common.tileentities.machines;
 
-import static gregtech.api.enums.Textures.BlockIcons.*;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_ME_CRAFTING_INPUT_SLAVE;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -141,6 +146,16 @@ public class GT_MetaTileEntity_Hatch_CraftingInput_Slave extends GT_MetaTileEnti
     @Override
     public Iterator<GT_MetaTileEntity_Hatch_CraftingInput_ME.PatternSlot> inventories() {
         return getMaster() != null ? getMaster().inventories() : Collections.emptyIterator();
+    }
+
+    @Override
+    public Optional<IDualInputInventory> getFirstNonEmptyInventory() {
+        return getMaster() != null ? getMaster().getFirstNonEmptyInventory() : Optional.empty();
+    }
+
+    @Override
+    public boolean supportsFluids() {
+        return getMaster() != null && getMaster().supportsFluids();
     }
 
     @Override

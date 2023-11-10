@@ -4,6 +4,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import appeng.api.crafting.ICraftingIconProvider;
 import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
@@ -12,7 +13,7 @@ import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 /**
  * Handles texture changes internally. No special calls are necessary other than updateTexture in add***ToMachineList.
  */
-public abstract class GT_MetaTileEntity_Hatch extends GT_MetaTileEntity_BasicTank {
+public abstract class GT_MetaTileEntity_Hatch extends GT_MetaTileEntity_BasicTank implements ICraftingIconProvider {
 
     public enum ConnectionType {
         CABLE,
@@ -29,23 +30,25 @@ public abstract class GT_MetaTileEntity_Hatch extends GT_MetaTileEntity_BasicTan
     private byte mTexturePage = 0;
     private byte actualTexture = 0;
 
+    private ItemStack ae2CraftingIcon;
+
     public GT_MetaTileEntity_Hatch(int aID, String aName, String aNameRegional, int aTier, int aInvSlotCount,
-        String aDescription, ITexture... aTextures) {
+                                   String aDescription, ITexture... aTextures) {
         super(aID, aName, aNameRegional, aTier, aInvSlotCount, aDescription, aTextures);
     }
 
     public GT_MetaTileEntity_Hatch(int aID, String aName, String aNameRegional, int aTier, int aInvSlotCount,
-        String[] aDescription, ITexture... aTextures) {
+                                   String[] aDescription, ITexture... aTextures) {
         super(aID, aName, aNameRegional, aTier, aInvSlotCount, aDescription, aTextures);
     }
 
     public GT_MetaTileEntity_Hatch(String aName, int aTier, int aInvSlotCount, String aDescription,
-        ITexture[][][] aTextures) {
+                                   ITexture[][][] aTextures) {
         super(aName, aTier, aInvSlotCount, aDescription, aTextures);
     }
 
     public GT_MetaTileEntity_Hatch(String aName, int aTier, int aInvSlotCount, String[] aDescription,
-        ITexture[][][] aTextures) {
+                                   ITexture[][][] aTextures) {
         super(aName, aTier, aInvSlotCount, aDescription, aTextures);
     }
 
@@ -64,9 +67,9 @@ public abstract class GT_MetaTileEntity_Hatch extends GT_MetaTileEntity_BasicTan
 
     @Override
     public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
-        int colorIndex, boolean aActive, boolean redstoneLevel) {
+                                 int colorIndex, boolean aActive, boolean redstoneLevel) {
         int texturePointer = (byte) (actualTexture & 0x7F); // just to be sure, from my testing the 8th bit cannot be
-                                                            // set clientside
+        // set clientside
         int textureIndex = texturePointer | (mTexturePage << 7); // Shift seven since one page is 128 textures!
         try {
             if (side != aFacing) {
@@ -103,8 +106,8 @@ public abstract class GT_MetaTileEntity_Hatch extends GT_MetaTileEntity_BasicTan
         mTexturePage = aNBT.getByte("mTexturePage");
 
         if (mTexturePage != 0 && GT_Values.GT.isServerSide()) actualTexture |= 0x80; // <- lets just hope no one needs
-                                                                                     // the correct value for that on
-                                                                                     // server
+        // the correct value for that on
+        // server
         mMachineBlock = actualTexture;
     }
 
@@ -116,6 +119,19 @@ public abstract class GT_MetaTileEntity_Hatch extends GT_MetaTileEntity_BasicTan
     public final void updateTexture(int id) {
         onValueUpdate((byte) id);
         onTexturePageUpdate((byte) (id >> 7));
+    }
+
+    /**
+     * Sets the icon for the owning multiblock used for AE2 crafting display of attached interfaces, called on add to
+     * machine list
+     */
+    public final void updateCraftingIcon(ItemStack icon) {
+        this.ae2CraftingIcon = icon;
+    }
+
+    @Override
+    public ItemStack getMachineCraftingIcon() {
+        return this.ae2CraftingIcon;
     }
 
     /**
@@ -216,12 +232,12 @@ public abstract class GT_MetaTileEntity_Hatch extends GT_MetaTileEntity_BasicTan
 
     @Override
     public void onPreTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) { // in that method since it is usually
-                                                                                 // not overriden, especially for
-                                                                                 // hatches.
+        // not overriden, especially for
+        // hatches.
         if (actualTexture != mMachineBlock) { // revert to page 0 on edition of the field - old code way
             actualTexture = (byte) (mMachineBlock & 0x7F);
             mMachineBlock = actualTexture; // clear last bit in mMachineBlock since now we are at page 0 after the
-                                           // direct field
+            // direct field
             // change
             mTexturePage = 0; // assuming old code only supports page 0
         }

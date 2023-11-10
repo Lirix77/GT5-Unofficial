@@ -1,6 +1,224 @@
 package gregtech.loaders.load;
 
-import static gregtech.api.enums.MetaTileEntityIDs.*;
+import static gregtech.api.enums.MetaTileEntityIDs.ALLOY_SMELTER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.ALLOY_SMELTER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.ALLOY_SMELTER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.ALLOY_SMELTER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.ALLOY_SMELTER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.ARC_FURNACE_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.ARC_FURNACE_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.ARC_FURNACE_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.ARC_FURNACE_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.ARC_FURNACE_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.ASSEMBLER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.ASSEMBLER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.ASSEMBLER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.ASSEMBLER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.ASSEMBLER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.AUTOCLAVE_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.AUTOCLAVE_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.AUTOCLAVE_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.AUTOCLAVE_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.AUTOCLAVE_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.BENDING_MACHINE_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.BENDING_MACHINE_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.BENDING_MACHINE_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.BENDING_MACHINE_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.BENDING_MACHINE_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.CANNER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.CANNER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.CANNER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.CANNER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.CANNER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.CENTRIFUGE_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.CENTRIFUGE_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.CENTRIFUGE_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.CENTRIFUGE_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.CENTRIFUGE_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.CHEMICAL_BATH_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.CHEMICAL_BATH_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.CHEMICAL_BATH_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.CHEMICAL_BATH_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.CHEMICAL_BATH_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.CHEMICAL_REACTOR_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.CHEMICAL_REACTOR_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.CHEMICAL_REACTOR_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.CHEMICAL_REACTOR_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.CHEMICAL_REACTOR_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.CIRCUIT_ASSEMBLER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.CIRCUIT_ASSEMBLER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.CIRCUIT_ASSEMBLER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.CIRCUIT_ASSEMBLER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.CIRCUIT_ASSEMBLER_LuV;
+import static gregtech.api.enums.MetaTileEntityIDs.CIRCUIT_ASSEMBLER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.CIRCUIT_ASSEMBLER_UV;
+import static gregtech.api.enums.MetaTileEntityIDs.CIRCUIT_ASSEMBLER_ZPM;
+import static gregtech.api.enums.MetaTileEntityIDs.COMPRESSOR_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.COMPRESSOR_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.COMPRESSOR_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.COMPRESSOR_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.COMPRESSOR_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.CUTTING_MACHINE_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.CUTTING_MACHINE_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.CUTTING_MACHINE_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.CUTTING_MACHINE_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.CUTTING_MACHINE_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.DISTILLERY_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.DISTILLERY_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.DISTILLERY_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.DISTILLERY_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.DISTILLERY_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.ELECTRIC_FURNACE_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.ELECTRIC_FURNACE_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.ELECTRIC_FURNACE_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.ELECTRIC_FURNACE_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.ELECTRIC_FURNACE_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.ELECTROLYSER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.ELECTROLYSER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.ELECTROLYSER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.ELECTROLYSER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.ELECTROLYSER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.ELECTROMAGNETIC_SEPARATOR_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.ELECTROMAGNETIC_SEPARATOR_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.ELECTROMAGNETIC_SEPARATOR_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.ELECTROMAGNETIC_SEPARATOR_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.ELECTROMAGNETIC_SEPARATOR_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.EXTRACTOR_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.EXTRACTOR_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.EXTRACTOR_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.EXTRACTOR_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.EXTRACTOR_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.EXTRUDER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.EXTRUDER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.EXTRUDER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.EXTRUDER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.EXTRUDER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.FERMENTER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.FERMENTER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.FERMENTER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.FERMENTER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.FERMENTER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.FLUID_CANNER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.FLUID_CANNER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.FLUID_CANNER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.FLUID_CANNER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.FLUID_CANNER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.FLUID_EXTRACTOR_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.FLUID_EXTRACTOR_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.FLUID_EXTRACTOR_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.FLUID_EXTRACTOR_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.FLUID_EXTRACTOR_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.FLUID_HEATER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.FLUID_HEATER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.FLUID_HEATER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.FLUID_HEATER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.FLUID_HEATER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.FLUID_SOLIDIFIER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.FLUID_SOLIDIFIER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.FLUID_SOLIDIFIER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.FLUID_SOLIDIFIER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.FLUID_SOLIDIFIER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.FORGE_HAMMER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.FORGE_HAMMER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.FORGE_HAMMER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.FORGE_HAMMER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.FORGE_HAMMER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.FORMING_PRESS_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.FORMING_PRESS_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.FORMING_PRESS_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.FORMING_PRESS_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.FORMING_PRESS_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.LASER_ENGRAVER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.LASER_ENGRAVER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.LASER_ENGRAVER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.LASER_ENGRAVER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.LASER_ENGRAVER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.LATHE_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.LATHE_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.LATHE_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.LATHE_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.LATHE_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.MACERATOR_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.MACERATOR_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.MACERATOR_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.MACERATOR_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.MACERATOR_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.MATTER_AMPLIFIER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.MATTER_AMPLIFIER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.MATTER_AMPLIFIER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.MATTER_AMPLIFIER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.MATTER_AMPLIFIER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.MICROWAVE_OVEN_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.MICROWAVE_OVEN_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.MICROWAVE_OVEN_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.MICROWAVE_OVEN_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.MICROWAVE_OVEN_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.MIXER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.MIXER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.MIXER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.MIXER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.MIXER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.ORE_WASHER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.ORE_WASHER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.ORE_WASHER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.ORE_WASHER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.ORE_WASHER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.OVEN_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.OVEN_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.OVEN_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.OVEN_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.OVEN_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.PLASMA_ARC_FURNACE_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.PLASMA_ARC_FURNACE_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.PLASMA_ARC_FURNACE_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.PLASMA_ARC_FURNACE_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.PLASMA_ARC_FURNACE_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.POLARIZER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.POLARIZER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.POLARIZER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.POLARIZER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.POLARIZER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.PRINTER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.PRINTER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.PRINTER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.PRINTER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.PRINTER_LuV;
+import static gregtech.api.enums.MetaTileEntityIDs.PRINTER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.PRINTER_UV;
+import static gregtech.api.enums.MetaTileEntityIDs.PRINTER_ZPM;
+import static gregtech.api.enums.MetaTileEntityIDs.RECYCLER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.RECYCLER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.RECYCLER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.RECYCLER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.RECYCLER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.SIFTER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.SIFTER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.SIFTER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.SIFTER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.SIFTER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.SLICER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.SLICER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.SLICER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.SLICER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.SLICER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.THERMAL_CENTRIFUGE_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.THERMAL_CENTRIFUGE_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.THERMAL_CENTRIFUGE_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.THERMAL_CENTRIFUGE_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.THERMAL_CENTRIFUGE_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.UNPACKAGER_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.UNPACKAGER_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.UNPACKAGER_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.UNPACKAGER_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.UNPACKAGER_LuV;
+import static gregtech.api.enums.MetaTileEntityIDs.UNPACKAGER_MV;
+import static gregtech.api.enums.MetaTileEntityIDs.UNPACKAGER_UV;
+import static gregtech.api.enums.MetaTileEntityIDs.UNPACKAGER_ZPM;
+import static gregtech.api.enums.MetaTileEntityIDs.WIREMILL_EV;
+import static gregtech.api.enums.MetaTileEntityIDs.WIREMILL_HV;
+import static gregtech.api.enums.MetaTileEntityIDs.WIREMILL_IV;
+import static gregtech.api.enums.MetaTileEntityIDs.WIREMILL_LV;
+import static gregtech.api.enums.MetaTileEntityIDs.WIREMILL_MV;
 import static gregtech.api.enums.Mods.BuildCraftFactory;
 import static gregtech.api.enums.Mods.Forestry;
 import static gregtech.api.enums.Mods.Gendustry;
@@ -113,9 +331,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "AlloySmelter.png",
                 SoundResource.IC2_MACHINES_INDUCTION_LOOP,
                 false,
                 false,
@@ -137,9 +352,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "AlloySmelter.png",
                 SoundResource.IC2_MACHINES_INDUCTION_LOOP,
                 false,
                 false,
@@ -161,9 +373,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "AlloySmelter.png",
                 SoundResource.IC2_MACHINES_INDUCTION_LOOP,
                 false,
                 false,
@@ -185,9 +394,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "AlloySmelter.png",
                 SoundResource.IC2_MACHINES_INDUCTION_LOOP,
                 false,
                 false,
@@ -209,9 +415,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "AlloySmelter.png",
                 SoundResource.IC2_MACHINES_INDUCTION_LOOP,
                 false,
                 false,
@@ -237,9 +440,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 4,
                 true,
-                0,
-                1,
-                "ArcFurnace.png",
                 SoundResource.IC2_MACHINES_INDUCTION_LOOP,
                 false,
                 false,
@@ -262,9 +462,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 4,
                 true,
-                0,
-                1,
-                "ArcFurnace.png",
                 SoundResource.IC2_MACHINES_INDUCTION_LOOP,
                 false,
                 false,
@@ -286,9 +483,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 4,
                 true,
-                0,
-                1,
-                "ArcFurnace.png",
                 SoundResource.IC2_MACHINES_INDUCTION_LOOP,
                 false,
                 false,
@@ -311,9 +505,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 9,
                 true,
-                0,
-                1,
-                "ArcFurnace.png",
                 SoundResource.IC2_MACHINES_INDUCTION_LOOP,
                 false,
                 false,
@@ -336,9 +527,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 9,
                 true,
-                0,
-                1,
-                "ArcFurnace.png",
                 SoundResource.IC2_MACHINES_INDUCTION_LOOP,
                 false,
                 false,
@@ -363,9 +551,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 6,
                 1,
                 true,
-                0,
-                1,
-                "Assembler.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -387,9 +572,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 9,
                 1,
                 true,
-                0,
-                1,
-                "Assembler2.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -411,9 +593,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 9,
                 1,
                 true,
-                0,
-                1,
-                "Assembler2.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -435,9 +614,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 9,
                 1,
                 true,
-                0,
-                1,
-                "Assembler2.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -459,9 +635,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 9,
                 1,
                 true,
-                0,
-                1,
-                "Assembler2.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -486,9 +659,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 2,
                 true,
-                0,
-                1,
-                "Autoclave2.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -511,9 +681,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 2,
                 true,
-                0,
-                1,
-                "Autoclave2.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -536,9 +703,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 3,
                 true,
-                0,
-                1,
-                "Autoclave3.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -561,9 +725,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 4,
                 true,
-                0,
-                1,
-                "Autoclave4.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -586,9 +747,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 4,
                 true,
-                0,
-                1,
-                "Autoclave4.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -614,9 +772,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Bender.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -639,9 +794,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Bender.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -664,9 +816,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Bender.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -689,9 +838,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Bender.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -714,9 +860,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Bender.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -742,9 +885,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 2,
                 false,
-                0,
-                1,
-                "Canner.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -767,9 +907,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 2,
                 false,
-                0,
-                1,
-                "Canner.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -792,9 +929,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 2,
                 false,
-                0,
-                1,
-                "Canner.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -817,9 +951,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 2,
                 false,
-                0,
-                1,
-                "Canner.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -842,9 +973,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 2,
                 false,
-                0,
-                1,
-                "Canner.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -870,9 +998,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 6,
                 true,
-                0,
-                1,
-                "Centrifuge.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -893,9 +1018,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 6,
                 true,
-                0,
-                1,
-                "Centrifuge.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -916,9 +1038,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 6,
                 true,
-                0,
-                1,
-                "Centrifuge.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -939,9 +1058,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 6,
                 true,
-                0,
-                1,
-                "Centrifuge.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -962,9 +1078,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 6,
                 true,
-                0,
-                1,
-                "Centrifuge.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -988,9 +1101,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 true,
-                0,
-                1,
-                "ChemicalBath.png",
                 SoundResource.NONE,
                 false,
                 true,
@@ -1013,9 +1123,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 true,
-                0,
-                1,
-                "ChemicalBath.png",
                 SoundResource.NONE,
                 false,
                 true,
@@ -1038,9 +1145,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 true,
-                0,
-                1,
-                "ChemicalBath.png",
                 SoundResource.NONE,
                 false,
                 true,
@@ -1063,9 +1167,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 true,
-                0,
-                1,
-                "ChemicalBath.png",
                 SoundResource.NONE,
                 false,
                 true,
@@ -1088,9 +1189,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 true,
-                0,
-                1,
-                "ChemicalBath.png",
                 SoundResource.NONE,
                 false,
                 true,
@@ -1116,9 +1214,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 2,
                 true,
-                0,
-                1,
-                "ChemicalReactor.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -1141,9 +1236,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 2,
                 true,
-                0,
-                1,
-                "ChemicalReactor.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -1166,9 +1258,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 2,
                 true,
-                0,
-                1,
-                "ChemicalReactor.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -1191,9 +1280,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 2,
                 true,
-                0,
-                1,
-                "ChemicalReactor.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -1216,9 +1302,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 2,
                 true,
-                0,
-                1,
-                "ChemicalReactor.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -1244,9 +1327,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 6,
                 1,
                 true,
-                0,
-                1,
-                "CircuitAssembler.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -1269,9 +1349,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 6,
                 1,
                 true,
-                0,
-                1,
-                "CircuitAssembler.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -1294,9 +1371,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 6,
                 1,
                 true,
-                0,
-                1,
-                "CircuitAssembler.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -1319,9 +1393,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 6,
                 1,
                 true,
-                0,
-                1,
-                "CircuitAssembler.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -1344,9 +1415,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 6,
                 1,
                 true,
-                0,
-                1,
-                "CircuitAssembler.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -1369,9 +1437,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 6,
                 1,
                 true,
-                0,
-                1,
-                "CircuitAssembler.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -1394,9 +1459,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 6,
                 1,
                 true,
-                0,
-                1,
-                "CircuitAssembler.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -1419,9 +1481,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 6,
                 1,
                 true,
-                0,
-                1,
-                "CircuitAssembler.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -1447,9 +1506,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Compressor.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -1471,9 +1527,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Compressor.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -1495,9 +1548,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Compressor.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -1519,9 +1569,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Compressor.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -1543,9 +1590,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Compressor.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -1570,9 +1614,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 2,
                 true,
-                0,
-                1,
-                "Cutter.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -1596,9 +1637,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 2,
                 true,
-                0,
-                1,
-                "Cutter2.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -1622,9 +1660,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 4,
                 true,
-                0,
-                1,
-                "Cutter4.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -1648,9 +1683,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 4,
                 true,
-                0,
-                1,
-                "Cutter4.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -1674,9 +1706,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 4,
                 true,
-                0,
-                1,
-                "Cutter4.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -1703,9 +1732,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "Distillery.png",
                 SoundResource.GT_MACHINES_DISTILLERY_LOOP,
                 false,
                 false,
@@ -1729,9 +1755,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "Distillery.png",
                 SoundResource.GT_MACHINES_DISTILLERY_LOOP,
                 false,
                 false,
@@ -1755,9 +1778,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "Distillery.png",
                 SoundResource.GT_MACHINES_DISTILLERY_LOOP,
                 false,
                 false,
@@ -1781,9 +1801,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "Distillery.png",
                 SoundResource.GT_MACHINES_DISTILLERY_LOOP,
                 false,
                 false,
@@ -1807,9 +1824,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "Distillery.png",
                 SoundResource.GT_MACHINES_DISTILLERY_LOOP,
                 false,
                 false,
@@ -1836,9 +1850,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "E_Furnace.png",
                 SoundResource.IC2_MACHINES_ELECTROFURNACE_LOOP,
                 false,
                 false,
@@ -1861,9 +1872,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "E_Furnace.png",
                 SoundResource.IC2_MACHINES_ELECTROFURNACE_LOOP,
                 false,
                 false,
@@ -1886,9 +1894,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "E_Furnace.png",
                 SoundResource.IC2_MACHINES_ELECTROFURNACE_LOOP,
                 false,
                 false,
@@ -1911,9 +1916,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "E_Furnace.png",
                 SoundResource.IC2_MACHINES_ELECTROFURNACE_LOOP,
                 false,
                 false,
@@ -1936,9 +1938,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "E_Furnace.png",
                 SoundResource.IC2_MACHINES_ELECTROFURNACE_LOOP,
                 false,
                 false,
@@ -1965,9 +1964,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 6,
                 true,
-                0,
-                1,
-                "Electrolyzer.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -1989,9 +1985,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 6,
                 true,
-                0,
-                1,
-                "Electrolyzer.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -2013,9 +2006,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 6,
                 true,
-                0,
-                1,
-                "Electrolyzer.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -2037,9 +2027,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 6,
                 true,
-                0,
-                1,
-                "Electrolyzer.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -2061,9 +2048,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 6,
                 true,
-                0,
-                1,
-                "Electrolyzer.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -2088,9 +2072,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 false,
-                0,
-                1,
-                "ElectromagneticSeparator.png",
                 SoundResource.IC2_MACHINES_MAGNETIZER_LOOP,
                 false,
                 false,
@@ -2113,9 +2094,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 false,
-                0,
-                1,
-                "ElectromagneticSeparator.png",
                 SoundResource.IC2_MACHINES_MAGNETIZER_LOOP,
                 false,
                 false,
@@ -2138,9 +2116,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 false,
-                0,
-                1,
-                "ElectromagneticSeparator.png",
                 SoundResource.IC2_MACHINES_MAGNETIZER_LOOP,
                 false,
                 false,
@@ -2163,9 +2138,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 false,
-                0,
-                1,
-                "ElectromagneticSeparator.png",
                 SoundResource.IC2_MACHINES_MAGNETIZER_LOOP,
                 false,
                 false,
@@ -2188,9 +2160,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 false,
-                0,
-                1,
-                "ElectromagneticSeparator.png",
                 SoundResource.IC2_MACHINES_MAGNETIZER_LOOP,
                 false,
                 false,
@@ -2216,9 +2185,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Extractor.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -2241,9 +2207,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Extractor.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -2266,9 +2229,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Extractor.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -2291,9 +2251,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Extractor.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -2316,9 +2273,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Extractor.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -2344,9 +2298,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Extruder.png",
                 SoundResource.IC2_MACHINES_INDUCTION_LOOP,
                 false,
                 false,
@@ -2368,9 +2319,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Extruder.png",
                 SoundResource.IC2_MACHINES_INDUCTION_LOOP,
                 false,
                 false,
@@ -2392,9 +2340,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Extruder.png",
                 SoundResource.IC2_MACHINES_INDUCTION_LOOP,
                 false,
                 false,
@@ -2416,9 +2361,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Extruder.png",
                 SoundResource.IC2_MACHINES_INDUCTION_LOOP,
                 false,
                 false,
@@ -2440,9 +2382,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Extruder.png",
                 SoundResource.IC2_MACHINES_INDUCTION_LOOP,
                 false,
                 false,
@@ -2467,9 +2406,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "Fermenter.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -2492,9 +2428,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "Fermenter.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -2517,9 +2450,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "Fermenter.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -2542,9 +2472,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "Fermenter.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -2567,9 +2494,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "Fermenter.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -2595,9 +2519,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "FluidCanner.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -2619,9 +2540,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "FluidCanner.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -2643,9 +2561,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "FluidCanner.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -2667,9 +2582,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "FluidCanner.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -2691,9 +2603,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "FluidCanner.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -2718,9 +2627,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "FluidExtractor.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -2743,9 +2649,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "FluidExtractor.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -2768,9 +2671,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "FluidExtractor.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -2793,9 +2693,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "FluidExtractor.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -2818,9 +2715,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "FluidExtractor.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -2847,9 +2741,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 0,
                 true,
-                0,
-                1,
-                "FluidHeater.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -2873,9 +2764,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 0,
                 true,
-                0,
-                1,
-                "FluidHeater.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -2899,9 +2787,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 0,
                 true,
-                0,
-                1,
-                "FluidHeater.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -2925,9 +2810,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 0,
                 true,
-                0,
-                1,
-                "FluidHeater.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -2951,9 +2833,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 0,
                 true,
-                0,
-                1,
-                "FluidHeater.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -2980,9 +2859,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "FluidSolidifier.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -3005,9 +2881,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "FluidSolidifier.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -3030,9 +2903,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "FluidSolidifier.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -3055,9 +2925,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "FluidSolidifier.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -3080,9 +2947,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "FluidSolidifier.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -3108,9 +2972,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                6,
-                3,
-                "Hammer.png",
                 SoundResource.RANDOM_ANVIL_USE,
                 false,
                 false,
@@ -3134,9 +2995,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                6,
-                3,
-                "Hammer.png",
                 SoundResource.RANDOM_ANVIL_USE,
                 false,
                 false,
@@ -3160,9 +3018,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                6,
-                3,
-                "Hammer.png",
                 SoundResource.RANDOM_ANVIL_USE,
                 false,
                 false,
@@ -3186,9 +3041,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                6,
-                3,
-                "Hammer.png",
                 SoundResource.RANDOM_ANVIL_USE,
                 false,
                 false,
@@ -3212,9 +3064,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                6,
-                3,
-                "Hammer.png",
                 SoundResource.RANDOM_ANVIL_USE,
                 false,
                 false,
@@ -3241,9 +3090,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Press.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -3265,9 +3111,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Press.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -3289,9 +3132,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 4,
                 1,
                 false,
-                0,
-                1,
-                "Press2.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -3313,9 +3153,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 4,
                 1,
                 false,
-                0,
-                1,
-                "Press2.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -3337,9 +3174,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 6,
                 1,
                 false,
-                0,
-                1,
-                "Press3.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -3364,9 +3198,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 true,
-                0,
-                1,
-                "LaserEngraver.png",
                 SoundResource.IC2_MACHINES_MAGNETIZER_LOOP,
                 false,
                 false,
@@ -3389,9 +3220,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 true,
-                0,
-                1,
-                "LaserEngraver.png",
                 SoundResource.IC2_MACHINES_MAGNETIZER_LOOP,
                 false,
                 false,
@@ -3414,9 +3242,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 true,
-                0,
-                1,
-                "LaserEngraver.png",
                 SoundResource.IC2_MACHINES_MAGNETIZER_LOOP,
                 false,
                 false,
@@ -3439,9 +3264,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 4,
                 1,
                 true,
-                0,
-                1,
-                "LaserEngraver2.png",
                 SoundResource.IC2_MACHINES_MAGNETIZER_LOOP,
                 false,
                 false,
@@ -3464,9 +3286,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 4,
                 1,
                 true,
-                0,
-                1,
-                "LaserEngraver2.png",
                 SoundResource.IC2_MACHINES_MAGNETIZER_LOOP,
                 false,
                 false,
@@ -3492,9 +3311,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 2,
                 false,
-                0,
-                1,
-                "Lathe.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -3517,9 +3333,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 2,
                 false,
-                0,
-                1,
-                "Lathe.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -3542,9 +3355,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 2,
                 false,
-                0,
-                1,
-                "Lathe.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -3567,9 +3377,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 2,
                 false,
-                0,
-                1,
-                "Lathe.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -3592,9 +3399,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 2,
                 false,
-                0,
-                1,
-                "Lathe.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -3620,9 +3424,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Macerator1.png",
                 SoundResource.IC2_MACHINES_MACERATOR_OP,
                 false,
                 false,
@@ -3645,9 +3446,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Macerator1.png",
                 SoundResource.IC2_MACHINES_MACERATOR_OP,
                 false,
                 false,
@@ -3670,9 +3468,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 2,
                 false,
-                0,
-                1,
-                "Macerator2.png",
                 SoundResource.IC2_MACHINES_MACERATOR_OP,
                 false,
                 false,
@@ -3695,9 +3490,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 false,
-                0,
-                1,
-                "Macerator3.png",
                 SoundResource.IC2_MACHINES_MACERATOR_OP,
                 false,
                 false,
@@ -3720,9 +3512,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 4,
                 false,
-                0,
-                1,
-                "Macerator4.png",
                 SoundResource.IC2_MACHINES_MACERATOR_OP,
                 false,
                 false,
@@ -3748,9 +3537,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 1000,
-                0,
-                1,
-                "Amplifabricator.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -3772,9 +3558,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 1000,
-                0,
-                1,
-                "Amplifabricator.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -3796,9 +3579,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 1000,
-                0,
-                1,
-                "Amplifabricator.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -3820,9 +3600,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 1000,
-                0,
-                1,
-                "Amplifabricator.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -3844,9 +3621,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 1000,
-                0,
-                1,
-                "Amplifabricator.png",
                 SoundResource.IC2_MACHINES_EXTRACTOR_OP,
                 false,
                 false,
@@ -3871,9 +3645,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "E_Furnace.png",
                 SoundResource.IC2_MACHINES_ELECTROFURNACE_LOOP,
                 false,
                 false,
@@ -3896,9 +3667,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "E_Furnace.png",
                 SoundResource.IC2_MACHINES_ELECTROFURNACE_LOOP,
                 false,
                 false,
@@ -3921,9 +3689,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "E_Furnace.png",
                 SoundResource.IC2_MACHINES_ELECTROFURNACE_LOOP,
                 false,
                 false,
@@ -3946,9 +3711,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "E_Furnace.png",
                 SoundResource.IC2_MACHINES_ELECTROFURNACE_LOOP,
                 false,
                 false,
@@ -3971,9 +3733,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "E_Furnace.png",
                 SoundResource.IC2_MACHINES_ELECTROFURNACE_LOOP,
                 false,
                 false,
@@ -3999,9 +3758,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 6,
                 1,
                 true,
-                0,
-                1,
-                "Mixer.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -4023,9 +3779,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 6,
                 1,
                 true,
-                0,
-                1,
-                "Mixer.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -4047,9 +3800,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 6,
                 4,
                 true,
-                0,
-                1,
-                "Mixer4.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -4071,9 +3821,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 9,
                 4,
                 true,
-                0,
-                1,
-                "Mixer6.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -4095,9 +3842,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 9,
                 4,
                 true,
-                0,
-                1,
-                "Mixer6.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -4122,9 +3866,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 true,
-                0,
-                1,
-                "OreWasher.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -4147,9 +3888,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 true,
-                0,
-                1,
-                "OreWasher.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -4172,9 +3910,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 true,
-                0,
-                1,
-                "OreWasher.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -4197,9 +3932,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 true,
-                0,
-                1,
-                "OreWasher.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -4222,9 +3954,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 true,
-                0,
-                1,
-                "OreWasher.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -4250,9 +3979,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "E_Oven.png",
                 SoundResource.IC2_MACHINES_ELECTROFURNACE_LOOP,
                 false,
                 false,
@@ -4274,9 +4000,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "E_Oven.png",
                 SoundResource.IC2_MACHINES_ELECTROFURNACE_LOOP,
                 false,
                 false,
@@ -4298,9 +4021,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "E_Oven.png",
                 SoundResource.IC2_MACHINES_ELECTROFURNACE_LOOP,
                 false,
                 false,
@@ -4322,9 +4042,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "E_Oven.png",
                 SoundResource.IC2_MACHINES_ELECTROFURNACE_LOOP,
                 false,
                 false,
@@ -4346,9 +4063,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "E_Oven.png",
                 SoundResource.IC2_MACHINES_ELECTROFURNACE_LOOP,
                 false,
                 false,
@@ -4373,9 +4087,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 4,
                 true,
-                0,
-                1,
-                "PlasmaArcFurnace.png",
                 SoundResource.IC2_MACHINES_INDUCTION_LOOP,
                 false,
                 false,
@@ -4398,9 +4109,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 4,
                 true,
-                0,
-                1,
-                "PlasmaArcFurnace.png",
                 SoundResource.IC2_MACHINES_INDUCTION_LOOP,
                 false,
                 false,
@@ -4423,9 +4131,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 4,
                 true,
-                0,
-                1,
-                "PlasmaArcFurnace.png",
                 SoundResource.IC2_MACHINES_INDUCTION_LOOP,
                 false,
                 false,
@@ -4448,9 +4153,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 9,
                 true,
-                0,
-                1,
-                "PlasmaArcFurnace.png",
                 SoundResource.IC2_MACHINES_INDUCTION_LOOP,
                 false,
                 false,
@@ -4473,9 +4175,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 9,
                 true,
-                0,
-                1,
-                "PlasmaArcFurnace.png",
                 SoundResource.IC2_MACHINES_INDUCTION_LOOP,
                 false,
                 false,
@@ -4501,9 +4200,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Polarizer.png",
                 SoundResource.IC2_MACHINES_MAGNETIZER_LOOP,
                 false,
                 false,
@@ -4524,9 +4220,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Polarizer.png",
                 SoundResource.IC2_MACHINES_MAGNETIZER_LOOP,
                 false,
                 false,
@@ -4547,9 +4240,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Polarizer.png",
                 SoundResource.IC2_MACHINES_MAGNETIZER_LOOP,
                 false,
                 false,
@@ -4570,9 +4260,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Polarizer.png",
                 SoundResource.IC2_MACHINES_MAGNETIZER_LOOP,
                 false,
                 false,
@@ -4593,9 +4280,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Polarizer.png",
                 SoundResource.IC2_MACHINES_MAGNETIZER_LOOP,
                 false,
                 false,
@@ -4620,9 +4304,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "Printer.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -4644,9 +4325,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "Printer.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -4668,9 +4346,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "Printer.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -4692,9 +4367,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "Printer.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -4716,9 +4388,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "Printer.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -4740,9 +4409,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "Printer.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -4764,9 +4430,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "Printer.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -4788,9 +4451,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 true,
-                0,
-                1,
-                "Printer.png",
                 SoundResource.IC2_MACHINES_COMPRESSOR_OP,
                 false,
                 false,
@@ -4815,9 +4475,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Recycler.png",
                 SoundResource.IC2_MACHINES_RECYCLER_OP,
                 false,
                 false,
@@ -4840,9 +4497,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Recycler.png",
                 SoundResource.IC2_MACHINES_RECYCLER_OP,
                 false,
                 false,
@@ -4865,9 +4519,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Recycler.png",
                 SoundResource.IC2_MACHINES_RECYCLER_OP,
                 false,
                 false,
@@ -4890,9 +4541,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Recycler.png",
                 SoundResource.IC2_MACHINES_RECYCLER_OP,
                 false,
                 false,
@@ -4915,9 +4563,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 1,
                 false,
-                0,
-                1,
-                "Recycler.png",
                 SoundResource.IC2_MACHINES_RECYCLER_OP,
                 false,
                 false,
@@ -4943,9 +4588,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 9,
                 true,
-                2,
-                5,
-                "Sifter.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -4966,9 +4608,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 9,
                 true,
-                2,
-                5,
-                "Sifter.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -4989,9 +4628,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 9,
                 true,
-                2,
-                5,
-                "Sifter.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5012,9 +4648,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 9,
                 true,
-                2,
-                5,
-                "Sifter.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5035,9 +4668,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 9,
                 true,
-                2,
-                5,
-                "Sifter.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5061,9 +4691,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Slicer.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5086,9 +4713,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Slicer.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5111,9 +4735,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Slicer.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5136,9 +4757,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Slicer.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5161,9 +4779,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Slicer.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5189,9 +4804,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 false,
-                0,
-                1,
-                "ThermalCentrifuge.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5213,9 +4825,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 false,
-                0,
-                1,
-                "ThermalCentrifuge.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5237,9 +4846,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 false,
-                0,
-                1,
-                "ThermalCentrifuge.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5261,9 +4867,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 false,
-                0,
-                1,
-                "ThermalCentrifuge.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5285,9 +4888,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 3,
                 false,
-                0,
-                1,
-                "ThermalCentrifuge.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5312,9 +4912,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 2,
                 false,
-                0,
-                1,
-                "Unpackager.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5337,9 +4934,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 2,
                 false,
-                0,
-                1,
-                "Unpackager.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5362,9 +4956,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 2,
                 false,
-                0,
-                1,
-                "Unpackager.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5387,9 +4978,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 2,
                 false,
-                0,
-                1,
-                "Unpackager.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5412,9 +5000,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 2,
                 false,
-                0,
-                1,
-                "Unpackager.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5437,9 +5022,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 2,
                 false,
-                0,
-                1,
-                "Unpackager.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5462,9 +5044,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 2,
                 false,
-                0,
-                1,
-                "Unpackager.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5487,9 +5066,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 1,
                 2,
                 false,
-                0,
-                1,
-                "Unpackager.png",
                 SoundResource.NONE,
                 false,
                 false,
@@ -5515,9 +5091,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Wiremill.png",
                 SoundResource.IC2_MACHINES_RECYCLER_OP,
                 false,
                 false,
@@ -5539,9 +5112,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Wiremill.png",
                 SoundResource.IC2_MACHINES_RECYCLER_OP,
                 false,
                 false,
@@ -5563,9 +5133,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Wiremill.png",
                 SoundResource.IC2_MACHINES_RECYCLER_OP,
                 false,
                 false,
@@ -5587,9 +5154,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Wiremill.png",
                 SoundResource.IC2_MACHINES_RECYCLER_OP,
                 false,
                 false,
@@ -5611,9 +5175,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 2,
                 1,
                 false,
-                0,
-                1,
-                "Wiremill.png",
                 SoundResource.IC2_MACHINES_RECYCLER_OP,
                 false,
                 false,
@@ -5915,76 +5476,8 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
             new Object[] { aTextPlate, "PhP", "BBB", 'P', OrePrefixes.plate.get(Materials.WroughtIron), 'B',
                 new ItemStack(Blocks.brick_block, 1) });
 
-        // These hull recipes are only to register recycling, hence their immediate removal afterwards.
-        GT_ModHandler.addCraftingRecipe(
-            ItemList.Hull_ULV.get(1L),
-            GT_ModHandler.RecipeBits.REVERSIBLE,
-            new Object[] { aTextCableHull, 'M', ItemList.Casing_ULV, 'C', OrePrefixes.cableGt01.get(Materials.Lead),
-                'H', OrePrefixes.plate.get(Materials.WroughtIron), 'P', OrePrefixes.plate.get(Materials.Wood) });
-        GT_ModHandler.addCraftingRecipe(
-            ItemList.Hull_LV.get(1L),
-            GT_ModHandler.RecipeBits.REVERSIBLE,
-            new Object[] { aTextCableHull, 'M', ItemList.Casing_LV, 'C', OrePrefixes.cableGt01.get(Materials.Tin), 'H',
-                OrePrefixes.plate.get(Materials.Steel), 'P', OrePrefixes.plate.get(Materials.WroughtIron) });
-        GT_ModHandler.addCraftingRecipe(
-            ItemList.Hull_MV.get(1L),
-            GT_ModHandler.RecipeBits.REVERSIBLE,
-            new Object[] { aTextCableHull, 'M', ItemList.Casing_MV, 'C', OrePrefixes.cableGt01.get(Materials.AnyCopper),
-                'H', OrePrefixes.plate.get(Materials.Aluminium), 'P', OrePrefixes.plate.get(Materials.WroughtIron) });
-        GT_ModHandler.addCraftingRecipe(
-            ItemList.Hull_HV.get(1L),
-            GT_ModHandler.RecipeBits.REVERSIBLE,
-            new Object[] { aTextCableHull, 'M', ItemList.Casing_HV, 'C', OrePrefixes.cableGt01.get(Materials.Gold), 'H',
-                OrePrefixes.plate.get(Materials.StainlessSteel), 'P', OrePrefixes.plate.get(Materials.Plastic) });
-        GT_ModHandler.addCraftingRecipe(
-            ItemList.Hull_EV.get(1L),
-            GT_ModHandler.RecipeBits.REVERSIBLE,
-            new Object[] { aTextCableHull, 'M', ItemList.Casing_EV, 'C', OrePrefixes.cableGt01.get(Materials.Aluminium),
-                'H', OrePrefixes.plate.get(Materials.Titanium), 'P', OrePrefixes.plate.get(Materials.Plastic) });
-        GT_ModHandler.addCraftingRecipe(
-            ItemList.Hull_IV.get(1L),
-            GT_ModHandler.RecipeBits.REVERSIBLE,
-            new Object[] { aTextCableHull, 'M', ItemList.Casing_IV, 'C', OrePrefixes.cableGt01.get(Materials.Tungsten),
-                'H', OrePrefixes.plate.get(Materials.TungstenSteel), 'P',
-                OrePrefixes.plate.get(Materials.Polytetrafluoroethylene) });
-        GT_ModHandler.addCraftingRecipe(
-            ItemList.Hull_LuV.get(1L),
-            GT_ModHandler.RecipeBits.REVERSIBLE,
-            new Object[] { aTextCableHull, 'M', ItemList.Casing_LuV, 'C',
-                OrePrefixes.cableGt01.get(Materials.VanadiumGallium), 'H',
-                OrePrefixes.plate.get(ExternalMaterials.getRhodiumPlatedPalladium()), 'P',
-                OrePrefixes.plate.get(Materials.Polytetrafluoroethylene) });
-        GT_ModHandler.addCraftingRecipe(
-            ItemList.Hull_ZPM.get(1L),
-            GT_ModHandler.RecipeBits.REVERSIBLE,
-            new Object[] { aTextCableHull, 'M', ItemList.Casing_ZPM, 'C', OrePrefixes.cableGt02.get(Materials.Naquadah),
-                'H', OrePrefixes.plate.get(Materials.Iridium), 'P',
-                OrePrefixes.plate.get(Materials.Polybenzimidazole) });
-        GT_ModHandler.addCraftingRecipe(
-            ItemList.Hull_UV.get(1L),
-            GT_ModHandler.RecipeBits.REVERSIBLE,
-            new Object[] { aTextCableHull, 'M', ItemList.Casing_UV, 'C',
-                OrePrefixes.cableGt04.get(Materials.NaquadahAlloy), 'H', OrePrefixes.plate.get(Materials.Osmium), 'P',
-                OrePrefixes.plate.get(Materials.Polybenzimidazole) });
-        GT_ModHandler.addCraftingRecipe(
-            ItemList.Hull_MAX.get(1L),
-            GT_ModHandler.RecipeBits.REVERSIBLE,
-            new Object[] { aTextCableHull, 'M', ItemList.Casing_MAX, 'C',
-                OrePrefixes.wireGt04.get(Materials.SuperconductorUV), 'H', OrePrefixes.plate.get(Materials.Neutronium),
-                'P', OrePrefixes.plate.get(Materials.Polybenzimidazole) });
-        GT_ModHandler.removeRecipeByOutput(ItemList.Hull_ULV.get(1L));
-        GT_ModHandler.removeRecipeByOutput(ItemList.Hull_LV.get(1L));
-        GT_ModHandler.removeRecipeByOutput(ItemList.Hull_MV.get(1L));
-        GT_ModHandler.removeRecipeByOutput(ItemList.Hull_HV.get(1L));
-        GT_ModHandler.removeRecipeByOutput(ItemList.Hull_EV.get(1L));
-        GT_ModHandler.removeRecipeByOutput(ItemList.Hull_IV.get(1L));
-        GT_ModHandler.removeRecipeByOutput(ItemList.Hull_LuV.get(1L));
-        GT_ModHandler.removeRecipeByOutput(ItemList.Hull_ZPM.get(1L));
-        GT_ModHandler.removeRecipeByOutput(ItemList.Hull_UV.get(1L));
-        GT_ModHandler.removeRecipeByOutput(ItemList.Hull_MAX.get(1L));
-
-        // These are the actual hull crafting recipes. (They can't be used for recycling as that would create an exploit
-        // loop with the assembler recipes.)
+        // hull crafting recipes. (They can't be used for recycling as that would create an exploit loop with the
+        // assembler recipes.)
         if (GT_Mod.gregtechproxy.mHardMachineCasings) {
             GT_ModHandler.addCraftingRecipe(
                 ItemList.Hull_ULV.get(1L),
@@ -6100,6 +5593,58 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 new Object[] { aTextCableHull, 'M', ItemList.Casing_MAX, 'C',
                     OrePrefixes.wireGt04.get(Materials.SuperconductorUV) });
         }
+        // hull recycling data
+        GT_OreDictUnificator.addItemDataFromInputs(
+            ItemList.Hull_ULV.get(1L),
+            ItemList.Casing_ULV.get(1),
+            OrePrefixes.cableGt01.get(Materials.Lead),
+            OrePrefixes.cableGt01.get(Materials.Lead));
+        GT_OreDictUnificator.addItemDataFromInputs(
+            ItemList.Hull_LV.get(1L),
+            ItemList.Casing_LV.get(1),
+            OrePrefixes.cableGt01.get(Materials.Tin),
+            OrePrefixes.cableGt01.get(Materials.Tin));
+        GT_OreDictUnificator.addItemDataFromInputs(
+            ItemList.Hull_MV.get(1L),
+            ItemList.Casing_MV.get(1),
+            OrePrefixes.cableGt01.get(Materials.AnyCopper),
+            OrePrefixes.cableGt01.get(Materials.AnyCopper));
+        GT_OreDictUnificator.addItemDataFromInputs(
+            ItemList.Hull_HV.get(1L),
+            ItemList.Casing_HV.get(1),
+            OrePrefixes.cableGt01.get(Materials.Gold),
+            OrePrefixes.cableGt01.get(Materials.Gold));
+        GT_OreDictUnificator.addItemDataFromInputs(
+            ItemList.Hull_EV.get(1L),
+            ItemList.Casing_EV.get(1),
+            OrePrefixes.cableGt01.get(Materials.Aluminium),
+            OrePrefixes.cableGt01.get(Materials.Aluminium));
+        GT_OreDictUnificator.addItemDataFromInputs(
+            ItemList.Hull_IV.get(1L),
+            ItemList.Casing_IV.get(1),
+            OrePrefixes.cableGt01.get(Materials.Tungsten),
+            OrePrefixes.cableGt01.get(Materials.Tungsten));
+        GT_OreDictUnificator.addItemDataFromInputs(
+            ItemList.Hull_LuV.get(1L),
+            ItemList.Casing_LuV.get(1),
+            OrePrefixes.cableGt01.get(Materials.VanadiumGallium),
+            OrePrefixes.cableGt01.get(Materials.VanadiumGallium));
+        GT_OreDictUnificator.addItemDataFromInputs(
+            ItemList.Hull_ZPM.get(1L),
+            ItemList.Casing_ZPM.get(1),
+            OrePrefixes.cableGt02.get(Materials.Naquadah),
+            OrePrefixes.cableGt02.get(Materials.Naquadah));
+        GT_OreDictUnificator.addItemDataFromInputs(
+            ItemList.Hull_UV.get(1L),
+            ItemList.Casing_UV.get(1),
+            OrePrefixes.cableGt04.get(Materials.NaquadahAlloy),
+            OrePrefixes.cableGt04.get(Materials.NaquadahAlloy));
+        GT_OreDictUnificator.addItemDataFromInputs(
+            ItemList.Hull_MAX.get(1L),
+            ItemList.Casing_MAX.get(1),
+            OrePrefixes.cableGt04.get(Materials.SuperconductorUV),
+            OrePrefixes.cableGt04.get(Materials.SuperconductorUV));
+
         GT_ModHandler.addCraftingRecipe(
             ItemList.Transformer_LV_ULV.get(1L),
             bitsd,
@@ -6226,6 +5771,50 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
             bitsd,
             new Object[] { "MX ", "PR ", 'M', ItemList.Hull_MV, 'P', OrePrefixes.pipeMedium.get(Materials.Steel), 'R',
                 OrePrefixes.rotor.get(Materials.Steel), 'X', ItemList.Electric_Motor_MV });
+
+        // recycling data for the other mufflers, recipes are in assembler
+        GT_OreDictUnificator.addItemDataFromInputs(
+            ItemList.Hatch_Muffler_HV.get(1L),
+            ItemList.Hull_HV.get(1),
+            OrePrefixes.pipeLarge.get(Materials.StainlessSteel),
+            OrePrefixes.rotor.get(Materials.StainlessSteel),
+            ItemList.Electric_Motor_HV.get(1));
+        GT_OreDictUnificator.addItemDataFromInputs(
+            ItemList.Hatch_Muffler_EV.get(1L),
+            ItemList.Hull_EV.get(1),
+            OrePrefixes.pipeLarge.get(Materials.Titanium),
+            OrePrefixes.rotor.get(Materials.Titanium),
+            ItemList.Electric_Motor_EV.get(1));
+        GT_OreDictUnificator.addItemDataFromInputs(
+            ItemList.Hatch_Muffler_IV.get(1L),
+            ItemList.Hull_IV.get(1),
+            OrePrefixes.pipeLarge.get(Materials.TungstenSteel),
+            OrePrefixes.rotor.get(Materials.TungstenSteel),
+            ItemList.Electric_Motor_IV.get(1));
+        GT_OreDictUnificator.addItemDataFromInputs(
+            ItemList.Hatch_Muffler_LuV.get(1L),
+            ItemList.Hull_LuV.get(1),
+            OrePrefixes.pipeLarge.get(Materials.Enderium),
+            OrePrefixes.rotor.get(Materials.Enderium),
+            ItemList.Electric_Motor_LuV.get(1));
+        GT_OreDictUnificator.addItemDataFromInputs(
+            ItemList.Hatch_Muffler_ZPM.get(1L),
+            ItemList.Hull_ZPM.get(1),
+            OrePrefixes.pipeLarge.get(Materials.Naquadah),
+            OrePrefixes.rotor.get(Materials.NaquadahAlloy),
+            ItemList.Electric_Motor_ZPM.get(1));
+        GT_OreDictUnificator.addItemDataFromInputs(
+            ItemList.Hatch_Muffler_UV.get(1L),
+            ItemList.Hull_UV.get(1),
+            OrePrefixes.pipeLarge.get(Materials.NetherStar),
+            OrePrefixes.rotor.get(Materials.Neutronium),
+            ItemList.Electric_Motor_UV.get(1));
+        GT_OreDictUnificator.addItemDataFromInputs(
+            ItemList.Hatch_Muffler_MAX.get(1L),
+            ItemList.Hull_MAX.get(1),
+            OrePrefixes.pipeLarge.get(Materials.MysteriousCrystal),
+            OrePrefixes.rotor.get(Materials.CosmicNeutronium),
+            ItemList.Electric_Motor_UHV.get(1));
 
         GT_ModHandler.addCraftingRecipe(
             ItemList.Machine_Bronze_Boiler.get(1L),
@@ -7297,7 +6886,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Machine_Multi_Cleanroom.get(1L))
                 .fluidInputs(Materials.StainlessSteel.getMolten(864L))
-                .noFluidOutputs()
                 .duration(60 * SECONDS)
                 .eut(TierEU.RECIPE_MV)
                 .addTo(sAssemblerRecipes);
@@ -7446,19 +7034,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 new Object[] { GT_ModHandler.getModItem(Gendustry.ID, "ApiaryUpgrade", 1, 15) });
 
         }
-        // Converter recipes in case you had old one lying around
-        GT_ModHandler.addShapelessCraftingRecipe(
-            ItemList.Seismic_Prospector_Adv_LV.get(1L),
-            bits,
-            new Object[] { ItemList.Seismic_Prospector_LV });
-        GT_ModHandler.addShapelessCraftingRecipe(
-            ItemList.Seismic_Prospector_Adv_MV.get(1L),
-            bits,
-            new Object[] { ItemList.Seismic_Prospector_MV });
-        GT_ModHandler.addShapelessCraftingRecipe(
-            ItemList.Seismic_Prospector_Adv_HV.get(1L),
-            bits,
-            new Object[] { ItemList.Seismic_Prospector_HV });
     }
 
     private static void run4() {
@@ -7494,8 +7069,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 ItemList.Electric_Pump_EV.get(1L),
                 GT_Utility.getIntegratedCircuit(5))
             .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.pipeSmall, Materials.Ultimate, 1L))
-            .noFluidInputs()
-            .noFluidOutputs()
             .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(sAssemblerRecipes);
@@ -7505,8 +7078,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 ItemList.Electric_Pump_IV.get(1L),
                 GT_Utility.getIntegratedCircuit(5))
             .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.pipeMedium, Materials.Ultimate, 1L))
-            .noFluidInputs()
-            .noFluidOutputs()
             .duration(20 * SECONDS)
             .eut(4096)
             .addTo(sAssemblerRecipes);
@@ -7516,8 +7087,6 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
                 ItemList.Electric_Pump_IV.get(2L),
                 GT_Utility.getIntegratedCircuit(5))
             .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.pipeLarge, Materials.Ultimate, 1L))
-            .noFluidInputs()
-            .noFluidOutputs()
             .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_IV)
             .addTo(sAssemblerRecipes);

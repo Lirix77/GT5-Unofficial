@@ -44,8 +44,6 @@ public class ProcessingFood implements gregtech.api.interfaces.IOreRecipeRegistr
         GT_Values.RA.stdBuilder()
             .itemInputs(stack, ItemList.Shape_Slicer_Flat.get(0L))
             .itemOutputs(ItemList.Food_Sliced_Cheese.get(4L))
-            .noFluidInputs()
-            .noFluidOutputs()
             .duration(3 * SECONDS + 4 * TICKS)
             .eut(4)
             .addTo(sSlicerRecipes);
@@ -53,10 +51,8 @@ public class ProcessingFood implements gregtech.api.interfaces.IOreRecipeRegistr
 
     private void registerBenderRecipes(ItemStack stack) {
         GT_Values.RA.stdBuilder()
-            .itemInputs(GT_Utility.copyAmount(1L, stack), GT_Utility.getIntegratedCircuit(1))
+            .itemInputs(GT_Utility.copyAmount(1, stack), GT_Utility.getIntegratedCircuit(1))
             .itemOutputs(ItemList.Food_Flat_Dough.get(1L))
-            .noFluidInputs()
-            .noFluidOutputs()
             .duration(16 * TICKS)
             .eut(4)
             .addTo(sBenderRecipes);
@@ -66,8 +62,6 @@ public class ProcessingFood implements gregtech.api.interfaces.IOreRecipeRegistr
         GT_Values.RA.stdBuilder()
             .itemInputs(stack, GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Sugar, 1L))
             .itemOutputs(ItemList.Food_Dough_Sugar.get(2L))
-            .noFluidInputs()
-            .noFluidOutputs()
             .duration(1 * SECONDS + 12 * TICKS)
             .eut(8)
             .addTo(sMixerRecipes);
@@ -75,8 +69,6 @@ public class ProcessingFood implements gregtech.api.interfaces.IOreRecipeRegistr
         GT_Values.RA.stdBuilder()
             .itemInputs(stack, GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Cocoa, 1L))
             .itemOutputs(ItemList.Food_Dough_Chocolate.get(2L))
-            .noFluidInputs()
-            .noFluidOutputs()
             .duration(1 * SECONDS + 12 * TICKS)
             .eut(8)
             .addTo(sMixerRecipes);
@@ -84,8 +76,6 @@ public class ProcessingFood implements gregtech.api.interfaces.IOreRecipeRegistr
         GT_Values.RA.stdBuilder()
             .itemInputs(stack, GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Chocolate, 1L))
             .itemOutputs(ItemList.Food_Dough_Chocolate.get(2L))
-            .noFluidInputs()
-            .noFluidOutputs()
             .duration(1 * SECONDS + 12 * TICKS)
             .eut(8)
             .addTo(sMixerRecipes);
@@ -94,28 +84,22 @@ public class ProcessingFood implements gregtech.api.interfaces.IOreRecipeRegistr
     private void registerFormingPressRecipes(ItemStack stack) {
 
         GT_Values.RA.stdBuilder()
-            .itemInputs(GT_Utility.copyAmount(1L, stack), ItemList.Shape_Mold_Bun.get(0L))
+            .itemInputs(GT_Utility.copyAmount(1, stack), ItemList.Shape_Mold_Bun.get(0L))
             .itemOutputs(ItemList.Food_Raw_Bun.get(1L))
-            .noFluidInputs()
-            .noFluidOutputs()
             .duration(6 * SECONDS + 8 * TICKS)
             .eut(4)
             .addTo(sPressRecipes);
 
         GT_Values.RA.stdBuilder()
-            .itemInputs(GT_Utility.copyAmount(2L, stack), ItemList.Shape_Mold_Bread.get(0L))
+            .itemInputs(GT_Utility.copyAmount(2, stack), ItemList.Shape_Mold_Bread.get(0L))
             .itemOutputs(ItemList.Food_Raw_Bread.get(1L))
-            .noFluidInputs()
-            .noFluidOutputs()
             .duration(12 * SECONDS + 16 * TICKS)
             .eut(4)
             .addTo(sPressRecipes);
 
         GT_Values.RA.stdBuilder()
-            .itemInputs(GT_Utility.copyAmount(3L, stack), ItemList.Shape_Mold_Baguette.get(0L))
+            .itemInputs(GT_Utility.copyAmount(3, stack), ItemList.Shape_Mold_Baguette.get(0L))
             .itemOutputs(ItemList.Food_Raw_Baguette.get(1L))
-            .noFluidInputs()
-            .noFluidOutputs()
             .duration(19 * SECONDS + 4 * TICKS)
             .eut(4)
             .addTo(sPressRecipes);

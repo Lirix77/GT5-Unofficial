@@ -3,6 +3,7 @@ package gregtech.loaders.oreprocessing;
 import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sBlastRecipes;
 import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sCentrifugeRecipes;
 import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sHammerRecipes;
+import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sMaceratorRecipes;
 import static gregtech.api.util.GT_RecipeBuilder.SECONDS;
 import static gregtech.api.util.GT_RecipeConstants.COIL_HEAT;
 
@@ -42,10 +43,9 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
 
         if (aMaterial == Materials.Oilsands) {
             GT_Values.RA.stdBuilder()
-                .itemInputs(GT_Utility.copyAmount(1L, aStack))
+                .itemInputs(GT_Utility.copyAmount(1, aStack))
                 .itemOutputs(new ItemStack(net.minecraft.init.Blocks.sand, 1, 0))
                 .outputChances(tIsRich ? 2000 : 4000)
-                .noFluidInputs()
                 .fluidOutputs(Materials.OilHeavy.getFluid(tIsRich ? 4000L : 2000L))
                 .duration(tIsRich ? 30 * SECONDS : 15 * SECONDS)
                 .eut(TierEU.RECIPE_LV)
@@ -54,7 +54,7 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
             registerStandardOreRecipes(
                 aPrefix,
                 aMaterial,
-                GT_Utility.copyAmount(1L, aStack),
+                GT_Utility.copyAmount(1, aStack),
                 Math.max(
                     1,
                     gregtech.api.GregTech_API.sOPStuff.get(
@@ -73,7 +73,7 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
         Materials tMaterial = aMaterial.mOreReplacement;
         Materials tPrimaryByMaterial = null;
         aMultiplier = Math.max(1, aMultiplier);
-        aOreStack = GT_Utility.copyAmount(1L, aOreStack);
+        aOreStack = GT_Utility.copyAmount(1, aOreStack);
         aOreStack.stackSize = 1;
 
         ItemStack tIngot = GT_OreDictUnificator.get(OrePrefixes.ingot, aMaterial.mDirectSmelting, 1L);
@@ -107,7 +107,7 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
             tCrushed = GT_OreDictUnificator.get(
                 OrePrefixes.dustImpure,
                 tMaterial,
-                GT_Utility.copyAmount((long) aMaterial.mOreMultiplier * aMultiplier, tCleaned, tDust, tGem),
+                GT_Utility.copyAmount(aMaterial.mOreMultiplier * aMultiplier, tCleaned, tDust, tGem),
                 (long) aMaterial.mOreMultiplier * aMultiplier);
         }
 
@@ -134,7 +134,7 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
             } else {
                 tHasSmelting = GT_ModHandler.addSmeltingRecipe(
                     aOreStack,
-                    GT_Utility.copyAmount((long) aMultiplier * aMaterial.mSmeltingMultiplier, tSmeltInto));
+                    GT_Utility.copyAmount(aMultiplier * aMaterial.mSmeltingMultiplier, tSmeltInto));
             }
 
             if (aMaterial.contains(SubTag.BLASTFURNACE_CALCITE_TRIPLE)) {
@@ -144,10 +144,8 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
                             aOreStack,
                             GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Calcite, aMultiplier))
                         .itemOutputs(
-                            GT_Utility.mul((long) aMultiplier * 3 * aMaterial.mSmeltingMultiplier, tSmeltInto),
+                            GT_Utility.mul(aMultiplier * 3 * aMaterial.mSmeltingMultiplier, tSmeltInto),
                             GT_OreDictUnificator.get(OrePrefixes.dustSmall, Materials.DarkAsh, 1L))
-                        .noFluidInputs()
-                        .noFluidOutputs()
                         .duration(tSmeltInto.stackSize * 25 * SECONDS)
                         .eut(TierEU.RECIPE_MV)
                         .metadata(COIL_HEAT, 1500)
@@ -157,10 +155,8 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
                             aOreStack,
                             GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Quicklime, aMultiplier))
                         .itemOutputs(
-                            GT_Utility.mul((long) aMultiplier * 3 * aMaterial.mSmeltingMultiplier, tSmeltInto),
+                            GT_Utility.mul(aMultiplier * 3 * aMaterial.mSmeltingMultiplier, tSmeltInto),
                             GT_OreDictUnificator.get(OrePrefixes.dustSmall, Materials.DarkAsh, 1L))
-                        .noFluidInputs()
-                        .noFluidOutputs()
                         .duration(tSmeltInto.stackSize * 25 * SECONDS)
                         .eut(TierEU.RECIPE_MV)
                         .metadata(COIL_HEAT, 1500)
@@ -173,10 +169,8 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
                             aOreStack,
                             GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Calcite, aMultiplier))
                         .itemOutputs(
-                            GT_Utility.mul((long) aMultiplier * 2 * aMaterial.mSmeltingMultiplier, tSmeltInto),
+                            GT_Utility.mul(aMultiplier * 2 * aMaterial.mSmeltingMultiplier, tSmeltInto),
                             GT_OreDictUnificator.get(OrePrefixes.dustSmall, Materials.DarkAsh, 1L))
-                        .noFluidInputs()
-                        .noFluidOutputs()
                         .duration(tSmeltInto.stackSize * 25 * SECONDS)
                         .eut(TierEU.RECIPE_MV)
                         .metadata(COIL_HEAT, 1500)
@@ -186,10 +180,8 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
                             aOreStack,
                             GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Quicklime, aMultiplier))
                         .itemOutputs(
-                            GT_Utility.mul((long) aMultiplier * 2 * aMaterial.mSmeltingMultiplier, tSmeltInto),
+                            GT_Utility.mul(aMultiplier * 2 * aMaterial.mSmeltingMultiplier, tSmeltInto),
                             GT_OreDictUnificator.get(OrePrefixes.dustSmall, Materials.DarkAsh, 1L))
-                        .noFluidInputs()
-                        .noFluidOutputs()
                         .duration(tSmeltInto.stackSize * 25 * SECONDS)
                         .eut(TierEU.RECIPE_MV)
                         .metadata(COIL_HEAT, 1500)
@@ -211,29 +203,30 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
             GT_Values.RA.stdBuilder()
                 .itemInputs(aOreStack)
                 .itemOutputs(GT_Utility.copy(GT_Utility.copyAmount(tCrushed.stackSize, tGem), tCrushed))
-                .noFluidInputs()
-                .noFluidOutputs()
                 .duration(10)
                 .eut(16)
                 .addTo(sHammerRecipes);
 
-            GT_ModHandler.addPulverisationRecipe(
-                aOreStack,
-                GT_Utility.mul(2L, tCrushed),
-                tMaterial.contains(SubTag.PULVERIZING_CINNABAR)
-                    ? GT_OreDictUnificator.get(
+            int chanceOre2 = tPrimaryByProduct == null ? 0
+                : tPrimaryByProduct.stackSize * 10 * aMultiplier * aMaterial.mByProductMultiplier;
+            chanceOre2 = 100 * chanceOre2; // converting to the GT format, 100% is 10000
+            GT_Values.RA.stdBuilder()
+                .itemInputs(aOreStack)
+                .itemOutputs(
+                    GT_Utility.mul(2, tCrushed),
+                    tMaterial.contains(SubTag.PULVERIZING_CINNABAR) ? GT_OreDictUnificator.get(
                         OrePrefixes.crystal,
                         Materials.Cinnabar,
                         GT_OreDictUnificator
-                            .get(OrePrefixes.gem, tPrimaryByMaterial, GT_Utility.copyAmount(1L, tPrimaryByProduct), 1L),
+                            .get(OrePrefixes.gem, tPrimaryByMaterial, GT_Utility.copyAmount(1, tPrimaryByProduct), 1L),
                         1L)
-                    : GT_OreDictUnificator
-                        .get(OrePrefixes.gem, tPrimaryByMaterial, GT_Utility.copyAmount(1L, tPrimaryByProduct), 1L),
-                tPrimaryByProduct == null ? 0
-                    : tPrimaryByProduct.stackSize * 10 * aMultiplier * aMaterial.mByProductMultiplier,
-                GT_OreDictUnificator.getDust(aPrefix.mSecondaryMaterial),
-                50,
-                true);
+                        : GT_OreDictUnificator
+                            .get(OrePrefixes.gem, tPrimaryByMaterial, GT_Utility.copyAmount(1, tPrimaryByProduct), 1L),
+                    GT_OreDictUnificator.getDust(aPrefix.mSecondaryMaterial))
+                .outputChances(10000, chanceOre2, 5000)
+                .duration(20 * SECONDS)
+                .eut(2)
+                .addTo(sMaceratorRecipes);
         }
         return true;
     }

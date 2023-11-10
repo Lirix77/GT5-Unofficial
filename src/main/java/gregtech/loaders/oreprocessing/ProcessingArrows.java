@@ -27,7 +27,7 @@ public class ProcessingArrows implements gregtech.api.interfaces.IOreRecipeRegis
     @Override
     public void registerOre(OrePrefixes aPrefix, Materials aMaterial, String aOreDictName, String aModName,
         ItemStack aStack) {
-        ItemStack tOutput = GT_Utility.copyAmount(1L, aStack);
+        ItemStack tOutput = GT_Utility.copyAmount(1, aStack);
         GT_Utility.updateItemStack(tOutput);
         GT_Utility.ItemNBT.addEnchantment(
             tOutput,
@@ -35,15 +35,14 @@ public class ProcessingArrows implements gregtech.api.interfaces.IOreRecipeRegis
             EnchantmentHelper.getEnchantmentLevel(Enchantment.smite.effectId, tOutput) + 3);
 
         GT_Values.RA.stdBuilder()
-            .itemInputs(GT_Utility.copyAmount(1L, aStack))
+            .itemInputs(GT_Utility.copyAmount(1, aStack))
             .itemOutputs(tOutput)
             .fluidInputs(Materials.HolyWater.getFluid(25L))
-            .noFluidOutputs()
             .duration(5 * SECONDS)
             .eut(2)
             .addTo(sChemicalBathRecipes);
 
-        tOutput = GT_Utility.copyAmount(1L, aStack);
+        tOutput = GT_Utility.copyAmount(1, aStack);
         GT_Utility.updateItemStack(tOutput);
         GT_Utility.ItemNBT.addEnchantment(
             tOutput,
@@ -51,15 +50,14 @@ public class ProcessingArrows implements gregtech.api.interfaces.IOreRecipeRegis
             EnchantmentHelper.getEnchantmentLevel(Enchantment.fireAspect.effectId, tOutput) + 3);
 
         GT_Values.RA.stdBuilder()
-            .itemInputs(GT_Utility.copyAmount(1L, aStack))
+            .itemInputs(GT_Utility.copyAmount(1, aStack))
             .itemOutputs(tOutput)
             .fluidInputs(Materials.FierySteel.getFluid(25L))
-            .noFluidOutputs()
             .duration(5 * SECONDS)
             .eut(2)
             .addTo(sChemicalBathRecipes);
 
-        tOutput = GT_Utility.copyAmount(1L, aStack);
+        tOutput = GT_Utility.copyAmount(1, aStack);
         GT_Utility.updateItemStack(tOutput);
         GT_Utility.ItemNBT.addEnchantment(
             tOutput,
@@ -67,15 +65,14 @@ public class ProcessingArrows implements gregtech.api.interfaces.IOreRecipeRegis
             EnchantmentHelper.getEnchantmentLevel(Enchantment.fireAspect.effectId, tOutput) + 1);
 
         GT_Values.RA.stdBuilder()
-            .itemInputs(GT_Utility.copyAmount(1L, aStack))
+            .itemInputs(GT_Utility.copyAmount(1, aStack))
             .itemOutputs(tOutput)
             .fluidInputs(Materials.Blaze.getMolten(18L))
-            .noFluidOutputs()
             .duration(5 * SECONDS)
             .eut(2)
             .addTo(sChemicalBathRecipes);
 
-        tOutput = GT_Utility.copyAmount(1L, aStack);
+        tOutput = GT_Utility.copyAmount(1, aStack);
         GT_Utility.updateItemStack(tOutput);
         GT_Utility.ItemNBT.addEnchantment(
             tOutput,
@@ -83,15 +80,14 @@ public class ProcessingArrows implements gregtech.api.interfaces.IOreRecipeRegis
             EnchantmentHelper.getEnchantmentLevel(Enchantment.knockback.effectId, tOutput) + 1);
 
         GT_Values.RA.stdBuilder()
-            .itemInputs(GT_Utility.copyAmount(1L, aStack))
+            .itemInputs(GT_Utility.copyAmount(1, aStack))
             .itemOutputs(tOutput)
             .fluidInputs(Materials.Rubber.getMolten(18L))
-            .noFluidOutputs()
             .duration(5 * SECONDS)
             .eut(2)
             .addTo(sChemicalBathRecipes);
 
-        tOutput = GT_Utility.copyAmount(1L, aStack);
+        tOutput = GT_Utility.copyAmount(1, aStack);
         GT_Utility.updateItemStack(tOutput);
         GT_Utility.ItemNBT.addEnchantment(
             tOutput,
@@ -100,32 +96,40 @@ public class ProcessingArrows implements gregtech.api.interfaces.IOreRecipeRegis
                 .getEnchantmentLevel(gregtech.api.enchants.Enchantment_EnderDamage.INSTANCE.effectId, tOutput) + 1);
 
         GT_Values.RA.stdBuilder()
-            .itemInputs(GT_Utility.copyAmount(1L, aStack))
+            .itemInputs(GT_Utility.copyAmount(1, aStack))
             .itemOutputs(tOutput)
             .fluidInputs(Materials.Mercury.getFluid(25L))
-            .noFluidOutputs()
             .duration(5 * SECONDS)
             .eut(2)
             .addTo(sChemicalBathRecipes);
 
-        if ((aMaterial.mUnificatable) && (aMaterial.mMaterialInto == aMaterial)
-            && !aMaterial.contains(SubTag.NO_WORKING)) {
-            switch (aPrefix) {
-                case arrowGtWood:
-                    GT_ModHandler.addCraftingRecipe(
-                        GT_OreDictUnificator.get(OrePrefixes.arrowGtWood, aMaterial, 1L),
-                        GT_Proxy.tBits,
-                        new Object[] { "  A", " S ", "F  ", 'S', OrePrefixes.stick.get(Materials.Wood), 'F',
-                            OreDictNames.craftingFeather, 'A', OrePrefixes.toolHeadArrow.get(aMaterial) });
-                case arrowGtPlastic:
-                    GT_ModHandler.addCraftingRecipe(
-                        GT_OreDictUnificator.get(OrePrefixes.arrowGtPlastic, aMaterial, 1L),
-                        GT_Proxy.tBits,
-                        new Object[] { "  A", " S ", "F  ", 'S', OrePrefixes.stick.get(Materials.Plastic), 'F',
-                            OreDictNames.craftingFeather, 'A', OrePrefixes.toolHeadArrow.get(aMaterial) });
-                default:
-                    break;
-            }
+        if (!aMaterial.mUnificatable) {
+            return;
         }
+        if (aMaterial.mMaterialInto != aMaterial) {
+            return;
+        }
+
+        if (aMaterial.contains(SubTag.NO_WORKING)) {
+            return;
+        }
+
+        switch (aPrefix) {
+            case arrowGtWood:
+                GT_ModHandler.addCraftingRecipe(
+                    GT_OreDictUnificator.get(OrePrefixes.arrowGtWood, aMaterial, 1L),
+                    GT_Proxy.tBits,
+                    new Object[] { "  A", " S ", "F  ", 'S', OrePrefixes.stick.get(Materials.Wood), 'F',
+                        OreDictNames.craftingFeather, 'A', OrePrefixes.toolHeadArrow.get(aMaterial) });
+            case arrowGtPlastic:
+                GT_ModHandler.addCraftingRecipe(
+                    GT_OreDictUnificator.get(OrePrefixes.arrowGtPlastic, aMaterial, 1L),
+                    GT_Proxy.tBits,
+                    new Object[] { "  A", " S ", "F  ", 'S', OrePrefixes.stick.get(Materials.Plastic), 'F',
+                        OreDictNames.craftingFeather, 'A', OrePrefixes.toolHeadArrow.get(aMaterial) });
+            default:
+                break;
+        }
+
     }
 }

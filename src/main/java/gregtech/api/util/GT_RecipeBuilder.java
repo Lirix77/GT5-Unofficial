@@ -20,14 +20,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.fluids.FluidStack;
 
+import gregtech.GT_Mod;
 import gregtech.api.interfaces.IGT_RecipeMap;
 import gregtech.api.util.extensions.ArrayExt;
 
+@SuppressWarnings("unused")
 public class GT_RecipeBuilder {
 
     // debug mode expose problems. panic mode help you check nothing is wrong-ish without you actively monitoring
-    private static final boolean DEBUG_MODE;
-    private static final boolean PANIC_MODE;
+    private static final boolean DEBUG_MODE_NULL;
+    private static boolean PANIC_MODE_NULL;
+    private static final boolean DEBUG_MODE_INVALID;
+    private static final boolean PANIC_MODE_INVALID;
+    private static final boolean DEBUG_MODE_COLLISION;
+    private static final boolean PANIC_MODE_COLLISION;
 
     public static final int WILDCARD = 32767;
 
@@ -46,22 +52,30 @@ public class GT_RecipeBuilder {
     public static final int BUCKETS = 1000;
 
     static {
+        final boolean debugAll;
         if (System.getProperties()
             .containsKey("gt.recipebuilder.debug")) {
-            DEBUG_MODE = Boolean.getBoolean("gt.recipebuilder.debug");
+            debugAll = Boolean.getBoolean("gt.recipebuilder.debug");
         } else {
             // turn on debug by default in dev mode
-            DEBUG_MODE = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
+            debugAll = (boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
         }
-        PANIC_MODE = DEBUG_MODE && Boolean.getBoolean("gt.recipebuilder.panic");
+        DEBUG_MODE_NULL = debugAll || Boolean.getBoolean("gt.recipebuilder.debug.null");
+        DEBUG_MODE_INVALID = debugAll || Boolean.getBoolean("gt.recipebuilder.debug.invalid");
+        DEBUG_MODE_COLLISION = debugAll || Boolean.getBoolean("gt.recipebuilder.debug.collision");
+
+        final boolean panicAll = Boolean.getBoolean("gt.recipebuilder.panic");
+        PANIC_MODE_NULL = panicAll || Boolean.getBoolean("gt.recipebuilder.panic.null");
+        PANIC_MODE_INVALID = panicAll || Boolean.getBoolean("gt.recipebuilder.panic.invalid");
+        PANIC_MODE_COLLISION = panicAll || Boolean.getBoolean("gt.recipebuilder.panic.collision");
     }
 
-    protected ItemStack[] inputsBasic;
+    protected ItemStack[] inputsBasic = new ItemStack[0];
     protected Object[] inputsOreDict;
-    protected ItemStack[] outputs;
+    protected ItemStack[] outputs = new ItemStack[0];
     protected ItemStack[][] alts;
-    protected FluidStack[] fluidInputs;
-    protected FluidStack[] fluidOutputs;
+    protected FluidStack[] fluidInputs = new FluidStack[0];
+    protected FluidStack[] fluidOutputs = new FluidStack[0];
     protected int[] chances;
     protected Object special;
     protected int duration = -1;
@@ -106,6 +120,8 @@ public class GT_RecipeBuilder {
         this.valid = valid;
     }
 
+    // region helper methods
+
     private static FluidStack[] fix(FluidStack[] fluidInputs) {
         return Arrays.stream(fluidInputs)
             .filter(Objects::nonNull)
@@ -127,35 +143,38 @@ public class GT_RecipeBuilder {
     }
 
     private static void handleNullRecipeComponents(String componentType) {
-        if (PANIC_MODE) {
+        // place a breakpoint here to catch all these issues
+        GT_Log.err.print("null detected in ");
+        GT_Log.err.println(componentType);
+        new NullPointerException().printStackTrace(GT_Log.err);
+        if (PANIC_MODE_NULL) {
             throw new IllegalArgumentException("null in argument");
-        } else {
-            // place a breakpoint here to catch all these issues
-            GT_Log.err.print("null detected in ");
-            GT_Log.err.println(componentType);
-            new NullPointerException().printStackTrace(GT_Log.err);
         }
     }
 
+    private static boolean debugNull() {
+        return DEBUG_MODE_NULL || PANIC_MODE_NULL;
+    }
+
     private static void handleInvalidRecipe() {
-        if (!PANIC_MODE && !DEBUG_MODE) {
+        if (!DEBUG_MODE_INVALID && !PANIC_MODE_INVALID) {
             return;
         }
         // place a breakpoint here to catch all these issues
         GT_Log.err.print("invalid recipe");
         new IllegalArgumentException().printStackTrace(GT_Log.err);
-        if (PANIC_MODE) {
+        if (PANIC_MODE_INVALID) {
             throw new IllegalArgumentException("invalid recipe");
         }
     }
 
     public static void handleRecipeCollision(String details) {
-        if (!PANIC_MODE && !DEBUG_MODE) {
+        if (!DEBUG_MODE_COLLISION && !PANIC_MODE_COLLISION) {
             return;
         }
         GT_Log.err.print("Recipe collision resulting in recipe loss detected with ");
         GT_Log.err.println(details);
-        if (PANIC_MODE) {
+        if (PANIC_MODE_COLLISION) {
             throw new IllegalArgumentException("Recipe Collision");
         } else {
             // place a breakpoint here to catch all these issues
@@ -163,11 +182,19 @@ public class GT_RecipeBuilder {
         }
     }
 
+    public static void onConfigLoad() {
+        PANIC_MODE_NULL |= GT_Mod.gregtechproxy.crashOnNullRecipeInput;
+    }
+
+    // endregion
+
+    // region setter
+
     /**
      * Non-OreDicted item inputs. Assumes input is unified.
      */
     public GT_RecipeBuilder itemInputsUnified(ItemStack... inputs) {
-        if (DEBUG_MODE && containsNull(inputs)) handleNullRecipeComponents("itemInputUnified");
+        if (debugNull() && containsNull(inputs)) handleNullRecipeComponents("itemInputUnified");
         inputsBasic = ArrayExt.withoutTrailingNulls(inputs, ItemStack[]::new);
         inputsOreDict = null;
         alts = null;
@@ -178,7 +205,7 @@ public class GT_RecipeBuilder {
      * Non-OreDicted item inputs. Assumes input is not unified.
      */
     public GT_RecipeBuilder itemInputs(ItemStack... inputs) {
-        if (DEBUG_MODE && containsNull(inputs)) handleNullRecipeComponents("itemInputs");
+        if (debugNull() && containsNull(inputs)) handleNullRecipeComponents("itemInputs");
         inputsBasic = fix(inputs);
         inputsOreDict = null;
         alts = null;
@@ -221,18 +248,15 @@ public class GT_RecipeBuilder {
     }
 
     /**
-     * Same as itemInputs(), but make it clear that no item inputs is intended, instead of a mistake.
+     * @deprecated You don't need to call this method, RecipeBuilder now takes empty item input array by default.
      */
+    @Deprecated
     public GT_RecipeBuilder noItemInputs() {
-        // this does not call into one of the itemInputs, to make it clear what is the expected behavior here.
-        inputsBasic = new ItemStack[0];
-        inputsOreDict = null;
-        alts = null;
         return this;
     }
 
     public GT_RecipeBuilder itemOutputs(ItemStack... outputs) {
-        if (DEBUG_MODE && containsNull(outputs)) handleNullRecipeComponents("itemOutputs");
+        if (debugNull() && containsNull(outputs)) handleNullRecipeComponents("itemOutputs");
         this.outputs = outputs;
         if (chances != null && chances.length != outputs.length) {
             throw new IllegalArgumentException("Output chances array and items array length differs");
@@ -245,7 +269,7 @@ public class GT_RecipeBuilder {
      * Intended for recipe rewrite middlewares.
      */
     public GT_RecipeBuilder itemOutputs(ItemStack[] outputs, int[] chances) {
-        if (DEBUG_MODE && containsNull(outputs)) handleNullRecipeComponents("itemOutputs");
+        if (debugNull() && containsNull(outputs)) handleNullRecipeComponents("itemOutputs");
         this.outputs = outputs;
         this.chances = chances;
         if (chances != null && chances.length != outputs.length) {
@@ -254,32 +278,48 @@ public class GT_RecipeBuilder {
         return this;
     }
 
+    /**
+     * @deprecated You don't need to call this method, RecipeBuilder now takes empty item output array by default.
+     */
+    @Deprecated
     public GT_RecipeBuilder noItemOutputs() {
-        return itemOutputs();
+        return this;
     }
 
     public GT_RecipeBuilder fluidInputs(FluidStack... fluidInputs) {
-        if (DEBUG_MODE && containsNull(fluidInputs)) handleNullRecipeComponents("fluidInputs");
+        if (debugNull() && containsNull(fluidInputs)) handleNullRecipeComponents("fluidInputs");
         this.fluidInputs = fix(fluidInputs);
         return this;
     }
 
+    /**
+     * @deprecated You don't need to call this method, RecipeBuilder now takes empty fluid input array by default.
+     */
+    @Deprecated
     public GT_RecipeBuilder noFluidInputs() {
-        return fluidInputs == null ? fluidInputs() : this;
+        return this;
     }
 
     public GT_RecipeBuilder fluidOutputs(FluidStack... fluidOutputs) {
-        if (DEBUG_MODE && containsNull(fluidOutputs)) handleNullRecipeComponents("fluidOutputs");
+        if (debugNull() && containsNull(fluidOutputs)) handleNullRecipeComponents("fluidOutputs");
         this.fluidOutputs = fix(fluidOutputs);
         return this;
     }
 
+    /**
+     * @deprecated You don't need to call this method, RecipeBuilder now takes empty fluid output array by default.
+     */
+    @Deprecated
     public GT_RecipeBuilder noFluidOutputs() {
-        return fluidOutputs();
+        return this;
     }
 
+    /**
+     * @deprecated You don't need to call this method, RecipeBuilder now takes empty arrays by default.
+     */
+    @Deprecated
     public GT_RecipeBuilder noOutputs() {
-        return noFluidOutputs().noItemOutputs();
+        return this;
     }
 
     public GT_RecipeBuilder outputChances(int... chances) {
@@ -392,6 +432,8 @@ public class GT_RecipeBuilder {
         return metadata(GT_RecipeConstants.LOW_GRAVITY, true);
     }
 
+    // endregion
+
     private static <T> T[] copy(T[] arr) {
         return arr == null ? null : arr.clone();
     }
@@ -457,6 +499,8 @@ public class GT_RecipeBuilder {
             valid);
     }
 
+    // region getter
+
     public ItemStack getItemInputBasic(int index) {
         return index < inputsBasic.length ? inputsBasic[index] : null;
     }
@@ -509,6 +553,10 @@ public class GT_RecipeBuilder {
         return eut;
     }
 
+    // endregion
+
+    // region validator
+
     public GT_RecipeBuilder clearInvalid() {
         valid = true;
         return this;
@@ -536,7 +584,7 @@ public class GT_RecipeBuilder {
      * unset. Both bound inclusive. Only supposed to be called by IGT_RecipeMap and not client code.
      */
     public GT_RecipeBuilder validateNoInput() {
-        return GT_Utility.isArrayEmptyOrNull(inputsBasic) ? noItemInputs() : invalidate();
+        return GT_Utility.isArrayEmptyOrNull(inputsBasic) ? this : invalidate();
     }
 
     /**
@@ -544,7 +592,7 @@ public class GT_RecipeBuilder {
      * unset. Both bound inclusive. Only supposed to be called by IGT_RecipeMap and not client code.
      */
     public GT_RecipeBuilder validateNoInputFluid() {
-        return GT_Utility.isArrayEmptyOrNull(fluidInputs) ? noFluidInputs() : invalidate();
+        return GT_Utility.isArrayEmptyOrNull(fluidInputs) ? this : invalidate();
     }
 
     /**
@@ -552,7 +600,7 @@ public class GT_RecipeBuilder {
      * unset. Both bound inclusive. Only supposed to be called by IGT_RecipeMap and not client code.
      */
     public GT_RecipeBuilder validateNoOutput() {
-        return GT_Utility.isArrayEmptyOrNull(outputs) ? noItemInputs() : invalidate();
+        return GT_Utility.isArrayEmptyOrNull(outputs) ? this : invalidate();
     }
 
     /**
@@ -560,7 +608,7 @@ public class GT_RecipeBuilder {
      * unset. Both bound inclusive. Only supposed to be called by IGT_RecipeMap and not client code.
      */
     public GT_RecipeBuilder validateNoOutputFluid() {
-        return GT_Utility.isArrayEmptyOrNull(fluidOutputs) ? noFluidOutputs() : invalidate();
+        return GT_Utility.isArrayEmptyOrNull(fluidOutputs) ? this : invalidate();
     }
 
     /**
@@ -568,7 +616,7 @@ public class GT_RecipeBuilder {
      * unset. Both bound inclusive. Only supposed to be called by IGT_RecipeMap and not client code.
      */
     public GT_RecipeBuilder validateInputCount(int min, int max) {
-        if (inputsBasic == null) return min < 0 ? noItemInputs() : invalidate();
+        if (inputsBasic == null) return min < 0 ? this : invalidate();
         return isArrayValid(inputsBasic, min, max) ? this : invalidate();
     }
 
@@ -577,7 +625,7 @@ public class GT_RecipeBuilder {
      * unset. Both bound inclusive. Only supposed to be called by IGT_RecipeMap and not client code.
      */
     public GT_RecipeBuilder validateInputFluidCount(int min, int max) {
-        if (fluidInputs == null) return min < 0 ? noItemInputs() : invalidate();
+        if (fluidInputs == null) return min < 0 ? this : invalidate();
         return isArrayValid(fluidInputs, min, max) ? this : invalidate();
     }
 
@@ -586,7 +634,7 @@ public class GT_RecipeBuilder {
      * unset. Both bound inclusive. Only supposed to be called by IGT_RecipeMap and not client code.
      */
     public GT_RecipeBuilder validateOutputCount(int min, int max) {
-        if (outputs == null) return min < 0 ? noItemInputs() : invalidate();
+        if (outputs == null) return min < 0 ? this : invalidate();
         return isArrayValid(outputs, min, max) ? this : invalidate();
     }
 
@@ -595,33 +643,35 @@ public class GT_RecipeBuilder {
      * unset. Both bound inclusive. Only supposed to be called by IGT_RecipeMap and not client code.
      */
     public GT_RecipeBuilder validateOutputFluidCount(int min, int max) {
-        if (fluidOutputs == null) return min < 0 ? noItemInputs() : invalidate();
+        if (fluidOutputs == null) return min < 0 ? this : invalidate();
         return isArrayValid(fluidOutputs, min, max) ? this : invalidate();
     }
 
     public GT_RecipeBuilder validateAnyInput() {
         if (fluidInputs != null && isArrayValid(fluidInputs, 1, Integer.MAX_VALUE)) {
-            return inputsBasic == null ? noItemInputs() : this;
+            return this;
         }
         if (inputsBasic != null && isArrayValid(inputsBasic, 1, Integer.MAX_VALUE)) {
-            return fluidInputs == null ? noFluidInputs() : this;
+            return this;
         }
         return invalidate();
     }
 
     public GT_RecipeBuilder validateAnyOutput() {
         if (fluidOutputs != null && isArrayValid(fluidOutputs, 1, Integer.MAX_VALUE)) {
-            return outputs == null ? noItemOutputs() : this;
+            return this;
         }
         if (outputs != null && isArrayValid(outputs, 1, Integer.MAX_VALUE)) {
-            return fluidOutputs == null ? noFluidOutputs() : this;
+            return this;
         }
         return invalidate();
     }
 
+    // endregion
+
     public Optional<GT_Recipe> build() {
         if (!valid) {
-            if (DEBUG_MODE) handleInvalidRecipe();
+            handleInvalidRecipe();
             return Optional.empty();
         }
         preBuildChecks();
@@ -656,7 +706,7 @@ public class GT_RecipeBuilder {
             throw new UnsupportedOperationException();
         }
         if (!valid) {
-            if (DEBUG_MODE) handleInvalidRecipe();
+            handleInvalidRecipe();
             return Optional.empty();
         }
         preBuildChecks();
@@ -683,10 +733,6 @@ public class GT_RecipeBuilder {
     }
 
     private void preBuildChecks() {
-        if (inputsBasic == null) throw new IllegalStateException("no itemInputs");
-        if (outputs == null) throw new IllegalStateException("no itemOutputs");
-        if (fluidInputs == null) throw new IllegalStateException("no fluidInputs");
-        if (fluidOutputs == null) throw new IllegalStateException("no fluidOutputs");
         if (duration == -1) throw new IllegalStateException("no duration");
         if (eut == -1) throw new IllegalStateException("no eut");
     }

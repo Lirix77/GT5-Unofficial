@@ -9,7 +9,10 @@ import static gregtech.api.enums.Mods.GTPlusPlus;
 import static gregtech.api.enums.Mods.GregTech;
 import static gregtech.api.enums.Mods.NEICustomDiagrams;
 import static gregtech.api.enums.Mods.Railcraft;
-import static gregtech.api.recipe.check.FindRecipeResult.*;
+import static gregtech.api.recipe.check.FindRecipeResult.EXPLODE;
+import static gregtech.api.recipe.check.FindRecipeResult.NOT_FOUND;
+import static gregtech.api.recipe.check.FindRecipeResult.ON_FIRE;
+import static gregtech.api.recipe.check.FindRecipeResult.ofSuccess;
 import static gregtech.api.util.GT_RecipeBuilder.handleRecipeCollision;
 import static gregtech.api.util.GT_RecipeConstants.ADDITIVE_AMOUNT;
 import static gregtech.api.util.GT_RecipeMapUtil.FIRST_FLUIDSTACK_INPUT;
@@ -262,18 +265,6 @@ public class GT_Recipe implements Comparable<GT_Recipe> {
         for (int i = 0; i < aChances.length; i++) if (aChances[i] <= 0) aChances[i] = 10000;
         for (int i = 0; i < aFluidInputs.length; i++) aFluidInputs[i] = aFluidInputs[i].copy();
         for (int i = 0; i < aFluidOutputs.length; i++) aFluidOutputs[i] = aFluidOutputs[i].copy();
-
-        for (ItemStack aInput : aInputs)
-            if (aInput != null && Items.feather.getDamage(aInput) != W) for (int j = 0; j < aOutputs.length; j++) {
-                if (GT_Utility.areStacksEqual(aInput, aOutputs[j]) && aChances[j] >= 10000) {
-                    if (aInput.stackSize >= aOutputs[j].stackSize) {
-                        aInput.stackSize -= aOutputs[j].stackSize;
-                        aOutputs[j] = null;
-                    } else {
-                        aOutputs[j].stackSize -= aInput.stackSize;
-                    }
-                }
-            }
 
         if (aOptimize && aDuration >= 32) {
             ArrayList<ItemStack> tList = new ArrayList<>();
@@ -2216,10 +2207,10 @@ public class GT_Recipe implements Comparable<GT_Recipe> {
                         && (aOutput1 == null || aOutput1.stackSize <= 6)
                         && (aOutput2 == null || aOutput2.stackSize <= 6)) {
                         // we don't use GT_Utility.mul() here. It does not have the truncating we need here.
-                        aInput1 = GT_Utility.multiplyStack(10L, aInput1);
-                        aInput2 = GT_Utility.multiplyStack(10L, aInput2);
-                        aOutput1 = GT_Utility.multiplyStack(10L, aOutput1);
-                        aOutput2 = GT_Utility.multiplyStack(10L, aOutput2);
+                        aInput1 = GT_Utility.multiplyStack(10, aInput1);
+                        aInput2 = GT_Utility.multiplyStack(10, aInput2);
+                        aOutput1 = GT_Utility.multiplyStack(10, aOutput1);
+                        aOutput2 = GT_Utility.multiplyStack(10, aOutput2);
                         for (Materials coal : new Materials[] { Materials.Coal, Materials.Charcoal }) {
                             coll.derive()
                                 .setInputs(aInput1, aInput2, coal.getBlocks(aCoalAmount))
@@ -2327,10 +2318,10 @@ public class GT_Recipe implements Comparable<GT_Recipe> {
                         return Arrays.asList(
                             b.build()
                                 .get(),
-                            b.fluidInputs(in)
+                            b.itemInputs()
+                                .itemOutputs()
+                                .fluidInputs(in)
                                 .fluidOutputs(out)
-                                .noItemInputs()
-                                .noItemOutputs()
                                 .build()
                                 .get());
                     }

@@ -61,6 +61,7 @@ import gregtech.common.tileentities.machines.GT_MetaTileEntity_BasicHull_SteelBr
 import gregtech.common.tileentities.machines.GT_MetaTileEntity_Hatch_CraftingInput_ME;
 import gregtech.common.tileentities.machines.GT_MetaTileEntity_Hatch_CraftingInput_Slave;
 import gregtech.common.tileentities.machines.GT_MetaTileEntity_Hatch_InputBus_ME;
+import gregtech.common.tileentities.machines.GT_MetaTileEntity_Hatch_Input_ME;
 import gregtech.common.tileentities.machines.GT_MetaTileEntity_Hatch_OutputBus_ME;
 import gregtech.common.tileentities.machines.GT_MetaTileEntity_Hatch_Output_ME;
 import gregtech.common.tileentities.machines.basic.GT_MetaTileEntity_AdvSeismicProspector;
@@ -75,7 +76,6 @@ import gregtech.common.tileentities.machines.basic.GT_MetaTileEntity_Pump;
 import gregtech.common.tileentities.machines.basic.GT_MetaTileEntity_Replicator;
 import gregtech.common.tileentities.machines.basic.GT_MetaTileEntity_RockBreaker;
 import gregtech.common.tileentities.machines.basic.GT_MetaTileEntity_Scanner;
-import gregtech.common.tileentities.machines.basic.GT_MetaTileEntity_SeismicProspector;
 import gregtech.common.tileentities.machines.basic.GT_MetaTileEntity_Teleporter;
 import gregtech.common.tileentities.machines.long_distance.GT_MetaTileEntity_LongDistancePipelineFluid;
 import gregtech.common.tileentities.machines.long_distance.GT_MetaTileEntity_LongDistancePipelineItem;
@@ -916,27 +916,6 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
                 "basicmachine.mobrep.tier.08",
                 "Advanced Monster Repellator VII",
                 8).getStackForm(1L));
-    }
-
-    private static void registerSeismicProspector() {
-        ItemList.Seismic_Prospector_LV.set(
-            new GT_MetaTileEntity_SeismicProspector(
-                SEISMIC_PROSPECTOR_LV.ID,
-                "basicmachine.seismicprospector.01",
-                "Seismic Prospector LV",
-                1).getStackForm(1));
-        ItemList.Seismic_Prospector_MV.set(
-            new GT_MetaTileEntity_SeismicProspector(
-                SEISMIC_PROSPECTOR_MV.ID,
-                "basicmachine.seismicprospector.02",
-                "Seismic Prospector MV",
-                2).getStackForm(1));
-        ItemList.Seismic_Prospector_HV.set(
-            new GT_MetaTileEntity_SeismicProspector(
-                SEISMIC_PROSPECTOR_HV.ID,
-                "basicmachine.seismicprospector.03",
-                "Seismic Prospector HV",
-                3).getStackForm(1));
     }
 
     private static void registerAdvancedSeismicProspector() {
@@ -1814,36 +1793,53 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
     }
 
     private static void registerAE2Hatches() {
-        if (GregTech_API.mAE2) {
-            ItemList.Hatch_Output_Bus_ME.set(
-                new GT_MetaTileEntity_Hatch_OutputBus_ME(OUTPUT_BUS_ME.ID, "hatch.output_bus.me", "Output Bus (ME)")
-                    .getStackForm(1L));
-            ItemList.Hatch_Input_Bus_ME.set(
-                new GT_MetaTileEntity_Hatch_InputBus_ME(
-                    INPUT_BUS_ME.ID,
-                    "hatch.input_bus.me",
-                    "Stocking Input Bus (ME)").getStackForm(1L));
-            ItemList.Hatch_Output_ME.set(
-                new GT_MetaTileEntity_Hatch_Output_ME(OUTPUT_HATCH_ME.ID, "hatch.output.me", "Output Hatch (ME)")
-                    .getStackForm(1L));
-            ItemList.Hatch_CraftingInput_Bus_ME.set(
-                new GT_MetaTileEntity_Hatch_CraftingInput_ME(
-                    CRAFTING_INPUT_ME.ID,
-                    "hatch.crafting_input.me",
-                    "Crafting Input Buffer (ME)",
-                    true).getStackForm(1L));
-            ItemList.Hatch_CraftingInput_Bus_ME_ItemOnly.set(
-                new GT_MetaTileEntity_Hatch_CraftingInput_ME(
-                    CRAFTING_INPUT_ME_BUS.ID,
-                    "hatch.crafting_input.me.item_only",
-                    "Crafting Input Bus (ME)",
-                    false).getStackForm(1L));
-            ItemList.Hatch_CraftingInput_Bus_Slave.set(
-                new GT_MetaTileEntity_Hatch_CraftingInput_Slave(
-                    CRAFTING_INPUT_SLAVE.ID,
-                    "hatch.crafting_input.slave",
-                    "Crafting Input Slave").getStackForm(1L));
-        }
+        ItemList.Hatch_Output_Bus_ME.set(
+            new GT_MetaTileEntity_Hatch_OutputBus_ME(OUTPUT_BUS_ME.ID, "hatch.output_bus.me", "Output Bus (ME)")
+                .getStackForm(1L));
+        ItemList.Hatch_Input_Bus_ME.set(
+            new GT_MetaTileEntity_Hatch_InputBus_ME(
+                INPUT_BUS_ME.ID,
+                false,
+                "hatch.input_bus.me.basic",
+                "Stocking Input Bus (ME)").getStackForm(1L));
+        ItemList.Hatch_Input_Bus_ME_Advanced.set(
+            new GT_MetaTileEntity_Hatch_InputBus_ME(
+                INPUT_BUS_ME_ADVANCED.ID,
+                true,
+                "hatch.input_bus.me",
+                "Advanced Stocking Input Bus (ME)").getStackForm(1L));
+        ItemList.Hatch_Input_ME.set(
+            new GT_MetaTileEntity_Hatch_Input_ME(
+                INPUT_HATCH_ME.ID,
+                false,
+                "hatch.input.me.basic",
+                "Stocking Input Hatch (ME)").getStackForm(1L));
+        ItemList.Hatch_Input_ME_Advanced.set(
+            new GT_MetaTileEntity_Hatch_Input_ME(
+                INPUT_HATCH_ME_ADVANCED.ID,
+                true,
+                "hatch.input.me",
+                "Advanced Stocking Input Hatch (ME)").getStackForm(1L));
+        ItemList.Hatch_Output_ME.set(
+            new GT_MetaTileEntity_Hatch_Output_ME(OUTPUT_HATCH_ME.ID, "hatch.output.me", "Output Hatch (ME)")
+                .getStackForm(1L));
+        ItemList.Hatch_CraftingInput_Bus_ME.set(
+            new GT_MetaTileEntity_Hatch_CraftingInput_ME(
+                CRAFTING_INPUT_ME.ID,
+                "hatch.crafting_input.me",
+                "Crafting Input Buffer (ME)",
+                true).getStackForm(1L));
+        ItemList.Hatch_CraftingInput_Bus_ME_ItemOnly.set(
+            new GT_MetaTileEntity_Hatch_CraftingInput_ME(
+                CRAFTING_INPUT_ME_BUS.ID,
+                "hatch.crafting_input.me.item_only",
+                "Crafting Input Bus (ME)",
+                false).getStackForm(1L));
+        ItemList.Hatch_CraftingInput_Bus_Slave.set(
+            new GT_MetaTileEntity_Hatch_CraftingInput_Slave(
+                CRAFTING_INPUT_SLAVE.ID,
+                "hatch.crafting_input.slave",
+                "Crafting Input Slave").getStackForm(1L));
     }
 
     private static void registerInputBus() {
@@ -2767,7 +2763,7 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
                 5).getStackForm(1L));
         ItemList.Generator_Plasma_ZPMV.set(
             new GT_MetaTileEntity_PlasmaGenerator(
-                PLASMA_GENERATOR_ZPMV.ID,
+                PLASMA_GENERATOR_ZPM.ID,
                 "basicgenerator.plasmagenerator.tier.07",
                 "Plasma Generator Mark III",
                 6).getStackForm(1L));
@@ -2793,20 +2789,27 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
 
         makeWires(Materials.RedAlloy, 2000, 0L, 1L, 1L, gregtech.api.enums.GT_Values.V[0], true, false);
 
-        makeWires(Materials.Cobalt, 1200, bEC ? 1L : 2L, bEC ? 2L : 4L, 2L, gregtech.api.enums.GT_Values.V[1], true, false);
-        makeWires(Materials.Lead, 1220, bEC ? 1L : 2L, bEC ? 2L : 4L, 2L, gregtech.api.enums.GT_Values.V[1], true, false);
-        makeWires(Materials.Tin, 1240, bEC ? 0L : 1L, bEC ? 1L : 2L, 1L, gregtech.api.enums.GT_Values.V[1], true, false);
+        makeWires(Materials.Cobalt, 1200, 2L, 4L, 2L, gregtech.api.enums.GT_Values.V[1], true, false);
+        makeWires(Materials.Lead, 1220, 2L, 4L, 2L, gregtech.api.enums.GT_Values.V[1], true, false);
+        makeWires(Materials.Tin, 1240, 1L, 2L, 1L, gregtech.api.enums.GT_Values.V[1], true, false);
 
-        makeWires(Materials.Zinc, 1260, bEC ? 0L : 1L, bEC ? 1L : 2L, 1L, gregtech.api.enums.GT_Values.V[1], true, false);
-        makeWires(Materials.SolderingAlloy, 1280, bEC ? 0L : 1L, bEC ? 1L : 2L, 1L, gregtech.api.enums.GT_Values.V[1], true, false);
+        makeWires(Materials.Zinc, 1260, 1L, 2L, 1L, gregtech.api.enums.GT_Values.V[1], true, false);
+        makeWires(Materials.SolderingAlloy, 1280, 1L, 2L, 1L, gregtech.api.enums.GT_Values.V[1], true, false);
 
         makeWires(
-            Materials.Iron, 1300, bEC ? 2L : 3L, bEC ? 4L : 6L, 2L, gregtech.api.enums.GT_Values.V[2], true, false);
+            Materials.Iron,
+            1300,
+            bEC ? 3L : 4L,
+            bEC ? 6L : 8L,
+            2L,
+            gregtech.api.enums.GT_Values.V[2],
+            true,
+            false);
         makeWires(
             Materials.Nickel,
             1320,
-            bEC ? 2L : 3L,
-            bEC ? 4L : 6L,
+            bEC ? 3L : 5L,
+            bEC ? 6L : 10L,
             3L,
             gregtech.api.enums.GT_Values.V[2],
             true,
@@ -2814,8 +2817,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Cupronickel,
             1340,
-            bEC ? 2L : 3L,
-            bEC ? 4L : 6L,
+            bEC ? 3L : 4L,
+            bEC ? 6L : 8L,
             2L,
             gregtech.api.enums.GT_Values.V[2],
             true,
@@ -2823,8 +2826,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Copper,
             1360,
-            bEC ? 1L : 2L,
-            bEC ? 2L : 4L,
+            bEC ? 2L : 3L,
+            bEC ? 4L : 6L,
             1L,
             gregtech.api.enums.GT_Values.V[2],
             true,
@@ -2832,8 +2835,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.AnnealedCopper,
             1380,
-            bEC ? 0L : 1L,
             bEC ? 1L : 2L,
+            bEC ? 2L : 4L,
             1L,
             gregtech.api.enums.GT_Values.V[2],
             true,
@@ -2842,8 +2845,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Kanthal,
             1400,
-            bEC ? 2L : 3L,
-            bEC ? 4L : 6L,
+            bEC ? 3L : 8L,
+            bEC ? 6L : 16L,
             4L,
             gregtech.api.enums.GT_Values.V[3],
             true,
@@ -2851,8 +2854,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Gold,
             1420,
-            bEC ? 1L : 2L,
-            bEC ? 2L : 4L,
+            bEC ? 2L : 6L,
+            bEC ? 4L : 12L,
             3L,
             gregtech.api.enums.GT_Values.V[3],
             true,
@@ -2860,8 +2863,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Electrum,
             1440,
-            bEC ? 1L : 2L,
-            bEC ? 2L : 4L,
+            bEC ? 2L : 5L,
+            bEC ? 4L : 10L,
             2L,
             gregtech.api.enums.GT_Values.V[3],
             true,
@@ -2869,8 +2872,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Silver,
             1460,
-            1L,
-            bEC ? 1L : 2L,
+            bEC ? 1L : 4L,
+            bEC ? 2L : 8L,
             1L,
             gregtech.api.enums.GT_Values.V[3],
             true,
@@ -2878,8 +2881,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.BlueAlloy,
             1480,
-            1L,
-            bEC ? 1L : 2L,
+            bEC ? 1L : 4L,
+            bEC ? 2L : 8L,
             2L,
             gregtech.api.enums.GT_Values.V[3],
             true,
@@ -2888,8 +2891,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Nichrome,
             1500,
-            bEC ? 2L : 4L,
-            bEC ? 4L : 8L,
+            bEC ? 4L : 32L,
+            bEC ? 8L : 64L,
             3L,
             gregtech.api.enums.GT_Values.V[4],
             true,
@@ -2897,8 +2900,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Steel,
             1520,
-            2L,
-            bEC ? 4L : 6L,
+            bEC ? 2L : 16L,
+            bEC ? 4L : 32L,
             2L,
             gregtech.api.enums.GT_Values.V[4],
             true,
@@ -2906,8 +2909,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.BlackSteel,
             1540,
-            bEC ? 2L : 4L,
-            bEC ? 4L : 8L,
+            bEC ? 2L : 14L,
+            bEC ? 4L : 28L,
             3L,
             gregtech.api.enums.GT_Values.V[4],
             true,
@@ -2915,8 +2918,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Titanium,
             1560,
-            2L,
-            bEC ? 4L : 5L,
+            bEC ? 2L : 12L,
+            bEC ? 4L : 24L,
             4L,
             gregtech.api.enums.GT_Values.V[4],
             true,
@@ -2924,8 +2927,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Aluminium,
             1580,
-            1L,
-            bEC ? 2L : 3L,
+            bEC ? 1L : 8L,
+            bEC ? 2L : 16L,
             1L,
             gregtech.api.enums.GT_Values.V[4],
             true,
@@ -2934,8 +2937,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Graphene,
             1600,
-            1L,
-            bEC ? 1L : 2L,
+            bEC ? 1L : 16L,
+            bEC ? 2L : 32L,
             1L,
             gregtech.api.enums.GT_Values.V[5],
             false,
@@ -2943,8 +2946,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Osmium,
             1620,
-            bEC ? 1L : 2L,
-            bEC ? 3L : 5L,
+            bEC ? 2L : 32L,
+            bEC ? 4L : 64L,
             4L,
             gregtech.api.enums.GT_Values.V[5],
             true,
@@ -2952,8 +2955,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Platinum,
             1640,
-            bEC ? 1L : 2L,
-            bEC ? 2L : 3L,
+            bEC ? 1L : 16L,
+            bEC ? 2L : 32L,
             2L,
             gregtech.api.enums.GT_Values.V[5],
             true,
@@ -2961,8 +2964,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.TungstenSteel,
             1660,
-            bEC ? 2L : 3L,
-            bEC ? 4L : 5L,
+            bEC ? 2L : 14L,
+            bEC ? 4L : 28L,
             3L,
             gregtech.api.enums.GT_Values.V[5],
             true,
@@ -2970,8 +2973,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Tungsten,
             1680,
-            bEC ? 2L : 3L,
-            bEC ? 4L : 5L,
+            bEC ? 2L : 12L,
+            bEC ? 4L : 24L,
             2L,
             gregtech.api.enums.GT_Values.V[5],
             true,
@@ -2980,8 +2983,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.HSSG,
             1700,
-            bEC ? 2L : 3L,
-            bEC ? 4L : 5L,
+            bEC ? 2L : 128L,
+            bEC ? 4L : 256L,
             4L,
             gregtech.api.enums.GT_Values.V[6],
             true,
@@ -2989,8 +2992,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.NiobiumTitanium,
             1720,
-            bEC ? 2L : 3L,
-            bEC ? 4L : 5L,
+            bEC ? 2L : 128L,
+            bEC ? 4L : 256L,
             4L,
             gregtech.api.enums.GT_Values.V[6],
             true,
@@ -2998,8 +3001,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.VanadiumGallium,
             1740,
-            bEC ? 2L : 3L,
-            bEC ? 4L : 5L,
+            bEC ? 2L : 128L,
+            bEC ? 4L : 256L,
             4L,
             gregtech.api.enums.GT_Values.V[6],
             true,
@@ -3007,8 +3010,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.YttriumBariumCuprate,
             1760,
-            bEC ? 3L : 5L,
-            bEC ? 6L : 9L,
+            bEC ? 4L : 256L,
+            bEC ? 8L : 512L,
             4L,
             gregtech.api.enums.GT_Values.V[6],
             true,
@@ -3017,8 +3020,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Naquadah,
             1780,
-            bEC ? 2L : 3L,
-            bEC ? 4L : 5L,
+            bEC ? 2L : 64L,
+            bEC ? 4L : 128L,
             2L,
             gregtech.api.enums.GT_Values.V[7],
             true,
@@ -3027,8 +3030,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.NaquadahAlloy,
             1800,
-            bEC ? 3L : 5L,
-            bEC ? 6L : 9L,
+            bEC ? 4L : 64L,
+            bEC ? 8L : 128L,
             2L,
             gregtech.api.enums.GT_Values.V[8],
             true,
@@ -3036,8 +3039,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.Duranium,
             1820,
-            bEC ? 5L : 6L,
-            bEC ? 10L : 12L,
+            bEC ? 8L : 64L,
+            bEC ? 16L : 128L,
             1L,
             gregtech.api.enums.GT_Values.V[8],
             true,
@@ -3045,8 +3048,8 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(
             Materials.TPV,
             1840,
-            bEC ? 1L : 2L,
-            bEC ? 2L : 4L,
+            bEC ? 1L : 14L,
+            bEC ? 2L : 28L,
             6L,
             gregtech.api.enums.GT_Values.V[4],
             true,
@@ -3127,15 +3130,7 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
             gregtech.api.enums.GT_Values.V[11],
             false,
             false);
-        makeWires(
-            Materials.SuperconductorUMVBase,
-            2072,
-            2L,
-            1048576L,
-            32L,
-            gregtech.api.enums.GT_Values.V[12],
-            false,
-            false);
+        makeWires(Materials.SuperconductorUMVBase, 2072, 2L, 1048576L, 32L, GT_Values.V[12], false, false);
 
         // Actual superconductors.
         makeWires(Materials.SuperconductorMV, 2320, 0L, 0L, 4L, gregtech.api.enums.GT_Values.V[2], false, true);
@@ -3151,25 +3146,7 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(Materials.SuperconductorUMV, 2089, 0L, 0L, 64L, gregtech.api.enums.GT_Values.V[12], false, true);
 
         makeWires(Materials.Ichorium, 2600, 2L, 2L, 12L, GT_Values.V[9], false, true);
-        //makeWires(Materials.SpaceTime, 2606, 0L, 0L, 1_000_000L, GT_Values.V[14], false, true);
-
-        makeWires(Materials.ElectricalSteel, 11490, bEC ? 1L : 2L, bEC ? 2L : 4L, 2L, GT_Values.V[2], true, false);
-        makeWires(Materials.EnergeticAlloy, 11510, bEC ? 2L : 5L, bEC ? 4L : 10L, 2L, gregtech.api.enums.GT_Values.V[3], true, false);
-        makeWires(Materials.VibrantAlloy, 11530, bEC ? 2L : 8L, bEC ? 4L : 16L, 4L, gregtech.api.enums.GT_Values.V[4], true, false);
-        makeWires(Materials.MelodicAlloy, 11550, bEC ? 2L : 16L, bEC ? 4L : 32L, 4L, gregtech.api.enums.GT_Values.V[5], true, false);
-        makeWires(Materials.StellarAlloy, 11570, bEC ? 4L : 16L, bEC ? 8L : 32L, 6L, gregtech.api.enums.GT_Values.V[6], true, false);
-        makeWires(Materials.Trinium, 11450, bEC ? 4L : 16L, bEC ? 8L : 32L, 6L, GT_Values.V[7], true, false);
-        makeWires(Materials.ElectrumFlux, 1900, 1L, 2L, 3L, GT_Values.V[8], true, false);
-        makeWires(Materials.Bedrockium, 11310, bEC ? 1L : 16L, bEC ? 32L : 64L, 2L, GT_Values.V[9], true, false);
-        makeWires(Materials.Osmiridium, 11610, bEC ? 1L : 2L, bEC ? 2L : 4L, 8L, GT_Values.V[6], true, false);
-        makeWires(Materials.HSSE, 11590, bEC ? 2L : 4L, bEC ? 4L : 8L, 6L, GT_Values.V[6], true, false);
-        makeWires(Materials.HSSS, 11470, bEC ? 4L : 16L, bEC ? 8L : 32L, 6L, GT_Values.V[9], true, false);
-        makeWires(Materials.Draconium, 11330, bEC ? 4L : 16L, bEC ? 32L : 64L, 8L, GT_Values.V[10], true, false);
-        makeWires(Materials.NetherStar, 11350, bEC ? 4L : 16L, bEC ? 16L : 32L, 4L, GT_Values.V[11], true, false);
-        makeWires(Materials.Quantium, 11370, bEC ? 4L : 16L, bEC ? 16L : 32L, 2L, GT_Values.V[12], true, false);
-        makeWires(Materials.BlackPlutonium, 11390, bEC ? 4L : 16L, bEC ? 16L : 32L, 1L, GT_Values.V[13], false, false);
-        makeWires(Materials.DraconiumAwakened, 11410, bEC ? 4L : 16L, bEC ? 16L : 32L, 1L, GT_Values.V[14], false, false);
-        makeWires(Materials.Infinity, 11430, 0L, 0L, 8192L, GT_Values.V[14], false, true);
+        makeWires(MaterialsUEVplus.SpaceTime, 2606, 0L, 0L, 1_000_000L, GT_Values.V[14], false, true);
 
         GT_OreDictUnificator.registerOre(
             OrePrefixes.pipeSmall.get(Materials.Wood),
@@ -3306,33 +3283,6 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
             2147483647,
             true);
 
-        generateFluidPipes(Materials.NiobiumTitanium, Materials.NiobiumTitanium.mName, 5180, 900, 2900, true);
-        generateFluidMultiPipes(Materials.NiobiumTitanium, Materials.NiobiumTitanium.mName, 5185, 900, 2900, true);
-
-        generateFluidPipes(Materials.Enderium, Materials.Enderium.mName, 5190, 1800, 15000, true);
-        generateFluidMultiPipes(Materials.Enderium, Materials.Enderium.mName, 5195, 1800, 15000, true);
-
-        generateFluidPipes(Materials.Naquadah, Materials.Naquadah.mName, 5200, 9000, 19000, true);
-        generateFluidMultiPipes(Materials.Naquadah, Materials.Naquadah.mName, 5205, 9000, 19000, true);
-
-        generateFluidPipes(Materials.Neutronium, Materials.Neutronium.mName, 5210, 16800, 1000000, true);
-        generateFluidMultiPipes(Materials.Neutronium, Materials.Neutronium.mName, 5215, 16800, 1000000, true);
-
-        generateFluidPipes(Materials.NetherStar, Materials.NetherStar.mName, 5220, 19200, 1000000, true);
-        generateFluidMultiPipes(Materials.NetherStar, Materials.NetherStar.mName, 5225, 19200, 1000000, true);
-
-        generateFluidPipes(Materials.MysteriousCrystal, Materials.MysteriousCrystal.mName, 5230, 24000, 1000000, true);
-        generateFluidMultiPipes(Materials.MysteriousCrystal, Materials.MysteriousCrystal.mName, 5235, 24000, 1000000, true);
-
-        generateFluidPipes(Materials.DraconiumAwakened, Materials.DraconiumAwakened.mName, 5240, 45000, 10000000, true);
-        generateFluidMultiPipes(Materials.DraconiumAwakened, Materials.DraconiumAwakened.mName, 5245, 45000, 10000000, true);
-
-        generateFluidPipes(Materials.Infinity, Materials.Infinity.mName, 5250, 60000, 10000000, true);
-        generateFluidMultiPipes(Materials.Infinity, Materials.Infinity.mName, 5255, 60000, 10000000, true);
-
-        generateFluidPipes(Materials.WroughtIron, Materials.WroughtIron.mName, 5260, 180, 2250, true);
-        generateFluidMultiPipes(Materials.WroughtIron, Materials.WroughtIron.mName, 5265, 180, 2250, true);
-
         generateItemPipes(Materials.Brass, Materials.Brass.mName, 5602, 1);
         generateItemPipes(Materials.Electrum, Materials.Electrum.mName, 5612, 2);
         generateItemPipes(Materials.Platinum, Materials.Platinum.mName, 5622, 4);
@@ -3341,333 +3291,7 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         generateItemPipes(Materials.Nickel, Materials.Nickel.mName, 5700, 1);
         generateItemPipes(Materials.Cobalt, Materials.Cobalt.mName, 5710, 2);
         generateItemPipes(Materials.Aluminium, Materials.Aluminium.mName, 5720, 2);
-        registerGTNHPipes();
     }
-
-    private static void registerGTNHPipes() {
-
-        // These IDs are totally messed up. Watch out if you want to add or change something here!
-
-        // Brass
-        String displayName = GT_LanguageManager.i18nPlaceholder ? "%material" : Materials.Brass.mDefaultLocalName;
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeTiny.get(Materials.Brass),
-            new GT_MetaPipeEntity_Item(
-                5600,
-                "GT_Pipe_Brass_Tiny",
-                "Tiny " + displayName + " Item Pipe",
-                0.25F,
-                Materials.Brass,
-                1,
-                131072,
-                false,
-                80).getStackForm(1L));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeSmall.get(Materials.Brass),
-            new GT_MetaPipeEntity_Item(
-                5601,
-                "GT_Pipe_Brass_Small",
-                "Small " + displayName + " Item Pipe",
-                0.375F,
-                Materials.Brass,
-                1,
-                65536,
-                false,
-                40).getStackForm(1L));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeRestrictiveTiny.get(Materials.Brass),
-            new GT_MetaPipeEntity_Item(
-                5640,
-                "GT_Pipe_Restrictive_Brass_Tiny",
-                "Tiny Restrictive " + displayName + " Item Pipe",
-                0.25F,
-                Materials.Brass,
-                1,
-                13107200,
-                true,
-                80).getStackForm(1L));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeRestrictiveSmall.get(Materials.Brass),
-            new GT_MetaPipeEntity_Item(
-                5641,
-                "GT_Pipe_Restrictive_Brass_Small",
-                "Small Restrictive " + displayName + " Item Pipe",
-                0.375F,
-                Materials.Brass,
-                1,
-                6553600,
-                true,
-                40).getStackForm(1L));
-
-        // Electrum
-        displayName = GT_LanguageManager.i18nPlaceholder ? "%material" : Materials.Electrum.mDefaultLocalName;
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeTiny.get(Materials.Electrum),
-            new GT_MetaPipeEntity_Item(
-                5610,
-                "GT_Pipe_Electrum_Tiny",
-                "Tiny " + displayName + " Item Pipe",
-                0.25F,
-                Materials.Electrum,
-                1,
-                65536,
-                false,
-                40).getStackForm(1L));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeSmall.get(Materials.Electrum),
-            new GT_MetaPipeEntity_Item(
-                5611,
-                "GT_Pipe_Electrum_Small",
-                "Small " + displayName + " Item Pipe",
-                0.375F,
-                Materials.Electrum,
-                1,
-                32768,
-                false).getStackForm(1L));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeRestrictiveTiny.get(Materials.Electrum),
-            new GT_MetaPipeEntity_Item(
-                5642,
-                "GT_Pipe_Restrictive_Electrum_Tiny",
-                "Tiny Restrictive " + displayName + " Item Pipe",
-                0.25F,
-                Materials.Electrum,
-                1,
-                6553600,
-                true,
-                40).getStackForm(1L));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeRestrictiveSmall.get(Materials.Electrum),
-            new GT_MetaPipeEntity_Item(
-                5643,
-                "GT_Pipe_Restrictive_Electrum_Small",
-                "Small Restrictive " + displayName + " Item Pipe",
-                0.375F,
-                Materials.Electrum,
-                1,
-                3276800,
-                true).getStackForm(1L));
-
-        // Platinum
-        displayName = GT_LanguageManager.i18nPlaceholder ? "%material" : Materials.Platinum.mDefaultLocalName;
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeTiny.get(Materials.Platinum),
-            new GT_MetaPipeEntity_Item(
-                5620,
-                "GT_Pipe_Platinum_Tiny",
-                "Tiny " + displayName + " Item Pipe",
-                0.25F,
-                Materials.Platinum,
-                1,
-                32768,
-                false).getStackForm(1L));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeSmall.get(Materials.Platinum),
-            new GT_MetaPipeEntity_Item(
-                5621,
-                "GT_Pipe_Platinum_Small",
-                "Small " + displayName + " Item Pipe",
-                0.375F,
-                Materials.Platinum,
-                2,
-                16384,
-                false).getStackForm(1L));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeRestrictiveTiny.get(Materials.Platinum),
-            new GT_MetaPipeEntity_Item(
-                5644,
-                "GT_Pipe_Restrictive_Platinum_Tiny",
-                "Tiny Restrictive " + displayName + " Item Pipe",
-                0.25F,
-                Materials.Platinum,
-                1,
-                3276800,
-                true).getStackForm(1L));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeRestrictiveSmall.get(Materials.Platinum),
-            new GT_MetaPipeEntity_Item(
-                5645,
-                "GT_Pipe_Restrictive_Platinum_Small",
-                "Small Restrictive " + displayName + " Item Pipe",
-                0.375F,
-                Materials.Platinum,
-                2,
-                1638400,
-                true).getStackForm(1L));
-
-        // Osmium
-        displayName = GT_LanguageManager.i18nPlaceholder ? "%material" : Materials.Osmium.mDefaultLocalName;
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeTiny.get(Materials.Osmium),
-            new GT_MetaPipeEntity_Item(
-                5630,
-                "GT_Pipe_Osmium_Tiny",
-                "Tiny " + displayName + " Item Pipe",
-                0.25F,
-                Materials.Osmium,
-                2,
-                16384,
-                false).getStackForm(1L));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeSmall.get(Materials.Osmium),
-            new GT_MetaPipeEntity_Item(
-                5631,
-                "GT_Pipe_Osmium_Small",
-                "Small " + displayName + " Item Pipe",
-                0.375F,
-                Materials.Osmium,
-                4,
-                8192,
-                false).getStackForm(1L));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeRestrictiveTiny.get(Materials.Osmium),
-            new GT_MetaPipeEntity_Item(
-                5646,
-                "GT_Pipe_Restrictive_Osmium_Tiny",
-                "Tiny Restrictive " + displayName + " Item Pipe",
-                0.25F,
-                Materials.Osmium,
-                2,
-                1638400,
-                true).getStackForm(1L));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeRestrictiveSmall.get(Materials.Osmium),
-            new GT_MetaPipeEntity_Item(
-                5647,
-                "GT_Pipe_Restrictive_Osmium_Small",
-                "Small Restrictive " + displayName + " Item Pipe",
-                0.375F,
-                Materials.Osmium,
-                4,
-                819200,
-                true).getStackForm(1L));
-
-        // Tin
-        displayName = GT_LanguageManager.i18nPlaceholder ? "%material" : Materials.Tin.mDefaultLocalName;
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeTiny.get(Materials.Tin),
-            new GT_MetaPipeEntity_Item(
-                5589,
-                "GT_Pipe_Tin_Tiny",
-                "Tiny " + displayName + " Item Pipe",
-                0.25F,
-                Materials.Tin,
-                1,
-                262144,
-                false,
-                160).getStackForm(1L));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeSmall.get(Materials.Tin),
-            new GT_MetaPipeEntity_Item(
-                5590,
-                "GT_Pipe_Tin_Small",
-                "Small " + displayName + " Item Pipe",
-                0.375F,
-                Materials.Tin,
-                1,
-                131072,
-                false,
-                80).getStackForm(1L));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeMedium.get(Materials.Tin),
-            new GT_MetaPipeEntity_Item(
-                5591,
-                "GT_Pipe_Tin",
-                displayName + " Item Pipe",
-                0.5F,
-                Materials.Tin,
-                1,
-                65536,
-                false,
-                40).getStackForm(1L));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeLarge.get(Materials.Tin),
-            new GT_MetaPipeEntity_Item(
-                5592,
-                "GT_Pipe_Tin_Large",
-                "Large " + displayName + " Item Pipe",
-                0.75F,
-                Materials.Tin,
-                1,
-                32768,
-                false).getStackForm(1L));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeHuge.get(Materials.Tin),
-            new GT_MetaPipeEntity_Item(
-                5593,
-                "GT_Pipe_Tin_Huge",
-                "Huge " + displayName + " Item Pipe",
-                0.875F,
-                Materials.Tin,
-                2,
-                16384,
-                false).getStackForm(1L));
-
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeRestrictiveTiny.get(Materials.Tin),
-            new GT_MetaPipeEntity_Item(
-                5594,
-                "GT_Pipe_Restrictive_Tin_Tiny",
-                "Tiny Restrictive " + displayName + " Item Pipe",
-                0.25F,
-                Materials.Tin,
-                1,
-                26214400,
-                true,
-                160).getStackForm(1L));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeRestrictiveSmall.get(Materials.Tin),
-            new GT_MetaPipeEntity_Item(
-                5595,
-                "GT_Pipe_Restrictive_Tin_Small",
-                "Small Restrictive " + displayName + " Item Pipe",
-                0.375F,
-                Materials.Tin,
-                1,
-                13107200,
-                true,
-                80).getStackForm(1L));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeRestrictiveMedium.get(Materials.Tin),
-            new GT_MetaPipeEntity_Item(
-                5596,
-                "GT_Pipe_Restrictive_Tin",
-                "Restrictive " + displayName + " Pipe",
-                0.5F,
-                Materials.Tin,
-                1,
-                6553600,
-                true,
-                40).getStackForm(1L));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeRestrictiveLarge.get(Materials.Tin),
-            new GT_MetaPipeEntity_Item(
-                5597,
-                "GT_Pipe_Restrictive_Tin_Large",
-                "Large Restrictive " + displayName + " Item Pipe",
-                0.75F,
-                Materials.Tin,
-                1,
-                3276800,
-                true).getStackForm(1L));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeRestrictiveHuge.get(Materials.Tin),
-            new GT_MetaPipeEntity_Item(
-                5598,
-                "GT_Pipe_Restrictive_Tin_Huge",
-                "Huge Restrictive " + displayName + " Item Pipe",
-                0.875F,
-                Materials.Tin,
-                2,
-                1638400,
-                true).getStackForm(1L));
-
-        generateItemPipes(Materials.ElectrumFlux, Materials.ElectrumFlux.mName, 5650, 16);
-        generateItemPipes(Materials.BlackPlutonium, Materials.BlackPlutonium.mName, 5660, 32);
-        generateItemPipes(Materials.Bedrockium, Materials.Bedrockium.mName, 5670, 64);
-        generateItemPipes(Materials.Quantium, Materials.Quantium.mName, 5730, 128);
-    }
-
 
     @SuppressWarnings("PointlessArithmeticExpression")
     private static void makeWires(Materials aMaterial, int aStartID, long aLossInsulated, long aLoss, long aAmperage,
@@ -3886,7 +3510,6 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         registerPump();
         registerTeleporter();
         registerMonsterRepellator();
-        registerSeismicProspector();
         registerAdvancedSeismicProspector();
         registerMicrowaveEnergyTransmitter();
         registerChestBuffer();

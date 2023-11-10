@@ -37,7 +37,7 @@ public class ProcessingStickLong implements gregtech.api.interfaces.IOreRecipeRe
 
             if (GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial, 1L) != null) {
                 GT_Values.RA.stdBuilder()
-                    .itemInputs(GT_Utility.copyAmount(1L, aStack))
+                    .itemInputs(GT_Utility.copyAmount(1, aStack))
                     .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial, 2L))
                     .fluidInputs(
                         Materials.Water.getFluid(
@@ -47,13 +47,12 @@ public class ProcessingStickLong implements gregtech.api.interfaces.IOreRecipeRe
                                     1000,
                                     ((int) Math.max(aMaterial.getMass(), 1L)) * calculateRecipeEU(aMaterial, 4)
                                         / 320))))
-                    .noFluidOutputs()
                     .duration(2 * ((int) Math.max(aMaterial.getMass(), 1L)) * TICKS)
                     .eut(calculateRecipeEU(aMaterial, 4))
                     .addTo(sCutterRecipes);
 
                 GT_Values.RA.stdBuilder()
-                    .itemInputs(GT_Utility.copyAmount(1L, aStack))
+                    .itemInputs(GT_Utility.copyAmount(1, aStack))
                     .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial, 2L))
                     .fluidInputs(
                         GT_ModHandler.getDistilledWater(
@@ -63,13 +62,12 @@ public class ProcessingStickLong implements gregtech.api.interfaces.IOreRecipeRe
                                     750,
                                     ((int) Math.max(aMaterial.getMass(), 1L)) * calculateRecipeEU(aMaterial, 4)
                                         / 426))))
-                    .noFluidOutputs()
                     .duration(2 * ((int) Math.max(aMaterial.getMass(), 1L)) * TICKS)
                     .eut(calculateRecipeEU(aMaterial, 4))
                     .addTo(sCutterRecipes);
 
                 GT_Values.RA.stdBuilder()
-                    .itemInputs(GT_Utility.copyAmount(1L, aStack))
+                    .itemInputs(GT_Utility.copyAmount(1, aStack))
                     .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.stick, aMaterial, 2L))
                     .fluidInputs(
                         Materials.Lubricant.getFluid(
@@ -79,7 +77,6 @@ public class ProcessingStickLong implements gregtech.api.interfaces.IOreRecipeRe
                                     250,
                                     ((int) Math.max(aMaterial.getMass(), 1L)) * calculateRecipeEU(aMaterial, 4)
                                         / 1280))))
-                    .noFluidOutputs()
                     .duration(((int) Math.max(aMaterial.getMass(), 1L)) * TICKS)
                     .eut(calculateRecipeEU(aMaterial, 4))
                     .addTo(sCutterRecipes);
@@ -103,10 +100,8 @@ public class ProcessingStickLong implements gregtech.api.interfaces.IOreRecipeRe
             {
                 if (GT_OreDictUnificator.get(OrePrefixes.spring, aMaterial, 1L) != null) {
                     GT_Values.RA.stdBuilder()
-                        .itemInputs(GT_Utility.copyAmount(1L, aStack), GT_Utility.getIntegratedCircuit(1))
+                        .itemInputs(GT_Utility.copyAmount(1, aStack), GT_Utility.getIntegratedCircuit(1))
                         .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.spring, aMaterial, 1L))
-                        .noFluidInputs()
-                        .noFluidOutputs()
                         .duration(10 * SECONDS)
                         .eut(calculateRecipeEU(aMaterial, 16))
                         .addTo(sBenderRecipes);

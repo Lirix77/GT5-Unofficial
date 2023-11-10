@@ -1179,6 +1179,18 @@ public abstract class MetaTileEntity implements IMetaTileEntity, ICleanroomRecei
 
     public void gridChanged() {}
 
+    @Override
+    public ItemStack getMachineCraftingIcon() {
+        final IGregTechTileEntity mte = getBaseMetaTileEntity();
+        if (mte == null) {
+            return null;
+        }
+        return mte.getDrops()
+            .stream()
+            .findAny()
+            .orElse(null);
+    }
+
     // === Waila compat ===
 
     @Override
@@ -1191,19 +1203,11 @@ public abstract class MetaTileEntity implements IMetaTileEntity, ICleanroomRecei
                     .name()));
 
         if (this instanceof IPowerChannelState state) {
-            // adapted from PowerStateWailaDataProvider
             final NBTTagCompound tag = accessor.getNBTData();
             final boolean isActive = tag.getBoolean("isActive");
             final boolean isPowered = tag.getBoolean("isPowered");
             final boolean isBooting = tag.getBoolean("isBooting");
-
-            if (isActive && isPowered) {
-                currenttip.add(WailaText.DeviceOnline.getLocal());
-            } else if (isPowered) {
-                currenttip.add(WailaText.DeviceMissingChannel.getLocal());
-            } else {
-                currenttip.add(WailaText.DeviceOffline.getLocal());
-            }
+            currenttip.add(WailaText.getPowerState(isActive, isPowered, isBooting));
         }
     }
 
@@ -1211,11 +1215,12 @@ public abstract class MetaTileEntity implements IMetaTileEntity, ICleanroomRecei
     public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
         int z) {
         if (this instanceof IPowerChannelState state) {
-            // adapted from PowerStateWailaDataProvider
             final boolean isActive = state.isActive();
             final boolean isPowered = state.isPowered();
+            final boolean isBooting = state.isBooting();
             tag.setBoolean("isActive", isActive);
             tag.setBoolean("isPowered", isPowered);
+            tag.setBoolean("isBooting", isBooting);
         }
     }
 

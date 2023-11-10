@@ -83,7 +83,7 @@ import gregtech.common.misc.spaceprojects.commands.SPM_Command;
 import gregtech.common.misc.spaceprojects.commands.SP_Command;
 import gregtech.common.tileentities.machines.GT_MetaTileEntity_Hatch_CraftingInput_ME;
 import gregtech.common.tileentities.storage.GT_MetaTileEntity_DigitalChestBase;
-import gregtech.crossmod.Waila;
+import gregtech.crossmod.waila.Waila;
 import gregtech.loaders.load.GT_CoverBehaviorLoader;
 import gregtech.loaders.load.GT_FuelLoader;
 import gregtech.loaders.load.GT_ItemIterator;
@@ -125,12 +125,12 @@ import ic2.api.recipe.RecipeOutput;
     guiFactory = "gregtech.client.GT_GuiFactory",
     dependencies = " required-after:IC2;" + " required-after:structurelib;"
         + " required-after:modularui@[1.1.12,);"
+        + " required-after:appliedenergistics2@[rv3-beta-258,);"
         + " after:dreamcraft;"
         + " after:Forestry;"
         + " after:PFAAGeologica;"
         + " after:Thaumcraft;"
         + " after:Railcraft;"
-        + " required-after:appliedenergistics2;"
         + " after:ThermalExpansion;"
         + " after:TwilightForest;"
         + " after:harvestcraft;"
@@ -269,6 +269,10 @@ public class GT_Mod implements IGT_Mod {
         EntityRegistry.registerModEntity(GT_Entity_Arrow.class, "GT_Entity_Arrow", 1, GT_Values.GT, 160, 1, true);
         EntityRegistry
             .registerModEntity(GT_Entity_Arrow_Potion.class, "GT_Entity_Arrow_Potion", 2, GT_Values.GT, 160, 1, true);
+        AEApi.instance()
+            .registries()
+            .interfaceTerminal()
+            .register(GT_MetaTileEntity_Hatch_CraftingInput_ME.class);
 
         GT_PreLoad.runMineTweakerCompat();
 
@@ -487,18 +491,16 @@ public class GT_Mod implements IGT_Mod {
             GT_Forestry_Compat.transferCentrifugeRecipes();
             GT_Forestry_Compat.transferSqueezerRecipes();
         }
-        if (GregTech_API.mAE2) {
-            GT_MetaTileEntity_DigitalChestBase.registerAEIntegration();
-            ItemStack facade = AEApi.instance()
-                .definitions()
-                .items()
-                .facade()
-                .maybeItem()
-                .transform(i -> new ItemStack(i, 1, GT_Values.W))
-                .orNull();
-            if (facade != null) {
-                GregTech_API.registerCover(facade, null, new GT_Cover_FacadeAE());
-            }
+        GT_MetaTileEntity_DigitalChestBase.registerAEIntegration();
+        ItemStack facade = AEApi.instance()
+            .definitions()
+            .items()
+            .facade()
+            .maybeItem()
+            .transform(i -> new ItemStack(i, 1, GT_Values.W))
+            .orNull();
+        if (facade != null) {
+            GregTech_API.registerCover(facade, null, new GT_Cover_FacadeAE());
         }
 
         Arrays

@@ -737,6 +737,7 @@ public enum ItemList implements IItemContainer {
     Spray_Color_13,
     Spray_Color_14,
     Spray_Color_15,
+    Spray_Color_Remover,
 
     Spray_Color_Used_00,
     Spray_Color_Used_01,
@@ -754,6 +755,9 @@ public enum ItemList implements IItemContainer {
     Spray_Color_Used_13,
     Spray_Color_Used_14,
     Spray_Color_Used_15,
+    Spray_Color_Used_Remover,
+
+    Spray_Color_Remover_Empty,
 
     Armor_Cheat,
     Armor_Cloaking,
@@ -1832,9 +1836,6 @@ public enum ItemList implements IItemContainer {
     Honeycomb,
     Charcoal_Pile,
     Block_BrittleCharcoal,
-    Seismic_Prospector_LV,
-    Seismic_Prospector_MV,
-    Seismic_Prospector_HV,
     Seismic_Prospector_Adv_LV,
     Seismic_Prospector_Adv_MV,
     Seismic_Prospector_Adv_HV,
@@ -2461,6 +2462,9 @@ public enum ItemList implements IItemContainer {
     VOLUMETRIC_FLASK,
 
     Hatch_Input_Bus_ME,
+    Hatch_Input_Bus_ME_Advanced,
+    Hatch_Input_ME,
+    Hatch_Input_ME_Advanced,
     Hatch_CraftingInput_Bus_ME,
     Hatch_CraftingInput_Bus_ME_ItemOnly,
     Hatch_CraftingInput_Bus_Slave,
@@ -2552,7 +2556,9 @@ public enum ItemList implements IItemContainer {
     ReinforcedPhotolithographicFrameworkCasing,
     RadiationProofPhotolithographicFrameworkCasing,
     InfinityCooledCasing,
-    Machine_Multi_TranscendentPlasmaMixer;
+    Machine_Multi_TranscendentPlasmaMixer,
+    Cover_Metrics_Transmitter,
+    NC_AdvancedSensorCard;
 
     public static final ItemList[] DYE_ONLY_ITEMS = { Color_00, Color_01, Color_02, Color_03, Color_04, Color_05,
         Color_06, Color_07, Color_08, Color_09, Color_10, Color_11, Color_12, Color_13, Color_14, Color_15 },

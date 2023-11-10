@@ -1,8 +1,6 @@
 package gregtech.loaders.oreprocessing;
 
-import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sAlloySmelterRecipes;
 import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sFluidSolidficationRecipes;
-import static gregtech.api.util.GT_RecipeBuilder.SECONDS;
 import static gregtech.api.util.GT_RecipeBuilder.TICKS;
 import static gregtech.api.util.GT_Utility.calculateRecipeEU;
 
@@ -13,11 +11,9 @@ import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.SubTag;
-import gregtech.api.enums.TierEU;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
 import gregtech.api.util.GT_RecipeRegistrator;
-import gregtech.api.util.GT_Utility;
 
 public class ProcessingNugget implements gregtech.api.interfaces.IOreRecipeRegistrator {
 
@@ -35,7 +31,6 @@ public class ProcessingNugget implements gregtech.api.interfaces.IOreRecipeRegis
                     .itemInputs(ItemList.Shape_Mold_Nugget.get(0L))
                     .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.nugget, aMaterial, 1L))
                     .fluidInputs(aMaterial.getMolten(16L))
-                    .noFluidOutputs()
                     .duration(16 * TICKS)
                     .eut(calculateRecipeEU(aMaterial, 4))
                     .addTo(sFluidSolidficationRecipes);

@@ -591,7 +591,7 @@ public enum GT_BeeDefinition implements IBeeDefinition {
     SUNNARIUM(GT_BranchDefinition.RAREMETAL, "Sunnarium", false, new Color(0xFFBC5E), new Color(0xE5CA2A),
         beeSpecies -> {
             beeSpecies.addProduct(Materials.Glowstone.getDust(1), 0.30f);
-            beeSpecies.addSpecialty(Materials.Sunnarium.getDust(1), 0.5f);
+            beeSpecies.addSpecialty(Materials.Sunnarium.getDust(1), 0.05f);
             beeSpecies.setHumidity(EnumHumidity.NORMAL);
             beeSpecies.setNocturnal();
             beeSpecies.setHasEffect();
@@ -712,6 +712,11 @@ public enum GT_BeeDefinition implements IBeeDefinition {
         IBeeMutationCustom tMutation = dis.registerMutation(LEAD, OSMIUM, 1);
         tMutation.requireResource("blockIndium");
         tMutation.addMutationCondition(new GT_Bees.DimensionMutationCondition(39, "Venus")); // Venus Dim
+        // Harder mutation that isn't dim locked
+        tMutation = dis.registerMutation(SILVER, OSMIUM, 1);
+        tMutation.requireResource("blockCinobiteA243");
+        tMutation.addMutationCondition(new GT_Bees.DimensionMutationCondition(60, "Bedrock")); // Thaumic Tinkerer
+                                                                                               // Bedrock Dim
     }),
 
     // IC2
@@ -2220,7 +2225,10 @@ public enum GT_BeeDefinition implements IBeeDefinition {
         beeSpecies.addProduct(GT_Bees.combs.getStackForType(CombType.BARNARDA), 0.25f);
         beeSpecies.setHumidity(ARID);
         beeSpecies.setTemperature(HOT);
-    }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
+    }, template -> {
+        AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST);
+        AlleleHelper.instance.set(template, EFFECT, getEffect(GREGTECH, "Treetwister"));
+    }, dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(BARNARDA, AMERICIUM, 3, 2);
         if (GalaxySpace.isModLoaded()) {
             tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "barnardaEgrunt"), 0);
