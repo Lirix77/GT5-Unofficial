@@ -124,8 +124,8 @@ import ic2.api.recipe.RecipeOutput;
     version = "MC1710",
     guiFactory = "gregtech.client.GT_GuiFactory",
     dependencies = " required-after:IC2;" + " required-after:structurelib;"
-        + " required-after:modularui@[1.1.12,);"
-        + " required-after:appliedenergistics2@[rv3-beta-258,);"
+        + " required-after:modularui;"
+        + " required-after:appliedenergistics2;"
         + " after:dreamcraft;"
         + " after:Forestry;"
         + " after:PFAAGeologica;"
