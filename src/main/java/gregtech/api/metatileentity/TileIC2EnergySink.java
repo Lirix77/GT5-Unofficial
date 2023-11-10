@@ -78,6 +78,7 @@ public class TileIC2EnergySink extends TileEntity implements IEnergySink {
     @Override
     public double injectEnergy(ForgeDirection directionFrom, double amount, double voltage) {
 
+        directionFrom = ForgeDirection.UNKNOWN;
         final long amps = (long) Math
             .max(amount / (cableMeta != null ? cableMeta.mVoltage : myMeta.getInputVoltage() * 1.0), 1.0);
         final long euPerAmp = (long) (amount / (amps * 1.0));
