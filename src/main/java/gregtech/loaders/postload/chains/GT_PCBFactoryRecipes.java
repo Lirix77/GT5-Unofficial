@@ -60,8 +60,7 @@ public class GT_PCBFactoryRecipes {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.NaquadahAlloy, 1),
-                    Materials.get("Artherium-Sn")
-                        .getPlates(6))
+                    Materials.DraconiumAwakened.getPlates(6))
                 .itemOutputs(ItemList.BasicPhotolithographicFrameworkCasing.get(1))
                 .duration(30 * SECONDS)
                 .eut(TierEU.RECIPE_ZPM)

@@ -4,7 +4,6 @@ import static gregtech.api.enums.Mods.NotEnoughItems;
 
 import gregtech.api.enums.Materials;
 import gregtech.loaders.postload.chains.GT_BauxiteRefineChain;
-import gregtech.loaders.postload.chains.GT_NaniteChain;
 import gregtech.loaders.postload.chains.GT_PCBFactoryRecipes;
 import gregtech.loaders.postload.recipe.GT_RecipeLoader;
 import gregtech.loaders.postload.recipes.AlloySmelterRecipes;
@@ -53,7 +52,6 @@ import gregtech.loaders.postload.recipes.RecipeRemover;
 import gregtech.loaders.postload.recipes.SifterRecipes;
 import gregtech.loaders.postload.recipes.SlicerRecipes;
 import gregtech.loaders.postload.recipes.SmelterRecipes;
-import gregtech.loaders.postload.recipes.ThaumcraftRecipes;
 import gregtech.loaders.postload.recipes.ThermalCentrifugeRecipes;
 import gregtech.loaders.postload.recipes.TranscendentPlasmaMixerRecipes;
 import gregtech.loaders.postload.recipes.VacuumFreezerRecipes;
@@ -120,14 +118,13 @@ public class GT_MachineRecipeLoader implements Runnable {
         new SifterRecipes().run();
         new SlicerRecipes().run();
         new SmelterRecipes().run();
-        new ThaumcraftRecipes().run();
         new ThermalCentrifugeRecipes().run();
         new VacuumFreezerRecipes().run();
         new WiremillRecipes().run();
         new TranscendentPlasmaMixerRecipes().run();
 
         GT_BauxiteRefineChain.run();
-        GT_NaniteChain.run();
+        //GT_NaniteChain.run();
         GT_PCBFactoryRecipes.load();
     }
 }

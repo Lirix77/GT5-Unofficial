@@ -74,22 +74,6 @@ public class FluidSolidifierRecipes implements Runnable {
 
         GT_Values.RA.stdBuilder()
             .itemInputs(ItemList.Shape_Mold_Ball.get(0L))
-            .itemOutputs(getModItem(Thaumcraft.ID, "ItemResource", 1, 3))
-            .fluidInputs(Materials.Mercury.getFluid(1000L))
-            .duration(6 * SECONDS + 8 * TICKS)
-            .eut(4)
-            .addTo(sFluidSolidficationRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(ItemList.Shape_Mold_Ball.get(0L))
-            .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.gem, Materials.Mercury, 1L))
-            .fluidInputs(Materials.Mercury.getFluid(1000L))
-            .duration(6 * SECONDS + 8 * TICKS)
-            .eut(4)
-            .addTo(sFluidSolidficationRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(ItemList.Shape_Mold_Ball.get(0L))
             .itemOutputs(new ItemStack(Items.snowball, 1, 0))
             .fluidInputs(Materials.Water.getFluid(250L))
             .duration(6 * SECONDS + 8 * TICKS)
@@ -234,7 +218,7 @@ public class FluidSolidifierRecipes implements Runnable {
 
         GT_Values.RA.stdBuilder()
             .itemInputs(ItemList.Shape_Mold_Plate.get(0L))
-            .itemOutputs(getModItem(NewHorizonsCoreMod.ID, "item.ReinforcedGlassPlate", 1L, 0))
+            .itemOutputs(ItemList.ReinforcedGlassLense.get(1))
             .fluidInputs(Materials.ReinforceGlass.getMolten(72))
             .duration(8 * SECONDS)
             .eut(TierEU.RECIPE_EV)

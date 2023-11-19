@@ -145,8 +145,6 @@ public class GT_Loader_OreDictionary implements Runnable {
         GT_OreDictUnificator
             .registerOre(OrePrefixes.stone, Materials.Glowstone, new ItemStack(Blocks.glowstone, 1, 32767));
 
-        GT_OreDictUnificator
-            .registerOre("paperResearchFragment", GT_ModHandler.getModItem(Thaumcraft.ID, "ItemResource", 1L, 9));
         GT_OreDictUnificator.registerOre(
             "itemCertusQuartz",
             GT_ModHandler.getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1L, 1));
@@ -253,9 +251,6 @@ public class GT_Loader_OreDictionary implements Runnable {
             .registerOre(OreDictNames.craftingGeothermalGenerator, GT_ModHandler.getIC2Item("geothermalGenerator", 1L));
 
         GT_OreDictUnificator.registerOre(OreDictNames.craftingFeather, new ItemStack(Items.feather, 1, 32767));
-        GT_OreDictUnificator.registerOre(
-            OreDictNames.craftingFeather,
-            GT_ModHandler.getModItem(TwilightForest.ID, "item.tfFeather", 1L, 32767));
 
         GT_OreDictUnificator.registerOre("itemWheat", new ItemStack(Items.wheat, 1, 32767));
         GT_OreDictUnificator.registerOre("paperEmpty", new ItemStack(Items.paper, 1, 32767));
@@ -303,43 +298,6 @@ public class GT_Loader_OreDictionary implements Runnable {
             OrePrefixes.itemCasing,
             Materials.Lead,
             GT_ModHandler.getModItem(IndustrialCraft2.ID, "itemCasing", 1L, 6));
-
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.itemCasing,
-            Materials.Osmium,
-            GT_ModHandler.getModItem(NewHorizonsCoreMod.ID, "item.OsmiumItemCasing", 1L, 0));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.itemCasing,
-            Materials.Aluminium,
-            GT_ModHandler.getModItem(NewHorizonsCoreMod.ID, "item.AluminiumItemCasing", 1L, 0));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.itemCasing,
-            Materials.StainlessSteel,
-            GT_ModHandler.getModItem(NewHorizonsCoreMod.ID, "item.StainlessSteelItemCasing", 1L, 0));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.itemCasing,
-            Materials.Tungsten,
-            GT_ModHandler.getModItem(NewHorizonsCoreMod.ID, "item.TungstenItemCasing", 1L, 0));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.itemCasing,
-            Materials.Neutronium,
-            GT_ModHandler.getModItem(NewHorizonsCoreMod.ID, "item.NeutroniumItemCasing", 1L, 0));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.itemCasing,
-            Materials.TungstenSteel,
-            GT_ModHandler.getModItem(NewHorizonsCoreMod.ID, "item.TungstenSteelItemCasing", 1L, 0));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.itemCasing,
-            Materials.Iridium,
-            GT_ModHandler.getModItem(NewHorizonsCoreMod.ID, "item.IridiumItemCasing", 1L, 0));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.itemCasing,
-            Materials.Titanium,
-            GT_ModHandler.getModItem(NewHorizonsCoreMod.ID, "item.TitaniumItemCasing", 1L, 0));
-        GT_OreDictUnificator.registerOre(
-            OrePrefixes.itemCasing,
-            Materials.Chrome,
-            GT_ModHandler.getModItem(NewHorizonsCoreMod.ID, "item.ChromeItemCasing", 1L, 0));
 
         // Fake Circuits
         GT_OreDictUnificator.registerOre(

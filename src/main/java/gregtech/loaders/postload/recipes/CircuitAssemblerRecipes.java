@@ -247,17 +247,18 @@ public class CircuitAssemblerRecipes implements Runnable {
             GT_OreDictUnificator.get(OrePrefixes.stickLong, Materials.Uranium, 2L), };
 
         for (int metaid = 0; metaid < rodMaterials.length; metaid++) {
-            GT_Values.RA.stdBuilder()
-                .itemInputs(
-                    GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1),
-                    GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2),
-                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2),
-                    rodMaterials[metaid])
-                .itemOutputs(getModItem(Forestry.ID, "thermionicTubes", 4L, metaid))
-                .fluidInputs(Materials.Glass.getMolten(576))
-                .duration(10 * SECONDS)
-                .eut((int) TierEU.RECIPE_LV)
-                .addTo(sCircuitAssemblerRecipes);
+            if(rodMaterials[metaid] != null)
+                GT_Values.RA.stdBuilder()
+                    .itemInputs(
+                        GT_OreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1),
+                        GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 2),
+                        GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Copper, 2),
+                        rodMaterials[metaid])
+                    .itemOutputs(getModItem(Forestry.ID, "thermionicTubes", 4L, metaid))
+                    .fluidInputs(Materials.Glass.getMolten(576))
+                    .duration(10 * SECONDS)
+                    .eut((int) TierEU.RECIPE_LV)
+                    .addTo(sCircuitAssemblerRecipes);
         }
 
         for (Materials tMat : solderingMats) {

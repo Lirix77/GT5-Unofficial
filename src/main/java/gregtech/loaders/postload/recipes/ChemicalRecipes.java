@@ -15,6 +15,7 @@ import static gregtech.api.util.GT_RecipeBuilder.TICKS;
 import static gregtech.api.util.GT_RecipeConstants.UniversalChemical;
 import static net.minecraftforge.fluids.FluidRegistry.getFluidStack;
 
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -110,17 +111,7 @@ public class ChemicalRecipes implements Runnable {
             .addTo(UniversalChemical);
 
         GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.InfusedGold, 8),
-                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Iron, 8))
-            .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Thaumium, 16))
-            .fluidInputs(new FluidStack(FluidRegistry.getFluid("ic2coolant"), 1000))
-            .duration(20 * SECONDS)
-            .eut(TierEU.RECIPE_HV)
-            .addTo(UniversalChemical);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(getModItem(GalaxySpace.ID, "item.UnknowCrystal", 4), Materials.Osmiridium.getDust(2))
+            .itemInputs(new ItemStack(Blocks.fire), Materials.Osmiridium.getDust(2))
             .itemOutputs(ItemList.Circuit_Chip_Stemcell.get(64))
             .fluidInputs(Materials.GrowthMediumSterilized.getFluid(1000))
             .fluidOutputs(getFluidStack("bacterialsludge", 1000))
@@ -1281,7 +1272,7 @@ public class ChemicalRecipes implements Runnable {
         GT_Values.RA.stdBuilder()
             .itemInputs(
                 MaterialsKevlar.CobaltIINitrate.getDust(9),
-                getModItem(NewHorizonsCoreMod.ID, "item.PotassiumHydroxideDust", 6L, 0))
+                ItemList.PotassiumHydroxideDust.get(6))
             .itemOutputs(MaterialsKevlar.CobaltIIHydroxide.getDust(5), Materials.Saltpeter.getDust(10))
             .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_MV)

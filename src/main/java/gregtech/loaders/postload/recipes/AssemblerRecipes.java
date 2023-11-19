@@ -816,16 +816,6 @@ public class AssemblerRecipes implements Runnable {
 
         GT_Values.RA.stdBuilder()
             .itemInputs(
-                getModItem(NewHorizonsCoreMod.ID, "item.ArtificialLeather", 1L, 0),
-                new ItemStack(Items.lead, 1, 32767))
-            .itemOutputs(new ItemStack(Items.name_tag, 1, 0))
-            .fluidInputs(Materials.Glue.getFluid(72))
-            .duration(5 * SECONDS)
-            .eut(8)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
                 GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Paper, 8),
                 new ItemStack(Items.compass, 1, 32767))
             .itemOutputs(new ItemStack(Items.map, 1, 0))
@@ -1046,16 +1036,6 @@ public class AssemblerRecipes implements Runnable {
         GT_Values.RA.stdBuilder()
             .itemInputs(
                 GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Paper, 3),
-                getModItem(NewHorizonsCoreMod.ID, "item.ArtificialLeather", 1L, 0))
-            .itemOutputs(new ItemStack(Items.book, 1, 0))
-            .fluidInputs(Materials.Glue.getFluid(20))
-            .duration(1 * SECONDS + 12 * TICKS)
-            .eut(8)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Paper, 3),
                 GT_OreDictUnificator.get(OrePrefixes.plateQuadruple, Materials.Paper, 1))
             .itemOutputs(new ItemStack(Items.book, 1, 0))
             .fluidInputs(Materials.Glue.getFluid(20))
@@ -1065,16 +1045,6 @@ public class AssemblerRecipes implements Runnable {
 
         GT_Values.RA.stdBuilder()
             .itemInputs(ItemList.Paper_Printed_Pages.get(1), new ItemStack(Items.leather, 1, 32767))
-            .itemOutputs(new ItemStack(Items.written_book, 1, 0))
-            .fluidInputs(Materials.Glue.getFluid(20))
-            .duration(1 * SECONDS + 12 * TICKS)
-            .eut(8)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Paper_Printed_Pages.get(1),
-                getModItem(NewHorizonsCoreMod.ID, "item.ArtificialLeather", 1L, 0))
             .itemOutputs(new ItemStack(Items.written_book, 1, 0))
             .fluidInputs(Materials.Glue.getFluid(20))
             .duration(1 * SECONDS + 12 * TICKS)
@@ -2932,7 +2902,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_MAX.get(1),
-                    getModItem(AvaritiaAddons.ID, "CompressedChest", 1),
+                    getModItem(IronChests.ID, "BlockIronChest", 2, 6),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_Bus_MAX.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(16 * INGOTS))
@@ -2947,21 +2917,12 @@ public class AssemblerRecipes implements Runnable {
      */
     public void loadOutputBusesRecipes() {
 
-        /*
-         * those early exits prevents further hatches recipes from being registered, but it's probably fine, as that
-         * means we aren't in full pack
-         */
-
-        if (!NewHorizonsCoreMod.isModLoaded()) {
-            return;
-        }
-
         // ULV output bus
         {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_ULV.get(1),
-                    getModItem(NewHorizonsCoreMod.ID, "BabyChest", 1),
+                    new ItemStack(Blocks.chest),
                     GT_Utility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_Bus_ULV.get(1))
                 .fluidInputs(Materials.Glue.getFluid(1 * INGOTS))
@@ -2972,7 +2933,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_ULV.get(1),
-                    getModItem(NewHorizonsCoreMod.ID, "BabyChest", 1),
+                    new ItemStack(Blocks.chest),
                     GT_Utility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_Bus_ULV.get(1))
                 .fluidInputs(Materials.Plastic.getMolten(1 * HALF_INGOT))
@@ -2983,7 +2944,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_ULV.get(1),
-                    getModItem(NewHorizonsCoreMod.ID, "BabyChest", 1),
+                    new ItemStack(Blocks.chest),
                     GT_Utility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_Bus_ULV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(1 * EIGHTH_INGOT))
@@ -2994,7 +2955,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_ULV.get(1),
-                    getModItem(NewHorizonsCoreMod.ID, "BabyChest", 1),
+                    new ItemStack(Blocks.chest),
                     GT_Utility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_Bus_ULV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(4))
@@ -3217,16 +3178,12 @@ public class AssemblerRecipes implements Runnable {
                 .addTo(sAssemblerRecipes);
         }
 
-        if (!AvaritiaAddons.isModLoaded()) {
-            return;
-        }
-
         // UHV output bus
         {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_MAX.get(1),
-                    getModItem(AvaritiaAddons.ID, "CompressedChest", 1),
+                    getModItem(IronChests.ID, "BlockIronChest", 2, 6),
                     GT_Utility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_Bus_MAX.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(16 * INGOTS))
@@ -5451,84 +5408,7 @@ public class AssemblerRecipes implements Runnable {
 
             // chunkloader upgrade OC
 
-            GT_Values.RA.stdBuilder()
-                .itemInputs(
-                    ItemList.Circuit_Board_Plastic_Advanced.get(1),
-                    GT_OreDictUnificator.get(OrePrefixes.itemCasing, Materials.Aluminium, 2),
-                    getModItem(Railcraft.ID, "machine.alpha", 1L, 0),
-                    getModItem(OpenComputers.ID, "item", 1L, 26),
-                    GT_Utility.getIntegratedCircuit(1))
-                .itemOutputs(getModItem(OpenComputers.ID, "item", 1L, 62))
-                .fluidInputs(tMat.getMolten(144L * tMultiplier / 2))
-                .duration(12 * SECONDS + 10 * TICKS)
-                .eut(256)
-                .addTo(sAssemblerRecipes);
-
         }
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                new ItemStack(Blocks.piston, 1, 0),
-                ItemList.FR_Casing_Sturdy.get(1),
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Lapis, 1),
-                GT_Utility.getIntegratedCircuit(1))
-            .itemOutputs(getModItem(NewHorizonsCoreMod.ID, "item.EngineCore", 1L, 0))
-            .fluidInputs(Materials.SeedOil.getFluid(250))
-            .duration(5 * SECONDS)
-            .eut(16)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                new ItemStack(Blocks.piston, 1, 0),
-                ItemList.FR_Casing_Sturdy.get(1),
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Lapis, 1),
-                GT_Utility.getIntegratedCircuit(1))
-            .itemOutputs(getModItem(NewHorizonsCoreMod.ID, "item.EngineCore", 1L, 0))
-            .fluidInputs(Materials.Lubricant.getFluid(125))
-            .duration(5 * SECONDS)
-            .eut(16)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                getModItem(ExtraUtilities.ID, "trashcan", 1L, 0),
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Obsidian, 4),
-                GT_Utility.getIntegratedCircuit(1))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.beta", 1L, 11))
-            .duration(10 * SECONDS)
-            .eut(16)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                getModItem(NewHorizonsCoreMod.ID, "item.EngineCore", 1),
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.AnyCopper, 10),
-                GT_Utility.getIntegratedCircuit(10))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.beta", 1L, 7))
-            .duration(10 * SECONDS)
-            .eut(16)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                getModItem(NewHorizonsCoreMod.ID, "item.EngineCore", 1),
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Steel, 10),
-                GT_Utility.getIntegratedCircuit(10))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.beta", 1L, 8))
-            .duration(10 * SECONDS)
-            .eut(16)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                getModItem(NewHorizonsCoreMod.ID, "item.EngineCore", 1),
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Aluminium, 10),
-                GT_Utility.getIntegratedCircuit(10))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.beta", 1L, 9))
-            .duration(10 * SECONDS)
-            .eut(16)
-            .addTo(sAssemblerRecipes);
 
         GT_Values.RA.stdBuilder()
             .itemInputs(
@@ -5613,385 +5493,11 @@ public class AssemblerRecipes implements Runnable {
         GT_Values.RA.stdBuilder()
             .itemInputs(
                 GT_OreDictUnificator.get(OrePrefixes.pipeLarge, Materials.Steel, 2),
-                getModItem(NewHorizonsCoreMod.ID, "item.SteelBars", 2),
+                ItemList.SteelBars.get(2),
                 GT_Utility.getIntegratedCircuit(22))
             .itemOutputs(getModItem(Railcraft.ID, "machine.beta", 1L, 15))
             .duration(20 * SECONDS)
             .eut(64)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Aluminium, 2),
-                GT_Utility.getIntegratedCircuit(20))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 1L, 0))
-            .duration(30 * SECONDS)
-            .eut(TierEU.RECIPE_MV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Aluminium, 2),
-                new ItemStack(Blocks.glass_pane, 2, 0),
-                GT_Utility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 2L, 1))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_MV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Aluminium, 2),
-                getModItem(TinkerConstruct.ID, "GlassPane", 2L, 0),
-                GT_Utility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 2L, 1))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_MV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.pipeLarge, Materials.Plastic, 2),
-                getModItem(NewHorizonsCoreMod.ID, "item.AluminiumBars", 2),
-                GT_Utility.getIntegratedCircuit(22))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 1L, 2))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_MV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.StainlessSteel, 2),
-                GT_Utility.getIntegratedCircuit(20))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 1L, 3))
-            .duration(10 * SECONDS)
-            .eut(256)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.StainlessSteel, 2),
-                new ItemStack(Blocks.glass_pane, 2, 0),
-                GT_Utility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 2L, 4))
-            .duration(20 * SECONDS)
-            .eut(256)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.StainlessSteel, 2),
-                getModItem(TinkerConstruct.ID, "GlassPane", 2L, 0),
-                GT_Utility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 2L, 4))
-            .duration(20 * SECONDS)
-            .eut(256)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.pipeLarge, Materials.StainlessSteel, 2),
-                getModItem(NewHorizonsCoreMod.ID, "item.StainlessSteelBars", 2),
-                GT_Utility.getIntegratedCircuit(22))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 1L, 5))
-            .duration(20 * SECONDS)
-            .eut(256)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Titanium, 2),
-                GT_Utility.getIntegratedCircuit(20))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 1L, 6))
-            .duration(30 * SECONDS)
-            .eut(TierEU.RECIPE_HV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Titanium, 2),
-                new ItemStack(Blocks.glass_pane, 2, 0),
-                GT_Utility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 2L, 7))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_HV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Titanium, 2),
-                getModItem(TinkerConstruct.ID, "GlassPane", 2L, 0),
-                GT_Utility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 2L, 7))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_HV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.pipeLarge, Materials.Titanium, 2),
-                getModItem(NewHorizonsCoreMod.ID, "item.TitaniumBars", 2),
-                GT_Utility.getIntegratedCircuit(22))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 1L, 8))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_HV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.TungstenSteel, 2),
-                GT_Utility.getIntegratedCircuit(20))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 1L, 9))
-            .duration(10 * SECONDS)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.TungstenSteel, 2),
-                new ItemStack(Blocks.glass_pane, 2, 0),
-                GT_Utility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 2L, 10))
-            .duration(20 * SECONDS)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.TungstenSteel, 2),
-                getModItem(TinkerConstruct.ID, "GlassPane", 2L, 0),
-                GT_Utility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 2L, 10))
-            .duration(20 * SECONDS)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.pipeLarge, Materials.TungstenSteel, 2),
-                getModItem(NewHorizonsCoreMod.ID, "item.TungstenSteelBars", 2),
-                GT_Utility.getIntegratedCircuit(22))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 1L, 11))
-            .duration(20 * SECONDS)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Palladium, 2),
-                GT_Utility.getIntegratedCircuit(20))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 1L, 12))
-            .duration(30 * SECONDS)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Palladium, 2),
-                new ItemStack(Blocks.glass_pane, 2, 0),
-                GT_Utility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 2L, 13))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Palladium, 2),
-                getModItem(TinkerConstruct.ID, "GlassPane", 2L, 0),
-                GT_Utility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 2L, 13))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.pipeLarge, Materials.NiobiumTitanium, 2),
-                getModItem(NewHorizonsCoreMod.ID, "item.ChromeBars", 2),
-                GT_Utility.getIntegratedCircuit(22))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 1L, 14))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Iridium, 2),
-                GT_Utility.getIntegratedCircuit(20))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 1L, 0))
-            .duration(10 * SECONDS)
-            .eut(4096)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Iridium, 2),
-                new ItemStack(Blocks.glass_pane, 2, 0),
-                GT_Utility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 2L, 1))
-            .duration(20 * SECONDS)
-            .eut(4096)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Iridium, 2),
-                getModItem(TinkerConstruct.ID, "GlassPane", 2L, 0),
-                GT_Utility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 2L, 1))
-            .duration(20 * SECONDS)
-            .eut(4096)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.pipeLarge, Materials.Enderium, 2),
-                getModItem(NewHorizonsCoreMod.ID, "item.IridiumBars", 2),
-                GT_Utility.getIntegratedCircuit(22))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 1L, 2))
-            .duration(20 * SECONDS)
-            .eut(4096)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Osmium, 2),
-                GT_Utility.getIntegratedCircuit(20))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 1L, 3))
-            .duration(30 * SECONDS)
-            .eut(TierEU.RECIPE_IV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Osmium, 2),
-                new ItemStack(Blocks.glass_pane, 2, 0),
-                GT_Utility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 2L, 4))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_IV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Osmium, 2),
-                getModItem(TinkerConstruct.ID, "GlassPane", 2L, 0),
-                GT_Utility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 2L, 4))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_IV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.pipeLarge, Materials.Naquadah, 2),
-                getModItem(NewHorizonsCoreMod.ID, "item.OsmiumBars", 2),
-                GT_Utility.getIntegratedCircuit(22))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 1L, 5))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_IV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Neutronium, 2),
-                GT_Utility.getIntegratedCircuit(20))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 1L, 6))
-            .duration(10 * SECONDS)
-            .eut(TierEU.RECIPE_LuV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Neutronium, 2),
-                new ItemStack(Blocks.glass_pane, 2, 0),
-                GT_Utility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 2L, 7))
-            .duration(20 * SECONDS)
-            .eut(TierEU.RECIPE_LuV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Neutronium, 2),
-                getModItem(TinkerConstruct.ID, "GlassPane", 2L, 0),
-                GT_Utility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 2L, 7))
-            .duration(20 * SECONDS)
-            .eut(TierEU.RECIPE_LuV)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.pipeLarge, Materials.Neutronium, 2),
-                getModItem(NewHorizonsCoreMod.ID, "item.NeutroniumBars", 2),
-                GT_Utility.getIntegratedCircuit(22))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 1L, 8))
-            .duration(20 * SECONDS)
-            .eut(TierEU.RECIPE_LuV)
-            .addTo(sAssemblerRecipes);
-
-        // Water Tank
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Iron, 1),
-                GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.Wood, 2))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.alpha", 1L, 14))
-            .fluidInputs(Materials.Glue.getFluid(36))
-            .duration(10 * SECONDS)
-            .eut(8)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.stick, Materials.IronMagnetic, 1),
-                GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.Wood, 2))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.alpha", 1L, 14))
-            .fluidInputs(Materials.Glue.getFluid(36))
-            .duration(10 * SECONDS)
-            .eut(8)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.stick, Materials.WroughtIron, 1),
-                GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.Wood, 2))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.alpha", 1L, 14))
-            .fluidInputs(Materials.Glue.getFluid(36))
-            .duration(10 * SECONDS)
-            .eut(8)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Steel, 4),
-                GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.Wood, 4))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.alpha", 3L, 14))
-            .fluidInputs(Materials.Glue.getFluid(72))
-            .duration(20 * SECONDS)
-            .eut(30)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Steel, 2),
-                GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.WoodSealed, 1))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.alpha", 3L, 14))
-            .fluidInputs(Materials.Plastic.getMolten(36))
-            .duration(20 * SECONDS)
-            .eut(30)
-            .addTo(sAssemblerRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.StainlessSteel, 4),
-                GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.WoodSealed, 4))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.alpha", 9L, 14))
-            .fluidInputs(Materials.Plastic.getMolten(72))
-            .duration(20 * SECONDS)
-            .eut(TierEU.RECIPE_MV)
             .addTo(sAssemblerRecipes);
 
         // Steam Boilers
@@ -6197,7 +5703,7 @@ public class AssemblerRecipes implements Runnable {
     }
 
     public void withGTNHLanthAndGTPP() {
-        if (!(GTNHLanthanides.isModLoaded() && GTPlusPlus.isModLoaded())) {
+        if (!GTPlusPlus.isModLoaded()) {
             return;
         }
 

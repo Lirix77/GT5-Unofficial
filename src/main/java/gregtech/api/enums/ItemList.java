@@ -62,7 +62,6 @@ public enum ItemList implements IItemContainer {
     RC_Bed_Wood,
     RC_Bed_Stone,
     RC_Rebar,
-    TC_Thaumometer,
     IC2_Item_Casing_Tin,
     IC2_Item_Casing_Copper,
     IC2_Item_Casing_Iron,

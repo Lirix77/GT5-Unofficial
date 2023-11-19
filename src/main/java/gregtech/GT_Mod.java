@@ -11,6 +11,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.function.Predicate;
 
+import appeng.helpers.InterfaceTerminalSupportedClassProvider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -269,10 +270,7 @@ public class GT_Mod implements IGT_Mod {
         EntityRegistry.registerModEntity(GT_Entity_Arrow.class, "GT_Entity_Arrow", 1, GT_Values.GT, 160, 1, true);
         EntityRegistry
             .registerModEntity(GT_Entity_Arrow_Potion.class, "GT_Entity_Arrow_Potion", 2, GT_Values.GT, 160, 1, true);
-        AEApi.instance()
-            .registries()
-            .interfaceTerminal()
-            .register(GT_MetaTileEntity_Hatch_CraftingInput_ME.class);
+        InterfaceTerminalSupportedClassProvider.register(GT_MetaTileEntity_Hatch_CraftingInput_ME.class);
 
         GT_PreLoad.runMineTweakerCompat();
 

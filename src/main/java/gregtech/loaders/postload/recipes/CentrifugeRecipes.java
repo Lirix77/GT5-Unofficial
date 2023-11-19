@@ -33,18 +33,6 @@ public class CentrifugeRecipes implements Runnable {
     public void run() {
 
         GT_Values.RA.stdBuilder()
-            .itemInputs(GT_OreDictUnificator.get(OrePrefixes.dust, Materials.InfusedGold, 1))
-            .itemOutputs(
-                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Gold, 1),
-                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Gold, 1),
-                getModItem(Thaumcraft.ID, "ItemResource", 2L, 14))
-            .outputChances(10000, 10000, 9000)
-            .fluidInputs(Materials.Mercury.getFluid(200))
-            .duration(20 * SECONDS)
-            .eut((int) TierEU.RECIPE_MV)
-            .addTo(sCentrifugeRecipes);
-
-        GT_Values.RA.stdBuilder()
             .itemInputs(ItemList.Cell_Empty.get(1))
             .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.cell, Materials.Oxygen, 1))
             .fluidInputs(Materials.Air.getGas(10000))
@@ -301,38 +289,6 @@ public class CentrifugeRecipes implements Runnable {
 
         GT_Values.RA.stdBuilder()
             .itemInputs(GT_ModHandler.getIC2Item("terraWart", 16), GT_Utility.getIntegratedCircuit(1))
-            .fluidOutputs(Materials.Methane.getGas(576))
-            .duration(3 * MINUTES + 50 * SECONDS + 8 * TICKS)
-            .eut(5)
-            .addTo(sCentrifugeRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(getModItem(TwilightForest.ID, "item.meefRaw", 12L, 32767), GT_Utility.getIntegratedCircuit(1))
-            .fluidOutputs(Materials.Methane.getGas(576))
-            .duration(3 * MINUTES + 50 * SECONDS + 8 * TICKS)
-            .eut(5)
-            .addTo(sCentrifugeRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(getModItem(TwilightForest.ID, "item.meefSteak", 16L, 32767), GT_Utility.getIntegratedCircuit(1))
-            .fluidOutputs(Materials.Methane.getGas(576))
-            .duration(3 * MINUTES + 50 * SECONDS + 8 * TICKS)
-            .eut(5)
-            .addTo(sCentrifugeRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                getModItem(TwilightForest.ID, "item.venisonRaw", 12L, 32767),
-                GT_Utility.getIntegratedCircuit(1))
-            .fluidOutputs(Materials.Methane.getGas(576))
-            .duration(3 * MINUTES + 50 * SECONDS + 8 * TICKS)
-            .eut(5)
-            .addTo(sCentrifugeRecipes);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(
-                getModItem(TwilightForest.ID, "item.venisonCooked", 16L, 32767),
-                GT_Utility.getIntegratedCircuit(1))
             .fluidOutputs(Materials.Methane.getGas(576))
             .duration(3 * MINUTES + 50 * SECONDS + 8 * TICKS)
             .eut(5)
@@ -716,80 +672,6 @@ public class CentrifugeRecipes implements Runnable {
             .duration(25 * SECONDS)
             .eut(5)
             .addTo(sCentrifugeRecipes);
-
-        if (Thaumcraft.isModLoaded()) {
-            // air
-
-            GT_Values.RA.stdBuilder()
-                .itemInputs(getModItem(GregTech.ID, "gt.comb", 1L, 144), GT_Utility.getIntegratedCircuit(1))
-                .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.gem, Materials.InfusedAir, 1))
-                .duration(51 * SECONDS + 4 * TICKS)
-                .eut(12)
-                .addTo(sCentrifugeRecipes);
-
-            // fire
-
-            GT_Values.RA.stdBuilder()
-                .itemInputs(getModItem(GregTech.ID, "gt.comb", 1L, 146), GT_Utility.getIntegratedCircuit(1))
-                .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.gem, Materials.InfusedFire, 1))
-                .duration(51 * SECONDS + 4 * TICKS)
-                .eut(12)
-                .addTo(sCentrifugeRecipes);
-
-            // aqua
-
-            GT_Values.RA.stdBuilder()
-                .itemInputs(getModItem(GregTech.ID, "gt.comb", 1L, 147), GT_Utility.getIntegratedCircuit(1))
-                .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.gem, Materials.InfusedWater, 1))
-                .duration(51 * SECONDS + 4 * TICKS)
-                .eut(12)
-                .addTo(sCentrifugeRecipes);
-
-            // terra
-
-            GT_Values.RA.stdBuilder()
-                .itemInputs(getModItem(GregTech.ID, "gt.comb", 1L, 145), GT_Utility.getIntegratedCircuit(1))
-                .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.gem, Materials.InfusedEarth, 1))
-                .duration(51 * SECONDS + 4 * TICKS)
-                .eut(12)
-                .addTo(sCentrifugeRecipes);
-
-            // ordo
-
-            GT_Values.RA.stdBuilder()
-                .itemInputs(getModItem(GregTech.ID, "gt.comb", 1L, 148), GT_Utility.getIntegratedCircuit(1))
-                .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.gem, Materials.InfusedOrder, 1))
-                .duration(51 * SECONDS + 4 * TICKS)
-                .eut(12)
-                .addTo(sCentrifugeRecipes);
-
-            // perditio
-
-            GT_Values.RA.stdBuilder()
-                .itemInputs(getModItem(GregTech.ID, "gt.comb", 1L, 149), GT_Utility.getIntegratedCircuit(1))
-                .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.gem, Materials.InfusedEntropy, 1))
-                .duration(51 * SECONDS + 4 * TICKS)
-                .eut(12)
-                .addTo(sCentrifugeRecipes);
-
-            // Nethershard
-
-            GT_Values.RA.stdBuilder()
-                .itemInputs(getModItem(GregTech.ID, "gt.comb", 1L, 152), GT_Utility.getIntegratedCircuit(1))
-                .itemOutputs(getModItem(ThaumicTinkerer.ID, "kamiResource", 1L, 6))
-                .duration(6 * SECONDS + 8 * TICKS)
-                .eut(512)
-                .addTo(sCentrifugeRecipes);
-
-            // Endshard
-
-            GT_Values.RA.stdBuilder()
-                .itemInputs(getModItem(GregTech.ID, "gt.comb", 1L, 153), GT_Utility.getIntegratedCircuit(1))
-                .itemOutputs(getModItem(ThaumicTinkerer.ID, "kamiResource", 1L, 7))
-                .duration(6 * SECONDS + 8 * TICKS)
-                .eut(512)
-                .addTo(sCentrifugeRecipes);
-        }
 
         if (ExtraUtilities.isModLoaded()) {
             // Caelestis red

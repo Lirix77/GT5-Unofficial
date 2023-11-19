@@ -108,55 +108,6 @@ public class GT_FuelLoader implements Runnable {
             0,
             1400000);
 
-        // BloodMagic
-        GT_Recipe.GT_Recipe_Map.sMagicFuels.addRecipe(
-            true,
-            new ItemStack[] { GT_ModHandler.getModItem(BloodMagic.ID, "reinforcedSlate", 1L) },
-            new ItemStack[] { GT_ModHandler.getModItem(BloodMagic.ID, "blankSlate", 1L) },
-            null,
-            null,
-            null,
-            0,
-            0,
-            400);
-        GT_Recipe.GT_Recipe_Map.sMagicFuels.addRecipe(
-            true,
-            new ItemStack[] { GT_ModHandler.getModItem(BloodMagic.ID, "imbuedSlate", 1L) },
-            new ItemStack[] { GT_ModHandler.getModItem(BloodMagic.ID, "reinforcedSlate", 1L) },
-            null,
-            null,
-            null,
-            0,
-            0,
-            1000);
-        GT_Recipe.GT_Recipe_Map.sMagicFuels.addRecipe(
-            true,
-            new ItemStack[] { GT_ModHandler.getModItem(BloodMagic.ID, "demonicSlate", 1L) },
-            new ItemStack[] { GT_ModHandler.getModItem(BloodMagic.ID, "imbuedSlate", 1L) },
-            null,
-            null,
-            null,
-            0,
-            0,
-            8000);
-        GT_Recipe.GT_Recipe_Map.sMagicFuels.addRecipe(
-            true,
-            new ItemStack[] { GT_ModHandler.getModItem(BloodMagic.ID, "bloodMagicBaseItems", 1L, 27) },
-            new ItemStack[] { GT_ModHandler.getModItem(BloodMagic.ID, "demonicSlate", 1L) },
-            null,
-            null,
-            null,
-            0,
-            0,
-            20000);
-
-        GT_Values.RA.stdBuilder()
-            .itemInputs(GT_ModHandler.getModItem(Thaumcraft.ID, "ItemResource", 1L, 4))
-            .metadata(FUEL_VALUE, 4)
-            .metadata(FUEL_TYPE, 5)
-            .duration(0)
-            .eut(0)
-            .addTo(GT_RecipeConstants.Fuel);
         GT_Values.RA.stdBuilder()
             .itemInputs(new ItemStack(Items.experience_bottle, 1))
             .metadata(FUEL_VALUE, 10)

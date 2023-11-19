@@ -67,14 +67,6 @@ public class FluidCannerRecipes implements Runnable {
             .addTo(sFluidCannerRecipes);
 
         GT_Values.RA.stdBuilder()
-            .itemInputs(ItemList.TF_Vial_FieryTears.get(1))
-            .itemOutputs(ItemList.Bottle_Empty.get(1))
-            .fluidOutputs(Materials.FierySteel.getFluid(250))
-            .duration(4)
-            .eut(1)
-            .addTo(sFluidCannerRecipes);
-
-        GT_Values.RA.stdBuilder()
             .itemInputs(ItemList.Spray_Color_Remover_Empty.get(1))
             .fluidInputs(Materials.Acetone.getFluid(4000))
             .itemOutputs(ItemList.Spray_Color_Remover.get(1))

@@ -2090,36 +2090,7 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
             Materials.IronWood,
             GT_ModHandler.getModItem(TwilightForest.ID, "item.ironwoodIngot", 1L, 0));
         GT_OreDictUnificator
-            .set(OrePrefixes.gem, Materials.InfusedAir, GT_ModHandler.getModItem(Thaumcraft.ID, "ItemShard", 1L, 0));
-        GT_OreDictUnificator
-            .set(OrePrefixes.gem, Materials.InfusedFire, GT_ModHandler.getModItem(Thaumcraft.ID, "ItemShard", 1L, 1));
-        GT_OreDictUnificator
-            .set(OrePrefixes.gem, Materials.InfusedWater, GT_ModHandler.getModItem(Thaumcraft.ID, "ItemShard", 1L, 2));
-        GT_OreDictUnificator
-            .set(OrePrefixes.gem, Materials.InfusedEarth, GT_ModHandler.getModItem(Thaumcraft.ID, "ItemShard", 1L, 3));
-        GT_OreDictUnificator
-            .set(OrePrefixes.gem, Materials.InfusedOrder, GT_ModHandler.getModItem(Thaumcraft.ID, "ItemShard", 1L, 4));
-        GT_OreDictUnificator.set(
-            OrePrefixes.gem,
-            Materials.InfusedEntropy,
-            GT_ModHandler.getModItem(Thaumcraft.ID, "ItemShard", 1L, 5));
-        GT_OreDictUnificator
-            .set(OrePrefixes.nugget, Materials.Mercury, GT_ModHandler.getModItem(Thaumcraft.ID, "ItemNugget", 1L, 5));
-        GT_OreDictUnificator
-            .set(OrePrefixes.nugget, Materials.Thaumium, GT_ModHandler.getModItem(Thaumcraft.ID, "ItemNugget", 1L, 6));
-        GT_OreDictUnificator
-            .set(OrePrefixes.ingot, Materials.Thaumium, GT_ModHandler.getModItem(Thaumcraft.ID, "ItemResource", 1L, 2));
-        GT_OreDictUnificator
-            .set(OrePrefixes.gem, Materials.Mercury, GT_ModHandler.getModItem(Thaumcraft.ID, "ItemResource", 1L, 3));
-        GT_OreDictUnificator
-            .set(OrePrefixes.gem, Materials.Amber, GT_ModHandler.getModItem(Thaumcraft.ID, "ItemResource", 1L, 6));
-        GT_OreDictUnificator
             .set(OrePrefixes.gem, Materials.Firestone, GT_ModHandler.getModItem(Railcraft.ID, "firestone.raw", 1L));
-
-        GT_OreDictUnificator
-            .set(OrePrefixes.nugget, Materials.Void, GT_ModHandler.getModItem(Thaumcraft.ID, "ItemNugget", 1L, 7));
-        GT_OreDictUnificator
-            .set(OrePrefixes.ingot, Materials.Void, GT_ModHandler.getModItem(Thaumcraft.ID, "ItemResource", 1L, 16));
 
         if (GregTech_API.sUnification
             .get(ConfigCategories.specialunificationtargets + "." + "railcraft", "plateIron", true)) {

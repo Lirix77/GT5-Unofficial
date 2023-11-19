@@ -36,18 +36,16 @@ public class GT_Block_CasingsNH extends GT_Block_Casings_Abstract {
 
     @Override
     public IIcon getIcon(int aSide, int aMeta) {
-        switch (aMeta) {
-            case 5:
-                return Textures.BlockIcons.MACHINE_CASING_PYROLYSE.getIcon();
-            default:
-                if (aSide == 0) {
-                    return Textures.BlockIcons.MACHINECASINGS_BOTTOM[aMeta+10].getIcon();
-                }
-                if (aSide == 1) {
-                    return Textures.BlockIcons.MACHINECASINGS_TOP[aMeta+10].getIcon();
-                }
-                return Textures.BlockIcons.MACHINECASINGS_SIDE[aMeta+10].getIcon();
+        if (aMeta >= 5) {
+            return Textures.BlockIcons.MACHINE_CASING_PYROLYSE.getIcon();
         }
+        if (aSide == 0) {
+            return Textures.BlockIcons.MACHINECASINGS_BOTTOM[aMeta + 10].getIcon();
+        }
+        if (aSide == 1) {
+            return Textures.BlockIcons.MACHINECASINGS_TOP[aMeta + 10].getIcon();
+        }
+        return Textures.BlockIcons.MACHINECASINGS_SIDE[aMeta + 10].getIcon();
     }
 
     @Override

@@ -847,7 +847,6 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler, IG
         ItemList.RC_Bed_Wood.set(GT_ModHandler.getModItem(Railcraft.ID, "part.railbed", 1L, 0));
         ItemList.RC_Bed_Stone.set(GT_ModHandler.getModItem(Railcraft.ID, "part.railbed", 1L, 1));
         ItemList.RC_Rebar.set(GT_ModHandler.getModItem(Railcraft.ID, "part.rebar", 1L));
-        ItemList.TC_Thaumometer.set(GT_ModHandler.getModItem(Thaumcraft.ID, "ItemThaumometer", 1L, 0));
         ItemList.Tool_Sword_Steel.set(GT_ModHandler.getModItem(Railcraft.ID, "tool.steel.sword", 1L));
         ItemList.Tool_Pickaxe_Steel.set(GT_ModHandler.getModItem(Railcraft.ID, "tool.steel.pickaxe", 1L));
         ItemList.Tool_Shovel_Steel.set(GT_ModHandler.getModItem(Railcraft.ID, "tool.steel.shovel", 1L));

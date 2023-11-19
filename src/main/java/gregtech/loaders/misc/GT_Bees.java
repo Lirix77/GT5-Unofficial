@@ -53,7 +53,7 @@ public class GT_Bees {
         GT_AlleleHelper.initialisation();
         setupGTAlleles();
         propolis = new ItemPropolis();
-        propolis.initPropolisRecipes();
+        //propolis.initPropolisRecipes();
         pollen = new ItemPollen();
         drop = new ItemDrop();
         drop.initDropsRecipes();

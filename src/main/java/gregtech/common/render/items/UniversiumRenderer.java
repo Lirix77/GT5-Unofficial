@@ -125,7 +125,7 @@ public class UniversiumRenderer extends GT_GeneratedMaterial_Renderer {
                 RenderHelper.enableGUIStandardItemLighting();
 
                 GL11.glDisable(GL11.GL_ALPHA_TEST);
-                //GL11.glDisable(GL11.GL_DEPTH_TEST);
+                GL11.glDisable(GL11.GL_DEPTH_TEST);
 
                 if (fluidDisplay) {
                     GL11.glDisable(GL11.GL_BLEND);
@@ -155,7 +155,7 @@ public class UniversiumRenderer extends GT_GeneratedMaterial_Renderer {
 
                 GL11.glEnable(GL11.GL_ALPHA_TEST);
                 GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-                //GL11.glEnable(GL11.GL_DEPTH_TEST);
+                GL11.glEnable(GL11.GL_DEPTH_TEST);
 
                 r.renderWithColor = true;
 

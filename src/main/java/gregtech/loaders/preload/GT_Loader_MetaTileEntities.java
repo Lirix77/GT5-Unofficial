@@ -4,7 +4,6 @@ import static gregtech.api.enums.MetaTileEntityIDs.*;
 
 import net.minecraft.util.EnumChatFormatting;
 
-import gregtech.GT_Mod;
 import gregtech.api.GregTech_API;
 import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.ItemList;
@@ -2763,7 +2762,7 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
                 5).getStackForm(1L));
         ItemList.Generator_Plasma_ZPMV.set(
             new GT_MetaTileEntity_PlasmaGenerator(
-                PLASMA_GENERATOR_ZPM.ID,
+                PLASMA_GENERATOR_ZPMV.ID,
                 "basicgenerator.plasmagenerator.tier.07",
                 "Plasma Generator Mark III",
                 6).getStackForm(1L));
@@ -2785,351 +2784,60 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
                     GregTech_API.sGeneratedMaterials[i]);
             }
         }
-        boolean bEC = !GT_Mod.gregtechproxy.mHardcoreCables;
-
         makeWires(Materials.RedAlloy, 2000, 0L, 1L, 1L, gregtech.api.enums.GT_Values.V[0], true, false);
 
         makeWires(Materials.Cobalt, 1200, 2L, 4L, 2L, gregtech.api.enums.GT_Values.V[1], true, false);
         makeWires(Materials.Lead, 1220, 2L, 4L, 2L, gregtech.api.enums.GT_Values.V[1], true, false);
         makeWires(Materials.Tin, 1240, 1L, 2L, 1L, gregtech.api.enums.GT_Values.V[1], true, false);
-
         makeWires(Materials.Zinc, 1260, 1L, 2L, 1L, gregtech.api.enums.GT_Values.V[1], true, false);
         makeWires(Materials.SolderingAlloy, 1280, 1L, 2L, 1L, gregtech.api.enums.GT_Values.V[1], true, false);
 
-        makeWires(
-            Materials.Iron,
-            1300,
-            bEC ? 3L : 4L,
-            bEC ? 6L : 8L,
-            2L,
-            gregtech.api.enums.GT_Values.V[2],
-            true,
-            false);
-        makeWires(
-            Materials.Nickel,
-            1320,
-            bEC ? 3L : 5L,
-            bEC ? 6L : 10L,
-            3L,
-            gregtech.api.enums.GT_Values.V[2],
-            true,
-            false);
-        makeWires(
-            Materials.Cupronickel,
-            1340,
-            bEC ? 3L : 4L,
-            bEC ? 6L : 8L,
-            2L,
-            gregtech.api.enums.GT_Values.V[2],
-            true,
-            false);
-        makeWires(
-            Materials.Copper,
-            1360,
-            bEC ? 2L : 3L,
-            bEC ? 4L : 6L,
-            1L,
-            gregtech.api.enums.GT_Values.V[2],
-            true,
-            false);
-        makeWires(
-            Materials.AnnealedCopper,
-            1380,
-            bEC ? 1L : 2L,
-            bEC ? 2L : 4L,
-            1L,
-            gregtech.api.enums.GT_Values.V[2],
-            true,
-            false);
+        makeWires(Materials.Iron, 1300, 3L, 6L, 2L, gregtech.api.enums.GT_Values.V[2], true, false);
+        makeWires(Materials.Nickel, 1320, 3L, 6L, 3L, gregtech.api.enums.GT_Values.V[2], true, false);
+        makeWires(Materials.Cupronickel, 1340, 3L, 6L, 2L, gregtech.api.enums.GT_Values.V[2], true, false);
+        makeWires(Materials.Copper, 1360, 2L, 4L, 1L, gregtech.api.enums.GT_Values.V[2], true, false);
+        makeWires(Materials.AnnealedCopper, 1380, 1L, 2L, 1L, gregtech.api.enums.GT_Values.V[2], true, false);
 
-        makeWires(
-            Materials.Kanthal,
-            1400,
-            bEC ? 3L : 8L,
-            bEC ? 6L : 16L,
-            4L,
-            gregtech.api.enums.GT_Values.V[3],
-            true,
-            false);
-        makeWires(
-            Materials.Gold,
-            1420,
-            bEC ? 2L : 6L,
-            bEC ? 4L : 12L,
-            3L,
-            gregtech.api.enums.GT_Values.V[3],
-            true,
-            false);
-        makeWires(
-            Materials.Electrum,
-            1440,
-            bEC ? 2L : 5L,
-            bEC ? 4L : 10L,
-            2L,
-            gregtech.api.enums.GT_Values.V[3],
-            true,
-            false);
-        makeWires(
-            Materials.Silver,
-            1460,
-            bEC ? 1L : 4L,
-            bEC ? 2L : 8L,
-            1L,
-            gregtech.api.enums.GT_Values.V[3],
-            true,
-            false);
-        makeWires(
-            Materials.BlueAlloy,
-            1480,
-            bEC ? 1L : 4L,
-            bEC ? 2L : 8L,
-            2L,
-            gregtech.api.enums.GT_Values.V[3],
-            true,
-            false);
+        makeWires(Materials.Kanthal, 1400, 3L, 6L, 4L, gregtech.api.enums.GT_Values.V[3], true, false);
+        makeWires(Materials.Gold, 1420, 2L, 4L, 3L, gregtech.api.enums.GT_Values.V[3], true, false);
+        makeWires(Materials.Electrum, 1440, 2L, 4L, 2L, gregtech.api.enums.GT_Values.V[3], true, false);
+        makeWires(Materials.Silver, 1460, 1L, 2L, 1L, gregtech.api.enums.GT_Values.V[3], true, false);
+        makeWires(Materials.BlueAlloy, 1480, 1L, 2L, 2L, gregtech.api.enums.GT_Values.V[3], true, false);
 
-        makeWires(
-            Materials.Nichrome,
-            1500,
-            bEC ? 4L : 32L,
-            bEC ? 8L : 64L,
-            3L,
-            gregtech.api.enums.GT_Values.V[4],
-            true,
-            false);
-        makeWires(
-            Materials.Steel,
-            1520,
-            bEC ? 2L : 16L,
-            bEC ? 4L : 32L,
-            2L,
-            gregtech.api.enums.GT_Values.V[4],
-            true,
-            false);
-        makeWires(
-            Materials.BlackSteel,
-            1540,
-            bEC ? 2L : 14L,
-            bEC ? 4L : 28L,
-            3L,
-            gregtech.api.enums.GT_Values.V[4],
-            true,
-            false);
-        makeWires(
-            Materials.Titanium,
-            1560,
-            bEC ? 2L : 12L,
-            bEC ? 4L : 24L,
-            4L,
-            gregtech.api.enums.GT_Values.V[4],
-            true,
-            false);
-        makeWires(
-            Materials.Aluminium,
-            1580,
-            bEC ? 1L : 8L,
-            bEC ? 2L : 16L,
-            1L,
-            gregtech.api.enums.GT_Values.V[4],
-            true,
-            false);
+        makeWires(Materials.Nichrome, 1500, 4L, 8L, 3L, gregtech.api.enums.GT_Values.V[4], true, false);
+        makeWires(Materials.Steel, 1520, 2L, 4L, 2L, gregtech.api.enums.GT_Values.V[4], true, false);
+        makeWires(Materials.BlackSteel, 1540, 2L, 4L, 3L, gregtech.api.enums.GT_Values.V[4], true, false);
+        makeWires(Materials.Titanium, 1560, 2L, 4L, 4L, gregtech.api.enums.GT_Values.V[4], true, false);
+        makeWires(Materials.Aluminium, 1580, 1L, 2L, 1L, gregtech.api.enums.GT_Values.V[4], true, false);
 
-        makeWires(
-            Materials.Graphene,
-            1600,
-            bEC ? 1L : 16L,
-            bEC ? 2L : 32L,
-            1L,
-            gregtech.api.enums.GT_Values.V[5],
-            false,
-            true);
-        makeWires(
-            Materials.Osmium,
-            1620,
-            bEC ? 2L : 32L,
-            bEC ? 4L : 64L,
-            4L,
-            gregtech.api.enums.GT_Values.V[5],
-            true,
-            false);
-        makeWires(
-            Materials.Platinum,
-            1640,
-            bEC ? 1L : 16L,
-            bEC ? 2L : 32L,
-            2L,
-            gregtech.api.enums.GT_Values.V[5],
-            true,
-            false);
-        makeWires(
-            Materials.TungstenSteel,
-            1660,
-            bEC ? 2L : 14L,
-            bEC ? 4L : 28L,
-            3L,
-            gregtech.api.enums.GT_Values.V[5],
-            true,
-            false);
-        makeWires(
-            Materials.Tungsten,
-            1680,
-            bEC ? 2L : 12L,
-            bEC ? 4L : 24L,
-            2L,
-            gregtech.api.enums.GT_Values.V[5],
-            true,
-            false);
+        makeWires(Materials.Graphene, 1600, 1L, 2L, 1L, gregtech.api.enums.GT_Values.V[5], false, true);
+        makeWires(Materials.Osmium, 1620, 2L, 4L, 4L, gregtech.api.enums.GT_Values.V[5], true, false);
+        makeWires(Materials.Platinum, 1640, 1L, 2L, 2L, gregtech.api.enums.GT_Values.V[5], true, false);
+        makeWires(Materials.TungstenSteel, 1660, 2L, 4L, 3L, gregtech.api.enums.GT_Values.V[5], true, false);
+        makeWires(Materials.Tungsten, 1680, 2L, 4L, 2L, gregtech.api.enums.GT_Values.V[5], true, false);
 
-        makeWires(
-            Materials.HSSG,
-            1700,
-            bEC ? 2L : 128L,
-            bEC ? 4L : 256L,
-            4L,
-            gregtech.api.enums.GT_Values.V[6],
-            true,
-            false);
-        makeWires(
-            Materials.NiobiumTitanium,
-            1720,
-            bEC ? 2L : 128L,
-            bEC ? 4L : 256L,
-            4L,
-            gregtech.api.enums.GT_Values.V[6],
-            true,
-            false);
-        makeWires(
-            Materials.VanadiumGallium,
-            1740,
-            bEC ? 2L : 128L,
-            bEC ? 4L : 256L,
-            4L,
-            gregtech.api.enums.GT_Values.V[6],
-            true,
-            false);
-        makeWires(
-            Materials.YttriumBariumCuprate,
-            1760,
-            bEC ? 4L : 256L,
-            bEC ? 8L : 512L,
-            4L,
-            gregtech.api.enums.GT_Values.V[6],
-            true,
-            false);
+        makeWires(Materials.HSSG, 1700, 2L, 4L, 4L, gregtech.api.enums.GT_Values.V[6], true, false);
+        makeWires(Materials.NiobiumTitanium, 1720, 2L, 4L, 4L, gregtech.api.enums.GT_Values.V[6], true, false);
+        makeWires(Materials.VanadiumGallium, 1740, 2L, 4L, 4L, gregtech.api.enums.GT_Values.V[6], true, false);
+        makeWires(Materials.YttriumBariumCuprate, 1760, 4L, 8L, 4L, gregtech.api.enums.GT_Values.V[6], true, false);
 
-        makeWires(
-            Materials.Naquadah,
-            1780,
-            bEC ? 2L : 64L,
-            bEC ? 4L : 128L,
-            2L,
-            gregtech.api.enums.GT_Values.V[7],
-            true,
-            false);
+        makeWires(Materials.Naquadah, 1780, 2L, 4L, 2L, gregtech.api.enums.GT_Values.V[7], true, false);
 
-        makeWires(
-            Materials.NaquadahAlloy,
-            1800,
-            bEC ? 4L : 64L,
-            bEC ? 8L : 128L,
-            2L,
-            gregtech.api.enums.GT_Values.V[8],
-            true,
-            false);
-        makeWires(
-            Materials.Duranium,
-            1820,
-            bEC ? 8L : 64L,
-            bEC ? 16L : 128L,
-            1L,
-            gregtech.api.enums.GT_Values.V[8],
-            true,
-            false);
-        makeWires(
-            Materials.TPV,
-            1840,
-            bEC ? 1L : 14L,
-            bEC ? 2L : 28L,
-            6L,
-            gregtech.api.enums.GT_Values.V[4],
-            true,
-            false);
+        makeWires(Materials.NaquadahAlloy, 1800, 4L, 8L, 2L, gregtech.api.enums.GT_Values.V[8], true, false);
+        makeWires(Materials.Duranium, 1820, 8L, 16L, 1L, gregtech.api.enums.GT_Values.V[8], true, false);
+        makeWires(Materials.TPV, 1840, 1L, 2L, 6L, gregtech.api.enums.GT_Values.V[4], true, false);
 
         // Superconductor base.
-        makeWires(
-            Materials.Pentacadmiummagnesiumhexaoxid,
-            2200,
-            1L,
-            2L,
-            1L,
-            gregtech.api.enums.GT_Values.V[2],
-            false,
-            false);
-        makeWires(
-            Materials.Titaniumonabariumdecacoppereikosaoxid,
-            2220,
-            1L,
-            8L,
-            2L,
-            gregtech.api.enums.GT_Values.V[3],
-            false,
-            false);
+        makeWires(Materials.Pentacadmiummagnesiumhexaoxid, 2200, 1L, 2L, 1L, gregtech.api.enums.GT_Values.V[2], false, false);
+        makeWires(Materials.Titaniumonabariumdecacoppereikosaoxid, 2220, 1L, 8L, 2L, gregtech.api.enums.GT_Values.V[3], false, false);
         makeWires(Materials.Uraniumtriplatinid, 2240, 1L, 16L, 3L, gregtech.api.enums.GT_Values.V[4], false, false);
         makeWires(Materials.Vanadiumtriindinid, 2260, 1L, 64L, 4L, gregtech.api.enums.GT_Values.V[5], false, false);
-        makeWires(
-            Materials.Tetraindiumditindibariumtitaniumheptacoppertetrakaidekaoxid,
-            2280,
-            2L,
-            256L,
-            6L,
-            gregtech.api.enums.GT_Values.V[6],
-            false,
-            false);
-        makeWires(
-            Materials.Tetranaquadahdiindiumhexaplatiumosminid,
-            2300,
-            2L,
-            1024L,
-            8L,
-            gregtech.api.enums.GT_Values.V[7],
-            false,
-            false);
-        makeWires(
-            Materials.Longasssuperconductornameforuvwire,
-            2500,
-            2L,
-            4096L,
-            12L,
-            gregtech.api.enums.GT_Values.V[8],
-            false,
-            false);
-        makeWires(
-            Materials.Longasssuperconductornameforuhvwire,
-            2520,
-            2L,
-            16384L,
-            16L,
-            gregtech.api.enums.GT_Values.V[9],
-            false,
-            false);
-        makeWires(
-            Materials.SuperconductorUEVBase,
-            2032,
-            2L,
-            65536L,
-            24L,
-            gregtech.api.enums.GT_Values.V[10],
-            false,
-            false);
-        makeWires(
-            Materials.SuperconductorUIVBase,
-            2052,
-            2L,
-            262144L,
-            32L,
-            gregtech.api.enums.GT_Values.V[11],
-            false,
-            false);
+        makeWires(Materials.Tetraindiumditindibariumtitaniumheptacoppertetrakaidekaoxid, 2280, 2L, 256L, 6L, gregtech.api.enums.GT_Values.V[6], false, false);
+        makeWires(Materials.Tetranaquadahdiindiumhexaplatiumosminid, 2300, 2L, 1024L, 8L, gregtech.api.enums.GT_Values.V[7], false, false);
+        makeWires(Materials.Longasssuperconductornameforuvwire, 2500, 2L, 4096L, 12L, gregtech.api.enums.GT_Values.V[8], false, false);
+        makeWires(Materials.Longasssuperconductornameforuhvwire, 2520, 2L, 16384L, 16L, gregtech.api.enums.GT_Values.V[9], false, false);
+        makeWires(Materials.SuperconductorUEVBase, 2032, 2L, 65536L, 24L, gregtech.api.enums.GT_Values.V[10], false, false);
+        makeWires(Materials.SuperconductorUIVBase, 2052, 2L, 262144L, 32L, gregtech.api.enums.GT_Values.V[11], false, false);
         makeWires(Materials.SuperconductorUMVBase, 2072, 2L, 1048576L, 32L, GT_Values.V[12], false, false);
 
         // Actual superconductors.
@@ -3145,8 +2853,27 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         makeWires(Materials.SuperconductorUIV, 2081, 0L, 0L, 64L, gregtech.api.enums.GT_Values.V[11], false, true);
         makeWires(Materials.SuperconductorUMV, 2089, 0L, 0L, 64L, gregtech.api.enums.GT_Values.V[12], false, true);
 
-        makeWires(Materials.Ichorium, 2600, 2L, 2L, 12L, GT_Values.V[9], false, true);
+        //makeWires(Materials.Ichorium, 2600, 2L, 2L, 12L, GT_Values.V[9], false, true);
         makeWires(MaterialsUEVplus.SpaceTime, 2606, 0L, 0L, 1_000_000L, GT_Values.V[14], false, true);
+        //makeWires(Materials.RedstoneAlloy, 30645, 0, 1, 1, 32, true, false);
+
+        makeWires(Materials.ElectricalSteel, 11490, 1L, 2L, 2L, GT_Values.V[2], true, false);
+        makeWires(Materials.EnergeticAlloy, 11510, 2L, 4L, 2L, gregtech.api.enums.GT_Values.V[3], true, false);
+        makeWires(Materials.VibrantAlloy, 11530, 2L, 4L, 4L, gregtech.api.enums.GT_Values.V[4], true, false);
+        makeWires(Materials.MelodicAlloy, 11550, 2L, 4L, 4L, gregtech.api.enums.GT_Values.V[5], true, false);
+        makeWires(Materials.StellarAlloy, 11570, 4L, 8L, 6L, gregtech.api.enums.GT_Values.V[6], true, false);
+        makeWires(Materials.Trinium, 11450, 4L, 8L, 6L, GT_Values.V[7], true, false);
+        makeWires(Materials.ElectrumFlux, 1900, 1L, 2L, 3L, GT_Values.V[8], true, false);
+        makeWires(Materials.Bedrockium, 11310, 1L, 32L, 2L, GT_Values.V[9], true, false);
+        makeWires(Materials.Osmiridium, 11610, 1L, 2L, 8L, GT_Values.V[6], true, false);
+        makeWires(Materials.HSSE, 11590, 2L, 4L, 6L, GT_Values.V[6], true, false);
+        makeWires(Materials.HSSS, 11470, 4L, 8L, 6L, GT_Values.V[9], true, false);
+        makeWires(Materials.Draconium, 11330, 4L, 32L, 8L, GT_Values.V[10], true, false);
+        makeWires(Materials.NetherStar, 11350, 4L, 16L, 4L, GT_Values.V[11], true, false);
+        makeWires(Materials.Quantium, 11370, 4L, 16L, 2L, GT_Values.V[12], true, false);
+        makeWires(Materials.BlackPlutonium, 11390, 4L, 16L, 1L, GT_Values.V[13], false, false);
+        makeWires(Materials.DraconiumAwakened, 11410, 4L, 16L, 1L, GT_Values.V[14], false, false);
+        makeWires(Materials.Infinity, 11430, 0L, 0L, 8192L, GT_Values.V[14], false, true);
 
         GT_OreDictUnificator.registerOre(
             OrePrefixes.pipeSmall.get(Materials.Wood),
@@ -3291,6 +3018,191 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         generateItemPipes(Materials.Nickel, Materials.Nickel.mName, 5700, 1);
         generateItemPipes(Materials.Cobalt, Materials.Cobalt.mName, 5710, 2);
         generateItemPipes(Materials.Aluminium, Materials.Aluminium.mName, 5720, 2);
+        generateItemPipes(Materials.ElectrumFlux, Materials.ElectrumFlux.mName, 5652, 16);
+        generateItemPipes(Materials.BlackPlutonium, Materials.BlackPlutonium.mName, 5662, 32);
+        generateItemPipes(Materials.Bedrockium, Materials.Bedrockium.mName, 5672, 64);
+        generateItemPipes(Materials.Quantium, Materials.Quantium.mName, 5732, 128);
+        registerHighTierGTNHPipes();
+
+        // Tin
+        String displayName = GT_LanguageManager.i18nPlaceholder ? "%material" : Materials.Tin.mDefaultLocalName;
+        GT_OreDictUnificator.registerOre(
+            OrePrefixes.pipeTiny.get(Materials.Tin),
+            new GT_MetaPipeEntity_Item(
+                5589,
+                "GT_Pipe_Tin_Tiny",
+                "Tiny " + displayName + " Item Pipe",
+                0.25F,
+                Materials.Tin,
+                1,
+                262144,
+                false,
+                160).getStackForm(1L));
+        GT_OreDictUnificator.registerOre(
+            OrePrefixes.pipeSmall.get(Materials.Tin),
+            new GT_MetaPipeEntity_Item(
+                5590,
+                "GT_Pipe_Tin_Small",
+                "Small " + displayName + " Item Pipe",
+                0.375F,
+                Materials.Tin,
+                1,
+                131072,
+                false,
+                80).getStackForm(1L));
+        GT_OreDictUnificator.registerOre(
+            OrePrefixes.pipeMedium.get(Materials.Tin),
+            new GT_MetaPipeEntity_Item(
+                5591,
+                "GT_Pipe_Tin",
+                displayName + " Item Pipe",
+                0.5F,
+                Materials.Tin,
+                1,
+                65536,
+                false,
+                40).getStackForm(1L));
+        GT_OreDictUnificator.registerOre(
+            OrePrefixes.pipeLarge.get(Materials.Tin),
+            new GT_MetaPipeEntity_Item(
+                5592,
+                "GT_Pipe_Tin_Large",
+                "Large " + displayName + " Item Pipe",
+                0.75F,
+                Materials.Tin,
+                1,
+                32768,
+                false).getStackForm(1L));
+        GT_OreDictUnificator.registerOre(
+            OrePrefixes.pipeHuge.get(Materials.Tin),
+            new GT_MetaPipeEntity_Item(
+                5593,
+                "GT_Pipe_Tin_Huge",
+                "Huge " + displayName + " Item Pipe",
+                0.875F,
+                Materials.Tin,
+                2,
+                16384,
+                false).getStackForm(1L));
+
+        GT_OreDictUnificator.registerOre(
+            OrePrefixes.pipeRestrictiveTiny.get(Materials.Tin),
+            new GT_MetaPipeEntity_Item(
+                5594,
+                "GT_Pipe_Restrictive_Tin_Tiny",
+                "Tiny Restrictive " + displayName + " Item Pipe",
+                0.25F,
+                Materials.Tin,
+                1,
+                26214400,
+                true,
+                160).getStackForm(1L));
+        GT_OreDictUnificator.registerOre(
+            OrePrefixes.pipeRestrictiveSmall.get(Materials.Tin),
+            new GT_MetaPipeEntity_Item(
+                5595,
+                "GT_Pipe_Restrictive_Tin_Small",
+                "Small Restrictive " + displayName + " Item Pipe",
+                0.375F,
+                Materials.Tin,
+                1,
+                13107200,
+                true,
+                80).getStackForm(1L));
+        GT_OreDictUnificator.registerOre(
+            OrePrefixes.pipeRestrictiveMedium.get(Materials.Tin),
+            new GT_MetaPipeEntity_Item(
+                5596,
+                "GT_Pipe_Restrictive_Tin",
+                "Restrictive " + displayName + " Pipe",
+                0.5F,
+                Materials.Tin,
+                1,
+                6553600,
+                true,
+                40).getStackForm(1L));
+        GT_OreDictUnificator.registerOre(
+            OrePrefixes.pipeRestrictiveLarge.get(Materials.Tin),
+            new GT_MetaPipeEntity_Item(
+                5597,
+                "GT_Pipe_Restrictive_Tin_Large",
+                "Large Restrictive " + displayName + " Item Pipe",
+                0.75F,
+                Materials.Tin,
+                1,
+                3276800,
+                true).getStackForm(1L));
+        GT_OreDictUnificator.registerOre(
+            OrePrefixes.pipeRestrictiveHuge.get(Materials.Tin),
+            new GT_MetaPipeEntity_Item(
+                5598,
+                "GT_Pipe_Restrictive_Tin_Huge",
+                "Huge Restrictive " + displayName + " Item Pipe",
+                0.875F,
+                Materials.Tin,
+                2,
+                1638400,
+                true).getStackForm(1L));
+    }
+
+    private static void registerHighTierGTNHPipes() {
+        // 5110 - 5114 Copper
+        // 5120 - 5124 Bronze
+        // 5130 - 5134 Steel
+        // 5140 - 5144 Stainless
+        // 5150 - 5154 Titanium
+        // 5160 - 5164 Tungstensteel
+        // 5165 - 5167 High Pressure Pipe
+        // 5168 - Plasma Pipe
+        // 5170 - 5174 Plastic
+
+        // 5180 - 5187 NiobiumTitanium
+
+        generateFluidPipes(Materials.NiobiumTitanium, Materials.NiobiumTitanium.mName, 5180, 900, 2900, true);
+        generateFluidMultiPipes(Materials.NiobiumTitanium, Materials.NiobiumTitanium.mName, 5185, 900, 2900, true);
+
+        // 5190 - 5197 Enderium
+
+        generateFluidPipes(Materials.Enderium, Materials.Enderium.mName, 5190, 1800, 15000, true);
+        generateFluidMultiPipes(Materials.Enderium, Materials.Enderium.mName, 5195, 1800, 15000, true);
+
+        // 5200 - 5207 Naquadah
+
+        generateFluidPipes(Materials.Naquadah, Materials.Naquadah.mName, 5200, 9000, 19000, true);
+        generateFluidMultiPipes(Materials.Naquadah, Materials.Naquadah.mName, 5205, 9000, 19000, true);
+
+        // 5210 - 5217 Neutronium
+
+        generateFluidPipes(Materials.Neutronium, Materials.Neutronium.mName, 5210, 16800, 1000000, true);
+        generateFluidMultiPipes(Materials.Neutronium, Materials.Neutronium.mName, 5215, 16800, 1000000, true);
+
+        // 5220 - 5227 Nether Star
+
+        generateFluidPipes(Materials.NetherStar, Materials.NetherStar.mName, 5220, 19200, 1000000, true);
+        generateFluidMultiPipes(Materials.NetherStar, Materials.NetherStar.mName, 5225, 19200, 1000000, true);
+
+        // 5230 - 5237 Mysteroius Crystal
+
+        generateFluidPipes(Materials.MysteriousCrystal, Materials.MysteriousCrystal.mName, 5230, 24000, 1000000, true);
+        generateFluidMultiPipes(Materials.MysteriousCrystal, Materials.MysteriousCrystal.mName, 5235, 24000, 1000000, true);
+
+        // 5240 - 5247 Awakened Draconium
+
+        generateFluidPipes(Materials.DraconiumAwakened, Materials.DraconiumAwakened.mName, 5240, 45000, 10000000, true);
+        generateFluidMultiPipes(Materials.DraconiumAwakened, Materials.DraconiumAwakened.mName, 5245, 45000, 10000000, true);
+
+        // 5250 - 5257 Infinity
+
+        generateFluidPipes(Materials.Infinity, Materials.Infinity.mName, 5250, 60000, 10000000, true);
+        generateFluidMultiPipes(Materials.Infinity, Materials.Infinity.mName, 5255, 60000, 10000000, true);
+
+        // 5260 - 5267 Wrough Iron
+
+        generateFluidPipes(Materials.WroughtIron, Materials.WroughtIron.mName, 5260, 180, 2250, true);
+        generateFluidMultiPipes(Materials.WroughtIron, Materials.WroughtIron.mName, 5265, 180, 2250, true);
+
+        // 5277 - 5588 Free, as of GT 5.09.32.xx
+        // 5589+ Item Pipes Tin
     }
 
     @SuppressWarnings("PointlessArithmeticExpression")
@@ -3573,7 +3485,29 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
     }
 
     private static void generateItemPipes(Materials aMaterial, String name, String displayName, int startID,
-        int baseInvSlots) {
+                                          int baseInvSlots) {
+        GT_OreDictUnificator.registerOre(
+            OrePrefixes.pipeTiny.get(aMaterial),
+            new GT_MetaPipeEntity_Item(
+                startID - 2,
+                "GT_Pipe_" + name + "_Tiny",
+                "Tiny " + displayName + " Item Pipe",
+                0.25F,
+                aMaterial,
+                baseInvSlots / 4,
+                131072 / baseInvSlots,
+                false).getStackForm(1L));
+        GT_OreDictUnificator.registerOre(
+            OrePrefixes.pipeSmall.get(aMaterial),
+            new GT_MetaPipeEntity_Item(
+                startID - 1,
+                "GT_Pipe_" + name + "_Small",
+                "Small " + displayName + " Item Pipe",
+                0.375F,
+                aMaterial,
+                baseInvSlots / 2,
+                65536 / baseInvSlots,
+                false).getStackForm(1L));
         GT_OreDictUnificator.registerOre(
             OrePrefixes.pipeMedium.get(aMaterial),
             new GT_MetaPipeEntity_Item(
@@ -3608,9 +3542,31 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
                 8192 / baseInvSlots,
                 false).getStackForm(1L));
         GT_OreDictUnificator.registerOre(
-            OrePrefixes.pipeRestrictiveMedium.get(aMaterial),
+            OrePrefixes.pipeRestrictiveTiny.get(aMaterial),
             new GT_MetaPipeEntity_Item(
                 startID + 3,
+                "GT_Pipe_Restrictive_" + name + "_Tiny",
+                "Tiny Restrictive " + displayName + " Item Pipe",
+                0.25F,
+                aMaterial,
+                baseInvSlots / 4,
+                13107200 / baseInvSlots,
+                true).getStackForm(1L));
+        GT_OreDictUnificator.registerOre(
+            OrePrefixes.pipeRestrictiveSmall.get(aMaterial),
+            new GT_MetaPipeEntity_Item(
+                startID + 4,
+                "GT_Pipe_Restrictive_" + name + "_Small",
+                "Small Restrictive " + displayName + " Item Pipe",
+                0.375F,
+                aMaterial,
+                baseInvSlots / 2,
+                6553600 / baseInvSlots,
+                true).getStackForm(1L));
+        GT_OreDictUnificator.registerOre(
+            OrePrefixes.pipeRestrictiveMedium.get(aMaterial),
+            new GT_MetaPipeEntity_Item(
+                startID + 5,
                 "GT_Pipe_Restrictive_" + name,
                 "Restrictive " + displayName + " Item Pipe",
                 0.50F,
@@ -3621,7 +3577,7 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         GT_OreDictUnificator.registerOre(
             OrePrefixes.pipeRestrictiveLarge.get(aMaterial),
             new GT_MetaPipeEntity_Item(
-                startID + 4,
+                startID + 6,
                 "GT_Pipe_Restrictive_" + name + "_Large",
                 "Large Restrictive " + displayName + " Item Pipe",
                 0.75F,
@@ -3632,7 +3588,7 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         GT_OreDictUnificator.registerOre(
             OrePrefixes.pipeRestrictiveHuge.get(aMaterial),
             new GT_MetaPipeEntity_Item(
-                startID + 5,
+                startID + 7,
                 "GT_Pipe_Restrictive_" + name + "_Huge",
                 "Huge Restrictive " + displayName + " Item Pipe",
                 0.875F,

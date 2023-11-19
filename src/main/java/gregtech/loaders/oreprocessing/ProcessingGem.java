@@ -16,6 +16,7 @@ import static gregtech.api.util.GT_RecipeConstants.FUEL_VALUE;
 import static gregtech.api.util.GT_Utility.calculateRecipeEU;
 
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -631,7 +632,7 @@ public class ProcessingGem implements gregtech.api.interfaces.IOreRecipeRegistra
                 }
                 GT_Values.RA.stdBuilder()
                     .itemInputs(aStack)
-                    .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.gem, aMaterial, 2L))
+                    .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.gem, aMaterial, new ItemStack(Items.boat), 2L))
                     .duration(3 * SECONDS + 4 * TICKS)
                     .eut(16)
                     .addTo(sHammerRecipes);

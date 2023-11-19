@@ -505,10 +505,6 @@ public class GT_PostLoad {
             GT_OreDictUnificator.get(ItemList.Block_SSFUEL.get(1)),
             GT_OreDictUnificator.get(ItemList.Block_MSSFUEL.get(1)),
             GT_OreDictUnificator.get(OrePrefixes.rod, Materials.Blaze, 1));
-        if (Thaumcraft.isModLoaded()) {
-            GT_Recipe.GT_Recipe_Map.sLargeBoilerFakeFuels
-                .addSolidRecipe(GT_ModHandler.getModItem(Thaumcraft.ID, "ItemResource", 1));
-        }
     }
 
     public static void identifyAnySteam() {

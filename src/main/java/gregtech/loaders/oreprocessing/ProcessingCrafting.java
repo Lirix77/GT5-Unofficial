@@ -255,24 +255,6 @@ public class ProcessingCrafting implements gregtech.api.interfaces.IOreRecipeReg
             case "craftingLensRed" -> {
 
                 GT_Values.RA.stdBuilder()
-                    .itemInputs(
-                        GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Redstone, 1L),
-                        GT_Utility.copyAmount(0, aStack))
-                    .itemOutputs(GT_ModHandler.getModItem(BuildCraftSilicon.ID, "redstoneChipset", 1L, 0))
-                    .duration(2 * SECONDS + 10 * TICKS)
-                    .eut(TierEU.RECIPE_MV)
-                    .addTo(sLaserEngraverRecipes);
-
-                GT_Values.RA.stdBuilder()
-                    .itemInputs(
-                        GT_OreDictUnificator.get(OrePrefixes.foil, Materials.RedAlloy, 1L),
-                        GT_Utility.copyAmount(0, aStack))
-                    .itemOutputs(GT_ModHandler.getModItem(NewHorizonsCoreMod.ID, "item.EtchedLowVoltageWiring", 1L, 0))
-                    .duration(10 * SECONDS)
-                    .eut(16)
-                    .addTo(sLaserEngraverRecipes);
-
-                GT_Values.RA.stdBuilder()
                     .itemInputs(ItemList.Circuit_Silicon_Wafer.get(1), GT_Utility.copyAmount(0, aStack))
                     .itemOutputs(ItemList.Circuit_Wafer_ILC.get(1))
                     .duration(60 * SECONDS)
