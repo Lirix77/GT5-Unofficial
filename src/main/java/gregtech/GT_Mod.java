@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 import appeng.helpers.InterfaceTerminalSupportedClassProvider;
+import gregtech.common.blocks.DimBlocks;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -311,6 +312,8 @@ public class GT_Mod implements IGT_Mod {
         if (GregTech_API.sLoadStarted) {
             return;
         }
+
+        DimBlocks.init();
 
         for (Runnable tRunnable : GregTech_API.sBeforeGTLoad) {
             try {
