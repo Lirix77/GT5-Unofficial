@@ -1,18 +1,18 @@
 package gregtech.loaders.postload.recipe;
 
+import gregtech.api.enums.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import cpw.mods.fml.common.Loader;
-import gregtech.api.enums.GT_Values;
-import gregtech.api.enums.ItemList;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
 import gregtech.api.util.GT_Utility;
+
+import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sCentrifugeRecipes;
+import static gregtech.api.util.GT_RecipeBuilder.*;
 
 public class CentrifugeRecipes implements Runnable {
 
@@ -184,20 +184,6 @@ public class CentrifugeRecipes implements Runnable {
             2);
 
         GT_Values.RA.addCentrifugeRecipe(
-            Materials.AstralSilver.getDust(3),
-            null,
-            null,
-            null,
-            Materials.Silver.getDust(2),
-            Materials.Thaumium.getDust(1),
-            null,
-            null,
-            null,
-            null,
-            new int[] { 10000, 10000 },
-            300,
-            480);
-        GT_Values.RA.addCentrifugeRecipe(
             Materials.SolderingAlloy.getDust(10),
             null,
             null,
@@ -298,6 +284,28 @@ public class CentrifugeRecipes implements Runnable {
                 new int[] { 10000, 10000, 1000 },
                 300,
                 5);
+
+            GT_Values.RA.stdBuilder().itemInputs(ItemList.MoonStoneDust.get(36L))
+                .itemOutputs(
+                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.SiliconDioxide, 9L),
+                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Manganese, 9L),
+                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Olivine, 9L),
+                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.RareEarth, 4L),
+                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Platinum, 4L),
+                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Tungstate, 4L))
+                .outputChances(5000, 2000, 1000, 750, 500, 250).duration(2 * MINUTES + 42 * SECONDS)
+                .eut(TierEU.RECIPE_MV).addTo(sCentrifugeRecipes);
+
+            GT_Values.RA.stdBuilder().itemInputs(ItemList.MarsStoneDust.get(36L))
+                .itemOutputs(
+                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.BandedIron, 9L),
+                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Magnesium, 9L),
+                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Aluminiumoxide, 9L),
+                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Ruby, 4L),
+                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Diamond, 4L),
+                    GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Iridium, 4L))
+                .outputChances(5000, 3000, 1000, 750, 500, 250).duration(2 * MINUTES + SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_HV).addTo(sCentrifugeRecipes);
         }
     }
 }

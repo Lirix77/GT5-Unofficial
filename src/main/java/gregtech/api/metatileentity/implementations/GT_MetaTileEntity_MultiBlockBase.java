@@ -1644,13 +1644,13 @@ public abstract class GT_MetaTileEntity_MultiBlockBase extends MetaTileEntity
                 + VN[GT_Utility.getTier(getMaxInputVoltage())]
                 + EnumChatFormatting.RESET,
             /* 5 */ StatCollector.translateToLocal("GT5U.multiblock.problems") + ": "
-                + EnumChatFormatting.RED
+                + ((getIdealStatus() - getRepairStatus()) > 0 ? EnumChatFormatting.RED : EnumChatFormatting.GREEN)
                 + (getIdealStatus() - getRepairStatus())
                 + EnumChatFormatting.RESET
                 + " "
                 + StatCollector.translateToLocal("GT5U.multiblock.efficiency")
                 + ": "
-                + EnumChatFormatting.YELLOW
+                + (mEfficiency < 10000 ? EnumChatFormatting.YELLOW : EnumChatFormatting.GREEN)
                 + mEfficiency / 100.0F
                 + EnumChatFormatting.RESET
                 + " %",

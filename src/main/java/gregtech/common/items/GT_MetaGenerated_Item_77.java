@@ -1,8 +1,9 @@
 package gregtech.common.items;
 
-import gregtech.api.enums.ItemList;
-import gregtech.api.enums.SubTag;
+import gregtech.api.enums.*;
 import gregtech.api.items.GT_MetaGenerated_Item_X32;
+import gregtech.api.util.GT_ModHandler;
+import gregtech.api.util.GT_OreDictUnificator;
 
 public class GT_MetaGenerated_Item_77 extends GT_MetaGenerated_Item_X32 {
     public static GT_MetaGenerated_Item_77 INSTANCE;
@@ -78,6 +79,11 @@ public class GT_MetaGenerated_Item_77 extends GT_MetaGenerated_Item_X32 {
         ItemList.DeshDualCompressedPlates.set(addItem(64, "DeshDualCompressedPlates", ""));
         ItemList.PotassiumHydroxideDust.set(addItem(65, "PotassiumHydroxideDust", ""));
         ItemList.RawLapotronCrystal.set(addItem(66, "RawLapotronCrystal", ""));
-        ItemList.IridiumAlloyItemCasing.set(addItem(67, "RawLapotronCrystal", ""));
+        ItemList.IridiumAlloyItemCasing.set(addItem(67, "IridiumAlloyItemCasing", ""));
+        ItemList.GTNHBioItems.set(addItem(68, "GTNHBioItems", ""));
+        ItemList.ChargedCertusQuartzDust.set(addItem(69, "ChargedCertusQuartzDust", ""));
+        GT_OreDictUnificator.set(OrePrefixes.dust, Materials.CertusQuartzCharged, ItemList.ChargedCertusQuartzDust.get(1));
+        ItemList.AlumiteDust.set(addItem(70, "AlumiteDust", ""));
+        GT_OreDictUnificator.set(OrePrefixes.dust, Materials.Alumite, ItemList.AlumiteDust.get(1));
     }
 }

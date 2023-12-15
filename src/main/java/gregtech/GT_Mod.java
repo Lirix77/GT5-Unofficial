@@ -493,16 +493,6 @@ public class GT_Mod implements IGT_Mod {
             GT_Forestry_Compat.transferSqueezerRecipes();
         }
         GT_MetaTileEntity_DigitalChestBase.registerAEIntegration();
-        ItemStack facade = AEApi.instance()
-            .definitions()
-            .items()
-            .facade()
-            .maybeItem()
-            .transform(i -> new ItemStack(i, 1, GT_Values.W))
-            .orNull();
-        if (facade != null) {
-            GregTech_API.registerCover(facade, null, new GT_Cover_FacadeAE());
-        }
 
         Arrays
             .stream(

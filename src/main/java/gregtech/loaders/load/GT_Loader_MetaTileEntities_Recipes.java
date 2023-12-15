@@ -228,6 +228,7 @@ import static gregtech.api.enums.Mods.Thaumcraft;
 import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sAssemblerRecipes;
 import static gregtech.api.util.GT_RecipeBuilder.SECONDS;
 
+import gregtech.api.enums.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -235,16 +236,6 @@ import net.minecraft.item.ItemStack;
 import codechicken.nei.api.API;
 import gregtech.GT_Mod;
 import gregtech.api.GregTech_API;
-import gregtech.api.enums.ConfigCategories;
-import gregtech.api.enums.Dyes;
-import gregtech.api.enums.GT_Values;
-import gregtech.api.enums.ItemList;
-import gregtech.api.enums.MachineType;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.OreDictNames;
-import gregtech.api.enums.OrePrefixes;
-import gregtech.api.enums.SoundResource;
-import gregtech.api.enums.TierEU;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_BasicMachine_GT_Recipe;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_BasicMachine_GT_Recipe.SpecialEffects;
 import gregtech.api.util.ExternalMaterials;
@@ -5812,7 +5803,7 @@ public class GT_Loader_MetaTileEntities_Recipes implements Runnable {
         GT_OreDictUnificator.addItemDataFromInputs(
             ItemList.Hatch_Muffler_MAX.get(1L),
             ItemList.Hull_MAX.get(1),
-            OrePrefixes.pipeLarge.get(Materials.MysteriousCrystal),
+            OrePrefixes.pipeLarge.get(MaterialsCubix.Power),
             OrePrefixes.rotor.get(Materials.CosmicNeutronium),
             ItemList.Electric_Motor_UHV.get(1));
 

@@ -12,17 +12,12 @@ import static gregtech.api.util.GT_RecipeConstants.RESEARCH_TIME;
 import java.util.ArrayList;
 import java.util.List;
 
+import gregtech.api.enums.*;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-import gregtech.api.enums.GT_Values;
-import gregtech.api.enums.ItemList;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.MaterialsUEVplus;
-import gregtech.api.enums.OrePrefixes;
-import gregtech.api.enums.TierEU;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
 import gregtech.api.util.GT_PCBFactoryManager;
@@ -60,7 +55,7 @@ public class GT_PCBFactoryRecipes {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     GT_OreDictUnificator.get(OrePrefixes.frameGt, Materials.NaquadahAlloy, 1),
-                    Materials.DraconiumAwakened.getPlates(6))
+                    Materials.get("Artherium-Sn").getPlates(6))
                 .itemOutputs(ItemList.BasicPhotolithographicFrameworkCasing.get(1))
                 .duration(30 * SECONDS)
                 .eut(TierEU.RECIPE_ZPM)
@@ -553,7 +548,7 @@ public class GT_PCBFactoryRecipes {
                             .getModItem("miscutils", "itemFoilChromaticGlass", (long) (16 * (Math.sqrt(tier - 6)))) },
                     new FluidStack[] { Materials.SulfuricAcid.getFluid((long) (500 * (Math.sqrt(tier - 6)))),
                         Materials.IronIIIChloride.getFluid((long) (12500 * (Math.sqrt(tier - 6)))),
-                        Materials.MysteriousCrystal.getMolten((long) (2880 * (Math.sqrt(tier - 6)))) },
+                        MaterialsCubix.Power.getMolten((long) (2880 * (Math.sqrt(tier - 6)))) },
                     aBoards.toArray(new ItemStack[0]),
                     (int) Math.ceil(600 / Math.sqrt(Math.pow(1.5, tier - 5.5))),
                     (int) GT_Values.VP[tier] * 3 / 4,
@@ -583,7 +578,7 @@ public class GT_PCBFactoryRecipes {
                             .getModItem("miscutils", "itemFoilChromaticGlass", (long) (16 * (Math.sqrt(tier - 6)))) },
                     new FluidStack[] { Materials.SulfuricAcid.getFluid((long) (500 * (Math.sqrt(tier - 6)))),
                         Materials.IronIIIChloride.getFluid((long) (12500 * (Math.sqrt(tier - 6)))),
-                        Materials.MysteriousCrystal.getMolten((long) (2880 * (Math.sqrt(tier - 6)))) },
+                        MaterialsCubix.Power.getMolten((long) (2880 * (Math.sqrt(tier - 6)))) },
                     aBoards.toArray(new ItemStack[0]),
                     (int) Math.ceil(500 / Math.sqrt(Math.pow(1.5, tier - 6.5))),
                     (int) GT_Values.VP[tier + 1] * 3 / 4,
@@ -613,7 +608,7 @@ public class GT_PCBFactoryRecipes {
                             .getModItem("miscutils", "itemFoilChromaticGlass", (long) (16 * (Math.sqrt(tier - 6)))) },
                     new FluidStack[] { Materials.SulfuricAcid.getFluid((long) (500 * (Math.sqrt(tier - 6)))),
                         Materials.IronIIIChloride.getFluid((long) (12500 * (Math.sqrt(tier - 6)))),
-                        Materials.MysteriousCrystal.getMolten((long) (2880 * (Math.sqrt(tier - 6)))) },
+                        MaterialsCubix.Power.getMolten((long) (2880 * (Math.sqrt(tier - 6)))) },
                     aBoards.toArray(new ItemStack[0]),
                     (int) Math.ceil(400 / Math.sqrt(Math.pow(1.5, tier - 6.5))),
                     (int) GT_Values.VP[tier + 1] * 3 / 4,

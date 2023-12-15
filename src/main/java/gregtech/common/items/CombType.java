@@ -121,7 +121,7 @@ public enum CombType {
     SPACE(91, "space", true, Materials._NULL, 100, 0x003366, 0xC0C0C0, ItemComb.Voltage.HV),
     METEORICIRON(92, "meteoriciron", true, Materials.MeteoricIron, 100, 0x321928, 0x643250, ItemComb.Voltage.EV),
     DESH(93, "desh", true, Materials.Desh, 90, 0x282828, 0x323232, ItemComb.Voltage.IV),
-    LEDOX(94, "ledox", true, Materials.Ledox, 75, 0x0000CD, 0x0074FF, ItemComb.Voltage.IV),
+    //LEDOX(94, "ledox", true, Materials.Ledox, 75, 0x0000CD, 0x0074FF, ItemComb.Voltage.IV),
     CALLISTOICE(95, "callistoice", true, Materials.CallistoIce, 75, 0x0074FF, 0x1EB1FF, ItemComb.Voltage.IV),
     MYTRYL(96, "mytryl", true, Materials.Mytryl, 65, 0xDAA520, 0xF26404, ItemComb.Voltage.IV),
     QUANTIUM(97, "quantium", true, Materials.Quantium, 50, 0x00FF00, 0x00D10B, ItemComb.Voltage.IV),

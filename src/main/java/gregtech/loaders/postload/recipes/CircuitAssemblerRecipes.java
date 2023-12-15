@@ -8,14 +8,9 @@ import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sCircuitAssemblerRecipes
 import static gregtech.api.util.GT_RecipeBuilder.SECONDS;
 import static gregtech.loaders.postload.GT_MachineRecipeLoader.solderingMats;
 
+import gregtech.api.enums.*;
 import net.minecraft.item.ItemStack;
 
-import gregtech.api.enums.GT_Values;
-import gregtech.api.enums.ItemList;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.OrePrefixes;
-import gregtech.api.enums.SubTag;
-import gregtech.api.enums.TierEU;
 import gregtech.api.util.GT_OreDictUnificator;
 import gregtech.api.util.GT_Utility;
 
@@ -237,7 +232,7 @@ public class CircuitAssemblerRecipes implements Runnable {
             GT_OreDictUnificator.get(OrePrefixes.stickLong, Materials.Iron, 2L),
             GT_OreDictUnificator.get(OrePrefixes.stickLong, Materials.Gold, 2L),
             GT_OreDictUnificator.get(OrePrefixes.stickLong, Materials.Diamond, 2L),
-            getModItem(NewHorizonsCoreMod.ID, "item.LongObsidianRod", 2L, 0),
+            GT_OreDictUnificator.get(OrePrefixes.stick, MaterialsCubix.Energy, 2L),
             GT_OreDictUnificator.get(OrePrefixes.stickLong, Materials.Blaze, 2L),
             GT_OreDictUnificator.get(OrePrefixes.stickLong, Materials.Rubber, 2L),
             GT_OreDictUnificator.get(OrePrefixes.stickLong, Materials.Emerald, 2L),

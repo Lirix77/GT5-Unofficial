@@ -1,13 +1,10 @@
 package gregtech.loaders.postload.recipe;
 
+import gregtech.api.enums.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.Loader;
-import gregtech.api.enums.GT_Values;
-import gregtech.api.enums.ItemList;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
 import gregtech.api.util.GT_Utility;
@@ -1813,27 +1810,6 @@ public class BlastFurnaceRecipes implements Runnable {
             8000,
             122880,
             9900);
-
-        GT_Values.RA.addBlastRecipe(
-            GT_OreDictUnificator.get(OrePrefixes.dust, Materials.MysteriousCrystal, 1L),
-            GT_Utility.getIntegratedCircuit(1),
-            GT_Values.NF,
-            GT_Values.NF,
-            GT_OreDictUnificator.get(OrePrefixes.ingotHot, Materials.MysteriousCrystal, 1L),
-            GT_Values.NI,
-            6000,
-            122880,
-            7200);
-        GT_Values.RA.addBlastRecipe(
-            GT_OreDictUnificator.get(OrePrefixes.dust, Materials.MysteriousCrystal, 1L),
-            GT_Utility.getIntegratedCircuit(11),
-            Materials.Radon.getGas(1000L),
-            GT_Values.NF,
-            GT_OreDictUnificator.get(OrePrefixes.ingotHot, Materials.MysteriousCrystal, 1L),
-            GT_Values.NI,
-            4500,
-            122880,
-            7200);
 
         GT_Values.RA.addBlastRecipe(
             GT_OreDictUnificator.get(OrePrefixes.dust, Materials.CosmicNeutronium, 1L),

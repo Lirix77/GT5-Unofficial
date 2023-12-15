@@ -535,7 +535,7 @@ public class CraftingRecipes implements Runnable {
             ItemList.Casing_Tank_10.get(1L),
             bits,
             new Object[]{"PPP", "PIP", "PPP", 'P', OrePrefixes.plate.get(Materials.Bedrockium), 'I',
-                OrePrefixes.pipeLarge.get(Materials.MysteriousCrystal)});
+                OrePrefixes.pipeLarge.get(MaterialsCubix.Power)});
 
         GT_ModHandler.addCraftingRecipe(
             ItemList.Field_Generator_LV.get(1L),

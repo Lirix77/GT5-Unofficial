@@ -95,9 +95,6 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10")
 
     implementation("mcp.mobius.waila:Waila:1.5.11-RC2-NONEI_1.7.10:dev")
-    implementation("codechicken:CodeChickenLib:1.7.10-1.1.3.140:dev")
-    implementation("codechicken:CodeChickenCore:1.7.10-1.0.7.47:dev")
-    implementation("codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev")
 
     compileOnly("com.enderio.core:EnderCore:1.7.10-0.2.0.39_beta:dev")
     compileOnly("com.enderio:EnderIO:1.7.10-2.3.0.429_beta:dev")

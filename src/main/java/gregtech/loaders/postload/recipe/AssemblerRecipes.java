@@ -400,7 +400,7 @@ public class AssemblerRecipes implements Runnable {
                 ItemList.Electric_Motor_ZPM.get(4L),
                 ItemList.Electric_Pump_ZPM.get(4L),
                 ItemList.Conveyor_Module_ZPM.get(4L),
-                GT_OreDictUnificator.get(OrePrefixes.gearGt, Materials.MysteriousCrystal, 4L),
+                GT_OreDictUnificator.get(OrePrefixes.gearGt, MaterialsCubix.Power, 4L),
                 GT_Utility.getIntegratedCircuit(2))
             .itemOutputs(ItemList.OreDrill4.get(1L)).fluidInputs(Materials.SolderingAlloy.getMolten(576))
             .duration(20 * SECONDS).eut(TierEU.RECIPE_ZPM).addTo(sAssemblerRecipes);
@@ -571,7 +571,7 @@ public class AssemblerRecipes implements Runnable {
 
         GT_Values.RA.stdBuilder()
             .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.pipeLarge, Materials.MysteriousCrystal, 1L),
+                GT_OreDictUnificator.get(OrePrefixes.pipeLarge, MaterialsCubix.Power, 1L),
                 GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Bedrockium, 8L),
                 GT_Utility.getIntegratedCircuit(4))
             .itemOutputs(ItemList.Casing_Tank_10.get(1L)).duration(5 * SECONDS).eut(16).addTo(sAssemblerRecipes);
@@ -3329,7 +3329,7 @@ public class AssemblerRecipes implements Runnable {
             .itemInputs(
                 GT_Utility.getIntegratedCircuit(3),
                 GT_ModHandler.getModItem(IndustrialCraft2.ID, "itemPartAlloy", 4),
-                GT_OreDictUnificator.get(OrePrefixes.plate, Materials.MysteriousCrystal, 4),
+                GT_OreDictUnificator.get(OrePrefixes.plate, MaterialsCubix.Power, 4),
                 ItemList.NaquadriaIronPlate.get(1))
             .itemOutputs(ItemList.ReinforcedNaquadriaIronPlate.get(1)).duration(5 * SECONDS)
             .eut(TierEU.RECIPE_UV).addTo(sAssemblerRecipes);

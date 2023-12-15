@@ -1695,7 +1695,7 @@ public enum GT_BeeDefinition implements IBeeDefinition {
     }),
     LEDOX(GT_BranchDefinition.SPACE, "Ledox", false, new Color(0x0000CD), new Color(0x0074FF), beeSpecies -> {
         beeSpecies.addProduct(GT_Bees.combs.getStackForType(CombType.SPACE), 0.10f);
-        beeSpecies.addSpecialty(GT_Bees.combs.getStackForType(CombType.LEDOX), 0.10f);
+        //beeSpecies.addSpecialty(GT_Bees.combs.getStackForType(CombType.LEDOX), 0.10f);
         beeSpecies.setHumidity(EnumHumidity.NORMAL);
         beeSpecies.setTemperature(COLD);
         beeSpecies.setHasEffect();

@@ -2537,6 +2537,9 @@ public enum ItemList implements IItemContainer {
     PotassiumHydroxideDust,
     RawLapotronCrystal,
     IridiumAlloyItemCasing,
+    GTNHBioItems,
+    ChargedCertusQuartzDust,
+    AlumiteDust,
 
     Superconducting_Magnet_Solenoid_MV,
     Superconducting_Magnet_Solenoid_HV,

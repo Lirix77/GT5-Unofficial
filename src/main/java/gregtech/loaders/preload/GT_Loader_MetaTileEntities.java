@@ -2,14 +2,10 @@ package gregtech.loaders.preload;
 
 import static gregtech.api.enums.MetaTileEntityIDs.*;
 
+import gregtech.api.enums.*;
 import net.minecraft.util.EnumChatFormatting;
 
 import gregtech.api.GregTech_API;
-import gregtech.api.enums.GT_Values;
-import gregtech.api.enums.ItemList;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.MaterialsUEVplus;
-import gregtech.api.enums.OrePrefixes;
 import gregtech.api.metatileentity.implementations.GT_MetaPipeEntity_Cable;
 import gregtech.api.metatileentity.implementations.GT_MetaPipeEntity_Fluid;
 import gregtech.api.metatileentity.implementations.GT_MetaPipeEntity_Frame;
@@ -2855,12 +2851,11 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
 
         //makeWires(Materials.Ichorium, 2600, 2L, 2L, 12L, GT_Values.V[9], false, true);
         makeWires(MaterialsUEVplus.SpaceTime, 2606, 0L, 0L, 1_000_000L, GT_Values.V[14], false, true);
-        //makeWires(Materials.RedstoneAlloy, 30645, 0, 1, 1, 32, true, false);
 
-        makeWires(Materials.ElectricalSteel, 11490, 1L, 2L, 2L, GT_Values.V[2], true, false);
+        makeWires(MaterialsCubix.Energy, 11490, 1L, 3L, 4L, GT_Values.V[2], true, false);
         makeWires(Materials.EnergeticAlloy, 11510, 2L, 4L, 2L, gregtech.api.enums.GT_Values.V[3], true, false);
         makeWires(Materials.VibrantAlloy, 11530, 2L, 4L, 4L, gregtech.api.enums.GT_Values.V[4], true, false);
-        makeWires(Materials.MelodicAlloy, 11550, 2L, 4L, 4L, gregtech.api.enums.GT_Values.V[5], true, false);
+        makeWires(MaterialsCubix.Power, 11550, 1L, 8L, 8L, gregtech.api.enums.GT_Values.V[7], true, false);
         makeWires(Materials.StellarAlloy, 11570, 4L, 8L, 6L, gregtech.api.enums.GT_Values.V[6], true, false);
         makeWires(Materials.Trinium, 11450, 4L, 8L, 6L, GT_Values.V[7], true, false);
         makeWires(Materials.ElectrumFlux, 1900, 1L, 2L, 3L, GT_Values.V[8], true, false);
@@ -3181,10 +3176,10 @@ public class GT_Loader_MetaTileEntities implements Runnable { // TODO CHECK CIRC
         generateFluidPipes(Materials.NetherStar, Materials.NetherStar.mName, 5220, 19200, 1000000, true);
         generateFluidMultiPipes(Materials.NetherStar, Materials.NetherStar.mName, 5225, 19200, 1000000, true);
 
-        // 5230 - 5237 Mysteroius Crystal
+        // 5230 - 5237 Power
 
-        generateFluidPipes(Materials.MysteriousCrystal, Materials.MysteriousCrystal.mName, 5230, 24000, 1000000, true);
-        generateFluidMultiPipes(Materials.MysteriousCrystal, Materials.MysteriousCrystal.mName, 5235, 24000, 1000000, true);
+        generateFluidPipes(MaterialsCubix.Power, MaterialsCubix.Power.mName, 5230, 24000, 1000000, true);
+        generateFluidMultiPipes(MaterialsCubix.Power, MaterialsCubix.Power.mName, 5235, 24000, 1000000, true);
 
         // 5240 - 5247 Awakened Draconium
 

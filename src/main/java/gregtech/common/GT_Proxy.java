@@ -59,6 +59,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 
+import gregtech.api.enums.*;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -122,19 +123,7 @@ import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.GregTech_API;
-import gregtech.api.enums.ConfigCategories;
-import gregtech.api.enums.Dyes;
-import gregtech.api.enums.FluidState;
-import gregtech.api.enums.GT_Values;
-import gregtech.api.enums.ItemList;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.OreDictNames;
-import gregtech.api.enums.OrePrefixes;
-import gregtech.api.enums.SoundResource;
-import gregtech.api.enums.SubTag;
 import gregtech.api.enums.TC_Aspects.TC_AspectStack;
-import gregtech.api.enums.TierEU;
-import gregtech.api.enums.ToolDictNames;
 import gregtech.api.fluid.GT_FluidFactory;
 import gregtech.api.interfaces.IBlockOnWalkOver;
 import gregtech.api.interfaces.IGlobalWirelessEnergy;
@@ -1098,6 +1087,55 @@ public abstract class GT_Proxy implements IGT_Mod, IGuiHandler, IFuelHandler, IG
                     GT_OreDictUnificator.get(OrePrefixes.bucketClay, Materials.Milk, 1L),
                     GT_OreDictUnificator.get(OrePrefixes.bucketClay, Materials.Empty, 1L)));
         }
+
+        GT_OreDictUnificator.set(
+            OrePrefixes.ingot,
+            MaterialsCubix.Energy,
+            GT_ModHandler.getModItem("energyadditions", "eaenergyingot", 1L, 0));
+        GT_OreDictUnificator.set(
+            OrePrefixes.ingot,
+            MaterialsCubix.Power,
+            GT_ModHandler.getModItem("energyadditions", "eapowerenergyingot", 1L, 0));
+        GT_OreDictUnificator.set(
+            OrePrefixes.nugget,
+            MaterialsCubix.Energy,
+            GT_ModHandler.getModItem("energyadditions", "eaenergynugget", 1L, 0));
+        GT_OreDictUnificator.set(
+            OrePrefixes.nugget,
+            MaterialsCubix.Power,
+            GT_ModHandler.getModItem("energyadditions", "eapowerenergynugget", 1L, 0));
+        GT_OreDictUnificator.set(
+            OrePrefixes.plate,
+            MaterialsCubix.Energy,
+            GT_ModHandler.getModItem("energyadditions", "eaenergyplate", 1L, 0));
+        GT_OreDictUnificator.set(
+            OrePrefixes.plate,
+            MaterialsCubix.Power,
+            GT_ModHandler.getModItem("energyadditions", "eapowerenergyplate", 1L, 0));
+        GT_OreDictUnificator.set(
+            OrePrefixes.stick,
+            MaterialsCubix.Energy,
+            GT_ModHandler.getModItem("energyadditions", "eaenergyrod", 1L, 0));
+        GT_OreDictUnificator.set(
+            OrePrefixes.stick,
+            MaterialsCubix.Power,
+            GT_ModHandler.getModItem("energyadditions", "eapowerenergyrod", 1L, 0));
+        GT_OreDictUnificator.set(
+            OrePrefixes.dust,
+            MaterialsCubix.Energy,
+            GT_ModHandler.getModItem("energyadditions", "eaenergydust", 1L, 0));
+        GT_OreDictUnificator.set(
+            OrePrefixes.dust,
+            MaterialsCubix.Power,
+            GT_ModHandler.getModItem("energyadditions", "eapowerenergydust", 1L, 0));
+        GT_OreDictUnificator.set(
+            OrePrefixes.block,
+            MaterialsCubix.Energy,
+            GT_ModHandler.getModItem("energyadditions", "eaenergyblock", 1L, 0));
+        GT_OreDictUnificator.set(
+            OrePrefixes.block,
+            MaterialsCubix.Power,
+            GT_ModHandler.getModItem("energyadditions", "eapowerenergyblock", 1L, 0));
 
         MinecraftForge.EVENT_BUS.register(new GlobalEnergyWorldSavedData(""));
         MinecraftForge.EVENT_BUS.register(new SpaceProjectWorldSavedData());

@@ -29,6 +29,7 @@ import static gregtech.api.util.GT_RecipeBuilder.SECONDS;
 import static gregtech.api.util.GT_RecipeBuilder.TICKS;
 import static gregtech.loaders.postload.GT_MachineRecipeLoader.solderingMats;
 
+import gregtech.api.enums.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -38,15 +39,6 @@ import net.minecraftforge.fluids.FluidStack;
 
 import gregtech.GT_Mod;
 import gregtech.api.GregTech_API;
-import gregtech.api.enums.ConfigCategories;
-import gregtech.api.enums.Dyes;
-import gregtech.api.enums.GT_Values;
-import gregtech.api.enums.ItemList;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.MaterialsUEVplus;
-import gregtech.api.enums.OrePrefixes;
-import gregtech.api.enums.SubTag;
-import gregtech.api.enums.TierEU;
 import gregtech.api.util.ExternalMaterials;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
@@ -637,7 +629,7 @@ public class AssemblerRecipes implements Runnable {
 
         GT_Values.RA.stdBuilder()
             .itemInputs(
-                GT_OreDictUnificator.get(OrePrefixes.pipeQuadruple, Materials.MysteriousCrystal, 1L),
+                GT_OreDictUnificator.get(OrePrefixes.pipeQuadruple, MaterialsCubix.Power, 1L),
                 ItemList.Hull_UV.get(1L),
                 GT_Utility.getIntegratedCircuit(4))
             .itemOutputs(ItemList.Hatch_Input_Multi_2x2_UV.get(1L))
@@ -787,7 +779,7 @@ public class AssemblerRecipes implements Runnable {
         GT_Values.RA.stdBuilder()
             .itemInputs(
                 ItemList.Hull_MAX.get(1),
-                GT_OreDictUnificator.get(OrePrefixes.pipeLarge, Materials.MysteriousCrystal, 1),
+                GT_OreDictUnificator.get(OrePrefixes.pipeLarge, MaterialsCubix.Power, 1),
                 ItemList.Electric_Motor_UHV.get(1),
                 GT_OreDictUnificator.get(OrePrefixes.rotor, Materials.CosmicNeutronium, 1),
                 GT_Utility.getIntegratedCircuit(3))

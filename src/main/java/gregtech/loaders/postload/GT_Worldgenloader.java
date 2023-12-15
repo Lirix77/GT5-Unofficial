@@ -1042,7 +1042,7 @@ public class GT_Worldgenloader implements Runnable {
             false,
             Materials.Quantium);
         new GT_Worldgen_GT_Ore_SmallPieces("ore.small.mythril", true, 5, 25, 6, false, false, false, Materials.Mytryl);
-        new GT_Worldgen_GT_Ore_SmallPieces("ore.small.ledox", true, 40, 60, 4, false, false, false, Materials.Ledox);
+        //new GT_Worldgen_GT_Ore_SmallPieces("ore.small.ledox", true, 40, 60, 4, false, false, false, Materials.Ledox);
         new GT_Worldgen_GT_Ore_SmallPieces(
             "ore.small.oriharukon",
             true,
@@ -1956,21 +1956,6 @@ public class GT_Worldgenloader implements Runnable {
             Materials.Jasper,
             Materials.Ceruclase,
             Materials.Vulcanite);
-        new GT_Worldgen_GT_Ore_Layer(
-            "ore.mix.ledox",
-            true,
-            55,
-            65,
-            30,
-            2,
-            24,
-            false,
-            false,
-            false,
-            Materials.Ledox,
-            Materials.Opal,
-            Materials.Orichalcum,
-            Materials.Rubracium);
         new GT_Worldgen_GT_Ore_Layer(
             "ore.mix.oriharukon",
             true,

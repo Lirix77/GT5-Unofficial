@@ -366,20 +366,6 @@ public class GT_NEI_DefaultHandler extends RecipeMapHandler {
     }
 
     @Override
-    public List<String> handleItemTooltip(GuiRecipe gui, ItemStack aStack, List<String> currentTip,
-        int aRecipeIndex) {
-        CachedRecipe tObject = this.arecipes.get(aRecipeIndex);
-        if (tObject instanceof CachedDefaultRecipe) {
-            currentTip = mRecipeMap.handleNEIItemTooltip(aStack, currentTip, (CachedDefaultRecipe) tObject);
-        }
-
-        if (mRecipeNameTooltip != null) {
-            mRecipeNameTooltip.handleTooltip(currentTip, aRecipeIndex);
-        }
-        return currentTip;
-    }
-
-    @Override
     public void drawExtras(int aRecipeIndex) {
         CachedDefaultRecipe cachedRecipe = ((CachedDefaultRecipe) this.arecipes.get(aRecipeIndex));
 

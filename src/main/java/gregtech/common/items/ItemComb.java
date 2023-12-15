@@ -1110,22 +1110,6 @@ public class ItemComb extends Item implements IGT_ItemWithMaterialRenderer {
                 NI,
                 30 * 100);
             addCentrifugeToMaterial(
-                CombType.LEDOX,
-                new Materials[] { Materials.Ledox, Materials.CallistoIce, Materials.Lead },
-                new int[] { 65 * 100, 55 * 100, 85 * 100 },
-                new int[] {},
-                Voltage.EV,
-                NI,
-                30 * 100);
-            addCentrifugeToMaterial(
-                CombType.CALLISTOICE,
-                new Materials[] { Materials.CallistoIce, Materials.Ledox, Materials.Lead },
-                new int[] { 65 * 100, 75 * 100, 100 * 100 },
-                new int[] {},
-                Voltage.IV,
-                NI,
-                30 * 100);
-            addCentrifugeToMaterial(
                 CombType.MYTRYL,
                 new Materials[] { Materials.Mytryl, Materials.Mithril },
                 new int[] { 55 * 100, 50 * 100 },
@@ -1168,22 +1152,20 @@ public class ItemComb extends Item implements IGT_ItemWithMaterialRenderer {
         }
 
         // Planet Line
-        /*
         addCentrifugeToItemStack(
             CombType.MOON,
             new ItemStack[] { ItemList.FR_Wax.get(1L),
-                GT_ModHandler.getModItem(NewHorizonsCoreMod.ID, "item.MoonStoneDust", 1L, 0) },
+                ItemList.MoonStoneDust.get(1) },
             new int[] { 50 * 100, 30 * 100 },
             Voltage.MV,
             300);
         addCentrifugeToItemStack(
             CombType.MARS,
             new ItemStack[] { ItemList.FR_Wax.get(1L),
-                GT_ModHandler.getModItem(NewHorizonsCoreMod.ID, "item.MarsStoneDust", 1L, 0) },
+                ItemList.MarsStoneDust.get(1) },
             new int[] { 50 * 100, 30 * 100 },
             Voltage.HV,
             300);
-            */
         // Infinity Line
         addCentrifugeToMaterial(
             CombType.INFINITYCATALYST,
