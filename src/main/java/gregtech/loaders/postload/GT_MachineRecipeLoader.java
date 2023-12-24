@@ -57,6 +57,7 @@ import gregtech.loaders.postload.recipes.ThermalCentrifugeRecipes;
 import gregtech.loaders.postload.recipes.TranscendentPlasmaMixerRecipes;
 import gregtech.loaders.postload.recipes.VacuumFreezerRecipes;
 import gregtech.loaders.postload.recipes.WiremillRecipes;
+import gregtech.loaders.postload.scripts.ScriptLoader;
 
 public class GT_MachineRecipeLoader implements Runnable {
 
@@ -127,5 +128,7 @@ public class GT_MachineRecipeLoader implements Runnable {
         GT_BauxiteRefineChain.run();
         GT_NaniteChain.run();
         GT_PCBFactoryRecipes.load();
+
+        ScriptLoader.run();
     }
 }
