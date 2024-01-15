@@ -170,7 +170,7 @@ public class GT_Mod implements IGT_Mod {
 
     @Deprecated
     public static final int TOTAL_VERSION = calculateTotalGTVersion(VERSION, SUBVERSION);
-    public static final int NBT_VERSION = calculateTotalGTVersion(VERSION, SUBVERSION, 43);
+    public static final int NBT_VERSION = calculateTotalGTVersion(VERSION, SUBVERSION, 44);
 
     @Deprecated
     public static final int REQUIRED_IC2 = 624;
@@ -223,7 +223,7 @@ public class GT_Mod implements IGT_Mod {
     }
 
     public static int calculateTotalGTVersion(int majorVersion, int minorVersion, int patchVersion) {
-        return majorVersion * 1000000 + minorVersion * 1000 + patchVersion;
+        return majorVersion * 100000 + minorVersion * 1000 + patchVersion;
     }
 
     @Mod.EventHandler
