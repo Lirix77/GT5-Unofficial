@@ -1,5 +1,7 @@
 package gregtech.api.util;
 
+import static appeng.core.localization.WailaText.*;
+
 public abstract class GT_Waila {
 
     public static String getMachineProgressString(boolean isActive, int maxProgress, int progress) {
@@ -20,5 +22,15 @@ public abstract class GT_Waila {
         }
 
         return result;
+    }
+
+    public static String getPowerState(boolean isActive, boolean isPowered, boolean isBooting) {
+        if (isBooting) {
+            return Booting.getLocal();
+        } else if (isActive && isPowered) {
+            return DeviceOnline.getLocal();
+        } else {
+            return isPowered ? DeviceMissingChannel.getLocal() : DeviceOffline.getLocal();
+        }
     }
 }

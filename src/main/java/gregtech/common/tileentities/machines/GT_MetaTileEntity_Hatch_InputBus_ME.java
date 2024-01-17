@@ -12,6 +12,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import gregtech.api.util.GT_Waila;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -50,7 +51,6 @@ import appeng.api.networking.security.MachineSource;
 import appeng.api.storage.IMEMonitor;
 import appeng.api.storage.data.IAEItemStack;
 import appeng.api.util.AECableType;
-import appeng.core.localization.WailaText;
 import appeng.me.GridAccessException;
 import appeng.me.helpers.AENetworkProxy;
 import appeng.me.helpers.IGridProxyable;
@@ -656,7 +656,7 @@ public class GT_MetaTileEntity_Hatch_InputBus_ME extends GT_MetaTileEntity_Hatch
             boolean isPowered = isPowered();
             boolean isBooting = isBooting();
             EnumChatFormatting color = (isActive && isPowered) ? EnumChatFormatting.GREEN : EnumChatFormatting.DARK_RED;
-            return color + WailaText.getPowerState(isActive, isPowered, isBooting);
+            return color + GT_Waila.getPowerState(isActive, isPowered, isBooting);
         })
             .setTextAlignment(Alignment.Center)
             .setSize(90, 9)

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.Supplier;
 
+import gregtech.api.util.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -33,7 +34,6 @@ import appeng.api.implementations.IPowerChannelState;
 import appeng.api.networking.energy.IEnergyGrid;
 import appeng.api.networking.pathing.IPathingGrid;
 import appeng.api.util.AECableType;
-import appeng.core.localization.WailaText;
 import appeng.me.helpers.AENetworkProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -53,13 +53,6 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.GT_MetaPipeEntity_Cable;
 import gregtech.api.objects.GT_ItemStack;
-import gregtech.api.util.GT_Config;
-import gregtech.api.util.GT_LanguageManager;
-import gregtech.api.util.GT_Log;
-import gregtech.api.util.GT_ModHandler;
-import gregtech.api.util.GT_TooltipDataCache;
-import gregtech.api.util.GT_Util;
-import gregtech.api.util.GT_Utility;
 import gregtech.common.GT_Client;
 import gregtech.common.covers.CoverInfo;
 import mcp.mobius.waila.api.IWailaConfigHandler;
@@ -1207,7 +1200,7 @@ public abstract class MetaTileEntity implements IMetaTileEntity, ICleanroomRecei
             final boolean isActive = tag.getBoolean("isActive");
             final boolean isPowered = tag.getBoolean("isPowered");
             final boolean isBooting = tag.getBoolean("isBooting");
-            currenttip.add(WailaText.getPowerState(isActive, isPowered, isBooting));
+            currenttip.add(GT_Waila.getPowerState(isActive, isPowered, isBooting));
         }
     }
 
