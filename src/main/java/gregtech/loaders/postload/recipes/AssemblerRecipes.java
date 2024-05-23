@@ -1,23 +1,6 @@
 package gregtech.loaders.postload.recipes;
 
-import static gregtech.api.enums.Mods.AppliedEnergistics2;
-import static gregtech.api.enums.Mods.AvaritiaAddons;
-import static gregtech.api.enums.Mods.BartWorks;
-import static gregtech.api.enums.Mods.BuildCraftFactory;
-import static gregtech.api.enums.Mods.ExtraUtilities;
-import static gregtech.api.enums.Mods.Forestry;
-import static gregtech.api.enums.Mods.GTNHLanthanides;
-import static gregtech.api.enums.Mods.GTPlusPlus;
-import static gregtech.api.enums.Mods.GalacticraftCore;
-import static gregtech.api.enums.Mods.GalacticraftMars;
-import static gregtech.api.enums.Mods.GalaxySpace;
-import static gregtech.api.enums.Mods.IC2NuclearControl;
-import static gregtech.api.enums.Mods.IronChests;
-import static gregtech.api.enums.Mods.IronTanks;
-import static gregtech.api.enums.Mods.NewHorizonsCoreMod;
-import static gregtech.api.enums.Mods.OpenComputers;
-import static gregtech.api.enums.Mods.Railcraft;
-import static gregtech.api.enums.Mods.TinkerConstruct;
+import static gregtech.api.enums.Mods.*;
 import static gregtech.api.util.GT_ModHandler.getModItem;
 import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sAssemblerRecipes;
 import static gregtech.api.util.GT_RecipeBuilder.EIGHTH_INGOT;
@@ -3241,16 +3224,12 @@ public class AssemblerRecipes implements Runnable {
          * means we aren't in full pack
          */
 
-        if (!BuildCraftFactory.isModLoaded()) {
-            return;
-        }
-
         // LV input hatch
         {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_LV.get(1),
-                    getModItem(BuildCraftFactory.ID, "tankBlock", 1),
+                    getModItem(ExtraCells2.ID, "certustank", 1),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_LV.get(1))
                 .fluidInputs(Materials.Glue.getFluid(5 * INGOTS))
@@ -3261,7 +3240,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_LV.get(1),
-                    getModItem(BuildCraftFactory.ID, "tankBlock", 1),
+                    getModItem(ExtraCells2.ID, "certustank", 1),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_LV.get(1))
                 .fluidInputs(Materials.Plastic.getMolten(1 * INGOTS))
@@ -3272,7 +3251,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_LV.get(1),
-                    getModItem(BuildCraftFactory.ID, "tankBlock", 1),
+                    getModItem(ExtraCells2.ID, "certustank", 1),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_LV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(1 * HALF_INGOT))
@@ -3283,7 +3262,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_LV.get(1),
-                    getModItem(BuildCraftFactory.ID, "tankBlock", 1),
+                    getModItem(ExtraCells2.ID, "certustank", 1),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_LV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(9))
@@ -3292,16 +3271,12 @@ public class AssemblerRecipes implements Runnable {
                 .addTo(sAssemblerRecipes);
         }
 
-        if (!IronTanks.isModLoaded()) {
-            return;
-        }
-
         // MV input hatch
         {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_MV.get(1),
-                    getModItem(IronTanks.ID, "copperTank", 1),
+                    getModItem(ExtraCells2.ID, "certustank", 1),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_MV.get(1))
                 .fluidInputs(Materials.Plastic.getMolten(2 * INGOTS))
@@ -3312,7 +3287,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_MV.get(1),
-                    getModItem(IronTanks.ID, "copperTank", 1),
+                    getModItem(ExtraCells2.ID, "certustank", 1),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_MV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(1 * INGOTS))
@@ -3323,7 +3298,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_MV.get(1),
-                    getModItem(IronTanks.ID, "copperTank", 1),
+                    getModItem(ExtraCells2.ID, "certustank", 1),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_MV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(1 * EIGHTH_INGOT))
@@ -3337,7 +3312,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_HV.get(1),
-                    getModItem(IronTanks.ID, "ironTank", 1),
+                    getModItem(ExtraCells2.ID, "certustank", 1),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_HV.get(1))
                 .fluidInputs(Materials.Plastic.getMolten(3 * INGOTS))
@@ -3348,7 +3323,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_HV.get(1),
-                    getModItem(IronTanks.ID, "ironTank", 1),
+                    getModItem(ExtraCells2.ID, "certustank", 1),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_HV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(2 * INGOTS))
@@ -3359,7 +3334,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_HV.get(1),
-                    getModItem(IronTanks.ID, "ironTank", 1),
+                    getModItem(ExtraCells2.ID, "certustank", 1),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_HV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(1 * QUARTER_INGOT))
@@ -3373,7 +3348,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_EV.get(1),
-                    getModItem(IronTanks.ID, "silverTank", 1),
+                    getModItem(ExtraCells2.ID, "certustank", 1),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_EV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(4 * INGOTS))
@@ -3384,7 +3359,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_EV.get(1),
-                    getModItem(IronTanks.ID, "silverTank", 1),
+                    getModItem(ExtraCells2.ID, "certustank", 1),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_EV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(1 * HALF_INGOT))
@@ -3398,7 +3373,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_IV.get(1),
-                    getModItem(IronTanks.ID, "goldTank", 1),
+                    getModItem(ExtraCells2.ID, "certustank", 1),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_IV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(8 * INGOTS))
@@ -3409,7 +3384,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_IV.get(1),
-                    getModItem(IronTanks.ID, "goldTank", 1),
+                    getModItem(ExtraCells2.ID, "certustank", 1),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_IV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(1 * INGOTS))
@@ -3423,7 +3398,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_LuV.get(1),
-                    getModItem(IronTanks.ID, "diamondTank", 1),
+                    getModItem(ExtraCells2.ID, "certustank", 1),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_LuV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(16 * INGOTS))
@@ -3434,7 +3409,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_LuV.get(1),
-                    getModItem(IronTanks.ID, "diamondTank", 1),
+                    getModItem(ExtraCells2.ID, "certustank", 1),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_LuV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(2 * INGOTS))
@@ -3448,7 +3423,7 @@ public class AssemblerRecipes implements Runnable {
             GT_Values.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_ZPM.get(1),
-                    getModItem(IronTanks.ID, "obsidianTank", 1),
+                    getModItem(ExtraCells2.ID, "certustank", 1),
                     GT_Utility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_ZPM.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(4 * INGOTS))
