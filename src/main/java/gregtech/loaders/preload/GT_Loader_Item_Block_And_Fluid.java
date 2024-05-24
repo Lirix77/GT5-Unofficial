@@ -9,10 +9,10 @@ import static gregtech.api.enums.Mods.PamsHarvestCraft;
 import static gregtech.api.enums.Mods.Railcraft;
 import static gregtech.api.enums.Mods.Thaumcraft;
 import static gregtech.api.enums.Mods.TwilightForest;
-import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sCentrifugeRecipes;
-import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sFluidCannerRecipes;
-import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sMaceratorRecipes;
-import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sThermalCentrifugeRecipes;
+import static gregtech.api.recipe.RecipeMaps.centrifugeRecipes;
+import static gregtech.api.recipe.RecipeMaps.fluidCannerRecipes;
+import static gregtech.api.recipe.RecipeMaps.maceratorRecipes;
+import static gregtech.api.recipe.RecipeMaps.thermalCentrifugeRecipes;
 import static gregtech.api.util.GT_RecipeBuilder.SECONDS;
 import static gregtech.api.util.GT_RecipeBuilder.TICKS;
 import static gregtech.api.util.GT_RecipeBuilder.WILDCARD;
@@ -53,6 +53,37 @@ import gregtech.api.util.GT_Log;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
 import gregtech.api.util.GT_Utility;
+import gregtech.common.blocks.GT_Block_Casings1;
+import gregtech.common.blocks.GT_Block_Casings2;
+import gregtech.common.blocks.GT_Block_Casings3;
+import gregtech.common.blocks.GT_Block_Casings4;
+import gregtech.common.blocks.GT_Block_Casings5;
+import gregtech.common.blocks.GT_Block_Casings6;
+import gregtech.common.blocks.GT_Block_Casings8;
+import gregtech.common.blocks.GT_Block_Casings9;
+import gregtech.common.blocks.GT_Block_Concretes;
+import gregtech.common.blocks.GT_Block_Drone;
+import gregtech.common.blocks.GT_Block_Granites;
+import gregtech.common.blocks.GT_Block_Machines;
+import gregtech.common.blocks.GT_Block_Metal;
+import gregtech.common.blocks.GT_Block_Ores;
+import gregtech.common.blocks.GT_Block_Reinforced;
+import gregtech.common.blocks.GT_Block_Stones;
+import gregtech.common.blocks.GT_Cyclotron_Coils;
+import gregtech.common.blocks.GT_TileEntity_Ores;
+import gregtech.common.items.GT_DepletetCell_Item;
+import gregtech.common.items.GT_FluidDisplayItem;
+import gregtech.common.items.GT_IntegratedCircuit_Item;
+import gregtech.common.items.GT_MetaGenerated_Item_01;
+import gregtech.common.items.GT_MetaGenerated_Item_02;
+import gregtech.common.items.GT_MetaGenerated_Item_03;
+import gregtech.common.items.GT_MetaGenerated_Item_98;
+import gregtech.common.items.GT_MetaGenerated_Item_99;
+import gregtech.common.items.GT_MetaGenerated_Tool_01;
+import gregtech.common.items.GT_NeutronReflector_Item;
+import gregtech.common.items.GT_TierDrone;
+import gregtech.common.items.GT_VolumetricFlask;
+import gregtech.common.tileentities.render.TileDrone;
 
 public class GT_Loader_Item_Block_And_Fluid implements Runnable {
 
@@ -143,8 +174,7 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
             false,
             new Object[] { "sensorcard", "GregTech Sensor Card" });
         ItemList.NC_SensorCard.set(
-            tItem == null
-                ? new GT_Generic_Item("sensorcard", "GregTech Sensor Card", "Nuclear Control not installed", false)
+            tItem == null ? new GT_Generic_Item("sensorcard", "GregTech Sensor Card", "Nuclear Control not installed")
                 : tItem);
 
         Item advSensorCard = (Item) GT_Utility
@@ -154,8 +184,7 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
                 ? new GT_Generic_Item(
                     "advancedsensorcard",
                     "GregTech Advanced Sensor Card",
-                    "Nuclear Control not installed",
-                    false)
+                    "Nuclear Control not installed")
                 : advSensorCard);
 
         ItemList.Neutron_Reflector
@@ -251,7 +280,7 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Iron, 1L))
             .duration(25 * SECONDS)
             .eut(48)
-            .addTo(sThermalCentrifugeRecipes);
+            .addTo(thermalCentrifugeRecipes);
 
         GT_Values.RA.stdBuilder()
             .itemInputs(ItemList.Depleted_Thorium_2.get(1))
@@ -261,7 +290,7 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Iron, 3L))
             .duration(25 * SECONDS)
             .eut(48)
-            .addTo(sThermalCentrifugeRecipes);
+            .addTo(thermalCentrifugeRecipes);
 
         GT_Values.RA.stdBuilder()
             .itemInputs(ItemList.Depleted_Thorium_4.get(1))
@@ -271,7 +300,7 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Iron, 6L))
             .duration(25 * SECONDS)
             .eut(48)
-            .addTo(sThermalCentrifugeRecipes);
+            .addTo(thermalCentrifugeRecipes);
 
         ItemList.Depleted_Naquadah_1
             .set(new GT_DepletetCell_Item("NaquadahcellDep", "Fuel Rod (Depleted Naquadah)", 1));
@@ -325,7 +354,7 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
             .outputChances(10_000, 5_000, 5_000, 2_500, 10_000, 10_000)
             .duration(25 * SECONDS)
             .eut(2000)
-            .addTo(sCentrifugeRecipes);
+            .addTo(centrifugeRecipes);
 
         GT_Values.RA.stdBuilder()
             .itemInputs(ItemList.Depleted_Naquadah_2.get(1))
@@ -339,7 +368,7 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
             .outputChances(10_000, 5_000, 5_000, 2_500, 10_000, 10_000)
             .duration(50 * SECONDS)
             .eut(2000)
-            .addTo(sCentrifugeRecipes);
+            .addTo(centrifugeRecipes);
 
         GT_Values.RA.stdBuilder()
             .itemInputs(ItemList.Depleted_Naquadah_4.get(1))
@@ -353,7 +382,7 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
             .outputChances(10_000, 5_000, 5_000, 2_500, 10_000, 10_000)
             .duration(100 * SECONDS)
             .eut(2000)
-            .addTo(sCentrifugeRecipes);
+            .addTo(centrifugeRecipes);
 
         ItemList.Depleted_MNq_1.set(new GT_DepletetCell_Item("MNqCellDep", "Fuel Rod (Depleted Nq*)", 1));
         ItemList.Depleted_MNq_2.set(new GT_DepletetCell_Item("Double_MNqCellDep", "Dual Fuel Rod (Depleted Nq*)", 1));
@@ -404,7 +433,7 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
             .outputChances(10_000, 5_000, 5_000, 2_500, 10_000, 10_000)
             .duration(25 * SECONDS)
             .eut(2000)
-            .addTo(sCentrifugeRecipes);
+            .addTo(centrifugeRecipes);
 
         GT_Values.RA.stdBuilder()
             .itemInputs(ItemList.Depleted_MNq_2.get(1))
@@ -418,7 +447,7 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
             .outputChances(10_000, 5_000, 5_000, 2_500, 10_000, 10_000)
             .duration(50 * SECONDS)
             .eut(2000)
-            .addTo(sCentrifugeRecipes);
+            .addTo(centrifugeRecipes);
 
         GT_Values.RA.stdBuilder()
             .itemInputs(ItemList.Depleted_MNq_4.get(1))
@@ -432,7 +461,7 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
             .outputChances(10_000, 5_000, 5_000, 2_500, 10_000, 10_000)
             .duration(100 * SECONDS)
             .eut(2000)
-            .addTo(sCentrifugeRecipes);
+            .addTo(centrifugeRecipes);
 
         ItemList.Uraniumcell_1.set(
             new GT_RadioactiveCellIC_Item(
@@ -517,7 +546,7 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
         GregTech_API.sBlockConcretes = new GT_Block_Concretes();
         GregTech_API.sBlockStones = new GT_Block_Stones();
         GregTech_API.sBlockOres1 = new GT_Block_Ores();
-
+        GregTech_API.sDroneRender = new GT_Block_Drone();
         // meta ID order, DO NOT CHANGE ORDER
 
         GregTech_API.sBlockMetal1 = new GT_Block_Metal(
@@ -623,7 +652,7 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
             new Materials[] { Materials.Cryolite, Materials.SiliconSG, MaterialsKevlar.NickelAluminide,
                 MaterialsUEVplus.SpaceTime, MaterialsUEVplus.TranscendentMetal, Materials.Oriharukon,
                 MaterialsUEVplus.WhiteDwarfMatter, MaterialsUEVplus.BlackDwarfMatter, MaterialsUEVplus.Universium,
-                MaterialsUEVplus.Eternity },
+                MaterialsUEVplus.Eternity, MaterialsUEVplus.MagMatter },
             OrePrefixes.block,
             gregtech.api.enums.Textures.BlockIcons.STORAGE_BLOCKS12);
 
@@ -640,6 +669,9 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
             "whitelist-spatial",
             tBaseMetaTileEntity.getClass()
                 .getName());
+
+        GT_Log.out.println("GT_Mod: Registering the DroneRender.");
+        GameRegistry.registerTileEntity(TileDrone.class, "DroneRender");
 
         GT_Log.out.println("GT_Mod: Registering the BaseMetaPipeEntity.");
         GameRegistry.registerTileEntity(BaseMetaPipeEntity.class, "BaseMetaPipeEntity");
@@ -804,7 +836,7 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
             .fluidInputs(GT_ModHandler.getSteam(1000))
             .duration(16 * TICKS)
             .eut(1)
-            .addTo(sFluidCannerRecipes);
+            .addTo(fluidCannerRecipes);
 
         Materials.Ice.mGas = Materials.Water.mGas;
         Materials.Water.mGas.setTemperature(375)
@@ -1213,6 +1245,15 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
             .configureMaterials(MaterialsUEVplus.PrimordialMatter)
             .registerBContainers(
                 GT_OreDictUnificator.get(OrePrefixes.cell, MaterialsUEVplus.PrimordialMatter, 1L),
+                ItemList.Cell_Empty.get(1L));
+
+        GT_FluidFactory.builder("QuarkGluonPlasma")
+            .withLocalizedName(MaterialsUEVplus.QuarkGluonPlasma.mLocalizedName)
+            .withStateAndTemperature(LIQUID, 2_000_000_000)
+            .buildAndRegister()
+            .configureMaterials(MaterialsUEVplus.QuarkGluonPlasma)
+            .registerBContainers(
+                GT_OreDictUnificator.get(OrePrefixes.cell, MaterialsUEVplus.QuarkGluonPlasma, 1L),
                 ItemList.Cell_Empty.get(1L));
 
         GT_FluidFactory.builder("fieryblood")
@@ -2049,7 +2090,7 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
             .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Stone, 1L))
             .duration(20 * SECONDS)
             .eut(2)
-            .addTo(sMaceratorRecipes);
+            .addTo(maceratorRecipes);
 
         GT_Values.RA.stdBuilder()
             .itemInputs(new ItemStack(Blocks.gravel, 1, WILDCARD))
@@ -2057,21 +2098,21 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
             .outputChances(10000, 1000)
             .duration(20 * SECONDS)
             .eut(2)
-            .addTo(sMaceratorRecipes);
+            .addTo(maceratorRecipes);
 
         GT_Values.RA.stdBuilder()
             .itemInputs(new ItemStack(Blocks.furnace, 1, WILDCARD))
             .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Stone, 8L))
             .duration(20 * SECONDS)
             .eut(2)
-            .addTo(sMaceratorRecipes);
+            .addTo(maceratorRecipes);
 
         GT_Values.RA.stdBuilder()
             .itemInputs(new ItemStack(Blocks.lit_furnace, 1, WILDCARD))
             .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Stone, 8L))
             .duration(20 * SECONDS)
             .eut(2)
-            .addTo(sMaceratorRecipes);
+            .addTo(maceratorRecipes);
 
         GT_OreDictUnificator.set(
             OrePrefixes.ingot,
@@ -2156,5 +2197,12 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
             .registerMachineBlock(GT_Utility.getBlockFromStack(GT_ModHandler.getIC2Item("reinforcedGlass", 0)), 0);
 
         GregTech_API.sSolenoidCoilCasings = new GT_Cyclotron_Coils();
+        ItemList.TierdDrone0
+            .set(new GT_TierDrone("tierdDrone0", "Drone (Level 1)", "Quadcopter Stable Small Aircraft", 1));
+        ItemList.TierdDrone1
+            .set(new GT_TierDrone("tierdDrone1", "Drone (Level 2)", "Dual Turbo High-Ejection Medium Aircraft", 2));
+        ItemList.TierdDrone2
+            .set(new GT_TierDrone("tierdDrone2", "Drone (Level 3)", "Single Engine Anti-Gravity Large Aircraft", 3));
+
     }
 }

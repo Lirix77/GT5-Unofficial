@@ -38,7 +38,6 @@ import gregtech.api.interfaces.tileentity.IMachineBlockUpdateable;
 import gregtech.api.objects.GT_ItemStack;
 import gregtech.api.util.GT_Config;
 import gregtech.api.util.GT_Util;
-import gregtech.common.power.Power;
 
 /**
  * Warning, this Interface has just been made to be able to add multiple kinds of MetaTileEntities (Cables, Pipes,
@@ -133,27 +132,28 @@ public interface IMetaTileEntity extends ISidedInventory, IFluidTank, IFluidHand
     boolean allowCoverOnSide(ForgeDirection side, GT_ItemStack aStack);
 
     /**
-     * When a Player rightclicks the Facing with a Screwdriver.
+     * When a Player right-clicks the Facing with a Screwdriver.
      */
-    void onScrewdriverRightClick(ForgeDirection side, EntityPlayer aPlayer, float aX, float aY, float aZ);
+    void onScrewdriverRightClick(ForgeDirection side, EntityPlayer aPlayer, float aX, float aY, float aZ,
+        ItemStack aTool);
 
     /**
      * When a Player right-clicks the Facing with a Wrench.
      */
     boolean onWrenchRightClick(ForgeDirection side, ForgeDirection wrenchingSide, EntityPlayer entityPlayer, float aX,
-        float aY, float aZ);
+        float aY, float aZ, ItemStack aTool);
 
     /**
      * When a Player right-clicks the Facing with a wire cutter.
      */
     boolean onWireCutterRightClick(ForgeDirection side, ForgeDirection wrenchingSide, EntityPlayer entityPlayer,
-        float aX, float aY, float aZ);
+        float aX, float aY, float aZ, ItemStack aTool);
 
     /**
      * When a Player right-clicks the Facing with a soldering iron.
      */
     boolean onSolderingToolRightClick(ForgeDirection side, ForgeDirection wrenchingSide, EntityPlayer entityPlayer,
-        float aX, float aY, float aZ);
+        float aX, float aY, float aZ, ItemStack aTool);
 
     /**
      * Called right before this Machine explodes
@@ -186,6 +186,11 @@ public interface IMetaTileEntity extends ISidedInventory, IFluidTank, IFluidHand
      * Called when the BaseMetaTileEntity gets invalidated, what happens right before the @inValidate above gets called
      */
     void onRemoval();
+
+    /**
+     * Called when the BaseMetaTileEntity gets unloaded (chunk or world)
+     */
+    default void onUnload() {}
 
     /**
      * @param facing the facing direction to check
@@ -359,13 +364,6 @@ public interface IMetaTileEntity extends ISidedInventory, IFluidTank, IFluidHand
      * In case the Output Voltage varies.
      */
     String getSpecialVoltageToolTip();
-
-    /**
-     * @return Power object used for displaying in NEI
-     */
-    default Power getPower() {
-        return null;
-    }
 
     /**
      * Icon of the Texture. If this returns null then it falls back to getTextureIndex.

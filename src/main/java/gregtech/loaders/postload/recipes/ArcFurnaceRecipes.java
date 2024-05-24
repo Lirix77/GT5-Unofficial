@@ -1,9 +1,11 @@
 package gregtech.loaders.postload.recipes;
 
 import static gregtech.api.enums.Mods.Railcraft;
+import static gregtech.api.recipe.RecipeMaps.arcFurnaceRecipes;
 import static gregtech.api.util.GT_ModHandler.getModItem;
 import static gregtech.api.util.GT_RecipeBuilder.SECONDS;
 import static gregtech.api.util.GT_RecipeBuilder.TICKS;
+import static gregtech.api.util.GT_RecipeConstants.RECYCLE;
 import static gregtech.api.util.GT_RecipeConstants.UniversalArcFurnace;
 
 import gregtech.api.enums.GT_Values;
@@ -25,6 +27,7 @@ public class ArcFurnaceRecipes implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Concrete, 1))
             .duration(8 * SECONDS)
             .eut(96)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -32,6 +35,7 @@ public class ArcFurnaceRecipes implements Runnable {
             .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Steel, 19L))
             .duration(9 * SECONDS)
             .eut((int) TierEU.RECIPE_MV)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -41,6 +45,7 @@ public class ArcFurnaceRecipes implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Steel, 7L))
             .duration(9 * SECONDS)
             .eut((int) TierEU.RECIPE_MV)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -48,6 +53,7 @@ public class ArcFurnaceRecipes implements Runnable {
             .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.nugget, Materials.Steel, 2L))
             .duration(10 * TICKS)
             .eut((int) TierEU.RECIPE_MV)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -57,6 +63,7 @@ public class ArcFurnaceRecipes implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.nugget, Materials.Steel, 1L))
             .duration(10 * TICKS)
             .eut((int) TierEU.RECIPE_MV)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -67,6 +74,7 @@ public class ArcFurnaceRecipes implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 2))
             .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_HV)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -77,6 +85,7 @@ public class ArcFurnaceRecipes implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 3))
             .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_HV)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -87,6 +96,7 @@ public class ArcFurnaceRecipes implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 4))
             .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_HV)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -97,6 +107,7 @@ public class ArcFurnaceRecipes implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 5))
             .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_HV)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -107,6 +118,7 @@ public class ArcFurnaceRecipes implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 6))
             .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_HV)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -117,6 +129,7 @@ public class ArcFurnaceRecipes implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 7))
             .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_HV)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -127,6 +140,7 @@ public class ArcFurnaceRecipes implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 8))
             .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_HV)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -137,6 +151,7 @@ public class ArcFurnaceRecipes implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 9))
             .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_HV)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -147,6 +162,7 @@ public class ArcFurnaceRecipes implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 10))
             .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_HV)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -157,6 +173,7 @@ public class ArcFurnaceRecipes implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 11))
             .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_HV)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -167,6 +184,7 @@ public class ArcFurnaceRecipes implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 12))
             .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_HV)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -174,6 +192,7 @@ public class ArcFurnaceRecipes implements Runnable {
             .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Iron, 2L))
             .duration(7 * SECONDS + 10 * TICKS)
             .eut(90)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -183,6 +202,7 @@ public class ArcFurnaceRecipes implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Glass, 3))
             .duration(7 * SECONDS + 10 * TICKS)
             .eut(90)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -192,6 +212,7 @@ public class ArcFurnaceRecipes implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.nugget, Materials.Iron, 6))
             .duration(7 * SECONDS + 10 * TICKS)
             .eut(90)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -199,6 +220,7 @@ public class ArcFurnaceRecipes implements Runnable {
             .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Steel, 2L))
             .duration(9 * SECONDS)
             .eut((int) TierEU.RECIPE_MV)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -208,6 +230,7 @@ public class ArcFurnaceRecipes implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Glass, 3))
             .duration(9 * SECONDS)
             .eut((int) TierEU.RECIPE_MV)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -217,6 +240,7 @@ public class ArcFurnaceRecipes implements Runnable {
                 GT_OreDictUnificator.get(OrePrefixes.nugget, Materials.Steel, 6L))
             .duration(9 * SECONDS)
             .eut((int) TierEU.RECIPE_MV)
+            .metadata(RECYCLE, true)
             .addTo(UniversalArcFurnace);
 
         GT_Values.RA.stdBuilder()
@@ -225,7 +249,7 @@ public class ArcFurnaceRecipes implements Runnable {
             .fluidInputs(Materials.Oxygen.getGas(2000L))
             .duration(60 * SECONDS)
             .eut((int) TierEU.RECIPE_LV)
-            .addTo(UniversalArcFurnace);
+            .addTo(arcFurnaceRecipes);
 
     }
 }

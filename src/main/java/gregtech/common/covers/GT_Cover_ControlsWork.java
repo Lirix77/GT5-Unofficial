@@ -22,14 +22,6 @@ import gregtech.common.gui.modularui.widget.CoverDataFollower_ToggleButtonWidget
 
 public class GT_Cover_ControlsWork extends GT_CoverBehavior implements IControlsWorkCover {
 
-    /**
-     * @deprecated use {@link #GT_Cover_ControlsWork(ITexture coverTexture)} instead
-     */
-    @Deprecated
-    public GT_Cover_ControlsWork() {
-        this(null);
-    }
-
     public GT_Cover_ControlsWork(ITexture coverTexture) {
         super(coverTexture);
     }
@@ -47,7 +39,8 @@ public class GT_Cover_ControlsWork extends GT_CoverBehavior implements IControls
             } else if (aCoverVariable == 2) {
                 machine.disableWorking();
             } else {
-                if (machine.wasShutdown()) {
+                if (machine.wasShutdown() && machine.getLastShutDownReason()
+                    .wasCritical()) {
                     machine.disableWorking();
                     if (!mPlayerNotified) {
                         EntityPlayer player = lastPlayer == null ? null : lastPlayer.get();

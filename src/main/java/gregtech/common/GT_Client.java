@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.function.Function;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -39,10 +40,15 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.oredict.OreDictionary;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
 
+import com.glodblock.github.nei.recipes.FluidRecipe;
+import com.glodblock.github.nei.recipes.extractor.GregTech5RecipeExtractor;
 import com.gtnewhorizon.structurelib.alignment.IAlignment;
 import com.gtnewhorizon.structurelib.alignment.IAlignmentProvider;
 
+import appeng.api.util.IOrientable;
+import appeng.tile.misc.TileInterface;
 import codechicken.lib.vec.Rotation;
 import codechicken.lib.vec.Scale;
 import codechicken.lib.vec.Transformation;
@@ -64,10 +70,14 @@ import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.interfaces.tileentity.ITurnable;
 import gregtech.api.items.GT_MetaGenerated_Item;
 import gregtech.api.metatileentity.BaseMetaPipeEntity;
+import gregtech.api.metatileentity.BaseMetaTileEntity;
 import gregtech.api.metatileentity.MetaPipeEntity;
+import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_BasicMachine;
 import gregtech.api.multitileentity.multiblock.base.MultiBlockPart;
 import gregtech.api.net.GT_Packet_ClientPreference;
 import gregtech.api.objects.GT_ItemStack;
+import gregtech.api.recipe.RecipeCategory;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.ColorsMetadataSection;
 import gregtech.api.util.ColorsMetadataSectionSerializer;
 import gregtech.api.util.GT_ClientPreference;
@@ -75,7 +85,6 @@ import gregtech.api.util.GT_CoverBehaviorBase;
 import gregtech.api.util.GT_Log;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_PlayedSound;
-import gregtech.api.util.GT_Recipe;
 import gregtech.api.util.GT_Utility;
 import gregtech.api.util.WorldSpawnedEventBuilder;
 import gregtech.common.blocks.GT_Item_Machines;
@@ -87,6 +96,7 @@ import gregtech.common.render.GT_FluidDisplayStackRenderer;
 import gregtech.common.render.GT_MetaGenerated_Tool_Renderer;
 import gregtech.common.render.GT_MultiTile_Renderer;
 import gregtech.common.render.GT_PollutionRenderer;
+import gregtech.common.render.GT_RenderDrone;
 import gregtech.common.render.GT_Renderer_Block;
 import gregtech.common.render.GT_Renderer_Entity_Arrow;
 import gregtech.common.render.items.GT_MetaGenerated_Item_Renderer;
@@ -94,6 +104,7 @@ import gregtech.common.tileentities.debug.GT_MetaTileEntity_AdvDebugStructureWri
 import gregtech.loaders.ExtraIcons;
 import gregtech.loaders.misc.GT_Bees;
 import gregtech.loaders.preload.GT_PreLoad;
+import gregtech.nei.NEI_GT_Config;
 import ic2.api.tile.IWrenchable;
 
 // Referenced classes of package gregtech.common:
@@ -303,6 +314,15 @@ public class GT_Client extends GT_Proxy implements Runnable {
         }
 
         GL11.glPushMatrix();
+
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+
+        // pause shader
+        int program = GL11.glGetInteger(GL20.GL_CURRENT_PROGRAM);
+        GL20.glUseProgram(0);
+
         MovingObjectPosition target = aEvent.target;
         EntityPlayer player = aEvent.player;
         double camX = player.lastTickPosX + (player.posX - player.lastTickPosX) * (double) aEvent.partialTicks;
@@ -326,6 +346,8 @@ public class GT_Client extends GT_Proxy implements Runnable {
         GL11.glVertex3d(-.25D, .0D, -.50D);
         GL11.glVertex3d(-.25D, .0D, +.50D);
         final TileEntity tTile = player.worldObj.getTileEntity(target.blockX, target.blockY, target.blockZ);
+        final Block block = player.worldObj.getBlock(target.blockX, target.blockY, target.blockZ);
+        final int meta = player.worldObj.getBlockMetadata(target.blockX, target.blockY, target.blockZ);
 
         // draw connection indicators
         int tConnections = 0;
@@ -334,8 +356,18 @@ public class GT_Client extends GT_Proxy implements Runnable {
                 for (final ForgeDirection tSide : ForgeDirection.VALID_DIRECTIONS) {
                     if (iCoverable.getCoverIDAtSide(tSide) != 0) tConnections |= tSide.flag;
                 }
-            } else if (tTile instanceof BaseMetaPipeEntity) tConnections = ((BaseMetaPipeEntity) tTile).mConnections;
-        }
+            } else if (tTile instanceof BaseMetaTileEntity baseMetaTile && baseMetaTile.getAlignment() == null) {
+                if (!aIsSneaking) tConnections |= baseMetaTile.getFrontFacing().flag;
+                else if (baseMetaTile.getMetaTileEntity() instanceof GT_MetaTileEntity_BasicMachine basicMachine) {
+                    tConnections |= basicMachine.mMainFacing.flag;
+                }
+            } else if (tTile instanceof BaseMetaPipeEntity pipeEntity) tConnections = pipeEntity.mConnections;
+        } else if (tTile instanceof IWrenchable wrenchable) {
+            tConnections |= ForgeDirection.getOrientation(wrenchable.getFacing()).flag;
+        } else if (ROTATABLE_VANILLA_BLOCKS.contains(block)) {
+            tConnections |= ForgeDirection.getOrientation(meta).flag;
+        } else if (tTile instanceof TileInterface tileInterface) tConnections |= tileInterface.getUp()
+            .getOpposite().flag;
 
         if (tConnections != 0) {
             for (ForgeDirection tSide : ForgeDirection.VALID_DIRECTIONS) {
@@ -395,26 +427,39 @@ public class GT_Client extends GT_Proxy implements Runnable {
         }
         GL11.glEnd();
         // draw turning indicator
+        Function<ForgeDirection, Transformation[]> getTransform = (ForgeDirection direction) -> {
+            try {
+                if (direction.ordinal() == tSideHit) return new Transformation[] { ROTATION_MARKER_TRANSFORM_CENTER };
+                else if (direction.getOpposite()
+                    .ordinal() == tSideHit) {
+                        return ROTATION_MARKER_TRANSFORMS_CORNER;
+                    } else {
+                        return new Transformation[] {
+                            ROTATION_MARKER_TRANSFORMS_SIDES_TRANSFORMS[ROTATION_MARKER_TRANSFORMS_SIDES[tSideHit * 6
+                                + direction.ordinal()]] };
+                    }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return new Transformation[] {};
+            }
+
+        };
+
         if (aIsWrench && tTile instanceof IAlignmentProvider) {
             final IAlignment tAlignment = ((IAlignmentProvider) (tTile)).getAlignment();
             if (tAlignment != null) {
-                final ForgeDirection direction = tAlignment.getDirection();
-                if (direction.ordinal() == tSideHit)
-                    drawExtendedRotationMarker(ROTATION_MARKER_TRANSFORM_CENTER, aIsSneaking, tAlignment);
-                else if (direction.getOpposite()
-                    .ordinal() == tSideHit) {
-                        for (Transformation t : ROTATION_MARKER_TRANSFORMS_CORNER) {
-                            drawExtendedRotationMarker(t, aIsSneaking, tAlignment);
-                        }
-                    } else {
-                        drawExtendedRotationMarker(
-                            ROTATION_MARKER_TRANSFORMS_SIDES_TRANSFORMS[ROTATION_MARKER_TRANSFORMS_SIDES[tSideHit * 6
-                                + direction.ordinal()]],
-                            aIsSneaking,
-                            tAlignment);
-                    }
+                for (var transform : getTransform.apply(tAlignment.getDirection())) {
+                    drawExtendedRotationMarker(transform, aIsSneaking, tAlignment);
+                }
             }
         }
+        if (aIsWrench && tTile instanceof IOrientable orientable
+            && !(tTile instanceof TileInterface)
+            && orientable.canBeRotated()) {
+            for (var transform : getTransform.apply(aIsSneaking ? orientable.getForward() : orientable.getUp())) {
+                drawExtendedRotationMarker(transform, aIsSneaking, orientable);
+            }
+        }
+        GL20.glUseProgram(program); // resume shader
         GL11.glPopMatrix(); // get back to player center
     }
 
@@ -428,6 +473,10 @@ public class GT_Client extends GT_Proxy implements Runnable {
                 drawRotationMarker(transform);
             }
         }
+    }
+
+    private static void drawExtendedRotationMarker(Transformation transform, boolean sneaking, IOrientable orientable) {
+        drawRotationMarker(transform);
     }
 
     private static void drawRotationMarker(Transformation transform) {
@@ -573,8 +622,9 @@ public class GT_Client extends GT_Proxy implements Runnable {
     @Override
     public void onLoad() {
         super.onLoad();
-        new GT_Renderer_Block();
+        GT_Renderer_Block.register();
         new GT_MultiTile_Renderer();
+        new GT_RenderDrone();
         metaGeneratedItemRenderer = new GT_MetaGenerated_Item_Renderer();
         for (GT_MetaGenerated_Item item : GT_MetaGenerated_Item.sInstances.values()) {
             metaGeneratedItemRenderer.registerItem(item);
@@ -587,6 +637,7 @@ public class GT_Client extends GT_Proxy implements Runnable {
         new GT_Renderer_Entity_Arrow(GT_Entity_Arrow_Potion.class, "arrow_potions");
         new GT_FlaskRenderer();
         new GT_FluidDisplayStackRenderer();
+        MinecraftForge.EVENT_BUS.register(new NEI_GT_Config());
     }
 
     @Override
@@ -624,6 +675,21 @@ public class GT_Client extends GT_Proxy implements Runnable {
                         .forEach(GT_CoverBehaviorBase::reloadColorOverride);
                 }
             });
+    }
+
+    @Override
+    public void onLoadComplete() {
+        super.onLoadComplete();
+        for (RecipeCategory category : RecipeCategory.ALL_RECIPE_CATEGORIES.values()) {
+            if (category.recipeMap.getFrontend()
+                .getNEIProperties().registerNEI) {
+                FluidRecipe.addRecipeMap(
+                    category.unlocalizedName,
+                    new GregTech5RecipeExtractor(
+                        category.unlocalizedName.equals("gt.recipe.scanner")
+                            || category.unlocalizedName.equals("gt.recipe.fakeAssemblylineProcess")));
+            }
+        }
     }
 
     @Override
@@ -666,7 +732,12 @@ public class GT_Client extends GT_Proxy implements Runnable {
     }
 
     @Override
-    public int getReloadCount() {
+    public void reloadNEICache() {
+        mReloadCount++;
+    }
+
+    @Override
+    public int getNEIReloadCount() {
         return mReloadCount;
     }
 
@@ -687,31 +758,31 @@ public class GT_Client extends GT_Proxy implements Runnable {
                     // Check for more IC2 recipes to also catch MineTweaker additions
                     GT_ModHandler.addIC2RecipesToGT(
                         GT_ModHandler.getMaceratorRecipeList(),
-                        GT_Recipe.GT_Recipe_Map.sMaceratorRecipes,
+                        RecipeMaps.maceratorRecipes,
                         true,
                         true,
                         true);
                     GT_ModHandler.addIC2RecipesToGT(
                         GT_ModHandler.getCompressorRecipeList(),
-                        GT_Recipe.GT_Recipe_Map.sCompressorRecipes,
+                        RecipeMaps.compressorRecipes,
                         true,
                         true,
                         true);
                     GT_ModHandler.addIC2RecipesToGT(
                         GT_ModHandler.getExtractorRecipeList(),
-                        GT_Recipe.GT_Recipe_Map.sExtractorRecipes,
+                        RecipeMaps.extractorRecipes,
                         true,
                         true,
                         true);
                     GT_ModHandler.addIC2RecipesToGT(
                         GT_ModHandler.getOreWashingRecipeList(),
-                        GT_Recipe.GT_Recipe_Map.sOreWasherRecipes,
+                        RecipeMaps.oreWasherRecipes,
                         false,
                         true,
                         true);
                     GT_ModHandler.addIC2RecipesToGT(
                         GT_ModHandler.getThermalCentrifugeRecipeList(),
-                        GT_Recipe.GT_Recipe_Map.sThermalCentrifugeRecipes,
+                        RecipeMaps.thermalCentrifugeRecipes,
                         true,
                         true,
                         true);
@@ -720,9 +791,6 @@ public class GT_Client extends GT_Proxy implements Runnable {
             afterSomeTime++;
             if (afterSomeTime >= 100L) {
                 afterSomeTime = 0;
-                for (GT_Recipe recipe : GT_Recipe.GT_Recipe_Map.sAssemblylineVisualRecipes.mRecipeList) {
-                    recipe.mHidden = false;
-                }
             }
             for (Iterator<Map.Entry<GT_PlayedSound, Integer>> iterator = GT_Utility.sPlayedSoundMap.entrySet()
                 .iterator(); iterator.hasNext();) {
@@ -757,7 +825,9 @@ public class GT_Client extends GT_Proxy implements Runnable {
 
         if (GT_Utility.isStackInList(aEvent.currentItem, GregTech_API.sWrenchList)) {
             if (aTileEntity instanceof ITurnable || ROTATABLE_VANILLA_BLOCKS.contains(aBlock)
-                || aTileEntity instanceof IWrenchable) drawGrid(aEvent, false, true, aEvent.player.isSneaking());
+                || aTileEntity instanceof IWrenchable
+                || (aTileEntity instanceof IOrientable orientable && orientable.canBeRotated()))
+                drawGrid(aEvent, false, true, aEvent.player.isSneaking());
             return;
         }
 

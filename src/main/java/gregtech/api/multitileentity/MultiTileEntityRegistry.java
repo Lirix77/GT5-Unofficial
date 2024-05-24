@@ -38,6 +38,7 @@ public class MultiTileEntityRegistry {
     // TODO: NBT sensitive or not? Starting with not for now
     private static final ItemStackMap<MultiTileEntityRegistry> REGISTRIES = new ItemStackMap<>(false);
     private static final HashSet<Class<?>> sRegisteredTileEntities = new HashSet<>();
+    private final HashMap<Integer, MultiTileEntityContainer> cachedTileEntityContainers = new HashMap<>();
 
     public HashMap<Short, CreativeTab> mCreativeTabs = new HashMap<>();
     public Map<Short, MultiTileEntityClassContainer> mRegistry = new HashMap<>();
@@ -80,7 +81,7 @@ public class MultiTileEntityRegistry {
         mBlock = aBlock;
         GT_FML_LOGGER.info(aNameInternal + " " + Block.getIdFromBlock(aBlock) + "This is the answer");
         mBlock.mMultiTileEntityRegistry = this;
-        REGISTRIES.put(new ItemStack(Item.getItemFromBlock(aBlock), 1, GT_Values.W), this);
+        REGISTRIES.put(new ItemStack(Item.getItemById(Block.getIdFromBlock(aBlock)), 1, GT_Values.W), this);
         NAMED_REGISTRIES.put(mNameInternal, this);
     }
 
@@ -146,8 +147,7 @@ public class MultiTileEntityRegistry {
             return null;
         }
 
-        GT_LanguageManager
-            .addStringLocalization(mNameInternal + "." + aClassContainer.mID + ".name", aLocalised, false);
+        GT_LanguageManager.addStringLocalization(mNameInternal + "." + aClassContainer.mID + ".name", aLocalised);
         mRegistry.put(aClassContainer.mID, aClassContainer);
         mLastRegisteredID = aClassContainer.mID;
         mRegistrations.add(aClassContainer);
@@ -265,6 +265,15 @@ public class MultiTileEntityRegistry {
             Items.feather.getDamage(aStack),
             aStack.getTagCompound());
         return tContainer == null ? null : tContainer.mTileEntity;
+    }
+
+    public MultiTileEntityContainer getCachedTileEntityContainer(ItemStack stack) {
+        MultiTileEntityContainer container = cachedTileEntityContainers.get(Items.feather.getDamage(stack));
+        if (container == null) {
+            container = getNewTileEntityContainer(stack);
+            cachedTileEntityContainers.put(Items.feather.getDamage(stack), container);
+        }
+        return container;
     }
 
     public MultiTileEntityContainer getNewTileEntityContainer(ItemStack aStack) {

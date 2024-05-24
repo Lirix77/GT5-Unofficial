@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintStream;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -25,14 +26,19 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
+import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.common.config.Configuration;
 
 import org.apache.commons.lang3.StringUtils;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.LoadController;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModContainer;
+import cpw.mods.fml.common.discovery.ASMDataTable;
+import cpw.mods.fml.common.discovery.ModDiscoverer;
 import gregtech.GT_Mod;
 import gregtech.api.GregTech_API;
 import gregtech.api.enums.ConfigCategories;
@@ -40,12 +46,16 @@ import gregtech.api.enums.Dyes;
 import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
+import gregtech.api.recipe.RecipeCategory;
+import gregtech.api.recipe.RecipeCategoryHolder;
+import gregtech.api.recipe.RecipeCategorySetting;
 import gregtech.api.util.GT_Config;
 import gregtech.api.util.GT_LanguageManager;
 import gregtech.api.util.GT_Log;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_RecipeBuilder;
 import gregtech.api.util.GT_Utility;
+import gregtech.common.GT_Proxy;
 import gregtech.common.tileentities.machines.long_distance.GT_MetaTileEntity_LongDistancePipelineBase;
 import gregtech.common.tileentities.machines.multi.GT_MetaTileEntity_Cleanroom;
 
@@ -84,13 +94,36 @@ public class GT_PreLoad {
 
     public static void initLocalization(File languageDir) {
         GT_FML_LOGGER.info("GT_Mod: Generating Lang-File");
-        GT_LanguageManager.sEnglishFile = new Configuration(new File(languageDir, "GregTech.lang"));
-        GT_LanguageManager.sEnglishFile.load();
-        if (GT_LanguageManager.sEnglishFile.get("EnableLangFile", "UseThisFileAsLanguageFile", false)
-            .getBoolean(false)) {
-            GT_LanguageManager.sLanguage = GT_LanguageManager.sEnglishFile.get("EnableLangFile", "Language", "en_US")
-                .getString();
+
+        if (FMLCommonHandler.instance()
+            .getEffectiveSide()
+            .isClient()) {
+            String userLang = Minecraft.getMinecraft()
+                .getLanguageManager()
+                .getCurrentLanguage()
+                .getLanguageCode();
+            GT_FML_LOGGER.info("User lang is " + userLang);
+            if (userLang.equals("en_US")) {
+                GT_FML_LOGGER.info("Loading GregTech.lang");
+                GT_LanguageManager.isEN_US = true;
+                GT_LanguageManager.sEnglishFile = new Configuration(new File(languageDir, "GregTech.lang"));
+            } else {
+                String l10nFileName = "GregTech_" + userLang + ".lang";
+                File l10nFile = new File(languageDir, l10nFileName);
+                if (l10nFile.isFile()) {
+                    GT_FML_LOGGER.info("Loading l10n file: " + l10nFileName);
+                    GT_LanguageManager.sEnglishFile = new Configuration(l10nFile);
+                } else {
+                    GT_FML_LOGGER.info("Cannot find l10n file " + l10nFileName + ", fallback to GregTech.lang");
+                    GT_LanguageManager.isEN_US = true;
+                    GT_LanguageManager.sEnglishFile = new Configuration(new File(languageDir, "GregTech.lang"));
+                }
+            }
+        } else {
+            GT_LanguageManager.isEN_US = true;
+            GT_LanguageManager.sEnglishFile = new Configuration(new File(languageDir, "GregTech.lang"));
         }
+        GT_LanguageManager.sEnglishFile.load();
 
         Materials.getMaterialsMap()
             .values()
@@ -109,16 +142,12 @@ public class GT_PreLoad {
         GT_Config.sConfigFileIDs = new Configuration(tFile);
         GT_Config.sConfigFileIDs.load();
         GT_Config.sConfigFileIDs.save();
-        GregTech_API.sRecipeFile = new GT_Config(
-            new Configuration(new File(new File(configDir, "GregTech"), "Recipes.cfg")));
         GregTech_API.sMachineFile = new GT_Config(
             new Configuration(new File(new File(configDir, "GregTech"), "MachineStats.cfg")));
         GregTech_API.sWorldgenFile = new GT_Config(
             new Configuration(new File(new File(configDir, "GregTech"), "WorldGeneration.cfg")));
         GregTech_API.sMaterialProperties = new GT_Config(
             new Configuration(new File(new File(configDir, "GregTech"), "MaterialProperties.cfg")));
-        GregTech_API.sMaterialComponents = new GT_Config(
-            new Configuration(new File(new File(configDir, "GregTech"), "MaterialComponents.cfg")));
         GregTech_API.sUnification = new GT_Config(
             new Configuration(new File(new File(configDir, "GregTech"), "Unification.cfg")));
         GregTech_API.sSpecialFile = new GT_Config(
@@ -160,19 +189,17 @@ public class GT_PreLoad {
                     GT_Log.mOreDictLogFile.createNewFile();
                 } catch (Throwable ignored) {}
             }
+            List<String> tList = ((GT_Log.LogBuffer) GT_Log.ore).mBufferedOreDictLog;
             try {
                 GT_Log.ore = new PrintStream(GT_Log.mOreDictLogFile);
             } catch (Throwable ignored) {}
-            try {
-                List<String> tList = ((GT_Log.LogBuffer) GT_Log.ore).mBufferedOreDictLog;
-                GT_Log.ore.println("******************************************************************************");
-                GT_Log.ore.println("* This is the complete log of the GT5-Unofficial OreDictionary Handler. It   *");
-                GT_Log.ore.println("* processes all OreDictionary entries and can sometimes cause errors. All    *");
-                GT_Log.ore.println("* entries and errors are being logged. If you see an error please raise an   *");
-                GT_Log.ore.println("* issue at https://github.com/Blood-Asp/GT5-Unofficial.                      *");
-                GT_Log.ore.println("******************************************************************************");
-                tList.forEach(GT_Log.ore::println);
-            } catch (Throwable ignored) {}
+            GT_Log.ore.println("******************************************************************************");
+            GT_Log.ore.println("* This is the complete log of the GT5-Unofficial OreDictionary Handler. It   *");
+            GT_Log.ore.println("* processes all OreDictionary entries and can sometimes cause errors. All    *");
+            GT_Log.ore.println("* entries and errors are being logged. If you see an error please raise an   *");
+            GT_Log.ore.println("* issue at https://github.com/GTNewHorizons/GT-New-Horizons-Modpack/issues.  *");
+            GT_Log.ore.println("******************************************************************************");
+            tList.forEach(GT_Log.ore::println);
         }
         if (tMainConfig.get(GT_Mod.aTextGeneral, "LoggingExplosions", true)
             .getBoolean(true)) {
@@ -254,7 +281,7 @@ public class GT_PreLoad {
                                     null, "ingot", "ingotHot", "ingotDouble", "ingotTriple", "ingotQuadruple",
                                     "ingotQuintuple", "plate", "plateDouble", "plateTriple", "plateQuadruple",
                                     "plateQuintuple", "plateDense", "stick", "lens", "round", "bolt", "screw", "ring",
-                                    "foil", "cell", "cellPlasma", "cellMolten" };
+                                    "foil", "cell", "cellPlasma", "cellMolten", "rawOre" };
                                 if (mIt == 2) tags = new String[] { "toolHeadSword", "toolHeadPickaxe",
                                     "toolHeadShovel", "toolHeadAxe", "toolHeadHoe", "toolHeadHammer", "toolHeadFile",
                                     "toolHeadSaw", "toolHeadDrill", "toolHeadChainsaw", "toolHeadWrench",
@@ -287,7 +314,7 @@ public class GT_PreLoad {
             "toolHeadUniversalSpade", "toolHeadSense", "toolHeadPlow", "toolHeadArrow", "toolHeadBuzzSaw",
             "turbineBlade", "wireFine", "gearGtSmall", "rotor", "stickLong", "springSmall", "spring", "arrowGtWood",
             "arrowGtPlastic", "gemChipped", "gemFlawed", "gemFlawless", "gemExquisite", "gearGt", "crateGtDust",
-            "crateGtIngot", "crateGtGem", "crateGtPlate", "nanite", "cellMolten" };
+            "crateGtIngot", "crateGtGem", "crateGtPlate", "nanite", "cellMolten", "rawOre" };
 
         List<String> mMTTags = new ArrayList<>();
         oreTags.stream()
@@ -414,6 +441,14 @@ public class GT_PreLoad {
         GT_Values.disableDigitalChestsExternalAccess = tMainConfig
             .get("machines", "disableDigitalChestsExternalAccess", false)
             .getBoolean(false);
+        GT_Values.enableMultiTileEntities = tMainConfig.get(
+            "machines",
+            "enableMultiTileEntities",
+            false,
+            "This enabled MuTEs(multitile entities) to be added to the game. MuTEs are in the start of development and its not recommended to enable them unless you know what you are doing.")
+            .getBoolean(false)
+            // Make sure MuTEs are enabled in development
+            || (boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
         GregTech_API.TICKS_FOR_LAG_AVERAGING = tMainConfig
             .get(GT_Mod.aTextGeneral, "TicksForLagAveragingWithScanner", 25)
             .getInt(25);
@@ -518,14 +553,10 @@ public class GT_PreLoad {
             .getBoolean(true);
         GT_Mod.gregtechproxy.mHideUnusedOres = tMainConfig.get(GT_Mod.aTextGeneral, "HideUnusedOres", true)
             .getBoolean(true);
-        GT_Mod.gregtechproxy.mHideRecyclingRecipes = tMainConfig.get(GT_Mod.aTextGeneral, "HideRecyclingRecipes", true)
-            .getBoolean(true);
         GT_Mod.gregtechproxy.mArcSmeltIntoAnnealed = tMainConfig
             .get(GT_Mod.aTextGeneral, "ArcSmeltIntoAnnealedWrought", true)
             .getBoolean(true);
         GT_Mod.gregtechproxy.mEnableAllMaterials = tMainConfig.get("general", "EnableAllMaterials", false)
-            .getBoolean(false);
-        GT_Mod.gregtechproxy.mEnableAllComponents = tMainConfig.get("general", "EnableAllComponents", false)
             .getBoolean(false);
 
         // Pollution: edit GT_Proxy.java to change default values
@@ -664,6 +695,10 @@ public class GT_PreLoad {
         }
 
         GT_Mod.gregtechproxy.mUndergroundOil.getConfig(tMainConfig, "undergroundfluid");
+        GT_Mod.gregtechproxy.enableUndergroundGravelGen = GregTech_API.sWorldgenFile
+            .get("general", "enableUndergroundGravelGen", GT_Mod.gregtechproxy.enableUndergroundGravelGen);
+        GT_Mod.gregtechproxy.enableUndergroundDirtGen = GregTech_API.sWorldgenFile
+            .get("general", "enableUndergroundDirtGen", GT_Mod.gregtechproxy.enableUndergroundDirtGen);
         GT_Mod.gregtechproxy.mEnableCleanroom = tMainConfig.get("general", "EnableCleanroom", true)
             .getBoolean(true);
         if (GT_Mod.gregtechproxy.mEnableCleanroom) GT_MetaTileEntity_Cleanroom.loadConfig(tMainConfig);
@@ -696,6 +731,12 @@ public class GT_PreLoad {
         GT_Mod.gregtechproxy.mMixedOreOnlyYieldsTwoThirdsOfPureOre = tMainConfig
             .get("general", "MixedOreOnlyYieldsTwoThirdsOfPureOre", false)
             .getBoolean(false);
+        GT_Mod.gregtechproxy.mRichOreYieldMultiplier = tMainConfig.get("general", "RichOreYieldMultiplier", true)
+            .getBoolean(false);
+        GT_Mod.gregtechproxy.mNetherOreYieldMultiplier = tMainConfig.get("general", "NetherOreYieldMultiplier", true)
+            .getBoolean(false);
+        GT_Mod.gregtechproxy.mEndOreYieldMultiplier = tMainConfig.get("general", "EndOreYieldMultiplier", true)
+            .getBoolean(false);
         GT_Mod.gregtechproxy.enableBlackGraniteOres = GregTech_API.sWorldgenFile
             .get("general", "enableBlackGraniteOres", GT_Mod.gregtechproxy.enableBlackGraniteOres);
         GT_Mod.gregtechproxy.enableRedGraniteOres = GregTech_API.sWorldgenFile
@@ -721,11 +762,22 @@ public class GT_PreLoad {
         GT_MetaTileEntity_LongDistancePipelineBase.minimalDistancePoints = tMainConfig
             .get("general", "LongDistancePipelineMinimalDistancePoints", 64)
             .getInt(64);
+        try {
+            String setting_string = tMainConfig.get(
+                "OreDropBehaviour",
+                "general",
+                "FortuneItem",
+                "Settings: \n'PerDimBlock': Sets the drop to the block variant of the ore block based on dimension, defaults to stone type, \n'UnifiedBlock': Sets the drop to the stone variant of the ore block, \n'Block': Sets the drop to the ore  mined, \n'FortuneItem': Sets the drop to the new ore item and makes it affected by fortune, \n'Item': Sets the drop to the new ore item, \nDefaults to: 'FortuneItem'")
+                .getString();
+            GT_Log.out.println("Trying to set it to: " + setting_string);
+            GT_Proxy.OreDropSystem setting = GT_Proxy.OreDropSystem.valueOf(setting_string);
+            GT_Mod.gregtechproxy.oreDropSystem = setting;
 
-        GregTech_API.mUseOnlyGoodSolderingMaterials = GregTech_API.sRecipeFile.get(
-            ConfigCategories.Recipes.harderrecipes,
-            "useonlygoodsolderingmaterials",
-            GregTech_API.mUseOnlyGoodSolderingMaterials);
+        } catch (IllegalArgumentException e) {
+            GT_Log.err.println(e);
+            GT_Mod.gregtechproxy.oreDropSystem = GT_Proxy.OreDropSystem.FortuneItem;
+        }
+
         GT_Mod.gregtechproxy.mChangeHarvestLevels = GregTech_API.sMaterialProperties
             .get("havestLevel", "activateHarvestLevelChange", false); // TODO CHECK
         if (GT_Mod.gregtechproxy.mChangeHarvestLevels) {
@@ -857,6 +909,18 @@ public class GT_PreLoad {
             .get("nei", "RecipeOwnerStackTrace", false);
         GT_Mod.gregtechproxy.mNEIOriginalVoltage = GregTech_API.sClientDataFile.get("nei", "OriginalVoltage", false);
 
+        GT_Mod.gregtechproxy.recipeCategorySettings.clear();
+        for (RecipeCategory recipeCategory : findRecipeCategories()) {
+            RecipeCategorySetting setting = RecipeCategorySetting.find(
+                GregTech_API.sClientDataFile.getWithValidValues(
+                    "nei.recipe_categories",
+                    recipeCategory.unlocalizedName,
+                    RecipeCategorySetting.NAMES,
+                    RecipeCategorySetting.getDefault()
+                        .toName()));
+            GT_Mod.gregtechproxy.recipeCategorySettings.put(recipeCategory, setting);
+        }
+
         GT_Mod.gregtechproxy.mWailaTransformerVoltageTier = GregTech_API.sClientDataFile
             .get("waila", "WailaTransformerVoltageTier", true);
         GT_Mod.gregtechproxy.wailaAverageNS = GregTech_API.sClientDataFile.get("waila", "WailaAverageNS", false);
@@ -866,5 +930,38 @@ public class GT_PreLoad {
         for (int i = 0; i < Circuits.length; i++) {
             GT_Mod.gregtechproxy.mCircuitsOrder.putIfAbsent(Circuits[i], i);
         }
+
+        GT_Mod.gregtechproxy.reloadNEICache();
+    }
+
+    private static List<RecipeCategory> findRecipeCategories() {
+        List<RecipeCategory> ret = new ArrayList<>();
+        try {
+            Field discovererField = Loader.class.getDeclaredField("discoverer");
+            discovererField.setAccessible(true);
+            ModDiscoverer discoverer = (ModDiscoverer) discovererField.get(Loader.instance());
+            for (ASMDataTable.ASMData asmData : discoverer.getASMTable()
+                .getAll(RecipeCategoryHolder.class.getName())) {
+                try {
+                    Object obj = Class.forName(asmData.getClassName())
+                        .getDeclaredField(asmData.getObjectName())
+                        .get(null);
+                    if (obj instanceof RecipeCategory recipeCategory) {
+                        ret.add(recipeCategory);
+                    } else {
+                        GT_FML_LOGGER.error(
+                            "{}#{} is not an instance of RecipeCategory",
+                            asmData.getClassName(),
+                            asmData.getObjectName());
+                    }
+                } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException e) {
+                    GT_FML_LOGGER.error("Failed to find RecipeCategory");
+                    GT_FML_LOGGER.catching(e);
+                }
+            }
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+        return ret;
     }
 }

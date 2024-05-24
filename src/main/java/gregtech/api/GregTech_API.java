@@ -31,11 +31,11 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
+import com.google.common.collect.SetMultimap;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -70,6 +70,7 @@ import gregtech.api.util.GT_Log;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
 import gregtech.api.util.GT_Utility;
+import gregtech.api.util.item.ItemHolder;
 import gregtech.api.world.GT_Worldgen;
 import gregtech.common.GT_DummyWorld;
 import gregtech.common.items.GT_IntegratedCircuit_Item;
@@ -105,8 +106,13 @@ public class GregTech_API {
     public static final long FLUID_MATERIAL_UNIT = L;
     /**
      * Fixes the HashMap Mappings for ItemStacks once the Server started
+     * <br>
+     * <br>
+     * NOTE: We use wildcards generics for the key because it could be for example {@link ItemStack} or
+     * {@link GT_ItemStack}
      */
-    public static final Collection<Map<? extends GT_ItemStack, ?>> sItemStackMappings = new ArrayList<>();
+    public static final Collection<Map<?, ?>> sItemStackMappings = new ArrayList<>();
+    public static final Collection<SetMultimap<? extends ItemHolder, ?>> itemStackMultiMaps = new ArrayList<>();
 
     /**
      * The MetaTileEntity-ID-List-Length
@@ -121,17 +127,36 @@ public class GregTech_API {
     /**
      * A List of all registered MetaTileEntities
      * <p/>
-     * 0 - 749 are used by GregTech. 750 - 999 are reserved for Alkalus. 1000 - 2047 are used by GregTech. 2048 - 2559
-     * are reserved for OvermindDL. 2560 - 3071 are reserved for Immibis. 3072 - 3583 are reserved for LinusPhoenix.
-     * 3584 - 4095 are reserved for BloodyAsp. 4096 - 5095 are used for GregTech Frames. 5096 - 6099 are used for
-     * GregTech Pipes. 6100 - 8191 are used for GregTech Decoration Blocks. 8192 - 8703 are reserved for ZL123. 8704 -
-     * 9215 are reserved for Mr10Movie. 9216 - 9727 are used for GregTech Automation Machines. 9728 - 10239 are reserved
-     * for 28Smiles. 10240 - 10751 are reserved for VirMan. 10752 - 11263 are reserved for Briareos81. 11264 - 12000 are
-     * reserved for Quantum64. 12001 - 12500 are reserved for RedMage17. 12501 - 13000 are reserved for bartimaeusnek.
-     * 13001 - 13100 are reserved for Techlone 13101 - 13500 are reserved for kekzdealer 13501 - 14000 are reserved for
-     * glee8e. 14001 - 14100 are reserved for glowredman 14101 - 14200 are reserved for MuXiu1997. 14201 - 14300 are
-     * reserved for kuba6000. 14301 - 14999 are currently free. 15000 - 16999 are reserved for TecTech. 17000 - 29999
-     * are currently free. 30000 - 31999 are reserved for Alkalus. 32001 - 32766 are reserved for Glod.
+     * 0 - 749 are used by GregTech.
+     * 750 - 999 are reserved for Alkalus.
+     * 1000 - 2047 are used by GregTech.
+     * 2048 - 2559 are reserved for OvermindDL.
+     * 2560 - 3071 are reserved for Immibis.
+     * 3072 - 3583 are reserved for LinusPhoenix.
+     * 3584 - 4095 are reserved for BloodyAsp.
+     * 4096 - 5095 are used for GregTech Frames.
+     * 5096 - 6099 are used for GregTech Pipes.
+     * 6100 - 8191 are used for GregTech Decoration Blocks.
+     * 8192 - 8703 are reserved for ZL123.
+     * 8704 - 9215 are reserved for Mr10Movie.
+     * 9216 - 9727 are used for GregTech Automation Machines.
+     * 9728 - 10239 are reserved for 28Smiles.
+     * 10240 - 10751 are reserved for VirMan.
+     * 10752 - 11263 are reserved for Briareos81.
+     * 11264 - 12000 are reserved for Quantum64.
+     * 12001 - 12500 are reserved for RedMage17.
+     * 12501 - 13000 are reserved for bartimaeusnek.
+     * 13001 - 13100 are reserved for Techlone.
+     * 13101 - 13500 are reserved for kekzdealer.
+     * 13501 - 14000 are reserved for glee8e.
+     * 14001 - 14100 are reserved for glowredman.
+     * 14101 - 14200 are reserved for MuXiu1997.
+     * 14201 - 14300 are reserved for kuba6000.
+     * 14301 - 14999 are currently free.
+     * 15000 - 16999 are reserved for TecTech.
+     * 17000 - 29999 are currently free.
+     * 30000 - 31999 are reserved for Alkalus.
+     * 32001 - 32766 are reserved for Glod.
      * <p/>
      * Contact me if you need a free ID-Range, which doesn't conflict with other Addons. You could make an ID-Config,
      * but we all know what "stupid" customers think about conflicting ID's
@@ -254,8 +279,8 @@ public class GregTech_API {
     /**
      * The Configuration Objects
      */
-    public static GT_Config sRecipeFile = null, sMachineFile = null, sWorldgenFile = null, sMaterialProperties = null,
-        sMaterialComponents = null, sUnification = null, sSpecialFile = null, sClientDataFile, sOPStuff = null;
+    public static GT_Config sMachineFile = null, sWorldgenFile = null, sMaterialProperties = null, sUnification = null,
+        sSpecialFile = null, sClientDataFile, sOPStuff = null;
 
     public static int TICKS_FOR_LAG_AVERAGING = 25, MILLISECOND_THRESHOLD_UNTIL_LAG_WARNING = 100;
     /**
@@ -271,6 +296,7 @@ public class GregTech_API {
     public static Block sBlockCasings1, sBlockCasings2, sBlockCasings3, sBlockCasings4, sBlockCasings5, sBlockCasings6,
         sBlockCasings8, sBlockCasings9, sBlockCasingsNH, sSolenoidCoilCasings;
     public static Block sBlockLongDistancePipes;
+    public static Block sDroneRender;
     /**
      * Getting assigned by the Config
      */
@@ -381,7 +407,7 @@ public class GregTech_API {
      */
     public static boolean causeMachineUpdate(World aWorld, int aX, int aY, int aZ) {
         if (aWorld != null && !aWorld.isRemote && !isDummyWorld(aWorld)) { // World might be null during World-gen
-            GT_Runnable_MachineBlockUpdate.setMachineUpdateValues(aWorld, new ChunkCoordinates(aX, aY, aZ));
+            GT_Runnable_MachineBlockUpdate.setMachineUpdateValues(aWorld, aX, aY, aZ);
             return true;
         }
         return false;
@@ -392,7 +418,7 @@ public class GregTech_API {
         if (aWorld == null || aWorld.isRemote || isDummyWorld(aWorld)) {
             return false;
         } // World might be null during World-gen
-        GT_Runnable_Cable_Update.setCableUpdateValues(aWorld, new ChunkCoordinates(aX, aY, aZ));
+        GT_Runnable_Cable_Update.setCableUpdateValues(aWorld, aX, aY, aZ);
         return true;
     }
 
@@ -454,8 +480,7 @@ public class GregTech_API {
         return new gregtech.api.items.GT_Generic_Item(
             aUnlocalized,
             aEnglish,
-            "Doesn't work as intended, this is a Bug",
-            false);
+            "Doesn't work as intended, this is a Bug");
     }
 
     /**
@@ -501,8 +526,7 @@ public class GregTech_API {
         return new gregtech.api.items.GT_Generic_Item(
             aUnlocalized,
             aEnglish,
-            "Doesn't work as intended, this is a Bug",
-            false);
+            "Doesn't work as intended, this is a Bug");
     }
 
     /**
@@ -525,8 +549,7 @@ public class GregTech_API {
         return new gregtech.api.items.GT_Generic_Item(
             aUnlocalized,
             aEnglish,
-            "Doesn't work as intended, this is a Bug",
-            false);
+            "Doesn't work as intended, this is a Bug");
     }
 
     /**

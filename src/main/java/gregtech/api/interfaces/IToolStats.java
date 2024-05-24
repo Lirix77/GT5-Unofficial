@@ -2,12 +2,16 @@ package gregtech.api.interfaces;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent;
@@ -30,6 +34,21 @@ public interface IToolStats {
      * Called when this gets added to a Tool Item
      */
     void onStatsAddedToTool(GT_MetaGenerated_Tool aItem, int aID);
+
+    /**
+     * @implNote if you are only modifying drops, override
+     *           {@link #convertBlockDrops(List, ItemStack, EntityPlayer, Block, int, int, int, byte, int, boolean, BlockEvent.HarvestDropsEvent)}
+     * @param player   The player
+     * @param x        Block pos
+     * @param y        Block pos
+     * @param z        Block pos
+     * @param block    the block
+     * @param metadata block metadata
+     * @param tile     TileEntity of the block if exist
+     * @param event    the event, cancel it to prevent the block from being broken
+     */
+    default void onBreakBlock(@Nonnull EntityPlayer player, int x, int y, int z, @Nonnull Block block, byte metadata,
+        @Nullable TileEntity tile, @Nonnull BlockEvent.BreakEvent event) {}
 
     /**
      * @return Damage the Tool receives when breaking a Block. 100 is one Damage Point (or 100 EU).
@@ -138,7 +157,7 @@ public interface IToolStats {
     boolean isMiningTool();
 
     /**
-     * aBlock.getHarvestTool(aMetaData) can return the following Values for example. "axe", "pickaxe", "sword",
+     * {@link Block#getHarvestTool(int)} can return the following Values for example. "axe", "pickaxe", "sword",
      * "shovel", "hoe", "grafter", "saw", "wrench", "crowbar", "file", "hammer", "plow", "plunger", "scoop",
      * "screwdriver", "sense", "scythe", "softhammer", "cutter", "plasmatorch"
      *
@@ -150,7 +169,7 @@ public interface IToolStats {
     /**
      * This lets you modify the Drop List, when this type of Tool has been used.
      *
-     * @return the Amount of modified Items.
+     * @return the Amount of modified Items, used to determine the extra durability cost
      */
     int convertBlockDrops(List<ItemStack> aDrops, ItemStack aStack, EntityPlayer aPlayer, Block aBlock, int aX, int aY,
         int aZ, byte aMetaData, int aFortune, boolean aSilkTouch, BlockEvent.HarvestDropsEvent aEvent);
@@ -176,4 +195,12 @@ public interface IToolStats {
 
     float getMiningSpeed(Block aBlock, byte aMetaData, float aDefault, EntityPlayer aPlayer, World worldObj, int aX,
         int aY, int aZ);
+
+    default String getToolTypeName() {
+        return null;
+    };
+
+    default byte getMaxMode() {
+        return 1;
+    }
 }

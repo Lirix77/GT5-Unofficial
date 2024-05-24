@@ -1,9 +1,8 @@
 package gregtech.loaders.oreprocessing;
 
-import static gregtech.api.enums.Mods.Railcraft;
-import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sAssemblerRecipes;
-import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sCutterRecipes;
-import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sMaceratorRecipes;
+import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
+import static gregtech.api.recipe.RecipeMaps.cutterRecipes;
+import static gregtech.api.recipe.RecipeMaps.maceratorRecipes;
 import static gregtech.api.util.GT_RecipeBuilder.SECONDS;
 
 import net.minecraft.block.Block;
@@ -12,7 +11,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import gregtech.api.enums.GT_Values;
-import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
@@ -39,7 +37,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .fluidInputs(Materials.Redstone.getMolten(144L))
                     .duration(5 * SECONDS)
                     .eut(48)
-                    .addTo(sAssemblerRecipes);
+                    .addTo(assemblerRecipes);
                 break;
             case "Sand":
                 GT_Values.RA.stdBuilder()
@@ -47,7 +45,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .itemOutputs(new ItemStack(Blocks.sand, 1, 0))
                     .duration(20 * SECONDS)
                     .eut(2)
-                    .addTo(sMaceratorRecipes);
+                    .addTo(maceratorRecipes);
                 break;
             case "Endstone":
                 GT_Values.RA.stdBuilder()
@@ -58,7 +56,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .outputChances(10000, 500)
                     .duration(20 * SECONDS)
                     .eut(2)
-                    .addTo(sMaceratorRecipes);
+                    .addTo(maceratorRecipes);
                 break;
             case "Netherrack":
                 GT_Values.RA.stdBuilder()
@@ -69,7 +67,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .outputChances(10000, 500)
                     .duration(20 * SECONDS)
                     .eut(2)
-                    .addTo(sMaceratorRecipes);
+                    .addTo(maceratorRecipes);
                 break;
             case "NetherBrick":
                 GT_Values.RA.stdBuilder()
@@ -77,27 +75,10 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .itemOutputs(new ItemStack(Blocks.nether_brick_fence, 1))
                     .duration(5 * SECONDS)
                     .eut(4)
-                    .addTo(sAssemblerRecipes);
+                    .addTo(assemblerRecipes);
                 break;
             case "Obsidian":
                 if (aBlock != Blocks.air) aBlock.setResistance(20.0F);
-
-                GT_Values.RA.stdBuilder()
-                    .itemInputs(GT_Utility.copyAmount(1, aStack), ItemList.IC2_Compressed_Coal_Ball.get(8L))
-                    .itemOutputs(ItemList.IC2_Compressed_Coal_Chunk.get(1L))
-                    .duration(20 * SECONDS)
-                    .eut(4)
-                    .addTo(sAssemblerRecipes);
-
-                GT_Values.RA.stdBuilder()
-                    .itemInputs(GT_Utility.copyAmount(1, aStack))
-                    .itemOutputs(
-                        GT_ModHandler.getModItem(Railcraft.ID, "cube", 1L, 4),
-                        GT_OreDictUnificator.get(OrePrefixes.dust, aMaterial, 1L))
-                    .outputChances(10000, 1000)
-                    .duration(20 * SECONDS)
-                    .eut(2)
-                    .addTo(sMaceratorRecipes);
                 break;
             case "Concrete":
                 GT_Values.RA.stdBuilder()
@@ -106,7 +87,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .fluidInputs(Materials.Water.getFluid(Math.max(4, Math.min(1000, 200 * 30 / 320))))
                     .duration(10 * SECONDS)
                     .eut(TierEU.RECIPE_LV)
-                    .addTo(sCutterRecipes);
+                    .addTo(cutterRecipes);
 
                 GT_Values.RA.stdBuilder()
                     .itemInputs(GT_Utility.copyAmount(1, aStack))
@@ -114,7 +95,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .fluidInputs(GT_ModHandler.getDistilledWater(Math.max(3, Math.min(750, 200 * 30 / 426))))
                     .duration(10 * SECONDS)
                     .eut(TierEU.RECIPE_LV)
-                    .addTo(sCutterRecipes);
+                    .addTo(cutterRecipes);
 
                 GT_Values.RA.stdBuilder()
                     .itemInputs(GT_Utility.copyAmount(1, aStack))
@@ -122,14 +103,14 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .fluidInputs(Materials.Lubricant.getFluid(Math.max(1, Math.min(250, 100 * 30 / 1280))))
                     .duration(5 * SECONDS)
                     .eut(TierEU.RECIPE_LV)
-                    .addTo(sCutterRecipes);
+                    .addTo(cutterRecipes);
 
                 GT_Values.RA.stdBuilder()
                     .itemInputs(GT_Utility.copyAmount(1, aStack))
                     .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.dust, aMaterial, 1L))
                     .duration(20 * SECONDS)
                     .eut(2)
-                    .addTo(sMaceratorRecipes);
+                    .addTo(maceratorRecipes);
                 break;
             case "Rhyolite":
                 GT_Values.RA.stdBuilder()
@@ -140,7 +121,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .outputChances(10000, 2000)
                     .duration(20 * SECONDS)
                     .eut(2)
-                    .addTo(sMaceratorRecipes);
+                    .addTo(maceratorRecipes);
                 break;
             case "Komatiite":
                 GT_Values.RA.stdBuilder()
@@ -151,7 +132,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .outputChances(10000, 500)
                     .duration(20 * SECONDS)
                     .eut(2)
-                    .addTo(sMaceratorRecipes);
+                    .addTo(maceratorRecipes);
                 break;
             case "Dacite":
             case "Andesite":
@@ -163,7 +144,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .outputChances(10000, 2000)
                     .duration(20 * SECONDS)
                     .eut(2)
-                    .addTo(sMaceratorRecipes);
+                    .addTo(maceratorRecipes);
                 break;
             case "Gabbro":
                 GT_Values.RA.stdBuilder()
@@ -174,7 +155,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .outputChances(10000, 2000)
                     .duration(20 * SECONDS)
                     .eut(2)
-                    .addTo(sMaceratorRecipes);
+                    .addTo(maceratorRecipes);
                 break;
             case "Eclogite":
                 GT_Values.RA.stdBuilder()
@@ -185,7 +166,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .outputChances(10000, 1000)
                     .duration(20 * SECONDS)
                     .eut(2)
-                    .addTo(sMaceratorRecipes);
+                    .addTo(maceratorRecipes);
                 break;
             case "Soapstone":
                 GT_Values.RA.stdBuilder()
@@ -196,7 +177,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .outputChances(10000, 1000)
                     .duration(20 * SECONDS)
                     .eut(2)
-                    .addTo(sMaceratorRecipes);
+                    .addTo(maceratorRecipes);
                 break;
             case "Greenschist":
             case "Blueschist":
@@ -208,7 +189,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .outputChances(10000, 1000)
                     .duration(20 * SECONDS)
                     .eut(2)
-                    .addTo(sMaceratorRecipes);
+                    .addTo(maceratorRecipes);
                 break;
             case "Gneiss":
             case "Migmatite":
@@ -220,7 +201,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .outputChances(10000, 5000)
                     .duration(20 * SECONDS)
                     .eut(2)
-                    .addTo(sMaceratorRecipes);
+                    .addTo(maceratorRecipes);
                 break;
             case "Redrock":
             case "Marble":
@@ -230,7 +211,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .fluidInputs(Materials.Water.getFluid(Math.max(4, Math.min(1000, 400 * 30 / 320))))
                     .duration(20 * SECONDS)
                     .eut(TierEU.RECIPE_LV)
-                    .addTo(sCutterRecipes);
+                    .addTo(cutterRecipes);
 
                 GT_Values.RA.stdBuilder()
                     .itemInputs(GT_Utility.copyAmount(1, aStack))
@@ -238,7 +219,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .fluidInputs(GT_ModHandler.getDistilledWater(Math.max(3, Math.min(750, 400 * 30 / 426))))
                     .duration(20 * SECONDS)
                     .eut(TierEU.RECIPE_LV)
-                    .addTo(sCutterRecipes);
+                    .addTo(cutterRecipes);
 
                 GT_Values.RA.stdBuilder()
                     .itemInputs(GT_Utility.copyAmount(1, aStack))
@@ -246,7 +227,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .fluidInputs(Materials.Lubricant.getFluid(Math.max(1, Math.min(250, 200 * 30 / 1280))))
                     .duration(10 * SECONDS)
                     .eut(TierEU.RECIPE_LV)
-                    .addTo(sCutterRecipes);
+                    .addTo(cutterRecipes);
             case "Basalt":
                 GT_Values.RA.stdBuilder()
                     .itemInputs(GT_Utility.copyAmount(1, aStack), GT_Utility.getIntegratedCircuit(3))
@@ -254,7 +235,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .fluidInputs(Materials.Water.getFluid(Math.max(4, Math.min(1000, 400 * 30 / 320))))
                     .duration(20 * SECONDS)
                     .eut(TierEU.RECIPE_LV)
-                    .addTo(sCutterRecipes);
+                    .addTo(cutterRecipes);
 
                 GT_Values.RA.stdBuilder()
                     .itemInputs(GT_Utility.copyAmount(1, aStack), GT_Utility.getIntegratedCircuit(3))
@@ -262,7 +243,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .fluidInputs(GT_ModHandler.getDistilledWater(Math.max(3, Math.min(750, 400 * 30 / 426))))
                     .duration(20 * SECONDS)
                     .eut(TierEU.RECIPE_LV)
-                    .addTo(sCutterRecipes);
+                    .addTo(cutterRecipes);
 
                 GT_Values.RA.stdBuilder()
                     .itemInputs(GT_Utility.copyAmount(1, aStack), GT_Utility.getIntegratedCircuit(3))
@@ -270,7 +251,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .fluidInputs(Materials.Lubricant.getFluid(Math.max(1, Math.min(250, 200 * 30 / 1280))))
                     .duration(10 * SECONDS)
                     .eut(TierEU.RECIPE_LV)
-                    .addTo(sCutterRecipes);
+                    .addTo(cutterRecipes);
             case "Quartzite":
                 GT_Values.RA.stdBuilder()
                     .itemInputs(GT_Utility.copyAmount(1, aStack))
@@ -280,7 +261,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .outputChances(10000, 1000)
                     .duration(20 * SECONDS)
                     .eut(2)
-                    .addTo(sMaceratorRecipes);
+                    .addTo(maceratorRecipes);
                 break;
             case "Flint":
                 GT_Values.RA.stdBuilder()
@@ -291,7 +272,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .outputChances(10000, 5000)
                     .duration(20 * SECONDS)
                     .eut(2)
-                    .addTo(sMaceratorRecipes);
+                    .addTo(maceratorRecipes);
                 break;
             case "GraniteBlack":
                 GT_Values.RA.stdBuilder()
@@ -300,7 +281,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .fluidInputs(Materials.Water.getFluid(Math.max(4, Math.min(1000, 400 * 30 / 320))))
                     .duration(20 * SECONDS)
                     .eut(TierEU.RECIPE_LV)
-                    .addTo(sCutterRecipes);
+                    .addTo(cutterRecipes);
 
                 GT_Values.RA.stdBuilder()
                     .itemInputs(GT_Utility.copyAmount(1, aStack))
@@ -308,7 +289,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .fluidInputs(GT_ModHandler.getDistilledWater(Math.max(3, Math.min(750, 400 * 30 / 426))))
                     .duration(20 * SECONDS)
                     .eut(TierEU.RECIPE_LV)
-                    .addTo(sCutterRecipes);
+                    .addTo(cutterRecipes);
 
                 GT_Values.RA.stdBuilder()
                     .itemInputs(GT_Utility.copyAmount(1, aStack))
@@ -316,7 +297,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .fluidInputs(Materials.Lubricant.getFluid(Math.max(1, Math.min(250, 200 * 30 / 1280))))
                     .duration(10 * SECONDS)
                     .eut(TierEU.RECIPE_LV)
-                    .addTo(sCutterRecipes);
+                    .addTo(cutterRecipes);
 
                 GT_Values.RA.stdBuilder()
                     .itemInputs(GT_Utility.copyAmount(1, aStack))
@@ -326,7 +307,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .outputChances(10000, 100)
                     .duration(20 * SECONDS)
                     .eut(2)
-                    .addTo(sMaceratorRecipes);
+                    .addTo(maceratorRecipes);
                 break;
             case "GraniteRed":
                 GT_Values.RA.stdBuilder()
@@ -335,7 +316,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .fluidInputs(Materials.Water.getFluid(Math.max(4, Math.min(1000, 400 * 30 / 320))))
                     .duration(20 * SECONDS)
                     .eut(TierEU.RECIPE_LV)
-                    .addTo(sCutterRecipes);
+                    .addTo(cutterRecipes);
 
                 GT_Values.RA.stdBuilder()
                     .itemInputs(GT_Utility.copyAmount(1, aStack))
@@ -343,7 +324,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .fluidInputs(GT_ModHandler.getDistilledWater(Math.max(3, Math.min(750, 400 * 30 / 426))))
                     .duration(20 * SECONDS)
                     .eut(TierEU.RECIPE_LV)
-                    .addTo(sCutterRecipes);
+                    .addTo(cutterRecipes);
 
                 GT_Values.RA.stdBuilder()
                     .itemInputs(GT_Utility.copyAmount(1, aStack))
@@ -351,7 +332,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .fluidInputs(Materials.Lubricant.getFluid(Math.max(1, Math.min(250, 200 * 30 / 1280))))
                     .duration(10 * SECONDS)
                     .eut(TierEU.RECIPE_LV)
-                    .addTo(sCutterRecipes);
+                    .addTo(cutterRecipes);
 
                 GT_Values.RA.stdBuilder()
                     .itemInputs(GT_Utility.copyAmount(1, aStack))
@@ -361,7 +342,7 @@ public class ProcessingStone implements IOreRecipeRegistrator {
                     .outputChances(10000, 100)
                     .duration(20 * SECONDS)
                     .eut(2)
-                    .addTo(sMaceratorRecipes);
+                    .addTo(maceratorRecipes);
         }
     }
 }

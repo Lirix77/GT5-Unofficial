@@ -30,6 +30,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.google.common.base.Stopwatch;
+import com.google.common.collect.SetMultimap;
 
 import appeng.api.AEApi;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -49,7 +50,6 @@ import gregtech.api.GregTech_API;
 import gregtech.api.enchants.Enchantment_EnderDamage;
 import gregtech.api.enchants.Enchantment_Hazmat;
 import gregtech.api.enchants.Enchantment_Radioactivity;
-import gregtech.api.enums.ConfigCategories;
 import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
@@ -59,9 +59,9 @@ import gregtech.api.enums.Textures;
 import gregtech.api.gui.modularui.GT_UIInfos;
 import gregtech.api.interfaces.internal.IGT_Mod;
 import gregtech.api.metatileentity.BaseMetaPipeEntity;
-import gregtech.api.objects.GT_ItemStack;
 import gregtech.api.objects.ItemData;
 import gregtech.api.objects.XSTR;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.threads.GT_Runnable_MachineBlockUpdate;
 import gregtech.api.util.GT_Assemblyline_Server;
 import gregtech.api.util.GT_Forestry_Compat;
@@ -73,6 +73,7 @@ import gregtech.api.util.GT_Recipe;
 import gregtech.api.util.GT_RecipeRegistrator;
 import gregtech.api.util.GT_SpawnEventHandler;
 import gregtech.api.util.GT_Utility;
+import gregtech.api.util.item.ItemHolder;
 import gregtech.common.GT_DummyWorld;
 import gregtech.common.GT_Network;
 import gregtech.common.GT_Proxy;
@@ -98,7 +99,6 @@ import gregtech.loaders.postload.GT_BlockResistanceLoader;
 import gregtech.loaders.postload.GT_BookAndLootLoader;
 import gregtech.loaders.postload.GT_CraftingRecipeLoader;
 import gregtech.loaders.postload.GT_CropLoader;
-import gregtech.loaders.postload.GT_ExtremeDieselFuelLoader;
 import gregtech.loaders.postload.GT_FakeRecipeLoader;
 import gregtech.loaders.postload.GT_ItemMaxStacksizeLoader;
 import gregtech.loaders.postload.GT_MachineRecipeLoader;
@@ -116,7 +116,6 @@ import gregtech.loaders.preload.GT_Loader_MultiTileEntities;
 import gregtech.loaders.preload.GT_Loader_OreDictionary;
 import gregtech.loaders.preload.GT_Loader_OreProcessing;
 import gregtech.loaders.preload.GT_PreLoad;
-import gregtech.nei.IMCForNEI;
 import ic2.api.recipe.IRecipeInput;
 import ic2.api.recipe.RecipeOutput;
 
@@ -223,7 +222,7 @@ public class GT_Mod implements IGT_Mod {
     }
 
     public static int calculateTotalGTVersion(int majorVersion, int minorVersion, int patchVersion) {
-        return majorVersion * 100000 + minorVersion * 1000 + patchVersion;
+        return majorVersion * 1000000 + minorVersion * 1000 + patchVersion;
     }
 
     @Mod.EventHandler
@@ -280,7 +279,9 @@ public class GT_Mod implements IGT_Mod {
         new GT_Loader_ItemData().run();
         new GT_Loader_Item_Block_And_Fluid().run();
         new GT_Loader_MetaTileEntities().run();
-        new GT_Loader_MultiTileEntities().run();
+        if (GT_Values.enableMultiTileEntities) {
+            new GT_Loader_MultiTileEntities().run();
+        }
 
         new GT_Loader_CircuitBehaviors().run();
         new GT_CoverBehaviorLoader().run();
@@ -355,7 +356,6 @@ public class GT_Mod implements IGT_Mod {
         if (Mods.Waila.isModLoaded()) {
             Waila.init();
         }
-        IMCForNEI.IMCSender();
         GregTech_API.sLoadFinished = true;
         GT_Log.out.println("GT_Mod: Load-Phase finished!");
         GT_Log.ore.println("GT_Mod: Load-Phase finished!");
@@ -431,14 +431,12 @@ public class GT_Mod implements IGT_Mod {
                 null,
                 null),
             new ItemData(Materials.Tin, 10886400L));
-        if (!GregTech_API.sRecipeFile.get(ConfigCategories.Recipes.storageblockcrafting, "tile.glowstone", false)) {
-            GT_ModHandler.removeRecipe(
-                new ItemStack(Items.glowstone_dust, 1),
-                new ItemStack(Items.glowstone_dust, 1),
-                null,
-                new ItemStack(Items.glowstone_dust, 1),
-                new ItemStack(Items.glowstone_dust, 1));
-        }
+        GT_ModHandler.removeRecipe(
+            new ItemStack(Items.glowstone_dust, 1),
+            new ItemStack(Items.glowstone_dust, 1),
+            null,
+            new ItemStack(Items.glowstone_dust, 1),
+            new ItemStack(Items.glowstone_dust, 1));
         GT_ModHandler.removeRecipeDelayed(
             new ItemStack(Blocks.wooden_slab, 1, 0),
             new ItemStack(Blocks.wooden_slab, 1, 1),
@@ -476,9 +474,7 @@ public class GT_Mod implements IGT_Mod {
                         .getDisplayName()));
         }
         new GT_CraftingRecipeLoader().run();
-        if (GregTech_API.sRecipeFile.get(ConfigCategories.Recipes.disabledrecipes, "ic2forgehammer", true)) {
-            GT_ModHandler.removeRecipeByOutput(ItemList.IC2_ForgeHammer.getWildcard(1L));
-        }
+        GT_ModHandler.removeRecipeByOutput(ItemList.IC2_ForgeHammer.getWildcard(1L));
         GT_ModHandler.removeRecipeByOutput(GT_ModHandler.getIC2Item("machine", 1L));
         GT_ModHandler.addCraftingRecipe(
             GT_ModHandler.getIC2Item("machine", 1L),
@@ -499,13 +495,10 @@ public class GT_Mod implements IGT_Mod {
                 new String[] { "blastfurnace", "blockcutter", "inductionFurnace", "generator", "windMill", "waterMill",
                     "solarPanel", "centrifuge", "electrolyzer", "compressor", "electroFurnace", "extractor",
                     "macerator", "recycler", "metalformer", "orewashingplant", "massFabricator", "replicator", })
-            .filter(
-                tName -> GregTech_API.sRecipeFile.get(ConfigCategories.Recipes.disabledrecipes, aTextIC2 + tName, true))
             .map(tName -> GT_ModHandler.getIC2Item(tName, 1L))
             .forEach(GT_ModHandler::removeRecipeByOutputDelayed);
 
         GT_PostLoad.nerfVanillaTools();
-        new GT_ExtremeDieselFuelLoader().run();
 
         /*
          * Until this point most crafting recipe additions, and removals, have been buffered. Go through, execute the
@@ -562,6 +555,7 @@ public class GT_Mod implements IGT_Mod {
 
     @Mod.EventHandler
     public void onLoadComplete(FMLLoadCompleteEvent aEvent) {
+        gregtechproxy.onLoadComplete();
         for (Runnable tRunnable : GregTech_API.sGTCompleteLoad) {
             try {
                 tRunnable.run();
@@ -595,33 +589,17 @@ public class GT_Mod implements IGT_Mod {
 
         gregtechproxy.onServerStarting();
         // Check for more IC2 recipes on ServerStart to also catch MineTweaker additions
-        GT_ModHandler.addIC2RecipesToGT(
-            GT_ModHandler.getMaceratorRecipeList(),
-            GT_Recipe.GT_Recipe_Map.sMaceratorRecipes,
-            true,
-            true,
-            true);
-        GT_ModHandler.addIC2RecipesToGT(
-            GT_ModHandler.getCompressorRecipeList(),
-            GT_Recipe.GT_Recipe_Map.sCompressorRecipes,
-            true,
-            true,
-            true);
-        GT_ModHandler.addIC2RecipesToGT(
-            GT_ModHandler.getExtractorRecipeList(),
-            GT_Recipe.GT_Recipe_Map.sExtractorRecipes,
-            true,
-            true,
-            true);
-        GT_ModHandler.addIC2RecipesToGT(
-            GT_ModHandler.getOreWashingRecipeList(),
-            GT_Recipe.GT_Recipe_Map.sOreWasherRecipes,
-            false,
-            true,
-            true);
+        GT_ModHandler
+            .addIC2RecipesToGT(GT_ModHandler.getMaceratorRecipeList(), RecipeMaps.maceratorRecipes, true, true, true);
+        GT_ModHandler
+            .addIC2RecipesToGT(GT_ModHandler.getCompressorRecipeList(), RecipeMaps.compressorRecipes, true, true, true);
+        GT_ModHandler
+            .addIC2RecipesToGT(GT_ModHandler.getExtractorRecipeList(), RecipeMaps.extractorRecipes, true, true, true);
+        GT_ModHandler
+            .addIC2RecipesToGT(GT_ModHandler.getOreWashingRecipeList(), RecipeMaps.oreWasherRecipes, false, true, true);
         GT_ModHandler.addIC2RecipesToGT(
             GT_ModHandler.getThermalCentrifugeRecipeList(),
-            GT_Recipe.GT_Recipe_Map.sThermalCentrifugeRecipes,
+            RecipeMaps.thermalCentrifugeRecipes,
             true,
             true,
             true);
@@ -794,7 +772,10 @@ public class GT_Mod implements IGT_Mod {
         GT_Utility.reInit();
         GT_Recipe.reInit();
         try {
-            for (Map<? extends GT_ItemStack, ?> gt_itemStackMap : GregTech_API.sItemStackMappings) {
+            for (Map<?, ?> gt_itemStackMap : GregTech_API.sItemStackMappings) {
+                GT_Utility.reMap(gt_itemStackMap);
+            }
+            for (SetMultimap<? extends ItemHolder, ?> gt_itemStackMap : GregTech_API.itemStackMultiMaps) {
                 GT_Utility.reMap(gt_itemStackMap);
             }
         } catch (Throwable e) {

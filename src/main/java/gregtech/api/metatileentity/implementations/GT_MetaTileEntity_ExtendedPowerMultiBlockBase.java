@@ -16,11 +16,16 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import org.jetbrains.annotations.NotNull;
+
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.util.GT_ExoticEnergyInputHelper;
+import gregtech.api.util.GT_OverclockCalculator;
 import gregtech.api.util.GT_Utility;
+import gregtech.api.util.shutdown.ShutDownReason;
+import gregtech.api.util.shutdown.ShutDownReasonRegistry;
 
 /**
  * Multiblock base class that allows machine to use power over int.
@@ -54,29 +59,13 @@ public abstract class GT_MetaTileEntity_ExtendedPowerMultiBlockBase<T extends GT
     @Override
     protected void calculateOverclockedNessMultiInternal(long aEUt, int aDuration, int mAmperage, long maxInputVoltage,
         boolean perfectOC) {
-        // 5% space for cable loss
-        long zMaxInputVoltage = maxInputVoltage / 100L * 95L;
-        long zTime = aDuration;
-        long zEUt = aEUt;
-        while (zEUt < zMaxInputVoltage) {
-            zEUt = zEUt << 2;
-            zTime = zTime >> (perfectOC ? 2 : 1);
-            if (zTime <= 0) {
-                break;
-            }
-        }
-        if (zTime <= 0) {
-            zTime = 1;
-        }
-        if (zEUt > zMaxInputVoltage) {
-            zEUt = zEUt >> 2;
-            zTime = zTime << (perfectOC ? 2 : 1);
-        }
-        if (zTime > Integer.MAX_VALUE - 1) {
-            zTime = Integer.MAX_VALUE - 1;
-        }
-        this.lEUt = zEUt;
-        this.mMaxProgresstime = (int) zTime;
+        GT_OverclockCalculator calculator = new GT_OverclockCalculator().setRecipeEUt(aEUt)
+            .setEUt(maxInputVoltage * mAmperage)
+            .setDuration(aDuration)
+            .setDurationDecreasePerOC(perfectOC ? 2 : 1)
+            .calculate();
+        lEUt = calculator.getConsumption();
+        mMaxProgresstime = calculator.getDuration();
     }
 
     @Override
@@ -87,7 +76,7 @@ public abstract class GT_MetaTileEntity_ExtendedPowerMultiBlockBase<T extends GT
         }
         if (this.lEUt < 0) {
             if (!drainEnergyInput(getActualEnergyUsage())) {
-                criticalStopMachine();
+                stopMachine(ShutDownReasonRegistry.POWER_LOSS);
                 return false;
             }
         }
@@ -95,9 +84,9 @@ public abstract class GT_MetaTileEntity_ExtendedPowerMultiBlockBase<T extends GT
     }
 
     @Override
-    public void stopMachine() {
+    public void stopMachine(@NotNull ShutDownReason reason) {
         this.lEUt = 0;
-        super.stopMachine();
+        super.stopMachine(reason);
     }
 
     @Override

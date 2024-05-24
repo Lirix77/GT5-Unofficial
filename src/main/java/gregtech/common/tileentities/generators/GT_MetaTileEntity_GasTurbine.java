@@ -31,28 +31,13 @@ import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_BasicGenerator;
+import gregtech.api.recipe.RecipeMap;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.render.TextureFactory;
-import gregtech.api.util.GT_Recipe;
 
 public class GT_MetaTileEntity_GasTurbine extends GT_MetaTileEntity_BasicGenerator {
 
     public int mEfficiency;
-
-    @Deprecated
-    public GT_MetaTileEntity_GasTurbine(int aID, String aName, String aNameRegional, int aTier) {
-        super(
-            aID,
-            aName,
-            aNameRegional,
-            aTier,
-            new String[] { "Requires flammable Gasses",
-                "Causes "
-                    + (int) (GT_Mod.gregtechproxy.mPollutionBaseGasTurbinePerSecond
-                        * GT_Mod.gregtechproxy.mPollutionGasTurbineReleasedByTier[aTier])
-                    + " Pollution per second" });
-        this.mEfficiency = 100 - aTier * 5;
-        onConfigLoad();
-    }
 
     public GT_MetaTileEntity_GasTurbine(int aID, String aName, String aNameRegional, int aTier, int mEfficiency) {
         super(
@@ -66,20 +51,6 @@ public class GT_MetaTileEntity_GasTurbine extends GT_MetaTileEntity_BasicGenerat
                         * GT_Mod.gregtechproxy.mPollutionGasTurbineReleasedByTier[aTier])
                     + " Pollution per second" });
         this.mEfficiency = mEfficiency;
-        onConfigLoad();
-    }
-
-    @Deprecated
-    public GT_MetaTileEntity_GasTurbine(String aName, int aTier, String aDescription, ITexture[][][] aTextures) {
-        super(aName, aTier, aDescription, aTextures);
-        this.mEfficiency = 100 - aTier * 5;
-        onConfigLoad();
-    }
-
-    @Deprecated
-    public GT_MetaTileEntity_GasTurbine(String aName, int aTier, String[] aDescription, ITexture[][][] aTextures) {
-        super(aName, aTier, aDescription, aTextures);
-        this.mEfficiency = 100 - aTier * 5;
         onConfigLoad();
     }
 
@@ -106,8 +77,8 @@ public class GT_MetaTileEntity_GasTurbine extends GT_MetaTileEntity_BasicGenerat
     }
 
     @Override
-    public GT_Recipe.GT_Recipe_Map getRecipes() {
-        return GT_Recipe.GT_Recipe_Map.sTurbineFuels;
+    public RecipeMap<?> getRecipeMap() {
+        return RecipeMaps.gasTurbineFuels;
     }
 
     @Override

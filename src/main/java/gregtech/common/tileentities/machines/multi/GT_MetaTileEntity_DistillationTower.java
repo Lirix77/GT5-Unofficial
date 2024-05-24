@@ -43,9 +43,11 @@ import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_EnhancedMultiBlockBase;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch_Output;
+import gregtech.api.recipe.RecipeMap;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GT_Multiblock_Tooltip_Builder;
-import gregtech.api.util.GT_Recipe;
+import gregtech.common.tileentities.machines.GT_MetaTileEntity_Hatch_Output_ME;
 
 public class GT_MetaTileEntity_DistillationTower extends
     GT_MetaTileEntity_EnhancedMultiBlockBase<GT_MetaTileEntity_DistillationTower> implements ISurvivalConstructable {
@@ -181,8 +183,8 @@ public class GT_MetaTileEntity_DistillationTower extends
     }
 
     @Override
-    public GT_Recipe.GT_Recipe_Map getRecipeMap() {
-        return GT_Recipe.GT_Recipe_Map.sDistillationRecipes;
+    public RecipeMap<?> getRecipeMap() {
+        return RecipeMaps.distillationTowerRecipes;
     }
 
     @Override
@@ -298,6 +300,15 @@ public class GT_MetaTileEntity_DistillationTower extends
             if (!dumpFluid(mOutputHatchesByLayer.get(i), tStack, true))
                 dumpFluid(mOutputHatchesByLayer.get(i), tStack, false);
         }
+    }
+
+    @Override
+    public boolean canDumpFluidToME() {
+        // All fluids can be dumped to ME only if each layer contains a ME Output Hatch.
+        return this.mOutputHatchesByLayer.stream()
+            .allMatch(
+                tLayerOutputHatches -> tLayerOutputHatches.stream()
+                    .anyMatch(tHatch -> tHatch instanceof GT_MetaTileEntity_Hatch_Output_ME));
     }
 
     @Override

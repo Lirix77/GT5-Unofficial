@@ -86,10 +86,6 @@ public enum ItemList implements IItemContainer {
     IC2_Compressed_Coal_Ball,
     IC2_Compressed_Coal_Chunk,
     IC2_Fuel_Rod_Empty,
-    @Deprecated
-    IC2_Fuel_Can_Empty(true),
-    @Deprecated
-    IC2_Fuel_Can_Filled(true),
     IC2_Food_Can_Empty,
     IC2_Food_Can_Filled,
     IC2_Food_Can_Spoiled,
@@ -806,7 +802,6 @@ public enum ItemList implements IItemContainer {
     Machine_Bronze_Hammer,
     Machine_Bronze_Compressor,
     Machine_Bronze_AlloySmelter,
-    Machine_Bronze_BlastFurnace,
     Machine_Bricked_BlastFurnace,
     Machine_Steel_Boiler_Lava,
     Machine_Steel_Boiler,
@@ -1743,6 +1738,7 @@ public enum ItemList implements IItemContainer {
     Cover_WirelessFluidDetector,
     Cover_WirelessItemDetector,
     Cover_WirelessNeedsMaintainance,
+    Cover_WirelessActivityDetector,
 
     Cover_RedstoneTransmitterExternal,
     Cover_RedstoneTransmitterInternal,
@@ -2560,7 +2556,12 @@ public enum ItemList implements IItemContainer {
     InfinityCooledCasing,
     Machine_Multi_TranscendentPlasmaMixer,
     Cover_Metrics_Transmitter,
-    NC_AdvancedSensorCard;
+    NC_AdvancedSensorCard,
+    Machine_Multi_DroneCentre,
+    TierdDrone0,
+    TierdDrone1,
+    TierdDrone2,
+    Hatch_DroneDownLink;
 
     public static final ItemList[] DYE_ONLY_ITEMS = { Color_00, Color_01, Color_02, Color_03, Color_04, Color_05,
         Color_06, Color_07, Color_08, Color_09, Color_10, Color_11, Color_12, Color_13, Color_14, Color_15 },

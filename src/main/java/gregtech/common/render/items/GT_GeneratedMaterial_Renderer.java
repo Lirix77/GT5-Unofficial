@@ -1,7 +1,6 @@
 package gregtech.common.render.items;
 
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
@@ -26,7 +25,8 @@ public class GT_GeneratedMaterial_Renderer implements IItemRenderer {
 
     @Override
     public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
-        return type == ItemRenderType.ENTITY;
+        return type == ItemRenderType.ENTITY && helper == ItemRendererHelper.ENTITY_BOBBING
+            || (helper == ItemRendererHelper.ENTITY_ROTATION && Minecraft.getMinecraft().gameSettings.fancyGraphics);
     }
 
     /**
@@ -97,19 +97,7 @@ public class GT_GeneratedMaterial_Renderer implements IItemRenderer {
             GL11.glColor3f(tModulation[0] / 255.0F, tModulation[1] / 255.0F, tModulation[2] / 255.0F);
         }
 
-        if (type.equals(IItemRenderer.ItemRenderType.INVENTORY)) {
-            GT_RenderUtil.renderItemIcon(icon, 16.0D, 0.001D, 0.0F, 0.0F, -1.0F);
-        } else {
-            ItemRenderer.renderItemIn2D(
-                Tessellator.instance,
-                icon.getMaxU(),
-                icon.getMinV(),
-                icon.getMinU(),
-                icon.getMaxV(),
-                icon.getIconWidth(),
-                icon.getIconHeight(),
-                0.0625F);
-        }
+        GT_RenderUtil.renderItem(type, icon);
     }
 
     protected void renderContainedFluid(ItemRenderType type, FluidStack aFluidStack, IIcon fluidIcon) {
@@ -119,35 +107,11 @@ public class GT_GeneratedMaterial_Renderer implements IItemRenderer {
         TextureUtils.bindAtlas(aFluid.getSpriteNumber());
 
         GL11.glDepthFunc(GL11.GL_EQUAL);
-        if (type.equals(IItemRenderer.ItemRenderType.INVENTORY)) {
-            GT_RenderUtil.renderItemIcon(fluidIcon, 16.0D, 0.001D, 0.0F, 0.0F, -1.0F);
-        } else {
-            ItemRenderer.renderItemIn2D(
-                Tessellator.instance,
-                fluidIcon.getMaxU(),
-                fluidIcon.getMinV(),
-                fluidIcon.getMinU(),
-                fluidIcon.getMaxV(),
-                fluidIcon.getIconWidth(),
-                fluidIcon.getIconHeight(),
-                0.0625F);
-        }
+        GT_RenderUtil.renderItem(type, fluidIcon);
         GL11.glDepthFunc(GL11.GL_LEQUAL);
     }
 
     protected void renderItemOverlay(ItemRenderType type, IIcon overlay) {
-        if (type.equals(IItemRenderer.ItemRenderType.INVENTORY)) {
-            GT_RenderUtil.renderItemIcon(overlay, 16.0D, 0.001D, 0.0F, 0.0F, -1.0F);
-        } else {
-            ItemRenderer.renderItemIn2D(
-                Tessellator.instance,
-                overlay.getMaxU(),
-                overlay.getMinV(),
-                overlay.getMinU(),
-                overlay.getMaxV(),
-                overlay.getIconWidth(),
-                overlay.getIconHeight(),
-                0.0625F);
-        }
+        GT_RenderUtil.renderItem(type, overlay);
     }
 }

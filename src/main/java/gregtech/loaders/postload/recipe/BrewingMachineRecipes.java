@@ -11,6 +11,8 @@ import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.Materials;
 import gregtech.api.util.GT_Recipe;
 
+import static gregtech.api.recipe.RecipeMaps.brewingRecipes;
+
 public class BrewingMachineRecipes implements Runnable {
 
     @Override
@@ -27,7 +29,7 @@ public class BrewingMachineRecipes implements Runnable {
                 for (IFermenterRecipe recipe : recipes) {
                     ItemStack resource = recipe.getResource();
 
-                    boolean alreadyHasRecipe = GT_Recipe.GT_Recipe_Map.sBrewingRecipes.containsInput(resource);
+                    boolean alreadyHasRecipe = brewingRecipes.containsInput(resource);
                     boolean resultsInBiomass = recipe.getOutput().equals(FluidRegistry.getFluid("biomass"));
 
                     if (!alreadyHasRecipe && resultsInBiomass) {

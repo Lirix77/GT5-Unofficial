@@ -4,24 +4,23 @@ import static appeng.core.localization.WailaText.*;
 
 public abstract class GT_Waila {
 
-    public static String getMachineProgressString(boolean isActive, int maxProgress, int progress) {
-        return getMachineProgressString(isActive, (long) maxProgress, (long) progress);
+    public static String getMachineProgressString(boolean isActive, int maxProgresstime, int progresstime) {
+        return getMachineProgressString(isActive, (long) maxProgresstime, (long) progresstime);
     }
 
-    public static String getMachineProgressString(boolean isActive, long maxProgress, long progress) {
-        final String result;
+    public static String getMachineProgressString(boolean isActive, long maxProgresstime, long progresstime) {
 
-        if (isActive) {
-            if (maxProgress < 20) {
-                result = String.format("Progress: %d ticks remaining", maxProgress);
-            } else {
-                result = String.format("Progress: %d s / %d s", progress / 20, maxProgress / 20);
-            }
-        } else {
-            result = "Idle";
-        }
+        if (!isActive) return "Idle";
 
-        return result;
+        StringBuilder ret = new StringBuilder("In progress: ")
+            .append(String.format("%,.2f", (double) progresstime / 20))
+            .append("s / ")
+            .append(String.format("%,.2f", (double) maxProgresstime / 20))
+            .append("s (")
+            .append(GT_Utility.formatNumbers((Math.round((double) progresstime / maxProgresstime * 1000) / 10.0)))
+            .append("%)");
+
+        return ret.toString();
     }
 
     public static String getPowerState(boolean isActive, boolean isPowered, boolean isBooting) {

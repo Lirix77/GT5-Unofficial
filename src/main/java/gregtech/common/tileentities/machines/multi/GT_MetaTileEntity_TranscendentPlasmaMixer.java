@@ -11,12 +11,18 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_DTPF_ON;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FUSION1_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
 import static gregtech.api.util.GT_StructureUtility.buildHatchAdder;
+import static gregtech.common.misc.WirelessNetworkManager.addEUToGlobalEnergyMap;
+import static gregtech.common.misc.WirelessNetworkManager.getUserEU;
+import static gregtech.common.misc.WirelessNetworkManager.processInitialSettings;
 import static gregtech.common.tileentities.machines.multi.GT_MetaTileEntity_PlasmaForge.DIM_BRIDGE_CASING;
 import static gregtech.common.tileentities.machines.multi.GT_MetaTileEntity_PlasmaForge.DIM_INJECTION_CASING;
 import static gregtech.common.tileentities.machines.multi.GT_MetaTileEntity_PlasmaForge.DIM_TRANS_CASING;
 import static java.lang.Math.max;
 import static net.minecraft.util.EnumChatFormatting.GOLD;
 import static net.minecraft.util.EnumChatFormatting.GRAY;
+
+import java.math.BigInteger;
+import java.util.UUID;
 
 import javax.annotation.Nonnull;
 
@@ -32,12 +38,13 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 
 import gregtech.api.GregTech_API;
-import gregtech.api.interfaces.IGlobalWirelessEnergy;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_EnhancedMultiBlockBase;
+import gregtech.api.recipe.RecipeMap;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
@@ -48,7 +55,7 @@ import gregtech.common.items.GT_IntegratedCircuit_Item;
 
 public class GT_MetaTileEntity_TranscendentPlasmaMixer
     extends GT_MetaTileEntity_EnhancedMultiBlockBase<GT_MetaTileEntity_TranscendentPlasmaMixer>
-    implements IGlobalWirelessEnergy, ISurvivalConstructable {
+    implements ISurvivalConstructable {
 
     private static final String[][] structure = new String[][] {
         { " CAC ", " ABA ", " ABA ", " A~A ", " ABA ", " ABA ", " CAC " },
@@ -72,7 +79,7 @@ public class GT_MetaTileEntity_TranscendentPlasmaMixer
         .addElement('C', ofBlock(GregTech_API.sBlockCasings1, DIM_BRIDGE_CASING))
         .build();
 
-    private String ownerUUID;
+    private UUID ownerUUID;
 
     public GT_MetaTileEntity_TranscendentPlasmaMixer(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -143,8 +150,8 @@ public class GT_MetaTileEntity_TranscendentPlasmaMixer
     long mWirelessEUt = 0;
 
     @Override
-    public GT_Recipe.GT_Recipe_Map getRecipeMap() {
-        return GT_Recipe.GT_Recipe_Map.sTranscendentPlasmaMixerRecipes;
+    public RecipeMap<?> getRecipeMap() {
+        return RecipeMaps.transcendentPlasmaMixerRecipes;
     }
 
     @Override
@@ -155,9 +162,23 @@ public class GT_MetaTileEntity_TranscendentPlasmaMixer
             @Override
             protected CheckRecipeResult validateRecipe(@Nonnull GT_Recipe recipe) {
                 mWirelessEUt = 10L * (long) recipe.mEUt * (long) multiplier;
+                if (getUserEU(ownerUUID).compareTo(BigInteger.valueOf(mWirelessEUt * recipe.mDuration)) < 0) {
+                    return CheckRecipeResultRegistry.insufficientPower(mWirelessEUt * recipe.mDuration);
+                }
+                return CheckRecipeResultRegistry.SUCCESSFUL;
+            }
+
+            @NotNull
+            @Override
+            protected CheckRecipeResult onRecipeStart(@Nonnull GT_Recipe recipe) {
+                mWirelessEUt = 10L * (long) recipe.mEUt * (long) multiplier;
+                // This will void the inputs if wireless energy has dropped
+                // below the required amount between validateRecipe and here.
                 if (!addEUToGlobalEnergyMap(ownerUUID, -mWirelessEUt * recipe.mDuration)) {
                     return CheckRecipeResultRegistry.insufficientPower(mWirelessEUt * recipe.mDuration);
                 }
+                // Energy consumed all at once from wireless net.
+                setCalculatedEut(0);
                 return CheckRecipeResultRegistry.SUCCESSFUL;
             }
 
@@ -165,15 +186,6 @@ public class GT_MetaTileEntity_TranscendentPlasmaMixer
             @Override
             protected GT_OverclockCalculator createOverclockCalculator(@Nonnull GT_Recipe recipe) {
                 return GT_OverclockCalculator.ofNoOverclock(recipe);
-            }
-
-            @NotNull
-            @Override
-            public CheckRecipeResult process() {
-                CheckRecipeResult result = super.process();
-                // Power will be directly consumed through wireless
-                setCalculatedEut(0);
-                return result;
             }
         }.setMaxParallelSupplier(() -> {
             ItemStack controllerStack = getControllerSlot();

@@ -1,5 +1,10 @@
 package gregtech.api.interfaces.tileentity;
 
+import javax.annotation.Nonnull;
+
+import gregtech.api.util.shutdown.ShutDownReason;
+import gregtech.api.util.shutdown.ShutDownReasonRegistry;
+
 /**
  * For Machines which have Progress
  */
@@ -16,7 +21,7 @@ public interface IMachineProgress extends IHasWorldObjectAndCoords {
     int getMaxProgress();
 
     /**
-     * increases the Progress of the Machine
+     * Manually increases the Progress of the Machine by vent cover.
      */
     boolean increaseProgress(int aProgressAmountInTicks);
 
@@ -46,6 +51,14 @@ public interface IMachineProgress extends IHasWorldObjectAndCoords {
      */
     boolean isAllowedToWork();
 
+    default void setAllowedToWork(Boolean allowedToWork) {
+        if (allowedToWork) {
+            enableWorking();
+        } else {
+            disableWorking();
+        }
+    }
+
     /**
      * used to control Machines via Redstone Signal Strength by special Covers In case of 0 the Machine is very likely
      * doing nothing, or is just not being controlled at all.
@@ -74,5 +87,10 @@ public interface IMachineProgress extends IHasWorldObjectAndCoords {
      */
     default boolean wasShutdown() {
         return false;
+    }
+
+    @Nonnull
+    default ShutDownReason getLastShutDownReason() {
+        return ShutDownReasonRegistry.NONE;
     }
 }

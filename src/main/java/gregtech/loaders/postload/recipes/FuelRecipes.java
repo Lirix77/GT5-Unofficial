@@ -24,8 +24,6 @@ public class FuelRecipes implements Runnable {
             .itemInputs(GT_ModHandler.getIC2Item("biogasCell", 1L))
             .metadata(FUEL_VALUE, 40)
             .metadata(FUEL_TYPE, 1)
-            .duration(0)
-            .eut(0)
             .addTo(GT_RecipeConstants.Fuel);
 
         GT_Values.RA.stdBuilder()
@@ -33,8 +31,6 @@ public class FuelRecipes implements Runnable {
             .itemOutputs(new ItemStack(Items.apple, 1))
             .metadata(FUEL_VALUE, 6400)
             .metadata(FUEL_TYPE, 5)
-            .duration(0)
-            .eut(0)
             .addTo(GT_RecipeConstants.Fuel);
     }
 }

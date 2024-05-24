@@ -51,6 +51,8 @@ import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch_Energy;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch_Muffler;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_Hatch_Output;
+import gregtech.api.recipe.RecipeMap;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
@@ -120,9 +122,8 @@ public class GT_MetaTileEntity_ElectricBlastFurnace extends
             .addInfo("Controller block for the Electric Blast Furnace")
             .addInfo("You can use some fluids to reduce recipe time. Place the circuit in the Input Bus")
             .addInfo("Each 900K over the min. Heat required reduces power consumption by 5% (multiplicatively)")
-            .addInfo("Each 1800K over the min. Heat required grants one perfect overclock")
-            .addInfo(
-                "For each perfect overclock the EBF will reduce recipe time 4 times (instead of 2) (100% efficiency)")
+            .addInfo("Each 1800K over the min. Heat allows for an overclock to be upgraded to a perfect overclock.")
+            .addInfo("That means the EBF will reduce recipe time by a factor 4 instead of 2 (giving 100% efficiency).")
             .addInfo("Additionally gives +100K for every tier past MV")
             .addPollutionAmount(getPollutionPerSecond(null))
             .addSeparator()
@@ -136,9 +137,9 @@ public class GT_MetaTileEntity_ElectricBlastFurnace extends
             .addInputBus("Any bottom layer casing", 3)
             .addInputHatch("Any bottom layer casing", 3)
             .addOutputBus("Any bottom layer casing", 3)
-            .addOutputHatch("Liquid form of fluids, Any bottom layer casing")
-            .addOutputHatch("Gas form of fluids, Any top layer casing", 1)
-            .addStructureInfo("Recovery amount scales with Muffler Hatch tier")
+            .addOutputHatch("Fluid outputs, Any bottom layer casing")
+            .addOutputHatch("Pollution gases (CO2/CO/SO2), Any top layer casing", 1)
+            .addStructureInfo("Pollution gas output amount scales with Muffler Hatch tier")
             .toolTipFinisher("Gregtech");
         return tt;
     }
@@ -175,8 +176,8 @@ public class GT_MetaTileEntity_ElectricBlastFurnace extends
     }
 
     @Override
-    public GT_Recipe.GT_Recipe_Map getRecipeMap() {
-        return GT_Recipe.GT_Recipe_Map.sBlastRecipes;
+    public RecipeMap<?> getRecipeMap() {
+        return RecipeMaps.blastFurnaceRecipes;
     }
 
     @Override
@@ -283,7 +284,7 @@ public class GT_MetaTileEntity_ElectricBlastFurnace extends
     }
 
     protected void multiplyPollutionFluidAmount(@Nonnull FluidStack fluid) {
-        fluid.amount = fluid.amount * Math.min(100 - getPollutionReduction() + 5, 100) / 100;
+        fluid.amount = fluid.amount * Math.min(100 - getPollutionReduction(), 100) / 100;
     }
 
     @Override
