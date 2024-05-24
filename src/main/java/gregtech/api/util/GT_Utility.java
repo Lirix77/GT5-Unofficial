@@ -44,6 +44,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.function.Function;
 import java.util.function.IntFunction;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -55,6 +56,7 @@ import javax.annotation.Nullable;
 
 import gregtech.api.metatileentity.MetaTileEntity;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -88,7 +90,9 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
@@ -115,6 +119,7 @@ import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
+import com.google.common.collect.SetMultimap;
 import com.gtnewhorizon.structurelib.alignment.IAlignment;
 import com.gtnewhorizon.structurelib.alignment.IAlignmentProvider;
 import com.mojang.authlib.GameProfile;
@@ -157,6 +162,7 @@ import gregtech.api.objects.CollectorUtils;
 import gregtech.api.objects.GT_ItemStack;
 import gregtech.api.objects.GT_ItemStack2;
 import gregtech.api.objects.ItemData;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.threads.GT_Runnable_Sound;
 import gregtech.api.util.extensions.ArrayExt;
 import gregtech.common.GT_Pollution;
@@ -496,14 +502,6 @@ public class GT_Utility {
 
     public static long getAmperageForTier(long voltage, byte tier) {
         return ceilDiv(voltage, GT_Values.V[tier]);
-    }
-
-    /**
-     * Do not use. It is rounding up voltage
-     */
-    @Deprecated
-    public static long roundDownVoltage(long voltage) {
-        return roundUpVoltage(voltage);
     }
 
     /**
@@ -1684,6 +1682,46 @@ public class GT_Utility {
             true);
     }
 
+    /**
+     * Move up to maxAmount amount of fluid from source to dest, with optional filtering via allowMove. note that this
+     * filter cannot bypass filtering done by IFluidHandlers themselves.
+     *
+     * this overload will assume the fill side is the opposite of drainSide
+     *
+     * @param source    tank to drain from. method become noop if this is null
+     * @param dest      tank to fill to. method become noop if this is null
+     * @param drainSide side used during draining operation
+     * @param maxAmount max amount of fluid to transfer. method become noop if this is not a positive integer
+     * @param allowMove filter. can be null to signal all fluids are accepted
+     */
+    public static void moveFluid(IFluidHandler source, IFluidHandler dest, ForgeDirection drainSide, int maxAmount,
+        @Nullable Predicate<FluidStack> allowMove) {
+        moveFluid(source, dest, drainSide, drainSide.getOpposite(), maxAmount, allowMove);
+    }
+
+    /**
+     * Move up to maxAmount amount of fluid from source to dest, with optional filtering via allowMove. note that this
+     * filter cannot bypass filtering done by IFluidHandlers themselves.
+     *
+     * @param source    tank to drain from. method become noop if this is null
+     * @param dest      tank to fill to. method become noop if this is null
+     * @param drainSide side used during draining operation
+     * @param fillSide  side used during filling operation
+     * @param maxAmount max amount of fluid to transfer. method become noop if this is not a positive integer
+     * @param allowMove filter. can be null to signal all fluids are accepted
+     */
+    public static void moveFluid(IFluidHandler source, IFluidHandler dest, ForgeDirection drainSide,
+        ForgeDirection fillSide, int maxAmount, @Nullable Predicate<FluidStack> allowMove) {
+        if (source == null || dest == null || maxAmount <= 0) return;
+        FluidStack liquid = source.drain(drainSide, maxAmount, false);
+        if (liquid == null) return;
+        liquid = liquid.copy();
+        liquid.amount = dest.fill(fillSide, liquid, false);
+        if (liquid.amount > 0 && (allowMove == null || allowMove.test(liquid))) {
+            dest.fill(fillSide, source.drain(drainSide, liquid.amount, true), true);
+        }
+    }
+
     public static boolean listContainsItem(Collection<ItemStack> aList, ItemStack aStack, boolean aTIfListEmpty,
         boolean aInvertFilter) {
         if (aStack == null || aStack.stackSize < 1) return false;
@@ -1852,6 +1890,12 @@ public class GT_Utility {
     public static ItemStack fillFluidContainer(FluidStack aFluid, ItemStack aStack, boolean aRemoveFluidDirectly,
         boolean aCheckIFluidContainerItems) {
         if (isStackInvalid(aStack) || aFluid == null) return null;
+        if (GT_ModHandler.isWater(aFluid) && ItemList.Bottle_Empty.isStackEqual(aStack)) {
+            if (aFluid.amount >= 1000) {
+                return new ItemStack(Items.potionitem, 1, 0);
+            }
+            return null;
+        }
         if (aCheckIFluidContainerItems && aStack.getItem() instanceof IFluidContainerItem
             && ((IFluidContainerItem) aStack.getItem()).getFluid(aStack) == null
             && ((IFluidContainerItem) aStack.getItem()).getCapacity(aStack) <= aFluid.amount) {
@@ -3099,6 +3143,13 @@ public class GT_Utility {
         return aList[aIndex];
     }
 
+    public static boolean isStackInStackSet(ItemStack aStack, Set<ItemStack> aSet) {
+        if (aStack == null) return false;
+        if (aSet.contains(aStack)) return true;
+
+        return aSet.contains(GT_ItemStack.internalCopyStack(aStack, true));
+    }
+
     public static boolean isStackInList(ItemStack aStack, Collection<GT_ItemStack> aList) {
         if (aStack == null) {
             return false;
@@ -3127,9 +3178,41 @@ public class GT_Utility {
      * re-maps all Keys of a Map after the Keys were weakened.
      */
     public static <X, Y> Map<X, Y> reMap(Map<X, Y> aMap) {
-        Map<X, Y> tMap = new HashMap<>(aMap);
+        Map<X, Y> tMap = null;
+        // We try to clone the Map first (most Maps are Cloneable) in order to retain as much state of the Map as
+        // possible when rehashing. For example, "Custom" HashMaps from fastutil may have a custom hash function which
+        // would not be used to rehash if we just create a new HashMap.
+        if (aMap instanceof Cloneable) {
+            try {
+                tMap = (Map<X, Y>) aMap.getClass()
+                    .getMethod("clone")
+                    .invoke(aMap);
+            } catch (Throwable e) {
+                GT_Log.err.println("Failed to clone Map of type " + aMap.getClass());
+                e.printStackTrace(GT_Log.err);
+            }
+        }
+
+        if (tMap == null) {
+            tMap = new HashMap<>(aMap);
+        }
+
         aMap.clear();
         aMap.putAll(tMap);
+        return aMap;
+    }
+
+    /**
+     * re-maps all Keys of a Map after the Keys were weakened.
+     */
+    public static <X, Y> SetMultimap<X, Y> reMap(SetMultimap<X, Y> aMap) {
+        @SuppressWarnings("unchecked")
+        Map.Entry<X, Y>[] entries = aMap.entries()
+            .toArray(new Map.Entry[0]);
+        aMap.clear();
+        for (Map.Entry<X, Y> entry : entries) {
+            aMap.put(entry.getKey(), entry.getValue());
+        }
         return aMap;
     }
 
@@ -3637,11 +3720,15 @@ public class GT_Utility {
         int rEUAmount = 0;
         try {
             if (tTileEntity instanceof IMachineProgress progress) {
-                if (progress.isAllowedToWork()) {
+                if (progress.isAllowedToWork() && !progress.hasThingsToDo()) {
                     tList.add(EnumChatFormatting.RED + "Disabled." + EnumChatFormatting.RESET);
                 }
-                if (progress.wasShutdown()) {
-                    tList.add(EnumChatFormatting.RED + "Shut down due to power loss." + EnumChatFormatting.RESET);
+                if (progress.wasShutdown() && isStringValid(
+                    progress.getLastShutDownReason()
+                        .getDisplayString())) {
+                    tList.add(
+                        progress.getLastShutDownReason()
+                            .getDisplayString());
                 }
                 rEUAmount += 400;
                 int tValue = 0;
@@ -3783,7 +3870,7 @@ public class GT_Utility {
     }
 
     public static String trans(String aKey, String aEnglish) {
-        return GT_LanguageManager.addStringLocalization("Interaction_DESCRIPTION_Index_" + aKey, aEnglish, false);
+        return GT_LanguageManager.addStringLocalization("Interaction_DESCRIPTION_Index_" + aKey, aEnglish);
     }
 
     public static String getTrans(String aKey) {
@@ -4800,7 +4887,7 @@ public class GT_Utility {
                 nbt = (NBTTagCompound) nbt.copy();
             }
 
-            return new AutoValue_GT_Utility_ItemId(itemStack.getItem(), itemStack.getItemDamage(), nbt);
+            return new AutoValue_GT_Utility_ItemId(itemStack.getItem(), Items.feather.getDamage(itemStack), nbt);
         }
 
         /**
@@ -4814,12 +4901,26 @@ public class GT_Utility {
         }
 
         /**
+         * This method stores metadata as wildcard and NBT as null.
+         */
+        public static ItemId createAsWildcard(ItemStack itemStack) {
+            return new AutoValue_GT_Utility_ItemId(itemStack.getItem(), W, null);
+        }
+
+        /**
+         * This method stores NBT as null.
+         */
+        public static ItemId createWithoutNBT(ItemStack itemStack) {
+            return new AutoValue_GT_Utility_ItemId(itemStack.getItem(), Items.feather.getDamage(itemStack), null);
+        }
+
+        /**
          * This method does not copy NBT in order to save time. Make sure not to mutate it!
          */
         public static ItemId createNoCopy(ItemStack itemStack) {
             return new AutoValue_GT_Utility_ItemId(
                 itemStack.getItem(),
-                itemStack.getItemDamage(),
+                Items.feather.getDamage(itemStack),
                 itemStack.getTagCompound());
         }
 
@@ -4844,6 +4945,12 @@ public class GT_Utility {
             if (nbt() != null) tag.setTag("tag", nbt());
             return tag;
         }
+
+        public ItemStack getItemStack() {
+            ItemStack itemStack = new ItemStack(item(), 1, metaData());
+            itemStack.setTagCompound(nbt());
+            return itemStack;
+        }
     }
 
     public static int getPlasmaFuelValueInEUPerLiterFromMaterial(Materials material) {
@@ -4852,8 +4959,24 @@ public class GT_Utility {
 
     public static int getPlasmaFuelValueInEUPerLiterFromFluid(FluidStack aLiquid) {
         if (aLiquid == null) return 0;
-        GT_Recipe tFuel = GT_Recipe.GT_Recipe_Map.sPlasmaFuels.findFuel(aLiquid);
+        GT_Recipe tFuel = RecipeMaps.plasmaFuels.getBackend()
+            .findFuel(aLiquid);
         if (tFuel != null) return tFuel.mSpecialValue;
         return 0;
+    }
+
+    public static MovingObjectPosition getPlayerLookingTarget() {
+        // Basically copied from waila, thanks Caedis for such challenge
+        Minecraft mc = Minecraft.getMinecraft();
+        EntityLivingBase viewpoint = mc.renderViewEntity;
+        if (viewpoint == null) return null;
+
+        float reachDistance = mc.playerController.getBlockReachDistance();
+        Vec3 posVec = viewpoint.getPosition(0);
+        Vec3 lookVec = viewpoint.getLook(0);
+        Vec3 modifiedPosVec = posVec
+            .addVector(lookVec.xCoord * reachDistance, lookVec.yCoord * reachDistance, lookVec.zCoord * reachDistance);
+
+        return viewpoint.worldObj.rayTraceBlocks(posVec, modifiedPosVec);
     }
 }

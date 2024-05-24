@@ -12,6 +12,7 @@ import com.gtnewhorizons.modularui.api.forge.ItemStackHandler;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 
+import appeng.api.crafting.ICraftingIconProvider;
 import gregtech.GT_Mod;
 import gregtech.api.GregTech_API;
 import gregtech.api.enums.ItemList;
@@ -28,7 +29,7 @@ import gregtech.api.util.GT_Log;
 import gregtech.api.util.GT_Utility;
 
 public abstract class CommonMetaTileEntity extends CoverableTileEntity
-    implements IGregTechTileEntity {
+    implements IGregTechTileEntity, ICraftingIconProvider {
 
     protected boolean mNeedsBlockUpdate = true, mNeedsUpdate = true, mSendClientData = false, mInventoryChanged = false;
 
@@ -307,5 +308,33 @@ public abstract class CommonMetaTileEntity extends CoverableTileEntity
             return getMetaTileEntity().getGUITextureSet();
         }
         return super.getGUITextureSet();
+    }
+
+    @Override
+    public ItemStack getMachineCraftingIcon() {
+        return getMetaTileEntity() != null ? getMetaTileEntity().getMachineCraftingIcon() : null;
+    }
+
+    @Override
+    public ModularWindow createWindow(UIBuildContext buildContext) {
+        if (!useModularUI()) return null;
+
+        buildContext.setValidator(getValidator());
+        final ModularWindow.Builder builder = ModularWindow.builder(getGUIWidth(), getGUIHeight());
+        builder.setBackground(getGUITextureSet().getMainBackground());
+        builder.setGuiTint(getGUIColorization());
+        if (doesBindPlayerInventory()) {
+            bindPlayerInventoryUI(builder, buildContext);
+        }
+        addUIWidgets(builder, buildContext);
+        addTitleToUI(builder);
+        addCoverTabs(builder, buildContext);
+        final IConfigurationCircuitSupport csc = getConfigurationCircuitSupport();
+        if (csc != null && csc.allowSelectCircuit()) {
+            addConfigurationCircuitSlot(builder);
+        } else {
+            addGregTechLogo(builder);
+        }
+        return builder.build();
     }
 }

@@ -6,7 +6,7 @@ import static gregtech.api.enums.Mods.GregTech;
 import static gregtech.api.enums.Mods.HardcoreEnderExpansion;
 import static gregtech.api.enums.Mods.MagicBees;
 import static gregtech.api.enums.Mods.NewHorizonsCoreMod;
-import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sFluidExtractionRecipes;
+import static gregtech.api.recipe.RecipeMaps.fluidExtractionRecipes;
 import static gregtech.api.util.GT_RecipeBuilder.SECONDS;
 import static gregtech.api.util.GT_RecipeBuilder.TICKS;
 
@@ -197,7 +197,7 @@ public class ItemDrop extends Item {
             .fluidOutputs(aOutput)
             .duration(1 * SECONDS + 12 * TICKS)
             .eut(aEUt)
-            .addTo(sFluidExtractionRecipes);
+            .addTo(fluidExtractionRecipes);
     }
 
     public void addProcessLV(ItemStack tDrop, FluidStack aOutput, ItemStack aOutput2, int aChance, int aDuration,
@@ -209,7 +209,7 @@ public class ItemDrop extends Item {
             .fluidOutputs(aOutput)
             .duration(aDuration)
             .eut(aEUt)
-            .addTo(sFluidExtractionRecipes);
+            .addTo(fluidExtractionRecipes);
     }
 
     public void addProcessMV(ItemStack tDrop, FluidStack aOutput, ItemStack aOutput2, int aChance, int aEUt) {
@@ -220,7 +220,7 @@ public class ItemDrop extends Item {
             .fluidOutputs(aOutput)
             .duration(6 * SECONDS + 8 * TICKS)
             .eut(aEUt)
-            .addTo(sFluidExtractionRecipes);
+            .addTo(fluidExtractionRecipes);
     }
 
     public void addProcessHV(ItemStack tDrop, FluidStack aOutput, ItemStack aOutput2, int aChance) {
@@ -233,6 +233,6 @@ public class ItemDrop extends Item {
         recipeBuilder.fluidOutputs(aOutput)
             .duration(24 * SECONDS)
             .eut(TierEU.RECIPE_HV)
-            .addTo(sFluidExtractionRecipes);
+            .addTo(fluidExtractionRecipes);
     }
 }

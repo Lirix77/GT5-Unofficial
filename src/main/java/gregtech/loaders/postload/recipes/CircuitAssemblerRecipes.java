@@ -3,8 +3,8 @@ package gregtech.loaders.postload.recipes;
 import static gregtech.api.enums.Mods.Forestry;
 import static gregtech.api.enums.Mods.NewHorizonsCoreMod;
 import static gregtech.api.enums.Mods.Railcraft;
+import static gregtech.api.recipe.RecipeMaps.circuitAssemblerRecipes;
 import static gregtech.api.util.GT_ModHandler.getModItem;
-import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sCircuitAssemblerRecipes;
 import static gregtech.api.util.GT_RecipeBuilder.SECONDS;
 import static gregtech.loaders.postload.GT_MachineRecipeLoader.solderingMats;
 
@@ -43,7 +43,7 @@ public class CircuitAssemblerRecipes implements Runnable {
                 .fluidInputs(tMat.getMolten(144L * tMultiplier / 2))
                 .duration(15 * SECONDS)
                 .eut((int) TierEU.RECIPE_LV)
-                .addTo(sCircuitAssemblerRecipes);
+                .addTo(circuitAssemblerRecipes);
 
             GT_Values.RA.stdBuilder()
                 .itemInputs(
@@ -54,7 +54,7 @@ public class CircuitAssemblerRecipes implements Runnable {
                 .fluidInputs(tMat.getMolten(144L * tMultiplier / 2))
                 .duration(15 * SECONDS)
                 .eut((int) TierEU.RECIPE_LV)
-                .addTo(sCircuitAssemblerRecipes);
+                .addTo(circuitAssemblerRecipes);
 
             GT_Values.RA.stdBuilder()
                 .itemInputs(
@@ -65,7 +65,7 @@ public class CircuitAssemblerRecipes implements Runnable {
                 .fluidInputs(tMat.getMolten(144L * tMultiplier / 2))
                 .duration(15 * SECONDS)
                 .eut((int) TierEU.RECIPE_LV)
-                .addTo(sCircuitAssemblerRecipes);
+                .addTo(circuitAssemblerRecipes);
 
             GT_Values.RA.stdBuilder()
                 .itemInputs(
@@ -76,7 +76,7 @@ public class CircuitAssemblerRecipes implements Runnable {
                 .fluidInputs(tMat.getMolten(144L * tMultiplier / 2))
                 .duration(20 * SECONDS)
                 .eut((int) TierEU.RECIPE_LV)
-                .addTo(sCircuitAssemblerRecipes);
+                .addTo(circuitAssemblerRecipes);
 
             GT_Values.RA.stdBuilder()
                 .itemInputs(
@@ -87,7 +87,7 @@ public class CircuitAssemblerRecipes implements Runnable {
                 .fluidInputs(tMat.getMolten(144L * tMultiplier / 2))
                 .duration(20 * SECONDS)
                 .eut((int) TierEU.RECIPE_LV)
-                .addTo(sCircuitAssemblerRecipes);
+                .addTo(circuitAssemblerRecipes);
 
             GT_Values.RA.stdBuilder()
                 .itemInputs(
@@ -98,7 +98,7 @@ public class CircuitAssemblerRecipes implements Runnable {
                 .fluidInputs(tMat.getMolten(144L * tMultiplier / 2))
                 .duration(20 * SECONDS)
                 .eut((int) TierEU.RECIPE_LV)
-                .addTo(sCircuitAssemblerRecipes);
+                .addTo(circuitAssemblerRecipes);
 
             GT_Values.RA.stdBuilder()
                 .itemInputs(
@@ -109,7 +109,7 @@ public class CircuitAssemblerRecipes implements Runnable {
                 .fluidInputs(tMat.getMolten(144L * tMultiplier / 2))
                 .duration(25 * SECONDS)
                 .eut((int) TierEU.RECIPE_LV)
-                .addTo(sCircuitAssemblerRecipes);
+                .addTo(circuitAssemblerRecipes);
 
             GT_Values.RA.stdBuilder()
                 .itemInputs(
@@ -120,7 +120,7 @@ public class CircuitAssemblerRecipes implements Runnable {
                 .fluidInputs(tMat.getMolten(144L * tMultiplier / 2))
                 .duration(25 * SECONDS)
                 .eut((int) TierEU.RECIPE_LV)
-                .addTo(sCircuitAssemblerRecipes);
+                .addTo(circuitAssemblerRecipes);
 
             GT_Values.RA.stdBuilder()
                 .itemInputs(
@@ -131,7 +131,7 @@ public class CircuitAssemblerRecipes implements Runnable {
                 .fluidInputs(tMat.getMolten(144L * tMultiplier / 2))
                 .duration(25 * SECONDS)
                 .eut((int) TierEU.RECIPE_LV)
-                .addTo(sCircuitAssemblerRecipes);
+                .addTo(circuitAssemblerRecipes);
 
             GT_Values.RA.stdBuilder()
                 .itemInputs(
@@ -145,7 +145,7 @@ public class CircuitAssemblerRecipes implements Runnable {
                 .fluidInputs(tMat.getMolten(1152L * tMultiplier / 2))
                 .duration(10 * SECONDS)
                 .eut((int) TierEU.RECIPE_LV)
-                .addTo(sCircuitAssemblerRecipes);
+                .addTo(circuitAssemblerRecipes);
 
             GT_Values.RA.stdBuilder()
                 .itemInputs(
@@ -159,7 +159,7 @@ public class CircuitAssemblerRecipes implements Runnable {
                 .fluidInputs(tMat.getMolten(1152L * tMultiplier / 2))
                 .duration(10 * SECONDS)
                 .eut((int) TierEU.RECIPE_LV)
-                .addTo(sCircuitAssemblerRecipes);
+                .addTo(circuitAssemblerRecipes);
 
             GT_Values.RA.stdBuilder()
                 .itemInputs(
@@ -173,7 +173,7 @@ public class CircuitAssemblerRecipes implements Runnable {
                 .fluidInputs(tMat.getMolten(1152L * tMultiplier / 2))
                 .duration(10 * SECONDS)
                 .eut((int) TierEU.RECIPE_LV)
-                .addTo(sCircuitAssemblerRecipes);
+                .addTo(circuitAssemblerRecipes);
 
             GT_Values.RA.stdBuilder()
                 .itemInputs(
@@ -187,7 +187,7 @@ public class CircuitAssemblerRecipes implements Runnable {
                 .fluidInputs(tMat.getMolten(1152L * tMultiplier / 2))
                 .duration(10 * SECONDS)
                 .eut((int) TierEU.RECIPE_LV)
-                .addTo(sCircuitAssemblerRecipes);
+                .addTo(circuitAssemblerRecipes);
 
         }
     }
@@ -209,7 +209,7 @@ public class CircuitAssemblerRecipes implements Runnable {
             .fluidInputs(Materials.Glass.getMolten(576))
             .duration(10 * SECONDS)
             .eut((int) TierEU.RECIPE_LV)
-            .addTo(sCircuitAssemblerRecipes);
+            .addTo(circuitAssemblerRecipes);
 
         // alternative version of the iron electron tube
 
@@ -223,7 +223,7 @@ public class CircuitAssemblerRecipes implements Runnable {
             .fluidInputs(Materials.Glass.getMolten(576))
             .duration(10 * SECONDS)
             .eut((int) TierEU.RECIPE_LV)
-            .addTo(sCircuitAssemblerRecipes);
+            .addTo(circuitAssemblerRecipes);
 
         ItemStack[] rodMaterials = new ItemStack[] {
             GT_OreDictUnificator.get(OrePrefixes.stickLong, Materials.Copper, 2L),
@@ -253,7 +253,7 @@ public class CircuitAssemblerRecipes implements Runnable {
                     .fluidInputs(Materials.Glass.getMolten(576))
                     .duration(10 * SECONDS)
                     .eut((int) TierEU.RECIPE_LV)
-                    .addTo(sCircuitAssemblerRecipes);
+                    .addTo(circuitAssemblerRecipes);
         }
 
         for (Materials tMat : solderingMats) {
@@ -273,7 +273,7 @@ public class CircuitAssemblerRecipes implements Runnable {
                 .fluidInputs(tMat.getMolten(1152L * tMultiplier / 2))
                 .duration(10 * SECONDS)
                 .eut((int) TierEU.RECIPE_LV)
-                .addTo(sCircuitAssemblerRecipes);
+                .addTo(circuitAssemblerRecipes);
 
             GT_Values.RA.stdBuilder()
                 .itemInputs(
@@ -287,7 +287,7 @@ public class CircuitAssemblerRecipes implements Runnable {
                 .fluidInputs(tMat.getMolten(1152L * tMultiplier / 2))
                 .duration(10 * SECONDS)
                 .eut((int) TierEU.RECIPE_LV)
-                .addTo(sCircuitAssemblerRecipes);
+                .addTo(circuitAssemblerRecipes);
 
             GT_Values.RA.stdBuilder()
                 .itemInputs(
@@ -301,7 +301,7 @@ public class CircuitAssemblerRecipes implements Runnable {
                 .fluidInputs(tMat.getMolten(1152L * tMultiplier / 2))
                 .duration(10 * SECONDS)
                 .eut((int) TierEU.RECIPE_LV)
-                .addTo(sCircuitAssemblerRecipes);
+                .addTo(circuitAssemblerRecipes);
 
             GT_Values.RA.stdBuilder()
                 .itemInputs(
@@ -315,7 +315,7 @@ public class CircuitAssemblerRecipes implements Runnable {
                 .fluidInputs(tMat.getMolten(1152L * tMultiplier / 2))
                 .duration(10 * SECONDS)
                 .eut((int) TierEU.RECIPE_LV)
-                .addTo(sCircuitAssemblerRecipes);
+                .addTo(circuitAssemblerRecipes);
 
         }
     }

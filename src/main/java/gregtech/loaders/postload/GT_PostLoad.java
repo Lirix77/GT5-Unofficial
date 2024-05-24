@@ -1,12 +1,11 @@
 package gregtech.loaders.postload;
 
-import static gregtech.api.enums.GT_Values.VP;
 import static gregtech.api.enums.Mods.Forestry;
 import static gregtech.api.enums.Mods.GalacticraftCore;
 import static gregtech.api.enums.Mods.GalacticraftMars;
 import static gregtech.api.enums.Mods.GalaxySpace;
 import static gregtech.api.enums.Mods.Thaumcraft;
-import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sFluidCannerRecipes;
+import static gregtech.api.recipe.RecipeMaps.fluidCannerRecipes;
 import static gregtech.api.util.GT_RecipeBuilder.TICKS;
 
 import java.lang.reflect.InvocationTargetException;
@@ -38,12 +37,14 @@ import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.SubTag;
+import gregtech.api.enums.TierEU;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GT_Forestry_Compat;
 import gregtech.api.util.GT_Log;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
-import gregtech.api.util.GT_Recipe;
 import gregtech.api.util.GT_RecipeBuilder;
+import gregtech.api.util.GT_RecipeConstants;
 import gregtech.api.util.GT_RecipeRegistrator;
 import gregtech.api.util.GT_Utility;
 import gregtech.common.items.GT_MetaGenerated_Tool_01;
@@ -94,20 +95,12 @@ public class GT_PostLoad {
             .findAny()
             .ifPresent(e -> aCompressorRecipeList.remove(e.getKey()));
         // Add default IC2 recipe to GT
+        GT_ModHandler.addIC2RecipesToGT(aMaceratorRecipeList, RecipeMaps.maceratorRecipes, true, true, true);
+        GT_ModHandler.addIC2RecipesToGT(aCompressorRecipeList, RecipeMaps.compressorRecipes, true, true, true);
+        GT_ModHandler.addIC2RecipesToGT(aExtractorRecipeList, RecipeMaps.extractorRecipes, true, true, true);
+        GT_ModHandler.addIC2RecipesToGT(aOreWashingRecipeList, RecipeMaps.oreWasherRecipes, false, true, true);
         GT_ModHandler
-            .addIC2RecipesToGT(aMaceratorRecipeList, GT_Recipe.GT_Recipe_Map.sMaceratorRecipes, true, true, true);
-        GT_ModHandler
-            .addIC2RecipesToGT(aCompressorRecipeList, GT_Recipe.GT_Recipe_Map.sCompressorRecipes, true, true, true);
-        GT_ModHandler
-            .addIC2RecipesToGT(aExtractorRecipeList, GT_Recipe.GT_Recipe_Map.sExtractorRecipes, true, true, true);
-        GT_ModHandler
-            .addIC2RecipesToGT(aOreWashingRecipeList, GT_Recipe.GT_Recipe_Map.sOreWasherRecipes, false, true, true);
-        GT_ModHandler.addIC2RecipesToGT(
-            aThermalCentrifugeRecipeList,
-            GT_Recipe.GT_Recipe_Map.sThermalCentrifugeRecipes,
-            true,
-            true,
-            true);
+            .addIC2RecipesToGT(aThermalCentrifugeRecipeList, RecipeMaps.thermalCentrifugeRecipes, true, true, true);
         // noinspection UnstableApiUsage// Stable enough for this project
         GT_Mod.GT_FML_LOGGER.info("IC2 Removal (" + stopwatch.stop() + "). Have a Cake.");
     }
@@ -124,7 +117,7 @@ public class GT_PostLoad {
                 .fluidInputs(tData.fluid)
                 .duration((tData.fluid.amount / 62) * TICKS)
                 .eut(1)
-                .addTo(sFluidCannerRecipes);
+                .addTo(fluidCannerRecipes);
             GT_RecipeBuilder builder = GT_Values.RA.stdBuilder()
                 .itemInputs(tData.filledContainer);
             if (tData.emptyContainer.stackSize > 0) {
@@ -133,7 +126,7 @@ public class GT_PostLoad {
             builder.fluidOutputs(tData.fluid)
                 .duration((tData.fluid.amount / 62) * TICKS)
                 .eut(1)
-                .addTo(sFluidCannerRecipes);
+                .addTo(fluidCannerRecipes);
         }
     }
 
@@ -145,7 +138,7 @@ public class GT_PostLoad {
         }
 
         if (ItemList.IC2_Crop_Seeds.get(1L) != null) {
-            GT_Recipe.GT_Recipe_Map.sScannerFakeRecipes.addFakeRecipe(
+            RecipeMaps.scannerFakeRecipes.addFakeRecipe(
                 false,
                 new ItemStack[] { ItemList.IC2_Crop_Seeds.getWildcard(1L) },
                 new ItemStack[] { ItemList.IC2_Crop_Seeds.getWithName(1L, "Scanned Seeds") },
@@ -156,7 +149,7 @@ public class GT_PostLoad {
                 8,
                 0);
         }
-        GT_Recipe.GT_Recipe_Map.sScannerFakeRecipes.addFakeRecipe(
+        RecipeMaps.scannerFakeRecipes.addFakeRecipe(
             false,
             new ItemStack[] { new ItemStack(Items.written_book, 1, 32767) },
             new ItemStack[] { ItemList.Tool_DataStick.getWithName(1L, "Scanned Book Data") },
@@ -166,7 +159,7 @@ public class GT_PostLoad {
             128,
             30,
             0);
-        GT_Recipe.GT_Recipe_Map.sScannerFakeRecipes.addFakeRecipe(
+        RecipeMaps.scannerFakeRecipes.addFakeRecipe(
             false,
             new ItemStack[] { new ItemStack(Items.filled_map, 1, 32767) },
             new ItemStack[] { ItemList.Tool_DataStick.getWithName(1L, "Scanned Map Data") },
@@ -176,7 +169,7 @@ public class GT_PostLoad {
             128,
             30,
             0);
-        GT_Recipe.GT_Recipe_Map.sScannerFakeRecipes.addFakeRecipe(
+        RecipeMaps.scannerFakeRecipes.addFakeRecipe(
             false,
             new ItemStack[] { ItemList.Tool_DataOrb.getWithName(1L, "Orb to overwrite") },
             new ItemStack[] { ItemList.Tool_DataOrb.getWithName(1L, "Copy of the Orb") },
@@ -186,7 +179,7 @@ public class GT_PostLoad {
             512,
             30,
             0);
-        GT_Recipe.GT_Recipe_Map.sScannerFakeRecipes.addFakeRecipe(
+        RecipeMaps.scannerFakeRecipes.addFakeRecipe(
             false,
             new ItemStack[] { ItemList.Tool_DataStick.getWithName(1L, "Stick to overwrite") },
             new ItemStack[] { ItemList.Tool_DataStick.getWithName(1L, "Copy of the Stick") },
@@ -196,7 +189,7 @@ public class GT_PostLoad {
             128,
             30,
             0);
-        GT_Recipe.GT_Recipe_Map.sScannerFakeRecipes.addFakeRecipe(
+        RecipeMaps.scannerFakeRecipes.addFakeRecipe(
             false,
             new ItemStack[] { ItemList.Tool_DataStick.getWithName(1L, "Raw Prospection Data") },
             new ItemStack[] { ItemList.Tool_DataStick.getWithName(1L, "Analyzed Prospection Data") },
@@ -207,7 +200,7 @@ public class GT_PostLoad {
             30,
             0);
         if (GalacticraftCore.isModLoaded()) {
-            GT_Recipe.GT_Recipe_Map.sScannerFakeRecipes.addFakeRecipe(
+            RecipeMaps.scannerFakeRecipes.addFakeRecipe(
                 false,
                 new ItemStack[] { Objects
                     .requireNonNull(GT_ModHandler.getModItem(GalacticraftCore.ID, "item.schematic", 1, Short.MAX_VALUE))
@@ -219,7 +212,7 @@ public class GT_PostLoad {
                 36000,
                 480,
                 0);
-            if (GalacticraftMars.isModLoaded()) GT_Recipe.GT_Recipe_Map.sScannerFakeRecipes.addFakeRecipe(
+            if (GalacticraftMars.isModLoaded()) RecipeMaps.scannerFakeRecipes.addFakeRecipe(
                 false,
                 new ItemStack[] { Objects
                     .requireNonNull(GT_ModHandler.getModItem(GalacticraftMars.ID, "item.schematic", 1, Short.MAX_VALUE))
@@ -233,7 +226,7 @@ public class GT_PostLoad {
                 0);
             if (GalaxySpace.isModLoaded()) {
                 for (int i = 4; i < 9; i++) {
-                    GT_Recipe.GT_Recipe_Map.sScannerFakeRecipes.addFakeRecipe(
+                    RecipeMaps.scannerFakeRecipes.addFakeRecipe(
                         false,
                         new ItemStack[] { GT_ModHandler.getModItem(GalaxySpace.ID, "item.SchematicTier" + i, 1)
                             .setStackDisplayName("Any Schematic") },
@@ -253,73 +246,66 @@ public class GT_PostLoad {
                 if ((tMaterial.mElement != null) && (!tMaterial.mElement.mIsIsotope)
                     && (tMaterial != Materials.Magic)
                     && (tMaterial.getMass() > 0L)) {
-                    ItemStack tOutput = ItemList.Tool_DataOrb.get(1L);
-                    Behaviour_DataOrb.setDataTitle(tOutput, "Elemental-Scan");
-                    Behaviour_DataOrb.setDataName(tOutput, tMaterial.mElement.name());
-                    ItemStack tInput = GT_OreDictUnificator.get(OrePrefixes.dust, tMaterial, 1L);
-                    ItemStack[] iSMat0 = new ItemStack[] { tInput };
-                    ItemStack[] iSMat1 = new ItemStack[] { tOutput };
-                    if (tInput != null) {
-                        GT_Recipe.GT_Recipe_Map.sScannerFakeRecipes.addFakeRecipe(
-                            false,
-                            iSMat0,
-                            iSMat1,
-                            ItemList.Tool_DataOrb.get(1L),
-                            null,
-                            null,
-                            (int) (tMaterial.getMass() * 8192L),
-                            30,
-                            0);
-                        GT_Recipe.GT_Recipe_Map.sReplicatorFakeRecipes.addFakeRecipe(
-                            false,
-                            null,
-                            iSMat0,
-                            iSMat1,
-                            new FluidStack[] { Materials.UUMatter.getFluid(tMaterial.getMass()) },
-                            null,
-                            (int) (tMaterial.getMass() * 512L),
-                            (int) VP[1],
-                            0);
+                    ItemStack dataOrb = ItemList.Tool_DataOrb.get(1L);
+                    Behaviour_DataOrb.setDataTitle(dataOrb, "Elemental-Scan");
+                    Behaviour_DataOrb.setDataName(dataOrb, tMaterial.mElement.name());
+                    ItemStack dustItem = GT_OreDictUnificator.get(OrePrefixes.dust, tMaterial, 1L);
+                    if (dustItem != null) {
+                        GT_Values.RA.stdBuilder()
+                            .itemInputs(dustItem)
+                            .itemOutputs(dataOrb)
+                            .special(ItemList.Tool_DataOrb.get(1L))
+                            .duration((int) (tMaterial.getMass() * 8192L))
+                            .eut(TierEU.RECIPE_LV)
+                            .fake()
+                            .ignoreCollision()
+                            .addTo(RecipeMaps.scannerFakeRecipes);
+                        GT_Values.RA.stdBuilder()
+                            .itemOutputs(dustItem)
+                            .special(dataOrb)
+                            .metadata(GT_RecipeConstants.MATERIAL, tMaterial)
+                            .addTo(RecipeMaps.replicatorRecipes);
                         return;
                     }
-                    tInput = GT_OreDictUnificator.get(OrePrefixes.cell, tMaterial, 1L);
-                    iSMat0 = new ItemStack[] { tInput };
-                    if (tInput != null) {
-                        GT_Recipe.GT_Recipe_Map.sScannerFakeRecipes.addFakeRecipe(
-                            false,
-                            iSMat0,
-                            iSMat1,
-                            ItemList.Tool_DataOrb.get(1L),
-                            null,
-                            null,
-                            (int) (tMaterial.getMass() * 8192L),
-                            30,
-                            0);
-                        GT_Recipe.GT_Recipe_Map.sReplicatorFakeRecipes.addFakeRecipe(
-                            false,
-                            null,
-                            iSMat0,
-                            iSMat1,
-                            new FluidStack[] { Materials.UUMatter.getFluid(tMaterial.getMass()) },
-                            null,
-                            (int) (tMaterial.getMass() * 512L),
-                            (int) VP[1],
-                            0);
+                    ItemStack cellItem = GT_OreDictUnificator.get(OrePrefixes.cell, tMaterial, 1L);
+                    if (cellItem != null) {
+                        GT_Values.RA.stdBuilder()
+                            .itemInputs(cellItem)
+                            .itemOutputs(dataOrb)
+                            .special(ItemList.Tool_DataOrb.get(1L))
+                            .duration((int) (tMaterial.getMass() * 8192L))
+                            .eut(TierEU.RECIPE_LV)
+                            .fake()
+                            .ignoreCollision()
+                            .addTo(RecipeMaps.scannerFakeRecipes);
+                        FluidStack fluidStack = GT_Utility.getFluidForFilledItem(cellItem, false);
+                        GT_RecipeBuilder builder = GT_Values.RA.stdBuilder();
+                        if (fluidStack != null) {
+                            builder.fluidOutputs(fluidStack);
+                        } else {
+                            builder.itemInputs(Materials.Empty.getCells(1))
+                                .itemOutputs(cellItem);
+                        }
+                        builder.special(dataOrb)
+                            .metadata(GT_RecipeConstants.MATERIAL, tMaterial)
+                            .addTo(RecipeMaps.replicatorRecipes);
                     }
                 }
             });
 
-        if (!GT_MetaTileEntity_Massfabricator.sRequiresUUA) GT_Recipe.GT_Recipe_Map.sMassFabFakeRecipes.addFakeRecipe(
-            false,
-            null,
-            null,
-            null,
-            null,
-            new FluidStack[] { Materials.UUMatter.getFluid(1L) },
-            GT_MetaTileEntity_Massfabricator.sDurationMultiplier,
-            256,
-            0);
-        GT_Recipe.GT_Recipe_Map.sMassFabFakeRecipes.addFakeRecipe(
+        if (!GT_MetaTileEntity_Massfabricator.sRequiresUUA) {
+            GT_MetaTileEntity_Massfabricator.nonUUARecipe = RecipeMaps.massFabFakeRecipes.addFakeRecipe(
+                false,
+                null,
+                null,
+                null,
+                null,
+                new FluidStack[] { Materials.UUMatter.getFluid(1L) },
+                GT_MetaTileEntity_Massfabricator.sDurationMultiplier,
+                GT_MetaTileEntity_Massfabricator.BASE_EUT,
+                0);
+        }
+        GT_MetaTileEntity_Massfabricator.uuaRecipe = RecipeMaps.massFabFakeRecipes.addFakeRecipe(
             false,
             new ItemStack[] { GT_Utility.getIntegratedCircuit(1) },
             null,
@@ -327,9 +313,9 @@ public class GT_PostLoad {
             new FluidStack[] { Materials.UUAmplifier.getFluid(GT_MetaTileEntity_Massfabricator.sUUAperUUM) },
             new FluidStack[] { Materials.UUMatter.getFluid(1L) },
             GT_MetaTileEntity_Massfabricator.sDurationMultiplier / GT_MetaTileEntity_Massfabricator.sUUASpeedBonus,
-            256,
+            GT_MetaTileEntity_Massfabricator.BASE_EUT,
             0);
-        GT_Recipe.GT_Recipe_Map.sRockBreakerFakeRecipes.addFakeRecipe(
+        RecipeMaps.rockBreakerFakeRecipes.addFakeRecipe(
             false,
             new ItemStack[] { ItemList.Display_ITS_FREE.getWithName(1L, "IT'S FREE! Place Lava on Side") },
             new ItemStack[] { new ItemStack(Blocks.cobblestone, 1) },
@@ -339,7 +325,7 @@ public class GT_PostLoad {
             16,
             30,
             0);
-        GT_Recipe.GT_Recipe_Map.sRockBreakerFakeRecipes.addFakeRecipe(
+        RecipeMaps.rockBreakerFakeRecipes.addFakeRecipe(
             false,
             new ItemStack[] { ItemList.Display_ITS_FREE.getWithName(1L, "IT'S FREE! Place Lava on Top") },
             new ItemStack[] { new ItemStack(Blocks.stone, 1) },
@@ -349,7 +335,7 @@ public class GT_PostLoad {
             16,
             30,
             0);
-        GT_Recipe.GT_Recipe_Map.sRockBreakerFakeRecipes.addFakeRecipe(
+        RecipeMaps.rockBreakerFakeRecipes.addFakeRecipe(
             false,
             new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Redstone, 1L),
                 GT_Utility.getIntegratedCircuit(1) },
@@ -481,30 +467,31 @@ public class GT_PostLoad {
     }
 
     public static void addSolidFakeLargeBoilerFuels() {
-        GT_Recipe.GT_Recipe_Map.sLargeBoilerFakeFuels.addSolidRecipes(
-            GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Charcoal, 1),
-            GT_OreDictUnificator.get(OrePrefixes.gem, Materials.Charcoal, 1),
-            GT_OreDictUnificator.get(OrePrefixes.block, Materials.Charcoal, 1),
-            GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Coal, 1),
-            GT_OreDictUnificator.get(OrePrefixes.gem, Materials.Coal, 1),
-            GT_OreDictUnificator.get(OrePrefixes.block, Materials.Coal, 1),
-            GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Coal, 1),
-            GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Lignite, 1),
-            GT_OreDictUnificator.get(OrePrefixes.gem, Materials.Lignite, 1),
-            GT_OreDictUnificator.get(OrePrefixes.block, Materials.Lignite, 1),
-            GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Lignite, 1),
-            GT_OreDictUnificator.get(OrePrefixes.log, Materials.Wood, 1),
-            GT_OreDictUnificator.get(OrePrefixes.plank, Materials.Wood, 1),
-            GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 1),
-            GT_OreDictUnificator.get(OrePrefixes.slab, Materials.Wood, 1),
-            GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Wood, 1),
-            GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Sodium, 1),
-            GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Lithium, 1),
-            GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Caesium, 1),
-            GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Sulfur, 1),
-            GT_OreDictUnificator.get(ItemList.Block_SSFUEL.get(1)),
-            GT_OreDictUnificator.get(ItemList.Block_MSSFUEL.get(1)),
-            GT_OreDictUnificator.get(OrePrefixes.rod, Materials.Blaze, 1));
+        RecipeMaps.largeBoilerFakeFuels.getBackend()
+            .addSolidRecipes(
+                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Charcoal, 1),
+                GT_OreDictUnificator.get(OrePrefixes.gem, Materials.Charcoal, 1),
+                GT_OreDictUnificator.get(OrePrefixes.block, Materials.Charcoal, 1),
+                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Coal, 1),
+                GT_OreDictUnificator.get(OrePrefixes.gem, Materials.Coal, 1),
+                GT_OreDictUnificator.get(OrePrefixes.block, Materials.Coal, 1),
+                GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Coal, 1),
+                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Lignite, 1),
+                GT_OreDictUnificator.get(OrePrefixes.gem, Materials.Lignite, 1),
+                GT_OreDictUnificator.get(OrePrefixes.block, Materials.Lignite, 1),
+                GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Lignite, 1),
+                GT_OreDictUnificator.get(OrePrefixes.log, Materials.Wood, 1),
+                GT_OreDictUnificator.get(OrePrefixes.plank, Materials.Wood, 1),
+                GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 1),
+                GT_OreDictUnificator.get(OrePrefixes.slab, Materials.Wood, 1),
+                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Wood, 1),
+                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Sodium, 1),
+                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Lithium, 1),
+                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Caesium, 1),
+                GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Sulfur, 1),
+                GT_OreDictUnificator.get(ItemList.Block_SSFUEL.get(1)),
+                GT_OreDictUnificator.get(ItemList.Block_MSSFUEL.get(1)),
+                GT_OreDictUnificator.get(OrePrefixes.rod, Materials.Blaze, 1));
     }
 
     public static void identifyAnySteam() {

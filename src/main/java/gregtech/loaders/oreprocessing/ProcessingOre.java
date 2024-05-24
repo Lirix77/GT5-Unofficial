@@ -1,9 +1,9 @@
 package gregtech.loaders.oreprocessing;
 
-import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sBlastRecipes;
-import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sCentrifugeRecipes;
-import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sHammerRecipes;
-import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sMaceratorRecipes;
+import static gregtech.api.recipe.RecipeMaps.blastFurnaceRecipes;
+import static gregtech.api.recipe.RecipeMaps.centrifugeRecipes;
+import static gregtech.api.recipe.RecipeMaps.hammerRecipes;
+import static gregtech.api.recipe.RecipeMaps.maceratorRecipes;
 import static gregtech.api.util.GT_RecipeBuilder.SECONDS;
 import static gregtech.api.util.GT_RecipeConstants.COIL_HEAT;
 
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
 
+import gregtech.GT_Mod;
 import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
@@ -35,11 +36,22 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
     @Override
     public void registerOre(OrePrefixes aPrefix, Materials aMaterial, String aOreDictName, String aModName,
         ItemStack aStack) {
-        boolean tIsRich = (aPrefix == OrePrefixes.oreNetherrack) || (aPrefix == OrePrefixes.oreNether)
-            || (aPrefix == OrePrefixes.oreEndstone)
-            || (aPrefix == OrePrefixes.oreEnd)
-            || (aPrefix == OrePrefixes.oreRich)
-            || (aPrefix == OrePrefixes.oreDense);
+        boolean tIsRich = false;
+
+        // For Sake of god of balance!
+
+        // Dense ore
+        if (GT_Mod.gregtechproxy.mRichOreYieldMultiplier) {
+            tIsRich = (aPrefix == OrePrefixes.oreRich) || (aPrefix == OrePrefixes.oreDense);
+        }
+        // NetherOre
+        if (GT_Mod.gregtechproxy.mNetherOreYieldMultiplier && !tIsRich) {
+            tIsRich = (aPrefix == OrePrefixes.oreNetherrack) || (aPrefix == OrePrefixes.oreNether);
+        }
+        // EndOre
+        if (GT_Mod.gregtechproxy.mEndOreYieldMultiplier && !tIsRich) {
+            tIsRich = (aPrefix == OrePrefixes.oreEndstone) || (aPrefix == OrePrefixes.oreEnd);
+        }
 
         if (aMaterial == Materials.Oilsands) {
             GT_Values.RA.stdBuilder()
@@ -49,7 +61,7 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
                 .fluidOutputs(Materials.OilHeavy.getFluid(tIsRich ? 4000L : 2000L))
                 .duration(tIsRich ? 30 * SECONDS : 15 * SECONDS)
                 .eut(TierEU.RECIPE_LV)
-                .addTo(sCentrifugeRecipes);
+                .addTo(centrifugeRecipes);
         } else {
             registerStandardOreRecipes(
                 aPrefix,
@@ -149,7 +161,7 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
                         .duration(tSmeltInto.stackSize * 25 * SECONDS)
                         .eut(TierEU.RECIPE_MV)
                         .metadata(COIL_HEAT, 1500)
-                        .addTo(sBlastRecipes);
+                        .addTo(blastFurnaceRecipes);
                     GT_Values.RA.stdBuilder()
                         .itemInputs(
                             aOreStack,
@@ -160,7 +172,7 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
                         .duration(tSmeltInto.stackSize * 25 * SECONDS)
                         .eut(TierEU.RECIPE_MV)
                         .metadata(COIL_HEAT, 1500)
-                        .addTo(sBlastRecipes);
+                        .addTo(blastFurnaceRecipes);
                 }
             } else if (aMaterial.contains(SubTag.BLASTFURNACE_CALCITE_DOUBLE)) {
                 if (aMaterial.mAutoGenerateBlastFurnaceRecipes) {
@@ -174,7 +186,7 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
                         .duration(tSmeltInto.stackSize * 25 * SECONDS)
                         .eut(TierEU.RECIPE_MV)
                         .metadata(COIL_HEAT, 1500)
-                        .addTo(sBlastRecipes);
+                        .addTo(blastFurnaceRecipes);
                     GT_Values.RA.stdBuilder()
                         .itemInputs(
                             aOreStack,
@@ -185,7 +197,7 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
                         .duration(tSmeltInto.stackSize * 25 * SECONDS)
                         .eut(TierEU.RECIPE_MV)
                         .metadata(COIL_HEAT, 1500)
-                        .addTo(sBlastRecipes);
+                        .addTo(blastFurnaceRecipes);
                 }
             }
         }
@@ -205,7 +217,7 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
                 .itemOutputs(GT_Utility.copy(GT_Utility.copyAmount(tCrushed.stackSize, tGem), tCrushed))
                 .duration(10)
                 .eut(16)
-                .addTo(sHammerRecipes);
+                .addTo(hammerRecipes);
 
             int chanceOre2 = tPrimaryByProduct == null ? 0
                 : tPrimaryByProduct.stackSize * 10 * aMultiplier * aMaterial.mByProductMultiplier;
@@ -226,7 +238,7 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
                 .outputChances(10000, chanceOre2, 5000)
                 .duration(20 * SECONDS)
                 .eut(2)
-                .addTo(sMaceratorRecipes);
+                .addTo(maceratorRecipes);
         }
         return true;
     }

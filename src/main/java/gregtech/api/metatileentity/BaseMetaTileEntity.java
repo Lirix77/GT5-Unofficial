@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
@@ -35,6 +36,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
+
+import org.jetbrains.annotations.NotNull;
 
 import com.gtnewhorizon.structurelib.alignment.IAlignment;
 import com.gtnewhorizon.structurelib.alignment.IAlignmentProvider;
@@ -78,6 +81,8 @@ import gregtech.api.util.GT_Log;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
 import gregtech.api.util.GT_Utility;
+import gregtech.api.util.shutdown.ShutDownReason;
+import gregtech.api.util.shutdown.ShutDownReasonRegistry;
 import gregtech.common.GT_Pollution;
 import gregtech.common.covers.CoverInfo;
 import ic2.api.Direction;
@@ -101,6 +106,7 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
     private boolean hasTimeStatisticsStarted;
     public long mLastSoundTick = 0;
     public boolean mWasShutdown = false;
+    public @Nonnull ShutDownReason lastShutDownReason = ShutDownReasonRegistry.NONE;
     protected MetaTileEntity mMetaTileEntity;
     protected long mStoredEnergy = 0, mStoredSteam = 0;
     protected int mAverageEUInputIndex = 0, mAverageEUOutputIndex = 0;
@@ -432,44 +438,13 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
                             if (GregTech_API.sMachineRainExplosions) {
                                 if (mMetaTileEntity.willExplodeInRain()) {
                                     if (getRandomNumber(1000) == 0 && isRainPossible()) {
-                                        if (isRainExposed()) {
-                                            if (worldObj.isRaining()) {
-                                                if (getRandomNumber(10) == 0) {
-                                                    try {
-                                                        GT_Mod.achievements.issueAchievement(
-                                                            this.getWorldObj()
-                                                                .getPlayerEntityByName(mOwnerName),
-                                                            "badweather");
-                                                    } catch (Exception ignored) {}
-                                                    GT_Log.exp.println(
-                                                        "Machine at: " + this.getXCoord()
-                                                            + " | "
-                                                            + this.getYCoord()
-                                                            + " | "
-                                                            + this.getZCoord()
-                                                            + " DIMID: "
-                                                            + this.worldObj.provider.dimensionId
-                                                            + " explosion due to rain!");
-                                                    doEnergyExplosion();
-                                                } else {
-                                                    GT_Log.exp.println(
-                                                        "Machine at: " + this.getXCoord()
-                                                            + " | "
-                                                            + this.getYCoord()
-                                                            + " | "
-                                                            + this.getZCoord()
-                                                            + " DIMID: "
-                                                            + this.worldObj.provider.dimensionId
-                                                            + "  set to Fire due to rain!");
-                                                    setOnFire();
-                                                }
-                                            }
-                                            if (!hasValidMetaTileEntity()) {
-                                                mRunningThroughTick = false;
-                                                return;
-                                            }
-                                            if (GregTech_API.sMachineThunderExplosions && worldObj.isThundering()
-                                                && getRandomNumber(3) == 0) {
+                                        // Short-circuit so raincheck happens before isRainExposed,
+                                        // saves sme TPS since rain exposed check can be slow
+                                        // This logic can be compressed further by only checking for
+                                        // isRainExposed once IF we can guarantee it never thunders without
+                                        // raining, but I don't know if this is true or not.
+                                        if (worldObj.isRaining() && isRainExposed()) {
+                                            if (getRandomNumber(10) == 0) {
                                                 try {
                                                     GT_Mod.achievements.issueAchievement(
                                                         this.getWorldObj()
@@ -484,9 +459,44 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
                                                         + this.getZCoord()
                                                         + " DIMID: "
                                                         + this.worldObj.provider.dimensionId
-                                                        + " explosion due to Thunderstorm!");
+                                                        + " explosion due to rain!");
                                                 doEnergyExplosion();
+                                            } else {
+                                                GT_Log.exp.println(
+                                                    "Machine at: " + this.getXCoord()
+                                                        + " | "
+                                                        + this.getYCoord()
+                                                        + " | "
+                                                        + this.getZCoord()
+                                                        + " DIMID: "
+                                                        + this.worldObj.provider.dimensionId
+                                                        + "  set to Fire due to rain!");
+                                                setOnFire();
                                             }
+                                        }
+                                        if (!hasValidMetaTileEntity()) {
+                                            mRunningThroughTick = false;
+                                            return;
+                                        }
+                                        if (GregTech_API.sMachineThunderExplosions && worldObj.isThundering()
+                                            && getRandomNumber(3) == 0
+                                            && isRainExposed()) {
+                                            try {
+                                                GT_Mod.achievements.issueAchievement(
+                                                    this.getWorldObj()
+                                                        .getPlayerEntityByName(mOwnerName),
+                                                    "badweather");
+                                            } catch (Exception ignored) {}
+                                            GT_Log.exp.println(
+                                                "Machine at: " + this.getXCoord()
+                                                    + " | "
+                                                    + this.getYCoord()
+                                                    + " | "
+                                                    + this.getZCoord()
+                                                    + " DIMID: "
+                                                    + this.worldObj.provider.dimensionId
+                                                    + " explosion due to Thunderstorm!");
+                                            doEnergyExplosion();
                                         }
                                     }
                                 }
@@ -718,24 +728,6 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
         receiveClientEvent(GregTechTileClientEvents.CHANGE_REDSTONE_OUTPUT, aRedstoneData);
     }
 
-    @Deprecated
-    public final void receiveMetaTileEntityData(short aID, int aCover0, int aCover1, int aCover2, int aCover3,
-        int aCover4, int aCover5, byte aTextureData, byte aUpdateData, byte aRedstoneData, byte aColorData) {
-        receiveMetaTileEntityData(
-            aID,
-            aCover0,
-            aCover1,
-            aCover2,
-            aCover3,
-            aCover4,
-            aCover5,
-            aTextureData,
-            (byte) 0,
-            aUpdateData,
-            aRedstoneData,
-            aColorData);
-    }
-
     @Override
     public boolean receiveClientEvent(int aEventID, int aValue) {
         super.receiveClientEvent(aEventID, aValue);
@@ -961,7 +953,7 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
     @Override
     public boolean isUseableByPlayer(EntityPlayer aPlayer) {
         return canAccessData() && playerOwnsThis(aPlayer, false)
-            && mTickTimer > 40
+            && mTickTimer > 1
             && getTileEntityOffset(0, 0, 0) == this
             && aPlayer.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) < 64
             && mMetaTileEntity.isAccessAllowed(aPlayer);
@@ -987,6 +979,10 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
 
     @Override
     public void onChunkUnload() {
+        if (canAccessData()) {
+            mMetaTileEntity.onUnload();
+        }
+
         super.onChunkUnload();
         onChunkUnloadAE();
     }
@@ -1520,7 +1516,8 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
                             aPlayer,
                             aX,
                             aY,
-                            aZ)) {
+                            aZ,
+                            tCurrentItem)) {
                                 GT_ModHandler.damageOrDechargeItem(tCurrentItem, 1, 1000, aPlayer);
                                 GT_Utility.sendSoundToPlayers(
                                     worldObj,
@@ -1548,7 +1545,7 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
                                     aX,
                                     aY,
                                     aZ));
-                            mMetaTileEntity.onScrewdriverRightClick(side, aPlayer, aX, aY, aZ);
+                            mMetaTileEntity.onScrewdriverRightClick(side, aPlayer, aX, aY, aZ, tCurrentItem);
                             GT_Utility.sendSoundToPlayers(
                                 worldObj,
                                 SoundResource.IC2_TOOLS_WRENCH,
@@ -1610,7 +1607,7 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
 
                     if (GT_Utility.isStackInList(tCurrentItem, GregTech_API.sSolderingToolList)) {
                         final ForgeDirection tSide = GT_Utility.determineWrenchingSide(side, aX, aY, aZ);
-                        if (mMetaTileEntity.onSolderingToolRightClick(side, tSide, aPlayer, aX, aY, aZ)) {
+                        if (mMetaTileEntity.onSolderingToolRightClick(side, tSide, aPlayer, aX, aY, aZ, tCurrentItem)) {
                             // logic handled internally
                             GT_Utility.sendSoundToPlayers(
                                 worldObj,
@@ -1645,7 +1642,7 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
 
                     if (GT_Utility.isStackInList(tCurrentItem, GregTech_API.sWireCutterList)) {
                         final ForgeDirection tSide = GT_Utility.determineWrenchingSide(side, aX, aY, aZ);
-                        if (mMetaTileEntity.onWireCutterRightClick(side, tSide, aPlayer, aX, aY, aZ)) {
+                        if (mMetaTileEntity.onWireCutterRightClick(side, tSide, aPlayer, aX, aY, aZ, tCurrentItem)) {
                             // logic handled internally
                             GT_Utility.sendSoundToPlayers(
                                 worldObj,
@@ -2479,6 +2476,16 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
     @Override
     public void setShutdownStatus(boolean newStatus) {
         mWasShutdown = newStatus;
+    }
+
+    @Override
+    public void setShutDownReason(@NotNull ShutDownReason reason) {
+        lastShutDownReason = reason;
+    }
+
+    @Override
+    public @NotNull ShutDownReason getLastShutDownReason() {
+        return lastShutDownReason;
     }
 
     @Override

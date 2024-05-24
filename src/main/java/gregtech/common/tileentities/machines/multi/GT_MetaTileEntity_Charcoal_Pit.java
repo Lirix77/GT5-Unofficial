@@ -29,11 +29,11 @@ import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_TooltipMultiBlockBase;
+import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GT_Multiblock_Tooltip_Builder;
-import gregtech.api.util.GT_Recipe;
 import gregtech.api.util.WorldSpawnedEventBuilder;
 import gregtech.common.GT_Pollution;
 
@@ -240,7 +240,7 @@ public class GT_MetaTileEntity_Charcoal_Pit extends GT_MetaTileEntity_TooltipMul
     }
 
     @Override
-    public GT_Recipe.GT_Recipe_Map getRecipeMap() {
+    public RecipeMap<?> getRecipeMap() {
         return null;
     }
 
@@ -257,12 +257,15 @@ public class GT_MetaTileEntity_Charcoal_Pit extends GT_MetaTileEntity_TooltipMul
             .addInfo("Will automatically start when valid")
             .addPollutionAmount(getPollutionPerSecond(null))
             .addSeparator()
-            .beginVariableStructureBlock(3, 11, 3, 6, 3, 11, false)
-            .addStructureInfo("Can be up to 11x6x11 in size, shape doesn't matter")
+            .beginVariableStructureBlock(3, 13, 3, 7, 3, 13, false)
+            .addStructureInfo("Can be up to 13x7x13 in size, including the dirt; shape doesn't matter")
+            .addOtherStructurePart("Controller", "Top layer, directly touching a wood log")
+            .addOtherStructurePart("Dirt/Grass", "Top and middle layers, covering wood logs")
             .addOtherStructurePart("Bricks", "Bottom layer, under all wood logs")
-            .addOtherStructurePart("Dirt/Grass", "All logs must be covered by these, the controller, or bricks")
-            .addOtherStructurePart("Wood Logs", "Inside the previously mentioned blocks")
-            .addStructureInfo("No air between logs allowed")
+            .addOtherStructurePart("Wood Logs", "Up to 5 layers, inside the previously mentioned blocks")
+            .addStructureInfo("No air between logs allowed.")
+            .addStructureInfo(
+                "All logs must be within 6 x/z of the controller, so it must be dead-center for a full 11x11 square of wood.")
             .toolTipFinisher("Gregtech");
         return tt;
     }

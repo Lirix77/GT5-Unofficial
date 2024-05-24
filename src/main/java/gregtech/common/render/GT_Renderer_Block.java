@@ -44,6 +44,7 @@ import gregtech.GT_Mod;
 import gregtech.api.GregTech_API;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
+import gregtech.api.interfaces.tileentity.IAllSidedTexturedTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.interfaces.tileentity.IPipeRenderedTileEntity;
 import gregtech.api.interfaces.tileentity.ITexturedTileEntity;
@@ -60,52 +61,54 @@ public class GT_Renderer_Block implements ISimpleBlockRenderingHandler {
     private static final float coverThickness = blockMax / 8.0F;
     private static final float coverInnerMin = blockMin + coverThickness;
     private static final float coverInnerMax = blockMax - coverThickness;
-    public static GT_Renderer_Block INSTANCE;
-    public final int mRenderID;
 
-    public GT_Renderer_Block() {
-        this.mRenderID = RenderingRegistry.getNextAvailableRenderId();
-        INSTANCE = this;
-        RenderingRegistry.registerBlockHandler(this);
+    @Deprecated
+    public static GT_Renderer_Block INSTANCE;
+    public static int mRenderID;
+
+    public static void register() {
+        mRenderID = RenderingRegistry.getNextAvailableRenderId();
+        INSTANCE = new GT_Renderer_Block();
+        RenderingRegistry.registerBlockHandler(INSTANCE);
     }
 
-    public static boolean renderStandardBlock(IBlockAccess aWorld, int aX, int aY, int aZ, Block aBlock,
+    private final ITexture[][] textureArray = new ITexture[6][];
+
+    public boolean renderStandardBlock(IBlockAccess aWorld, int aX, int aY, int aZ, Block aBlock,
         RenderBlocks aRenderer) {
         final TileEntity tTileEntity = aWorld.getTileEntity(aX, aY, aZ);
-        if ((tTileEntity instanceof IPipeRenderedTileEntity)) {
-            return renderStandardBlock(
-                aWorld,
-                aX,
-                aY,
-                aZ,
-                aBlock,
-                aRenderer,
-                new ITexture[][] { ((IPipeRenderedTileEntity) tTileEntity).getTextureCovered(DOWN),
-                    ((IPipeRenderedTileEntity) tTileEntity).getTextureCovered(UP),
-                    ((IPipeRenderedTileEntity) tTileEntity).getTextureCovered(NORTH),
-                    ((IPipeRenderedTileEntity) tTileEntity).getTextureCovered(SOUTH),
-                    ((IPipeRenderedTileEntity) tTileEntity).getTextureCovered(WEST),
-                    ((IPipeRenderedTileEntity) tTileEntity).getTextureCovered(EAST) });
+        if (tTileEntity instanceof IPipeRenderedTileEntity pipeRenderedTileEntity) {
+            textureArray[0] = pipeRenderedTileEntity.getTextureCovered(DOWN);
+            textureArray[1] = pipeRenderedTileEntity.getTextureCovered(UP);
+            textureArray[2] = pipeRenderedTileEntity.getTextureCovered(NORTH);
+            textureArray[3] = pipeRenderedTileEntity.getTextureCovered(SOUTH);
+            textureArray[4] = pipeRenderedTileEntity.getTextureCovered(WEST);
+            textureArray[5] = pipeRenderedTileEntity.getTextureCovered(EAST);
+            return renderStandardBlock(aWorld, aX, aY, aZ, aBlock, aRenderer, textureArray);
         }
-        if ((tTileEntity instanceof ITexturedTileEntity)) {
-            return renderStandardBlock(
-                aWorld,
-                aX,
-                aY,
-                aZ,
-                aBlock,
-                aRenderer,
-                new ITexture[][] { ((ITexturedTileEntity) tTileEntity).getTexture(aBlock, DOWN),
-                    ((ITexturedTileEntity) tTileEntity).getTexture(aBlock, UP),
-                    ((ITexturedTileEntity) tTileEntity).getTexture(aBlock, NORTH),
-                    ((ITexturedTileEntity) tTileEntity).getTexture(aBlock, SOUTH),
-                    ((ITexturedTileEntity) tTileEntity).getTexture(aBlock, WEST),
-                    ((ITexturedTileEntity) tTileEntity).getTexture(aBlock, EAST) });
+        if (tTileEntity instanceof IAllSidedTexturedTileEntity allSidedTexturedTileEntity) {
+            ITexture[] texture = allSidedTexturedTileEntity.getTexture(aBlock);
+            textureArray[0] = texture;
+            textureArray[1] = texture;
+            textureArray[2] = texture;
+            textureArray[3] = texture;
+            textureArray[4] = texture;
+            textureArray[5] = texture;
+            return renderStandardBlock(aWorld, aX, aY, aZ, aBlock, aRenderer, textureArray);
+        }
+        if (tTileEntity instanceof ITexturedTileEntity texturedTileEntity) {
+            textureArray[0] = texturedTileEntity.getTexture(aBlock, DOWN);
+            textureArray[1] = texturedTileEntity.getTexture(aBlock, UP);
+            textureArray[2] = texturedTileEntity.getTexture(aBlock, NORTH);
+            textureArray[3] = texturedTileEntity.getTexture(aBlock, SOUTH);
+            textureArray[4] = texturedTileEntity.getTexture(aBlock, WEST);
+            textureArray[5] = texturedTileEntity.getTexture(aBlock, EAST);
+            return renderStandardBlock(aWorld, aX, aY, aZ, aBlock, aRenderer, textureArray);
         }
         return false;
     }
 
-    public static boolean renderStandardBlock(IBlockAccess aWorld, int aX, int aY, int aZ, Block aBlock,
+    public boolean renderStandardBlock(IBlockAccess aWorld, int aX, int aY, int aZ, Block aBlock,
         RenderBlocks aRenderer, ITexture[][] aTextures) {
         aBlock.setBlockBounds(blockMin, blockMin, blockMin, blockMax, blockMax, blockMax);
         aRenderer.setRenderBoundsFromBlock(aBlock);
@@ -119,7 +122,11 @@ public class GT_Renderer_Block implements ISimpleBlockRenderingHandler {
         return true;
     }
 
-    public static boolean renderPipeBlock(IBlockAccess aWorld, int aX, int aY, int aZ, Block aBlock,
+    final ITexture[][] tIcons = new ITexture[VALID_DIRECTIONS.length][];
+    final ITexture[][] tCovers = new ITexture[VALID_DIRECTIONS.length][];
+    final boolean[] tIsCovered = new boolean[VALID_DIRECTIONS.length];
+
+    public boolean renderPipeBlock(IBlockAccess aWorld, int aX, int aY, int aZ, Block aBlock,
         IPipeRenderedTileEntity aTileEntity, RenderBlocks aRenderer) {
         final byte aConnections = aTileEntity.getConnections();
         if ((aConnections & (HAS_FRESHFOAM | HAS_HARDENEDFOAM)) != 0) {
@@ -132,17 +139,13 @@ public class GT_Renderer_Block implements ISimpleBlockRenderingHandler {
         // Range of block occupied by pipe
         final float pipeMin = (blockMax - thickness) / 2.0F;
         final float pipeMax = blockMax - pipeMin;
-        final boolean[] tIsCovered = new boolean[VALID_DIRECTIONS.length];
-        for (int i = 0; i < VALID_DIRECTIONS.length; i++) {
-            tIsCovered[i] = (aTileEntity.getCoverIDAtSide(ForgeDirection.getOrientation(i)) != 0);
-        }
 
-        final ITexture[][] tIcons = new ITexture[VALID_DIRECTIONS.length][];
-        final ITexture[][] tCovers = new ITexture[VALID_DIRECTIONS.length][];
-        for (final ForgeDirection iSide : ForgeDirection.VALID_DIRECTIONS) {
-            final int iOrdinalSide = iSide.ordinal();
-            tCovers[iOrdinalSide] = aTileEntity.getTexture(aBlock, iSide);
-            tIcons[iOrdinalSide] = aTileEntity.getTextureUncovered(iSide);
+        for (int i = 0; i < VALID_DIRECTIONS.length; i++) {
+            final ForgeDirection iSide = VALID_DIRECTIONS[i];
+            tIsCovered[i] = (aTileEntity.getCoverIDAtSide(iSide) != 0);
+            tCovers[i] = aTileEntity.getTexture(aBlock, iSide);
+            tIcons[i] = aTileEntity.getTextureUncovered(iSide);
+
         }
 
         switch (aConnections) {
@@ -535,6 +538,8 @@ public class GT_Renderer_Block implements ISimpleBlockRenderingHandler {
         }
     }
 
+    final GT_TileEntity_Ores tTileEntity = new GT_TileEntity_Ores();
+
     @Override
     public void renderInventoryBlock(Block aBlock, int aMeta, int aModelID, RenderBlocks aRenderer) {
         aRenderer.enableAO = false;
@@ -543,65 +548,19 @@ public class GT_Renderer_Block implements ISimpleBlockRenderingHandler {
         GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
         if (aBlock instanceof GT_Block_Ores_Abstract) {
-            final GT_TileEntity_Ores tTileEntity = new GT_TileEntity_Ores();
             tTileEntity.mMetaData = ((short) aMeta);
 
             aBlock.setBlockBoundsForItemRender();
             aRenderer.setRenderBoundsFromBlock(aBlock);
-            renderNegativeYFacing(
-                null,
-                aRenderer,
-                aBlock,
-                0,
-                0,
-                0,
-                tTileEntity.getTexture(aBlock, ForgeDirection.DOWN),
-                true);
-            renderPositiveYFacing(
-                null,
-                aRenderer,
-                aBlock,
-                0,
-                0,
-                0,
-                tTileEntity.getTexture(aBlock, ForgeDirection.UP),
-                true);
-            renderNegativeZFacing(
-                null,
-                aRenderer,
-                aBlock,
-                0,
-                0,
-                0,
-                tTileEntity.getTexture(aBlock, ForgeDirection.NORTH),
-                true);
-            renderPositiveZFacing(
-                null,
-                aRenderer,
-                aBlock,
-                0,
-                0,
-                0,
-                tTileEntity.getTexture(aBlock, ForgeDirection.SOUTH),
-                true);
-            renderNegativeXFacing(
-                null,
-                aRenderer,
-                aBlock,
-                0,
-                0,
-                0,
-                tTileEntity.getTexture(aBlock, ForgeDirection.WEST),
-                true);
-            renderPositiveXFacing(
-                null,
-                aRenderer,
-                aBlock,
-                0,
-                0,
-                0,
-                tTileEntity.getTexture(aBlock, ForgeDirection.EAST),
-                true);
+            // spotless:off
+            ITexture[] texture = tTileEntity.getTexture(aBlock);
+            renderNegativeYFacing(null, aRenderer, aBlock, 0, 0, 0, texture, true);
+            renderPositiveYFacing(null, aRenderer, aBlock, 0, 0, 0, texture, true);
+            renderNegativeZFacing(null, aRenderer, aBlock, 0, 0, 0, texture, true);
+            renderPositiveZFacing(null, aRenderer, aBlock, 0, 0, 0, texture, true);
+            renderNegativeXFacing(null, aRenderer, aBlock, 0, 0, 0, texture, true);
+            renderPositiveXFacing(null, aRenderer, aBlock, 0, 0, 0, texture, true);
+            // spotless:on
         } else if (aMeta > 0 && (aMeta < GregTech_API.METATILEENTITIES.length)
             && aBlock instanceof GT_Block_Machines
             && (GregTech_API.METATILEENTITIES[aMeta] != null)
@@ -629,6 +588,7 @@ public class GT_Renderer_Block implements ISimpleBlockRenderingHandler {
 
         final IGregTechTileEntity iGregTechTileEntity = tMetaTileEntity.getBaseMetaTileEntity();
 
+        // spotless:off
         if ((iGregTechTileEntity instanceof IPipeRenderedTileEntity renderedPipe)
             && (tMetaTileEntity instanceof MetaPipeEntity pipeEntity)) {
             final float tThickness = renderedPipe.getThickNess();
@@ -637,116 +597,21 @@ public class GT_Renderer_Block implements ISimpleBlockRenderingHandler {
 
             aBlock.setBlockBounds(blockMin, pipeMin, pipeMin, blockMax, pipeMax, pipeMax);
             aRenderer.setRenderBoundsFromBlock(aBlock);
-            renderNegativeYFacing(
-                null,
-                aRenderer,
-                aBlock,
-                0,
-                0,
-                0,
-                pipeEntity.getTexture(iGregTechTileEntity, DOWN, (CONNECTED_WEST | CONNECTED_EAST), -1, false, false),
-                true);
-            renderPositiveYFacing(
-                null,
-                aRenderer,
-                aBlock,
-                0,
-                0,
-                0,
-                pipeEntity.getTexture(iGregTechTileEntity, UP, (CONNECTED_WEST | CONNECTED_EAST), -1, false, false),
-                true);
-            renderNegativeZFacing(
-                null,
-                aRenderer,
-                aBlock,
-                0,
-                0,
-                0,
-                pipeEntity.getTexture(iGregTechTileEntity, NORTH, (CONNECTED_WEST | CONNECTED_EAST), -1, false, false),
-                true);
-            renderPositiveZFacing(
-                null,
-                aRenderer,
-                aBlock,
-                0,
-                0,
-                0,
-                pipeEntity.getTexture(iGregTechTileEntity, SOUTH, (CONNECTED_WEST | CONNECTED_EAST), -1, false, false),
-                true);
-            renderNegativeXFacing(
-                null,
-                aRenderer,
-                aBlock,
-                0,
-                0,
-                0,
-                pipeEntity.getTexture(iGregTechTileEntity, WEST, (CONNECTED_WEST | CONNECTED_EAST), -1, true, false),
-                true);
-            renderPositiveXFacing(
-                null,
-                aRenderer,
-                aBlock,
-                0,
-                0,
-                0,
-                pipeEntity.getTexture(iGregTechTileEntity, EAST, (CONNECTED_WEST | CONNECTED_EAST), -1, true, false),
-                true);
+            renderNegativeYFacing(null, aRenderer, aBlock, 0, 0, 0, pipeEntity.getTexture(iGregTechTileEntity, DOWN, (CONNECTED_WEST | CONNECTED_EAST), -1, false, false), true);
+            renderPositiveYFacing(null, aRenderer, aBlock, 0, 0, 0, pipeEntity.getTexture(iGregTechTileEntity, UP, (CONNECTED_WEST | CONNECTED_EAST), -1, false, false), true);
+            renderNegativeZFacing(null, aRenderer, aBlock, 0, 0, 0, pipeEntity.getTexture(iGregTechTileEntity, NORTH, (CONNECTED_WEST | CONNECTED_EAST), -1, false, false), true);
+            renderPositiveZFacing(null, aRenderer, aBlock, 0, 0, 0, pipeEntity.getTexture(iGregTechTileEntity, SOUTH, (CONNECTED_WEST | CONNECTED_EAST), -1, false, false), true);
+            renderNegativeXFacing(null, aRenderer, aBlock, 0, 0, 0, pipeEntity.getTexture(iGregTechTileEntity, WEST, (CONNECTED_WEST | CONNECTED_EAST), -1, true, false), true);
+            renderPositiveXFacing(null, aRenderer, aBlock, 0, 0, 0, pipeEntity.getTexture(iGregTechTileEntity, EAST, (CONNECTED_WEST | CONNECTED_EAST), -1, true, false), true);
         } else {
-            renderNegativeYFacing(
-                null,
-                aRenderer,
-                aBlock,
-                0,
-                0,
-                0,
-                tMetaTileEntity.getTexture(iGregTechTileEntity, DOWN, WEST, -1, true, false),
-                true);
-            renderPositiveYFacing(
-                null,
-                aRenderer,
-                aBlock,
-                0,
-                0,
-                0,
-                tMetaTileEntity.getTexture(iGregTechTileEntity, UP, WEST, -1, true, false),
-                true);
-            renderNegativeZFacing(
-                null,
-                aRenderer,
-                aBlock,
-                0,
-                0,
-                0,
-                tMetaTileEntity.getTexture(iGregTechTileEntity, NORTH, WEST, -1, true, false),
-                true);
-            renderPositiveZFacing(
-                null,
-                aRenderer,
-                aBlock,
-                0,
-                0,
-                0,
-                tMetaTileEntity.getTexture(iGregTechTileEntity, SOUTH, WEST, -1, true, false),
-                true);
-            renderNegativeXFacing(
-                null,
-                aRenderer,
-                aBlock,
-                0,
-                0,
-                0,
-                tMetaTileEntity.getTexture(iGregTechTileEntity, WEST, WEST, -1, true, false),
-                true);
-            renderPositiveXFacing(
-                null,
-                aRenderer,
-                aBlock,
-                0,
-                0,
-                0,
-                tMetaTileEntity.getTexture(iGregTechTileEntity, EAST, WEST, -1, true, false),
-                true);
+            renderNegativeYFacing(null, aRenderer, aBlock, 0, 0, 0, tMetaTileEntity.getTexture(iGregTechTileEntity, DOWN, WEST, -1, true, false), true);
+            renderPositiveYFacing(null, aRenderer, aBlock, 0, 0, 0, tMetaTileEntity.getTexture(iGregTechTileEntity, UP, WEST, -1, true, false), true);
+            renderNegativeZFacing(null, aRenderer, aBlock, 0, 0, 0, tMetaTileEntity.getTexture(iGregTechTileEntity, NORTH, WEST, -1, true, false), true);
+            renderPositiveZFacing(null, aRenderer, aBlock, 0, 0, 0, tMetaTileEntity.getTexture(iGregTechTileEntity, SOUTH, WEST, -1, true, false), true);
+            renderNegativeXFacing(null, aRenderer, aBlock, 0, 0, 0, tMetaTileEntity.getTexture(iGregTechTileEntity, WEST, WEST, -1, true, false), true);
+            renderPositiveXFacing(null, aRenderer, aBlock, 0, 0, 0, tMetaTileEntity.getTexture(iGregTechTileEntity, EAST, WEST, -1, true, false), true);
         }
+        // spotless:on
     }
 
     public static void renderNegativeYFacing(IBlockAccess aWorld, RenderBlocks aRenderer, Block aBlock, int aX, int aY,

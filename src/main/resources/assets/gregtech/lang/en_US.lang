@@ -100,8 +100,8 @@ gt.recipe.assembler=Assembler
 gt.recipe.assembler.description=Avengers, Assemble!
 gt.recipe.autoclave=Autoclave
 gt.recipe.autoclave.description=Crystallizing your Dusts
-gt.recipe.brewery=Brewery
-gt.recipe.brewery.description=Brewing your Drinks
+gt.recipe.brewer=Brewery
+gt.recipe.brewer.description=Brewing your Drinks
 gt.recipe.metalbender=Bending Machine
 gt.recipe.metalbender.description=Boo, he's bad! We want BENDER!!!
 gt.recipe.canner=Canner
@@ -190,6 +190,49 @@ gt.recipe.unpackager=Unpackager
 gt.recipe.unpackager.description=Grabs things out of Boxes
 gt.recipe.wiremill=Wiremill
 gt.recipe.wiremill.description=Produces Wires more efficiently
+
+# RecipeMaps that are not listed on MachineType enum
+gt.recipe.fakeAssemblylineProcess=Assemblyline Process
+gt.recipe.fusionreactor=Fusion Reactor
+gt.recipe.blastfurnace=Blast Furnace
+gt.recipe.plasmaforge=DTPF
+gt.recipe.transcendentplasmamixerrecipes=Transcendent Plasma Mixer
+gt.recipe.fakespaceprojects=Space Projects
+gt.recipe.primitiveblastfurnace=Primitive Blast Furnace
+gt.recipe.implosioncompressor=Implosion Compressor
+gt.recipe.vacuumfreezer=Vacuum Freezer
+gt.recipe.largechemicalreactor=Large Chemical Reactor
+gt.recipe.distillationtower=Distillation Tower
+gt.recipe.craker=Oil Cracker
+gt.recipe.pyro=Pyrolyse Oven
+gt.recipe.dieselgeneratorfuel=Combustion Generator Fuels
+gt.recipe.extremedieselgeneratorfuel=Extreme Diesel Engine Fuel
+gt.recipe.gasturbinefuel=Gas Turbine Fuel
+gt.recipe.thermalgeneratorfuel=Thermal Generator Fuels
+gt.recipe.semifluidboilerfuels=Semifluid Boiler Fuels
+gt.recipe.plasmageneratorfuels=Plasma Generator Fuels
+gt.recipe.magicfuels=Magic Energy Absorber Fuels
+gt.recipe.smallnaquadahreactor=Naquadah Reactor MkI
+gt.recipe.largenaquadahreactor=Naquadah Reactor MkII
+gt.recipe.fluidnaquadahreactor=Naquadah Reactor MkIII
+gt.recipe.hugenaquadahreactor=Naquadah Reactor MkIV
+gt.recipe.extrahugenaquadahreactor=Naquadah Reactor MkV
+gt.recipe.fluidfuelnaquadahreactor=Fluid Naquadah Reactor
+gt.recipe.largeboilerfakefuels=Large Boiler
+gt.recipe.nanoforge=Nano Forge
+gt.recipe.pcbfactory=PCB Factory
+gt.recipe.ic2nuke=Nuclear Fission
+
+# Recipe categories
+gt.recipe.category.arc_furnace_recycling=Arc Furnace Recycling
+gt.recipe.category.plasma_arc_furnace_recycling=Plasma Arc Furnace Recycling
+gt.recipe.category.macerator_recycling=Macerator Recycling
+gt.recipe.category.fluid_extractor_recycling=Fluid Extractor Recycling
+gt.recipe.category.alloy_smelter_recycling=Alloy Smelter Recycling
+gt.recipe.category.alloy_smelter_molding=Alloy Smelter Molding
+gt.recipe.category.forge_hammer_recycling=Forge Hammer Recycling
+gt.recipe.category.tic_part_extruding=TiC Part Extruding
+gt.recipe.category.tic_bolt_molding=TiC Bolt Molding
 
 GT5U.machines.tier=Tier
 GT5U.machines.workarea=Work Area
@@ -336,17 +379,24 @@ GT5U.machines.ignore_nbt.tooltip=Ignore item NBT
 GT5U.machines.ignore_nbt.tooltip.extended=§7By default, item NBT must match.
 GT5U.machines.stocking_bus.cannot_set_slot=§8Cannot set slot while auto-pull mode is enabled
 GT5U.machines.stocking_bus.auto_pull.tooltip.1=Click to toggle automatic item pulling from ME.
-GT5U.machines.stocking_bus.auto_pull.tooltip.2=Right-Click to edit minimum stack size for item pulling.
+GT5U.machines.stocking_bus.auto_pull.tooltip.2=Right-Click to edit additional parameters.
 GT5U.machines.stocking_bus.min_stack_size=Min Stack Size
+GT5U.machines.stocking_bus.refresh_time=Slot Refresh Time (Ticks)
 GT5U.machines.stocking_bus.auto_pull_toggle.enabled=Automatic Item Pull Enabled
 GT5U.machines.stocking_bus.auto_pull_toggle.disabled=Automatic Item Pull Disabled
 GT5U.machines.stocking_hatch.auto_pull.tooltip.1=Click to toggle automatic fluid pulling from ME.
-GT5U.machines.stocking_hatch.auto_pull.tooltip.2=Right-Click to edit minimum amount for fluid pulling.
+GT5U.machines.stocking_hatch.auto_pull.tooltip.2=Right-Click to edit additional parameters.
 GT5U.machines.stocking_hatch.min_amount=Min Amount
 GT5U.machines.stocking_hatch.auto_pull_toggle.enabled=Automatic Fluid Pull Enabled
 GT5U.machines.stocking_hatch.auto_pull_toggle.disabled=Automatic Fluid Pull Disabled
 GT5U.machines.stocking_bus.saved=Saved Config to Data Stick
 GT5U.machines.stocking_bus.loaded=Loaded Config From Data Stick
+GT5U.machines.dronecentre.shutdown=You cannot control machine when drone centre shut down!
+GT5U.machines.dronecentre.turnon=Successfully turn on all machines!
+GT5U.machines.dronecentre.turnoff=Successfully turn off all machines!
+GT5U.machines.dronecentre.noconnection=No valid connection
+GT5U.machines.dronecentre.enableRender=Enable Drone Render
+GT5U.machines.dronecentre.disableRender=Disable Drone Render
 
 GT5U.recipe_filter.empty_representation_slot.tooltip=§7Click with a machine to set filter
 GT5U.recipe_filter.representation_slot.tooltip=§7Click to clear
@@ -376,12 +426,23 @@ GT5U.gui.button.ore_drill_cobblestone_on=§7Replace with cobblestone: §aON
 GT5U.gui.button.ore_drill_cobblestone_off=§7Replace with cobblestone: §4OFF
 GT5U.gui.button.drill_retract_pipes=§7Abort and retract mining pipes
 GT5U.gui.button.drill_retract_pipes_active=§4Cannot interrupt abort procedure
+GT5U.gui.button.drone_setname=Set custom name for machine
+GT5U.gui.button.drone_highlight=Highlight machine in the world
+GT5U.gui.button.drone_outofrange=§4Machine is too far, drone control system not available!
+GT5U.gui.button.drone_open_list=Open Machine List
+GT5U.gui.button.drone_poweron_all=Turn ON ALL machines, no matter how remote
+GT5U.gui.button.drone_poweroff_all=Turn OFF ALL machines, no matter how remote
+GT5U.gui.button.drone_name=Sort by §3name
+GT5U.gui.button.drone_distance=Sort by §3distance
+GT5U.gui.button.drone_error=Sort by §3shutdown status
+GT5U.gui.button.drone_showLocalName=Show localized name
 GT5U.gui.text.success=§aProcessing recipe
 GT5U.gui.text.generating=§aGenerating power
 GT5U.gui.text.no_recipe=§7No valid recipe found
-GT5U.gui.text.output_full=§7Not enough output space
+GT5U.gui.text.item_output_full=§7Not enough item output space
+GT5U.gui.text.fluid_output_full=§7Not enough fluid output space
 GT5U.gui.text.none=
-GT5U.gui.text.crash=§4Machine turned off due to crash
+GT5U.gui.text.crash=§4Machine turned off due to crash. Refer to the log for more info.
 GT5U.gui.text.no_fuel=§7No valid fuel found
 GT5U.gui.text.no_turbine=§7No valid turbine found
 GT5U.gui.text.no_lubricant=§7No lubricant found
@@ -425,6 +486,19 @@ GT5U.gui.text.drill_offline_reason=Drill Offline: %s
 GT5U.gui.text.drill_offline_generic=Drill Offline
 GT5U.gui.text.stocking_bus_fail_extraction=§4Failed to extract expected amount of items from stocking bus. This can be caused by attaching multiple storage buses to the same inventory.
 GT5U.gui.text.stocking_hatch_fail_extraction=§4Failed to extract expected amount of fluids from stocking hatch. This can be caused by attaching multiple storage fluid buses to the same tank.
+GT5U.gui.text.drone_noDrone=§4Can't find any drone in inputBuses!
+GT5U.gui.text.drone_operating=§aDrone operating normally!
+GT5U.gui.text.drone_title=Drone Control Centre
+GT5U.gui.text.drone_custom_name=Custom Machine Name
+GT5U.gui.text.drone_search=Search machine name
+GT5U.gui.text.out_of_fluid=§cNo following fluids supplied: §b%s§f x §6%s L
+GT5U.gui.text.out_of_item=§cNo following items supplied: §b%s§f x §6%s
+GT5U.gui.text.out_of_stuff=§cNo following stuffs supplied: §b%s§f x §6%s
+GT5U.gui.text.power_loss=§cShut down due to power loss.
+GT5U.gui.text.pollution_fail=§cFailed to output the pollution.
+GT5U.gui.text.structure_incomplete=§7Shut down due to incomplete structure.
+GT5U.gui.text.no_repair=§7Shut down due to machine damage.
+GT5U.gui.text.no_machine_part=§7No correct machine part in controller slot.
 
 GT5U.item.programmed_circuit.select.header=Reprogram Circuit
 
@@ -465,6 +539,13 @@ GT5U.multiblock.mei=Max Energy Income
 GT5U.multiblock.usage=Probably uses
 GT5U.multiblock.parallelism=Max parallelism
 GT5U.multiblock.curparallelism=Current parallelism
+
+# NEI recipe handlers
+GT5U.nei.heat_capacity=Heat Capacity: %s K (%s)
+GT5U.nei.tier=Tier: %s
+GT5U.nei.start_eu=Start: %s EU (MK %s)
+GT5U.nei.stages=Stages: %s
+GT5U.nei.fuel=Fuel Value: %s EU
 
 GT5U.config.colormodulation=Color Modulator
 GT5U.config.colormodulation.cable_insulation=Cable Insulation
@@ -514,6 +595,7 @@ GT5U.config.nei.RecipeOwner=Show which mod added the recipe
 GT5U.config.nei.RecipeOwnerStackTrace=[debug] Show stack traces of recipe addition
 GT5U.config.nei.RecipeOwnerStackTrace.tooltip=[requires reboot]
 GT5U.config.nei.OriginalVoltage=Show original voltage when overclocked
+GT5U.config.nei.recipe_categories=Recipe Categories
 GT5U.config.waila=Waila
 GT5U.config.waila.WailaTransformerVoltageTier=Show voltage tier of transformer
 GT5U.config.waila.WailaAverageNS=Show average ns of multiblocks on waila
@@ -526,7 +608,10 @@ GT5U.interface.coverTabs.south=South
 GT5U.interface.coverTabs.west=West
 GT5U.interface.coverTabs.east=East
 
-# NEI
+GT5U.steam_variant.bronze=Bronze
+GT5U.steam_variant.steel=Steel
+
+# NEI options
 nei.options.tools.dump.gt5u=GT5u
 nei.options.tools.dump.gt5u.metatileentity=MetaTileEntity
 nei.options.tools.dump.gt5u.metatileentitys=MetaTileEntities
@@ -558,6 +643,10 @@ GT5U.waila.stocking_bus.auto_pull.enabled=Auto-Pull from ME: Enabled
 GT5U.waila.stocking_bus.auto_pull.disabled=Auto-Pull from ME: Disabled
 GT5U.waila.stocking_bus.min_stack_size=Minimum Stack Size: %s
 GT5U.waila.stocking_hatch.min_amount=Minimum Amount: %s
+GT5U.waila.drone_downlink.noConnection=Not connected
+GT5U.waila.drone_downlink.connection=Connect to centre:
+GT5U.waila.drone_downlink.connectionCount=Connection Count:
+GT5U.waila.drone_downlink.droneLevel=Drone Level:
 
 achievement.flintpick=First Tools
 achievement.flintpick.desc=Craft a flint pick
@@ -1375,7 +1464,6 @@ gt.solar.system.nereid=Nereid
 gt.solar.system.mercury=Mercury
 gt.solar.system.titan=Titan
 gt.solar.system.phobos=Phobos
-gt.specialvalue.stages=Stages:
 
 gt.multiBlock.controller.cokeOven=Coke Oven
 
@@ -1409,3 +1497,7 @@ gt.time.tick.singular=tick
 gt.time.tick.plural=ticks
 gt.time.second.singular=second
 gt.time.second.plural=seconds
+
+#Tool modes
+gt.wrench.mode.1=Line Mode
+

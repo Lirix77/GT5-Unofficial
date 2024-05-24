@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import com.gtnewhorizons.modularui.api.drawable.AdaptableUITexture;
+import com.gtnewhorizons.modularui.api.drawable.FallbackableUITexture;
 import com.gtnewhorizons.modularui.api.drawable.UITexture;
 
 public class GT_UITextures {
@@ -23,6 +24,8 @@ public class GT_UITextures {
         .of(GregTech.ID, "gui/background/text_field", 142, 28, 1);
     public static final AdaptableUITexture BACKGROUND_TEXT_FIELD_LIGHT_GRAY = AdaptableUITexture
         .of(GregTech.ID, "gui/background/text_field_light_gray", 61, 12, 1);
+    public static final AdaptableUITexture BACKGROUND_NEI_SINGLE_RECIPE = AdaptableUITexture
+        .of(GregTech.ID, "gui/background/nei_single_recipe.png", 64, 64, 2);
 
     public static final SteamTexture SLOT_ITEM_STEAM = SteamTexture.fullImage(GregTech.ID, "gui/slot/item_%s");
     public static final SteamTexture SLOT_FLUID_STEAM = SteamTexture.fullImage(GregTech.ID, "gui/slot/fluid_%s");
@@ -106,6 +109,8 @@ public class GT_UITextures {
     public static final UITexture OVERLAY_SLOT_LENS = UITexture.fullImage(GregTech.ID, "gui/overlay_slot/lens");
     public static final UITexture OVERLAY_SLOT_MICROSCOPE = UITexture
         .fullImage(GregTech.ID, "gui/overlay_slot/microscope");
+    public static final UITexture OVERLAY_SLOT_MINING_PIPE = UITexture
+        .fullImage(GregTech.ID, "gui/overlay_slot/mining_pipe");
     public static final UITexture OVERLAY_SLOT_MOLD = UITexture.fullImage(GregTech.ID, "gui/overlay_slot/mold");
     public static final UITexture OVERLAY_SLOT_MOLECULAR_1 = UITexture
         .fullImage(GregTech.ID, "gui/overlay_slot/molecular_1");
@@ -199,6 +204,10 @@ public class GT_UITextures {
     public static final UITexture PROGRESSBAR_SLICE = UITexture.fullImage(GregTech.ID, "gui/progressbar/slice");
     public static final UITexture PROGRESSBAR_STORED_EU = UITexture.fullImage(GregTech.ID, "gui/progressbar/stored_eu");
     public static final UITexture PROGRESSBAR_WIREMILL = UITexture.fullImage(GregTech.ID, "gui/progressbar/wiremill");
+
+    public static FallbackableUITexture fallbackableProgressbar(String name, UITexture fallback) {
+        return new FallbackableUITexture(UITexture.fullImage(GregTech.ID, "gui/progressbar/" + name), fallback);
+    }
 
     public static final UITexture TAB_COVER_NORMAL = UITexture.fullImage(GregTech.ID, "gui/tab/cover_normal");
     public static final UITexture TAB_COVER_HIGHLIGHT = UITexture.fullImage(GregTech.ID, "gui/tab/cover_highlight");

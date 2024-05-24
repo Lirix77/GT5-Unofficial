@@ -11,7 +11,7 @@ import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
 import gregtech.api.util.GT_Utility;
 
-import static gregtech.api.util.GT_Recipe.GT_Recipe_Map.sCentrifugeRecipes;
+import static gregtech.api.recipe.RecipeMaps.centrifugeRecipes;
 import static gregtech.api.util.GT_RecipeBuilder.*;
 
 public class CentrifugeRecipes implements Runnable {
@@ -294,7 +294,7 @@ public class CentrifugeRecipes implements Runnable {
                     GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Platinum, 4L),
                     GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Tungstate, 4L))
                 .outputChances(5000, 2000, 1000, 750, 500, 250).duration(2 * MINUTES + 42 * SECONDS)
-                .eut(TierEU.RECIPE_MV).addTo(sCentrifugeRecipes);
+                .eut(TierEU.RECIPE_MV).addTo(centrifugeRecipes);
 
             GT_Values.RA.stdBuilder().itemInputs(ItemList.MarsStoneDust.get(36L))
                 .itemOutputs(
@@ -305,7 +305,7 @@ public class CentrifugeRecipes implements Runnable {
                     GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Diamond, 4L),
                     GT_OreDictUnificator.get(OrePrefixes.dust, Materials.Iridium, 4L))
                 .outputChances(5000, 3000, 1000, 750, 500, 250).duration(2 * MINUTES + SECONDS + 10 * TICKS)
-                .eut(TierEU.RECIPE_HV).addTo(sCentrifugeRecipes);
+                .eut(TierEU.RECIPE_HV).addTo(centrifugeRecipes);
         }
     }
 }

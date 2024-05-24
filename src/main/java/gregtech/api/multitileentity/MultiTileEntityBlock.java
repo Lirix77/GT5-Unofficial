@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -189,8 +192,8 @@ public class MultiTileEntityBlock extends Block implements IDebugableBlock, ITil
     @Override
     public ArrayList<String> getDebugInfo(EntityPlayer aPlayer, int aX, int aY, int aZ, int aLogLevel) {
         final TileEntity aTileEntity = aPlayer.worldObj.getTileEntity(aX, aY, aZ);
-        if (aTileEntity instanceof IDebugableTileEntity) {
-            return ((IDebugableTileEntity) aTileEntity).getDebugInfo(aPlayer, aLogLevel);
+        if (aTileEntity instanceof IDebugableTileEntity mte) {
+            return mte.getDebugInfo(aPlayer, aLogLevel);
         }
         return new ArrayList<>();
     }
@@ -291,7 +294,7 @@ public class MultiTileEntityBlock extends Block implements IDebugableBlock, ITil
         final TileEntity aTileEntity = aWorld.getTileEntity(aX, aY, aZ);
         if (!LOCK) {
             LOCK = true;
-            if (aTileEntity instanceof BaseTileEntity) ((BaseTileEntity) aTileEntity).onAdjacentBlockChange(aX, aY, aZ);
+            if (aTileEntity instanceof BaseTileEntity bte) bte.onAdjacentBlockChange(aX, aY, aZ);
             LOCK = false;
         }
         if (aTileEntity instanceof IMTE_OnNeighborBlockChange change) change.onNeighborBlockChange(aWorld, aBlock);
@@ -367,21 +370,25 @@ public class MultiTileEntityBlock extends Block implements IDebugableBlock, ITil
         final int aFortune = EnchantmentHelper.getFortuneModifier(aPlayer);
         float aChance = 1.0F;
         final TileEntity aTileEntity = getTileEntity(aWorld, aX, aY, aZ, true);
-        if (aTileEntity instanceof IMultiTileEntity) {
-            final ArrayList<ItemStack> tList = ((IMultiTileEntity) aTileEntity).getDrops(aFortune, aSilkTouch);
-            aChance = ForgeEventFactory
-                .fireBlockHarvesting(tList, aWorld, this, aX, aY, aZ, aMeta, aFortune, aChance, aSilkTouch, aPlayer);
-            for (final ItemStack tStack : tList)
-                if (XSTR.XSTR_INSTANCE.nextFloat() <= aChance) dropBlockAsItem(aWorld, aX, aY, aZ, tStack);
+
+        if (!(aTileEntity instanceof IMultiTileEntity mte)) {
+            return;
         }
+
+        final ArrayList<ItemStack> tList = mte.getDrops(aFortune, aSilkTouch);
+        aChance = ForgeEventFactory
+            .fireBlockHarvesting(tList, aWorld, this, aX, aY, aZ, aMeta, aFortune, aChance, aSilkTouch, aPlayer);
+        for (final ItemStack tStack : tList)
+            if (XSTR.XSTR_INSTANCE.nextFloat() <= aChance) dropBlockAsItem(aWorld, aX, aY, aZ, tStack);
+
     }
 
     @Override
     public final boolean shouldSideBeRendered(IBlockAccess aWorld, int aX, int aY, int aZ, int ordinalSide) {
         final TileEntity aTileEntity = aWorld
             .getTileEntity(aX - OFFX[ordinalSide], aY - OFFY[ordinalSide], aZ - OFFZ[ordinalSide]);
-        return aTileEntity instanceof IMultiTileEntity
-            ? ((IMultiTileEntity) aTileEntity).shouldSideBeRendered(ForgeDirection.getOrientation(ordinalSide))
+        return aTileEntity instanceof IMultiTileEntity mte
+            ? mte.shouldSideBeRendered(ForgeDirection.getOrientation(ordinalSide))
             : super.shouldSideBeRendered(aWorld, aX, aY, aZ, ordinalSide);
     }
 
@@ -472,12 +479,17 @@ public class MultiTileEntityBlock extends Block implements IDebugableBlock, ITil
     @Override
     public final int getComparatorInputOverride(World aWorld, int aX, int aY, int aZ, int ordinalSide) {
         final TileEntity aTileEntity = aWorld.getTileEntity(aX, aY, aZ);
-        return aTileEntity instanceof IMTE_GetComparatorInputOverride override
-            ? override.getComparatorInputOverride(ForgeDirection.getOrientation(ordinalSide))
-            : aTileEntity instanceof IMTE_IsProvidingWeakPower power ? power.isProvidingWeakPower(
+        if (aTileEntity instanceof IMTE_GetComparatorInputOverride override) {
+            return override.getComparatorInputOverride(ForgeDirection.getOrientation(ordinalSide));
+        }
+
+        if (aTileEntity instanceof IMTE_IsProvidingWeakPower power) {
+            return power.isProvidingWeakPower(
                 ForgeDirection.getOrientation(ordinalSide)
-                    .getOpposite())
-                : super.getComparatorInputOverride(aWorld, aX, aY, aZ, ordinalSide);
+                    .getOpposite());
+        }
+
+        return super.getComparatorInputOverride(aWorld, aX, aY, aZ, ordinalSide);
     }
 
     @Override
@@ -522,7 +534,7 @@ public class MultiTileEntityBlock extends Block implements IDebugableBlock, ITil
     public final ArrayList<ItemStack> getDrops(World aWorld, int aX, int aY, int aZ, int aUnusableMetaData,
         int aFortune) {
         final TileEntity aTileEntity = getTileEntity(aWorld, aX, aY, aZ, true);
-        if (aTileEntity instanceof IMultiTileEntity) return ((IMultiTileEntity) aTileEntity).getDrops(aFortune, false);
+        if (aTileEntity instanceof IMultiTileEntity mte) return mte.getDrops(aFortune, false);
         return new ArrayList<>();
     }
 
@@ -535,8 +547,8 @@ public class MultiTileEntityBlock extends Block implements IDebugableBlock, ITil
     public final float getExplosionResistance(Entity aExploder, World aWorld, int aX, int aY, int aZ,
         double aExplosionX, double aExplosionY, double aExplosionZ) {
         final TileEntity aTileEntity = aWorld.getTileEntity(aX, aY, aZ);
-        return aTileEntity instanceof IMultiTileEntity
-            ? ((IMultiTileEntity) aTileEntity).getExplosionResistance(aExploder, aExplosionX, aExplosionY, aExplosionZ)
+        return aTileEntity instanceof IMultiTileEntity mte
+            ? mte.getExplosionResistance(aExploder, aExplosionX, aExplosionY, aExplosionZ)
             : 1.0F;
     }
 
@@ -545,14 +557,14 @@ public class MultiTileEntityBlock extends Block implements IDebugableBlock, ITil
         if (aWorld.isRemote) return;
         final TileEntity aTileEntity = getTileEntity(aWorld, aX, aY, aZ, true);
         if (aTileEntity != null) LAST_BROKEN_TILEENTITY.set(aTileEntity);
-        if (aTileEntity instanceof IMultiTileEntity) {
+        if (aTileEntity instanceof IMultiTileEntity mte) {
             GT_Log.exp.printf(
                 "Explosion at : %d | %d | %d DIMID: %s due to near explosion!%n",
                 aX,
                 aY,
                 aZ,
                 aWorld.provider.dimensionId);
-            ((IMultiTileEntity) aTileEntity).onExploded(aExplosion);
+            mte.onExploded(aExplosion);
         } else aWorld.setBlockToAir(aX, aY, aZ);
     }
 
@@ -586,24 +598,24 @@ public class MultiTileEntityBlock extends Block implements IDebugableBlock, ITil
     public final ItemStack getPickBlock(MovingObjectPosition aTarget, World aWorld, int aX, int aY, int aZ,
         EntityPlayer aPlayer) {
         final TileEntity aTileEntity = aWorld.getTileEntity(aX, aY, aZ);
-        return aTileEntity instanceof IMultiTileEntity ? ((IMultiTileEntity) aTileEntity).getPickBlock(aTarget) : null;
+        return aTileEntity instanceof IMultiTileEntity mte ? mte.getPickBlock(aTarget) : null;
     }
 
     @Override
     public final ItemStack getPickBlock(MovingObjectPosition aTarget, World aWorld, int aX, int aY, int aZ) {
         final TileEntity aTileEntity = aWorld.getTileEntity(aX, aY, aZ);
-        return aTileEntity instanceof IMultiTileEntity ? ((IMultiTileEntity) aTileEntity).getPickBlock(aTarget) : null;
+        return aTileEntity instanceof IMultiTileEntity mte ? mte.getPickBlock(aTarget) : null;
     }
 
-    public final IMultiTileEntity receiveMultiTileEntityData(IBlockAccess aWorld, int aX, short aY, int aZ, short aRID,
-        short aID) {
+    @Nullable
+    public final IMultiTileEntity receiveMultiTileEntityData(@Nonnull IBlockAccess aWorld, int aX, int aY, int aZ,
+        int registryId, int aID) {
         if (!(aWorld instanceof World)) return null;
         TileEntity aTileEntity = aWorld.getTileEntity(aX, aY, aZ);
 
-        if (!(aTileEntity instanceof IMultiTileEntity)
-            || ((IMultiTileEntity) aTileEntity).getMultiTileEntityRegistryID() != aRID
-            || ((IMultiTileEntity) aTileEntity).getMultiTileEntityID() != aID) {
-            final MultiTileEntityRegistry tRegistry = MultiTileEntityRegistry.getRegistry(aRID);
+        if (!(aTileEntity instanceof IMultiTileEntity mte) || mte.getMultiTileEntityRegistryID() != registryId
+            || mte.getMultiTileEntityID() != aID) {
+            final MultiTileEntityRegistry tRegistry = MultiTileEntityRegistry.getRegistry(registryId);
             if (tRegistry == null) return null;
 
             aTileEntity = tRegistry.getNewTileEntity((World) aWorld, aX, aY, aZ, aID);
@@ -611,7 +623,7 @@ public class MultiTileEntityBlock extends Block implements IDebugableBlock, ITil
 
             setTileEntity((World) aWorld, aX, aY, aZ, aTileEntity, false);
         }
-        return ((IMultiTileEntity) aTileEntity);
+        return (IMultiTileEntity) aTileEntity;
     }
 
     public void receiveCoverData(IMultiTileEntity mte, int aCover0, int aCover1, int aCover2, int aCover3, int aCover4,
@@ -628,14 +640,6 @@ public class MultiTileEntityBlock extends Block implements IDebugableBlock, ITil
             mte.issueBlockUpdate();
         }
     }
-    //
-    // te.receiveClientEvent(GregTechTileClientEvents.CHANGE_COMMON_DATA, aTextureData);
-    //
-    // te.receiveClientEvent(GregTechTileClientEvents.CHANGE_CUSTOM_DATA, aUpdateData & 0x7F);
-    // te.receiveClientEvent(GregTechTileClientEvents.CHANGE_CUSTOM_DATA, aTexturePage | 0x80);
-    //
-    // te.receiveClientEvent(GregTechTileClientEvents.CHANGE_COLOR, aColorData);
-    // te.receiveClientEvent(GregTechTileClientEvents.CHANGE_REDSTONE_OUTPUT, aRedstoneData);
 
     @Override
     public final TileEntity createTileEntity(World aWorld, int aMeta) {

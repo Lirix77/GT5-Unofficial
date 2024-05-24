@@ -46,6 +46,8 @@ import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
 import gregtech.api.util.GT_Utility;
 import gregtech.common.covers.CoverInfo;
+import mcp.mobius.waila.api.IWailaConfigHandler;
+import mcp.mobius.waila.api.IWailaDataAccessor;
 
 /**
  * NEVER INCLUDE THIS FILE IN YOUR MOD!!!
@@ -517,7 +519,7 @@ public class BaseMetaPipeEntity extends CommonMetaTileEntity
 
     @Override
     public boolean isUseableByPlayer(EntityPlayer aPlayer) {
-        return hasValidMetaTileEntity() && mTickTimer > 40
+        return hasValidMetaTileEntity() && mTickTimer > 1
             && getTileEntityOffset(0, 0, 0) == this
             && aPlayer.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) < 64
             && mMetaTileEntity.isAccessAllowed(aPlayer);
@@ -816,7 +818,8 @@ public class BaseMetaPipeEntity extends CommonMetaTileEntity
                 }
                 final ForgeDirection tSide = GT_Utility.determineWrenchingSide(side, aX, aY, aZ);
                 if (GT_Utility.isStackInList(tCurrentItem, GregTech_API.sWrenchList)) {
-                    if (mMetaTileEntity.onWrenchRightClick(side, tSide, aPlayer, aX, aY, aZ)) {
+
+                    if (mMetaTileEntity.onWrenchRightClick(side, tSide, aPlayer, aX, aY, aZ, tCurrentItem)) {
                         mMetaTileEntity.markDirty();
                         GT_ModHandler.damageOrDechargeItem(tCurrentItem, 1, 1000, aPlayer);
                         GT_Utility.sendSoundToPlayers(
@@ -836,7 +839,7 @@ public class BaseMetaPipeEntity extends CommonMetaTileEntity
                             setCoverDataAtSide(
                                 tSide,
                                 getCoverInfoAtSide(tSide).onCoverScrewdriverClick(aPlayer, 0.5F, 0.5F, 0.5F));
-                            mMetaTileEntity.onScrewdriverRightClick(tSide, aPlayer, aX, aY, aZ);
+                            mMetaTileEntity.onScrewdriverRightClick(tSide, aPlayer, aX, aY, aZ, tCurrentItem);
                             mMetaTileEntity.markDirty();
                             GT_Utility.sendSoundToPlayers(
                                 worldObj,
@@ -852,7 +855,7 @@ public class BaseMetaPipeEntity extends CommonMetaTileEntity
                             setCoverDataAtSide(
                                 side,
                                 getCoverInfoAtSide(side).onCoverScrewdriverClick(aPlayer, aX, aY, aZ));
-                            mMetaTileEntity.onScrewdriverRightClick(side, aPlayer, aX, aY, aZ);
+                            mMetaTileEntity.onScrewdriverRightClick(side, aPlayer, aX, aY, aZ, tCurrentItem);
                             mMetaTileEntity.markDirty();
                             GT_Utility.sendSoundToPlayers(
                                 worldObj,
@@ -894,7 +897,7 @@ public class BaseMetaPipeEntity extends CommonMetaTileEntity
                 }
 
                 if (GT_Utility.isStackInList(tCurrentItem, GregTech_API.sWireCutterList)) {
-                    if (mMetaTileEntity.onWireCutterRightClick(side, tSide, aPlayer, aX, aY, aZ)) {
+                    if (mMetaTileEntity.onWireCutterRightClick(side, tSide, aPlayer, aX, aY, aZ, tCurrentItem)) {
                         mMetaTileEntity.markDirty();
                         // logic handled internally
                         GT_Utility.sendSoundToPlayers(
@@ -911,7 +914,7 @@ public class BaseMetaPipeEntity extends CommonMetaTileEntity
                 }
 
                 if (GT_Utility.isStackInList(tCurrentItem, GregTech_API.sSolderingToolList)) {
-                    if (mMetaTileEntity.onSolderingToolRightClick(side, tSide, aPlayer, aX, aY, aZ)) {
+                    if (mMetaTileEntity.onSolderingToolRightClick(side, tSide, aPlayer, aX, aY, aZ, tCurrentItem)) {
                         mMetaTileEntity.markDirty();
                         // logic handled internally
                         GT_Utility.sendSoundToPlayers(
@@ -1402,5 +1405,12 @@ public class BaseMetaPipeEntity extends CommonMetaTileEntity
     @Override
     public void startTimeStatistics() {
         hasTimeStatisticsStarted = true;
+    }
+
+    @Override
+    public void getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
+        IWailaConfigHandler config) {
+        super.getWailaBody(itemStack, currentTip, accessor, config);
+        mMetaTileEntity.getWailaBody(itemStack, currentTip, accessor, config);
     }
 }
