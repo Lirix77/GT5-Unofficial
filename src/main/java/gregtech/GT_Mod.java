@@ -222,7 +222,7 @@ public class GT_Mod implements IGT_Mod {
     }
 
     public static int calculateTotalGTVersion(int majorVersion, int minorVersion, int patchVersion) {
-        return majorVersion * 1000000 + minorVersion * 1000 + patchVersion;
+        return majorVersion * 100000 + minorVersion * 1000 + patchVersion;
     }
 
     @Mod.EventHandler
