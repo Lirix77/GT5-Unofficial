@@ -226,7 +226,7 @@ public class GT_RecipeRegistrator {
         builder.fluidOutputs(aMaterial.mSmeltInto.getMolten((L * aMaterialAmount) / (M * aStack.stackSize)))
             .duration((int) Math.max(1, (24 * aMaterialAmount) / M))
             .eut(Math.max(8, (int) Math.sqrt(2 * aMaterial.mSmeltInto.mStandardMoltenFluid.getTemperature())))
-            .recipeCategory(RecipeCategories.fluidExtractorRecycling)
+            //.recipeCategory(RecipeCategories.fluidExtractorRecycling)
             .addTo(fluidExtractionRecipes);
     }
 
@@ -398,7 +398,7 @@ public class GT_RecipeRegistrator {
                     .duration(
                         (aData.mMaterial.mMaterial == Materials.Marble ? 1 : (int) Math.max(16, tAmount / M)) * TICKS)
                     .eut(4)
-                    .recipeCategory(RecipeCategories.maceratorRecycling)
+                    //.recipeCategory(RecipeCategories.maceratorRecycling)
                     .addTo(maceratorRecipes);
             }
         }
@@ -416,7 +416,7 @@ public class GT_RecipeRegistrator {
                     .itemOutputs(GT_OreDictUnificator.getDust(aData.mMaterial))
                     .duration(10 * SECONDS)
                     .eut(TierEU.RECIPE_LV)
-                    .recipeCategory(RecipeCategories.forgeHammerRecycling)
+                    //.recipeCategory(RecipeCategories.forgeHammerRecycling)
                     .addTo(hammerRecipes);
                 break;
             }

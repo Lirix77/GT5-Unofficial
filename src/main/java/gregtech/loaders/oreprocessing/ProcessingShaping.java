@@ -66,7 +66,7 @@ public class ProcessingShaping implements gregtech.api.interfaces.IOreRecipeRegi
                             .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.block, aMaterial.mSmeltInto, tAmount))
                             .duration((5 * tAmount) * TICKS)
                             .eut(calculateRecipeEU(aMaterial, 4 * tVoltageMultiplier))
-                            .recipeCategory(RecipeCategories.alloySmelterMolding)
+                            //.recipeCategory(RecipeCategories.alloySmelterMolding)
                             .addTo(alloySmelterRecipes);
                     }
                 }
@@ -406,7 +406,7 @@ public class ProcessingShaping implements gregtech.api.interfaces.IOreRecipeRegi
                                 .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial.mSmeltInto, tAmount))
                                 .duration(((int) Math.max(aMaterialMass * 2L * tAmount, tAmount)) * TICKS)
                                 .eut(calculateRecipeEU(aMaterial, 2 * tVoltageMultiplier))
-                                .recipeCategory(RecipeCategories.alloySmelterMolding)
+                                //.recipeCategory(RecipeCategories.alloySmelterMolding)
                                 .addTo(alloySmelterRecipes);
                         }
                     }
@@ -419,7 +419,7 @@ public class ProcessingShaping implements gregtech.api.interfaces.IOreRecipeRegi
                                 .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.plate, aMaterial.mSmeltInto, tAmount))
                                 .duration(((int) Math.max(aMaterialMass * 2L * tAmount, tAmount)) * TICKS)
                                 .eut(calculateRecipeEU(aMaterial, 2 * tVoltageMultiplier))
-                                .recipeCategory(RecipeCategories.alloySmelterMolding)
+                                //.recipeCategory(RecipeCategories.alloySmelterMolding)
                                 .addTo(alloySmelterRecipes);
                         }
                     }
@@ -433,7 +433,7 @@ public class ProcessingShaping implements gregtech.api.interfaces.IOreRecipeRegi
                             .itemOutputs(GT_OreDictUnificator.get(OrePrefixes.gearGt, aMaterial.mSmeltInto, tAmount))
                             .duration(((int) Math.max(aMaterialMass * 10L * tAmount, tAmount)) * TICKS)
                             .eut(calculateRecipeEU(aMaterial, 2 * tVoltageMultiplier))
-                            .recipeCategory(RecipeCategories.alloySmelterMolding)
+                            //.recipeCategory(RecipeCategories.alloySmelterMolding)
                             .addTo(alloySmelterRecipes);
                     }
                 }

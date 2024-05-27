@@ -467,7 +467,7 @@ public class ProcessingPlate implements gregtech.api.interfaces.IOreRecipeRegist
                 .itemOutputs(GT_Utility.copyAmount(3, aStack))
                 .duration(6 * SECONDS + 8 * TICKS)
                 .eut(calculateRecipeEU(aMaterial, 15))
-                .recipeCategory(RecipeCategories.alloySmelterMolding)
+                //.recipeCategory(RecipeCategories.alloySmelterMolding)
                 .addTo(alloySmelterRecipes);
 
             GT_Values.RA.stdBuilder()

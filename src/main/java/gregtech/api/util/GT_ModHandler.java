@@ -566,8 +566,8 @@ public class GT_ModHandler {
         }
         recipeBuilder.itemOutputs(aOutput)
             .duration(6 * SECONDS + 10 * TICKS)
-            .eut(3)
-            .recipeCategory(RecipeCategories.alloySmelterRecycling);
+            .eut(3);
+            //.recipeCategory(RecipeCategories.alloySmelterRecycling);
         if (hidden) {
             recipeBuilder.hidden();
         }

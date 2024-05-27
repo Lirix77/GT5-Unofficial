@@ -27,8 +27,6 @@ public class ScriptIC2 implements IScriptLoader {
     public void loadRecipes() {
         recipeRemove();
         loadMachineRecipes();
-        addShapedRecipe(GT_ModHandler.getIC2Item("blockCrop",1),
-            new Object[]{"stickLongWood", null, "stickLongWood", null, null, null, null, null, null });
     }
 
     private void loadMachineRecipes() {

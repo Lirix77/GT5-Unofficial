@@ -116,14 +116,14 @@ public class GT_RecipeConstants {
                 .fluidInputs(mat.getPlasma(tPlasmaAmount))
                 .fluidOutputs(mat.getGas(tPlasmaAmount));
             if (recycle) {
-                plasmaBuilder.recipeCategory(RecipeCategories.plasmaArcFurnaceRecycling);
+                //plasmaBuilder.recipeCategory(RecipeCategories.plasmaArcFurnaceRecycling);
             }
             ret.addAll(RecipeMaps.plasmaArcFurnaceRecipes.doAdd(plasmaBuilder));
         }
         GT_RecipeBuilder arcBuilder = builder.copy()
             .fluidInputs(Materials.Oxygen.getGas(aDuration));
         if (recycle) {
-            arcBuilder.recipeCategory(RecipeCategories.arcFurnaceRecycling);
+            //arcBuilder.recipeCategory(RecipeCategories.arcFurnaceRecycling);
         }
         ret.addAll(RecipeMaps.arcFurnaceRecipes.doAdd(arcBuilder));
         return ret;

@@ -170,7 +170,7 @@ public class FluidExtractorRecipes implements Runnable {
             .fluidOutputs(Materials.Steel.getMolten(19 * 144))
             .duration(20 * SECONDS)
             .eut(90)
-            .recipeCategory(RecipeCategories.fluidExtractorRecycling)
+            //.recipeCategory(RecipeCategories.fluidExtractorRecycling)
             .addTo(fluidExtractionRecipes);
 
         GT_Values.RA.stdBuilder()
@@ -180,7 +180,7 @@ public class FluidExtractorRecipes implements Runnable {
             .fluidOutputs(Materials.Tin.getMolten(12 * 144))
             .duration(20 * SECONDS)
             .eut(90)
-            .recipeCategory(RecipeCategories.fluidExtractorRecycling)
+            //.recipeCategory(RecipeCategories.fluidExtractorRecycling)
             .addTo(fluidExtractionRecipes);
 
         GT_Values.RA.stdBuilder()
@@ -188,7 +188,7 @@ public class FluidExtractorRecipes implements Runnable {
             .fluidOutputs(Materials.Steel.getMolten(189))
             .duration(2 * SECONDS)
             .eut(90)
-            .recipeCategory(RecipeCategories.fluidExtractorRecycling)
+            //.recipeCategory(RecipeCategories.fluidExtractorRecycling)
             .addTo(fluidExtractionRecipes);
 
         GT_Values.RA.stdBuilder()
@@ -198,7 +198,7 @@ public class FluidExtractorRecipes implements Runnable {
             .fluidOutputs(Materials.Steel.getMolten(324))
             .duration(20 * SECONDS)
             .eut(90)
-            .recipeCategory(RecipeCategories.fluidExtractorRecycling)
+            //.recipeCategory(RecipeCategories.fluidExtractorRecycling)
             .addTo(fluidExtractionRecipes);
 
         GT_Values.RA.stdBuilder()
