@@ -9,6 +9,8 @@ import java.util.function.Supplier;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.EnumChatFormatting;
 
 import com.gtnewhorizons.modularui.api.drawable.IDrawable;
@@ -75,6 +77,7 @@ public class SpaceProjectFrontend extends RecipeMapFrontend {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     protected List<String> handleNEIItemInputTooltip(List<String> currentTip,
         GT_NEI_DefaultHandler.FixedPositionedStack pStack) {
         super.handleNEIItemOutputTooltip(currentTip, pStack);
@@ -84,6 +87,7 @@ public class SpaceProjectFrontend extends RecipeMapFrontend {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void drawNEIOverlays(GT_NEI_DefaultHandler.CachedDefaultRecipe neiCachedRecipe) {
         for (PositionedStack stack : neiCachedRecipe.mInputs) {
             if (stack instanceof GT_NEI_DefaultHandler.FixedPositionedStack pStack && stack.item != null

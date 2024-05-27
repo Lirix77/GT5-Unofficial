@@ -11,6 +11,8 @@ import java.util.stream.IntStream;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
@@ -275,6 +277,7 @@ public class RecipeMapFrontend {
         }
     }
 
+    @SideOnly(Side.CLIENT)
     public List<String> handleNEIItemTooltip(ItemStack stack, List<String> currentTip,
         GT_NEI_DefaultHandler.CachedDefaultRecipe neiCachedRecipe) {
         for (PositionedStack pStack : neiCachedRecipe.mInputs) {
@@ -300,6 +303,7 @@ public class RecipeMapFrontend {
         return currentTip;
     }
 
+    @SideOnly(Side.CLIENT)
     protected List<String> handleNEIItemInputTooltip(List<String> currentTip,
         GT_NEI_DefaultHandler.FixedPositionedStack pStack) {
         if (pStack.isNotConsumed()) {
@@ -308,6 +312,7 @@ public class RecipeMapFrontend {
         return currentTip;
     }
 
+    @SideOnly(Side.CLIENT)
     protected List<String> handleNEIItemOutputTooltip(List<String> currentTip,
         GT_NEI_DefaultHandler.FixedPositionedStack pStack) {
         if (pStack.isChanceBased()) {
@@ -316,6 +321,7 @@ public class RecipeMapFrontend {
         return currentTip;
     }
 
+    @SideOnly(Side.CLIENT)
     public void drawNEIOverlays(GT_NEI_DefaultHandler.CachedDefaultRecipe neiCachedRecipe) {
         for (PositionedStack stack : neiCachedRecipe.mInputs) {
             if (stack instanceof GT_NEI_DefaultHandler.FixedPositionedStack) {
@@ -329,12 +335,14 @@ public class RecipeMapFrontend {
         }
     }
 
+    @SideOnly(Side.CLIENT)
     protected void drawNEIOverlayForInput(GT_NEI_DefaultHandler.FixedPositionedStack stack) {
         if (stack.isNotConsumed()) {
             drawNEIOverlayText("NC", stack);
         }
     }
 
+    @SideOnly(Side.CLIENT)
     protected void drawNEIOverlayForOutput(GT_NEI_DefaultHandler.FixedPositionedStack stack) {
         if (stack.isChanceBased()) {
             drawNEIOverlayText(stack.getChanceText(), stack);
@@ -342,6 +350,7 @@ public class RecipeMapFrontend {
     }
 
     @SuppressWarnings("SameParameterValue")
+    @SideOnly(Side.CLIENT)
     protected void drawNEIOverlayText(String text, PositionedStack stack, int color, float scale, boolean shadow,
         Alignment alignment) {
         FontRenderer fontRenderer = net.minecraft.client.Minecraft.getMinecraft().fontRenderer;
@@ -356,6 +365,7 @@ public class RecipeMapFrontend {
         GlStateManager.popMatrix();
     }
 
+    @SideOnly(Side.CLIENT)
     protected void drawNEIOverlayText(String text, PositionedStack stack) {
         drawNEIOverlayText(
             text,

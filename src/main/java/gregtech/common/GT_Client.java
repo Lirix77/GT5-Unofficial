@@ -8,6 +8,7 @@ package gregtech.common;
 import static gregtech.api.enums.GT_Values.calculateMaxPlasmaTurbineEfficiency;
 import static gregtech.api.enums.Mods.Forestry;
 import static gregtech.api.enums.Mods.GregTech;
+import static gregtech.loaders.preload.GT_PreLoad.loadClientConfig;
 import static org.lwjgl.opengl.GL11.GL_LINE_LOOP;
 
 import java.net.URL;
@@ -613,6 +614,7 @@ public class GT_Client extends GT_Proxy implements Runnable {
         new Thread(this).start();
 
         mPollutionRenderer.preLoad();
+        loadClientConfig();
 
         mPreference = new GT_ClientPreference(GregTech_API.sClientDataFile);
 
@@ -811,7 +813,7 @@ public class GT_Client extends GT_Proxy implements Runnable {
             GregTech_API.sClientDataFile.mConfig.save();
             // refresh client preference and send to server, since it's the only config we allow changing at runtime.
             mPreference = new GT_ClientPreference(GregTech_API.sClientDataFile);
-            GT_PreLoad.loadClientConfig();
+            loadClientConfig();
             if (e.isWorldRunning) GT_Values.NW.sendToServer(new GT_Packet_ClientPreference(mPreference));
         }
     }

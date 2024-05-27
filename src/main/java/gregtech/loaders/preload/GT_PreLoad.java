@@ -26,6 +26,8 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.launchwrapper.Launch;
@@ -497,8 +499,6 @@ public class GT_PreLoad {
         GregTech_API.sMultiThreadedSounds = tMainConfig.get(GT_Mod.aTextGeneral, "sound_multi_threading", false)
             .getBoolean(false);
 
-        loadClientConfig();
-
         GT_Mod.gregtechproxy.mMaxEqualEntitiesAtOneSpot = tMainConfig
             .get(GT_Mod.aTextGeneral, "MaxEqualEntitiesAtOneSpot", 3)
             .getInt(3);
@@ -934,6 +934,7 @@ public class GT_PreLoad {
         GT_Mod.gregtechproxy.reloadNEICache();
     }
 
+    @SideOnly(Side.CLIENT)
     private static List<RecipeCategory> findRecipeCategories() {
         List<RecipeCategory> ret = new ArrayList<>();
         try {
