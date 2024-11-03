@@ -20,6 +20,7 @@ import org.gradle.internal.logging.text.StyledTextOutputFactory
 import org.gradle.internal.xml.XmlTransformer
 import org.jetbrains.gradle.ext.Application
 import org.jetbrains.gradle.ext.Gradle
+import ru.justagod.plugin.gradle.CutterPlugin
 
 import javax.inject.Inject
 import java.nio.file.Files
@@ -51,7 +52,12 @@ buildscript {
 
         mavenLocal()
     }
+    dependencies {
+        classpath files(rootProject.file('cutter.jar'))
+        classpath 'org.zeroturnaround:zt-zip:1.14'
+    }
 }
+
 plugins {
     id 'java-library'
     id "org.jetbrains.gradle.plugin.idea-ext" version "1.1.7"
@@ -71,6 +77,8 @@ plugins {
     id 'com.matthewprenger.cursegradle' version '1.4.0' apply false
     id 'com.gtnewhorizons.retrofuturagradle' version '1.3.24'
 }
+
+apply plugin: CutterPlugin
 
 print("You might want to check out './gradlew :faq' if your build fails.\n")
 
@@ -566,13 +574,13 @@ configurations {
     create("compile") {
         description = "Deprecated: use api or implementation instead, gets put in api"
         canBeConsumed = false
-        canBeResolved = false
+        canBeResolved = true
         visible = false
     }
     create("testCompile") {
         description = "Deprecated: use testImplementation instead"
         canBeConsumed = false
-        canBeResolved = false
+        canBeResolved = true
         visible = false
     }
     api.extendsFrom(compile)
