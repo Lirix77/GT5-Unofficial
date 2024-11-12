@@ -17,7 +17,7 @@ import com.gtnewhorizon.structurelib.util.Vec3Impl;
 
 import gregtech.api.multitileentity.enums.GT_MultiTileCasing;
 import gregtech.api.multitileentity.multiblock.base.StackableController;
-import gregtech.api.util.GT_Multiblock_Tooltip_Builder;
+import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.common.tileentities.machines.multiblock.logic.MaceratorProcessingLogic;
 
 public class Macerator extends StackableController<Macerator, MaceratorProcessingLogic> {
@@ -75,11 +75,9 @@ public class Macerator extends StackableController<Macerator, MaceratorProcessin
     }
 
     @Override
-    protected GT_Multiblock_Tooltip_Builder createTooltip() {
-        final GT_Multiblock_Tooltip_Builder tt = new GT_Multiblock_Tooltip_Builder();
+    protected MultiblockTooltipBuilder createTooltip() {
+        final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Macerator")
-            .addInfo("Controller for the Macerator")
-            .addSeparator()
             .beginVariableStructureBlock(7, 9, 2 + getMinStacks(), 2 + getMaxStacks(), 7, 9, true)
             .addController("Bottom Front Center")
             .addCasingInfoExactly("Test Casing", 60, false)
@@ -90,7 +88,7 @@ public class Macerator extends StackableController<Macerator, MaceratorProcessin
             .addOutputBus("Any non-optional external facing casing on the stacks")
             .addStructureInfo(
                 String.format("Stackable middle stacks between %d-%d time(s).", getMinStacks(), getMaxStacks()))
-            .toolTipFinisher("Wildcard");
+            .toolTipFinisher();
         return tt;
     }
 

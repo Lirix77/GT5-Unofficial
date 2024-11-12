@@ -1,5 +1,6 @@
 package gregtech.api.recipe.check;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -109,6 +110,19 @@ public final class CheckRecipeResultRegistry {
         .ofFailure("backfiller_no_concrete");
 
     /**
+     * Black Hole Compressor does not have an active black hole
+     */
+    public static final CheckRecipeResult NO_BLACK_HOLE = SimpleCheckRecipeResult.ofFailure("no_black_hole");
+
+    public static final CheckRecipeResult NO_SEE_SKY = SimpleCheckRecipeResult.ofFailure("no_see_sky");
+
+    /**
+     * Machine is waiting for the main controller to start the cycle.
+     */
+    @Nonnull
+    public static final CheckRecipeResult CYCLE_IDLE = SimpleCheckRecipeResult.ofSuccess("cycle_idle");
+
+    /**
      * Cannot process recipe because the machine cannot handle required EUt.
      */
     @Nonnull
@@ -140,11 +154,18 @@ public final class CheckRecipeResultRegistry {
         return new ResultInsufficientStartupPower(required);
     }
 
+    @Nonnull
+    public static CheckRecipeResult insufficientStartupPower(BigInteger required) {
+        return new ResultInsufficientStartupPowerBigInt(required);
+    }
+
     static {
         register(new SimpleCheckRecipeResult(false, "", false));
         register(new ResultInsufficientPower(0));
         register(new ResultInsufficientHeat(0));
         register(new ResultInsufficientMachineTier(0));
         register(new ResultInsufficientStartupPower(0));
+        register(new ResultInsufficientStartupPowerBigInt(BigInteger.ZERO));
+        register(new ResultMissingItem());
     }
 }

@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -25,12 +26,12 @@ import com.gtnewhorizons.modularui.api.widget.Widget;
 import com.gtnewhorizons.modularui.common.widget.Scrollable;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
 
-import gregtech.api.util.GT_Utility;
+import gregtech.api.util.GTUtility;
 import gregtech.api.util.item.ItemHolder;
 
 /**
  * Generic Item logic for MuTEs.
- * 
+ *
  * @author BlueWeabo
  */
 public class ItemInventoryLogic {
@@ -101,7 +102,7 @@ public class ItemInventoryLogic {
     }
 
     /**
-     * 
+     *
      * @return The Item Inventory Logic as an NBTTagCompound to be saved in another nbt as how one wants.
      */
     @Nonnull
@@ -150,7 +151,7 @@ public class ItemInventoryLogic {
             final NBTTagCompound tNBT = nbtList.getCompoundTagAt(i);
             final int tSlot = tNBT.getShort("s");
             if (tSlot >= 0 && tSlot < inventory.getSlots()) {
-                inventory.setStackInSlot(tSlot, GT_Utility.loadItem(tNBT));
+                inventory.setStackInSlot(tSlot, GTUtility.loadItem(tNBT));
             }
         }
     }
@@ -164,9 +165,8 @@ public class ItemInventoryLogic {
     public ItemStack[] getStoredItems() {
         final ItemStack[] items = inventory.getStacks()
             .stream()
-            .filter(item -> item != null)
-            .collect(Collectors.toList())
-            .toArray(new ItemStack[0]);
+            .filter(Objects::nonNull)
+            .toArray(ItemStack[]::new);
         if (items == null) {
             return new ItemStack[0];
         }

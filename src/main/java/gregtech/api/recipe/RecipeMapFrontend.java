@@ -1,6 +1,6 @@
 package gregtech.api.recipe;
 
-import static gregtech.api.util.GT_Utility.trans;
+import static gregtech.api.util.GTUtility.trans;
 import static net.minecraft.util.EnumChatFormatting.GRAY;
 
 import java.util.ArrayList;
@@ -11,8 +11,6 @@ import java.util.stream.IntStream;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
@@ -32,15 +30,15 @@ import com.gtnewhorizons.modularui.common.widget.ProgressBar;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
 
 import codechicken.nei.PositionedStack;
-import gregtech.GT_Mod;
+import gregtech.GTMod;
 import gregtech.api.enums.SteamVariant;
-import gregtech.api.gui.GT_GUIColorOverride;
-import gregtech.api.gui.modularui.GT_UITextures;
+import gregtech.api.gui.GUIColorOverride;
+import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.recipe.metadata.IRecipeMetadataStorage;
-import gregtech.api.util.GT_Recipe;
+import gregtech.api.util.GTRecipe;
 import gregtech.api.util.MethodsReturnNonnullByDefault;
 import gregtech.common.gui.modularui.UIHelper;
-import gregtech.nei.GT_NEI_DefaultHandler;
+import gregtech.nei.GTNEIDefaultHandler;
 import gregtech.nei.RecipeDisplayInfo;
 
 /**
@@ -62,8 +60,8 @@ public class RecipeMapFrontend {
      */
     protected final NEIRecipeProperties neiProperties;
 
-    protected final GT_GUIColorOverride colorOverride = GT_GUIColorOverride
-        .get(GT_UITextures.BACKGROUND_NEI_SINGLE_RECIPE.location);
+    protected final GUIColorOverride colorOverride = GUIColorOverride
+        .get(GTUITextures.BACKGROUND_NEI_SINGLE_RECIPE.location);
 
     public RecipeMapFrontend(BasicUIPropertiesBuilder uiPropertiesBuilder,
         NEIRecipePropertiesBuilder neiPropertiesBuilder) {
@@ -98,7 +96,7 @@ public class RecipeMapFrontend {
         IItemHandlerModifiable fluidInputsInventory, IItemHandlerModifiable fluidOutputsInventory,
         Supplier<Float> progressSupplier, Pos2d windowOffset) {
         ModularWindow.Builder builder = ModularWindow.builder(neiProperties.recipeBackgroundSize)
-            .setBackground(GT_UITextures.BACKGROUND_NEI_SINGLE_RECIPE);
+            .setBackground(GTUITextures.BACKGROUND_NEI_SINGLE_RECIPE);
 
         UIHelper.forEachSlots(
             (i, backgrounds, pos) -> builder.widget(
@@ -247,8 +245,8 @@ public class RecipeMapFrontend {
     }
 
     protected void drawRecipeOwnerInfo(RecipeDisplayInfo recipeInfo) {
-        GT_Recipe recipe = recipeInfo.recipe;
-        if (GT_Mod.gregtechproxy.mNEIRecipeOwner) {
+        GTRecipe recipe = recipeInfo.recipe;
+        if (GTMod.gregtechproxy.mNEIRecipeOwner) {
             if (recipe.owners.size() > 1) {
                 recipeInfo.drawText(
                     EnumChatFormatting.ITALIC + trans("273", "Original Recipe by: ")
@@ -267,7 +265,7 @@ public class RecipeMapFrontend {
                             .getName());
             }
         }
-        if (GT_Mod.gregtechproxy.mNEIRecipeOwnerStackTrace && recipe.stackTraces != null
+        if (GTMod.gregtechproxy.mNEIRecipeOwnerStackTrace && recipe.stackTraces != null
             && !recipe.stackTraces.isEmpty()) {
             recipeInfo.drawText("stackTrace:");
             // todo: good way to show all stacktraces
@@ -277,25 +275,24 @@ public class RecipeMapFrontend {
         }
     }
 
-    @SideOnly(Side.CLIENT)
     public List<String> handleNEIItemTooltip(ItemStack stack, List<String> currentTip,
-        GT_NEI_DefaultHandler.CachedDefaultRecipe neiCachedRecipe) {
+        GTNEIDefaultHandler.CachedDefaultRecipe neiCachedRecipe) {
         for (PositionedStack pStack : neiCachedRecipe.mInputs) {
             if (stack == pStack.item) {
-                if (pStack instanceof GT_NEI_DefaultHandler.FixedPositionedStack) {
+                if (pStack instanceof GTNEIDefaultHandler.FixedPositionedStack) {
                     currentTip = handleNEIItemInputTooltip(
                         currentTip,
-                        (GT_NEI_DefaultHandler.FixedPositionedStack) pStack);
+                        (GTNEIDefaultHandler.FixedPositionedStack) pStack);
                 }
                 break;
             }
         }
         for (PositionedStack pStack : neiCachedRecipe.mOutputs) {
             if (stack == pStack.item) {
-                if (pStack instanceof GT_NEI_DefaultHandler.FixedPositionedStack) {
+                if (pStack instanceof GTNEIDefaultHandler.FixedPositionedStack) {
                     currentTip = handleNEIItemOutputTooltip(
                         currentTip,
-                        (GT_NEI_DefaultHandler.FixedPositionedStack) pStack);
+                        (GTNEIDefaultHandler.FixedPositionedStack) pStack);
                 }
                 break;
             }
@@ -303,54 +300,48 @@ public class RecipeMapFrontend {
         return currentTip;
     }
 
-    @SideOnly(Side.CLIENT)
     protected List<String> handleNEIItemInputTooltip(List<String> currentTip,
-        GT_NEI_DefaultHandler.FixedPositionedStack pStack) {
+        GTNEIDefaultHandler.FixedPositionedStack pStack) {
         if (pStack.isNotConsumed()) {
             currentTip.add(GRAY + trans("151", "Does not get consumed in the process"));
         }
         return currentTip;
     }
 
-    @SideOnly(Side.CLIENT)
     protected List<String> handleNEIItemOutputTooltip(List<String> currentTip,
-        GT_NEI_DefaultHandler.FixedPositionedStack pStack) {
+        GTNEIDefaultHandler.FixedPositionedStack pStack) {
         if (pStack.isChanceBased()) {
             currentTip.add(GRAY + trans("150", "Chance: ") + pStack.getChanceText());
         }
         return currentTip;
     }
 
-    @SideOnly(Side.CLIENT)
-    public void drawNEIOverlays(GT_NEI_DefaultHandler.CachedDefaultRecipe neiCachedRecipe) {
+    public void drawNEIOverlays(GTNEIDefaultHandler.CachedDefaultRecipe neiCachedRecipe) {
         for (PositionedStack stack : neiCachedRecipe.mInputs) {
-            if (stack instanceof GT_NEI_DefaultHandler.FixedPositionedStack) {
-                drawNEIOverlayForInput((GT_NEI_DefaultHandler.FixedPositionedStack) stack);
+            if (stack instanceof GTNEIDefaultHandler.FixedPositionedStack) {
+                drawNEIOverlayForInput((GTNEIDefaultHandler.FixedPositionedStack) stack);
             }
         }
         for (PositionedStack stack : neiCachedRecipe.mOutputs) {
-            if (stack instanceof GT_NEI_DefaultHandler.FixedPositionedStack) {
-                drawNEIOverlayForOutput((GT_NEI_DefaultHandler.FixedPositionedStack) stack);
+            if (stack instanceof GTNEIDefaultHandler.FixedPositionedStack) {
+                drawNEIOverlayForOutput((GTNEIDefaultHandler.FixedPositionedStack) stack);
             }
         }
     }
 
-    @SideOnly(Side.CLIENT)
-    protected void drawNEIOverlayForInput(GT_NEI_DefaultHandler.FixedPositionedStack stack) {
+    protected void drawNEIOverlayForInput(GTNEIDefaultHandler.FixedPositionedStack stack) {
         if (stack.isNotConsumed()) {
             drawNEIOverlayText("NC", stack);
         }
     }
 
-    @SideOnly(Side.CLIENT)
-    protected void drawNEIOverlayForOutput(GT_NEI_DefaultHandler.FixedPositionedStack stack) {
+    protected void drawNEIOverlayForOutput(GTNEIDefaultHandler.FixedPositionedStack stack) {
         if (stack.isChanceBased()) {
             drawNEIOverlayText(stack.getChanceText(), stack);
         }
     }
 
     @SuppressWarnings("SameParameterValue")
-    @SideOnly(Side.CLIENT)
     protected void drawNEIOverlayText(String text, PositionedStack stack, int color, float scale, boolean shadow,
         Alignment alignment) {
         FontRenderer fontRenderer = net.minecraft.client.Minecraft.getMinecraft().fontRenderer;
@@ -365,7 +356,6 @@ public class RecipeMapFrontend {
         GlStateManager.popMatrix();
     }
 
-    @SideOnly(Side.CLIENT)
     protected void drawNEIOverlayText(String text, PositionedStack stack) {
         drawNEIOverlayText(
             text,
