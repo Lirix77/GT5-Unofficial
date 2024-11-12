@@ -6,10 +6,10 @@ import java.util.UUID;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import gregtech.api.enums.GT_Values;
+import gregtech.api.enums.GTValues;
 import gregtech.api.multitileentity.interfaces.IMultiBlockController;
 import gregtech.api.multitileentity.multiblock.casing.UpgradeCasing;
-import gregtech.api.util.GT_Utility;
+import gregtech.api.util.GTUtility;
 
 public class Tank extends UpgradeCasing {
 
@@ -19,8 +19,8 @@ public class Tank extends UpgradeCasing {
     public static final int INPUT = 0;
     public static final int OUTPUT = 1;
     public static final int BOTH = 2;
-    private String tankName = "tank";
-    private int type = BOTH;
+    private final String tankName = "tank";
+    private final int type = BOTH;
 
     @Override
     protected void customWork(IMultiBlockController aTarget) {
@@ -47,8 +47,8 @@ public class Tank extends UpgradeCasing {
     @Override
     public void readMultiTileNBT(NBTTagCompound aNBT) {
         super.readMultiTileNBT(aNBT);
-        tankCount = aNBT.getInteger(GT_Values.NBT.UPGRADE_TANK_COUNT);
-        tankCapacity = aNBT.getInteger(GT_Values.NBT.UPGRADE_TANK_CAPACITY);
+        tankCount = aNBT.getInteger(GTValues.NBT.UPGRADE_TANK_COUNT);
+        tankCapacity = aNBT.getInteger(GTValues.NBT.UPGRADE_TANK_CAPACITY);
     }
 
     @Override
@@ -56,6 +56,6 @@ public class Tank extends UpgradeCasing {
         super.addToolTips(list, stack, f3_h);
         list.add("Adds another tank inventory");
         list.add("Number of tanks: " + tankCount);
-        list.add("Tank capacity: " + GT_Utility.formatNumbers(tankCapacity) + " L");
+        list.add("Tank capacity: " + GTUtility.formatNumbers(tankCapacity) + " L");
     }
 }

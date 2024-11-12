@@ -2,6 +2,7 @@ package gregtech.api.enums;
 
 import static gregtech.api.enums.Mods.GregTech;
 import static gregtech.api.enums.Mods.IndustrialCraft2;
+import static gregtech.api.enums.Mods.TecTech;
 
 import java.util.EnumSet;
 import java.util.Locale;
@@ -11,6 +12,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import net.minecraft.util.ResourceLocation;
 
 import com.google.common.collect.Maps;
+
+import gregtech.api.GregTechAPI;
 
 /**
  * Enumerates known sounds with id and resource-location
@@ -59,6 +62,49 @@ public enum SoundResource {
     GT_MACHINES_FUSION_LOOP(230, GregTech.ID, "machines.FusionLoop"),
     GT_MACHINES_DISTILLERY_LOOP(231, GregTech.ID, "machines.DistilleryLoop"),
     GT_MACHINES_PLASMAFORGE_LOOP(232, GregTech.ID, "machines.PlasmaForgeLoop"),
+    GT_MACHINES_STEAM_WASHER_LOOP(233, GregTech.ID, "machines.SteamWasherLoop"),
+    GT_MACHINES_WATER_PUMP_LOOP(234, GregTech.ID, "machines.WaterPumpLoop"),
+    GT_MACHINES_STEAM_CENTRIFUGE_LOOP(235, GregTech.ID, "machines.SteamCentrifugeLoop"),
+
+    GT_MACHINES_PURIFICATIONPLANT_LOOP(236, GregTech.ID, "machines.PurificationPlantLoop"),
+    GT_MACHINES_PURIFICATION_PH_LOOP(237, GregTech.ID, "machines.PurificationPhLoop"),
+    GT_MACHINES_COAGULATION_LOOP(238, GregTech.ID, "machines.PurificationCoagulationLoop"),
+    GT_MACHINES_OZONATION_LOOP(239, GregTech.ID, "machines.PurificationOzonationLoop"),
+    GT_MACHINES_PURIFICATION_PLASMA_LOOP(240, "machines.PurificationPlasmaLoop"),
+
+    GT_MACHINES_MULTI_LATHE_LOOP(241, GregTech.ID, "machines.MultiLatheLoop"),
+    GT_MACHINES_MULTI_AUTOCLAVE_LOOP(242, GregTech.ID, "machines.MultiAutoclaveLoop"),
+
+    GT_SPRAYCAN_SHAKE(243, GregTech.ID, "items.spraycan_shake"),
+    GT_SPRAYCAN_LOCK(244, GregTech.ID, "items.spraycan_lock"),
+    GT_SPRAYCAN_UNLOCK(245, GregTech.ID, "items.spraycan_unlock"),
+
+    GT_MACHINES_BLACK_HOLE_COMPRESSOR(246, GregTech.ID, "machines.BlackHoleCompressorLoop"),
+
+    GT_MACHINES_MULTI_PRECISE_LOOP(247, GregTech.ID, "machines.MTEPreciseAssembler"),
+    GT_MACHINES_MULTI_ORE_WASHER_PLANT_LOOP(248, GregTech.ID, "machines.MTEIndustrialWashPlant"),
+    GT_MACHINES_MULTI_MEGA_VACUUM_FREEZER_LOOP(249, GregTech.ID, "machines.MTEMegaVacuumFreezer"),
+    GT_MACHINES_MULTI_VACUUM_FREEZER_LOOP(250, GregTech.ID, "machines.MTEVacuumFreezer"),
+    GT_MACHINES_EXTREME_ENTITY_CRUSHER_LOOP(251, GregTech.ID, "machines.MTEExtremeEntityCrusher"),
+    GT_MACHINES_CUTTING_MACHINE_LOOP(252, GregTech.ID, "machines.MTEIndustrialCuttingMachine"),
+    GT_MACHINES_ARC_FURNACE_LOOP(253, GregTech.ID, "machines.MTEIndustrialArcFurnace"),
+    GT_MACHINES_MEGA_INDUSTRIAL_APIARY_LOOP(254, GregTech.ID, "machines.MTEMegaIndustrialApiary"),
+    GT_MACHINES_ALGAE_LOOP(255, GregTech.ID, "machines.MTEAlgaePondBase"),
+    GT_MACHINES_THERMAL_CENTRIFUGE_LOOP(256, GregTech.ID, "machines.MTEIndustrialThermalCentrifuge"),
+    GT_MACHINES_SIFTER_LOOP(257, GregTech.ID, "machines.MTEIndustrialSifter"),
+    GT_MACHINES_EYE_OF_HARMONY_LOOP(258, GregTech.ID, "machines.MTEEyeOfHarmony"),
+    GT_MACHINES_EBF_LOOP(259, GregTech.ID, "machines.MTEElectricBlastFurnace"),
+    GT_MACHINES_ADV_FREEZER_LOOP(260, GregTech.ID, "machines.MTEIndustrialVacuumFreezer"),
+    GT_MACHINES_GOD_FORGE_LOOP(261, GregTech.ID, "machines.MTEForgeOfGods"),
+    GT_MACHINES_MEGA_BLAST_FURNACE_LOOP(262, GregTech.ID, "machines.MTEMegaBlastFurnace"),
+    GT_MACHINES_OIL_DRILL_LOOP(263, GregTech.ID, "machines.MTEOilDrillBase"),
+    GT_MACHINES_QUANTUM_FORCE_TRANSFORMER_LOOP(264, GregTech.ID, "machines.MTEQuantumForceTransformer"),
+    GT_MACHINES_ADV_EBF_LOOP(265, GregTech.ID, "machines.MTEAdvEBF"),
+    GT_MACHINES_LARGE_TURBINES_LOOP(266, GregTech.ID, "machines.MTELargeTurbine"),
+    TECTECH_MACHINES_FX_LOW_FREQ(267, TecTech.ID, "fx_lo_freq"),
+    TECTECH_MACHINES_FX_HIGH_FREQ(268, TecTech.ID, "fx_hi_freq"),
+    TECTECH_MACHINES_NOISE(269, TecTech.ID, "fx_noise"),
+    TECTECH_MACHINES_FX_WHOOUM(270, TecTech.ID, "fx_whooum"),
 
     GUI_BUTTON_DOWN(-1, GregTech.ID, "gui.buttonDown"),
     GUI_BUTTON_UP(-1, GregTech.ID, "gui.buttonUp"),
@@ -305,7 +351,16 @@ public enum SoundResource {
 
     static {
         EnumSet.allOf(SoundResource.class)
-            .forEach(sound -> { if (sound.id >= 0) ID_SOUND_MAP.put(sound.id, sound); });
+            .forEach(sound -> {
+                if (sound.id < 0) {
+                    return;
+                }
+
+                if (ID_SOUND_MAP.containsKey(sound.id)) {
+                    throw new IllegalStateException(String.format("Sound ID %s is already occupied!", sound.id));
+                }
+                ID_SOUND_MAP.put(sound.id, sound);
+            });
         EnumSet.allOf(SoundResource.class)
             .forEach(sound -> RESOURCE_STR_SOUND_MAP.put(sound.resourceLocation.toString(), sound));
     }
@@ -352,7 +407,7 @@ public enum SoundResource {
     /**
      * Provides a backward-compatible Sounds {@code Map<Integer, String>} sound list
      *
-     * @return The map for the deprecated {@link gregtech.api.GregTech_API#sSoundList}
+     * @return The map for the deprecated {@link GregTechAPI#sSoundList}
      * @deprecated This method is planned for removal.
      *             <p>
      *             Use this {@link SoundResource} enum instead.

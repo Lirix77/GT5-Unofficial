@@ -10,7 +10,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.MinecraftForgeClient;
 
-import static gregtech.api.GregTech_API.TAB_GREGTECH;
+import static gregtech.api.GregTechAPI.TAB_GREGTECH;
 
 public class ItemDimensionDisplay extends ItemBlock {
     public ItemDimensionDisplay(Block block) {
