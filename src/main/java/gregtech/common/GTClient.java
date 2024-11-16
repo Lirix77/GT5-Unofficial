@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
 
+import com.gtnewhorizon.gtnhlib.util.AboveHotbarHUD;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GLAllocation;
@@ -791,6 +792,18 @@ public class GTClient extends GTProxy implements Runnable {
             GTPreLoad.loadClientConfig();
             if (e.isWorldRunning) GTValues.NW.sendToServer(new GTPacketClientPreference(mPreference));
         }
+    }
+
+    /**
+     * Prints a message above the hotbar
+     *
+     * @param message         Color it with EnumChatFormatting
+     * @param displayDuration in ticks
+     * @param drawShadow      Should the message be drawn with a drawShadow
+     * @param shouldFade      Should the message fade away with time
+     */
+    public static void printMessageAboveHotbar(String message, int displayDuration, boolean drawShadow, boolean shouldFade) {
+        AboveHotbarHUD.renderTextAboveHotbar(message, displayDuration, drawShadow, shouldFade);
     }
 
     @SubscribeEvent

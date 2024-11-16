@@ -22,7 +22,6 @@ import net.minecraftforge.fluids.FluidStack;
 import com.sinthoras.visualprospecting.VisualProspecting_API;
 
 import detrav.items.DetravMetaGeneratedTool01;
-import detrav.net.DetravNetwork;
 import detrav.net.ProspectingPacket;
 import detrav.utils.BartWorksHelper;
 import detrav.utils.GTppHelper;
