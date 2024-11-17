@@ -12,6 +12,7 @@ import gregtech.api.recipe.NEIRecipePropertiesBuilder;
 import gregtech.api.recipe.RecipeMapFrontend;
 import gregtech.api.util.MethodsReturnNonnullByDefault;
 import gregtech.common.gui.modularui.UIHelper;
+import ru.justagod.cutter.invoke.Invoke;
 
 /**
  * Nicely display NEI with many items and fluids. Remember to call
@@ -32,7 +33,7 @@ public class LargeNEIFrontend extends RecipeMapFrontend {
         super(uiPropertiesBuilder.logoPos(new Pos2d(80, 62)), neiPropertiesBuilder);
         this.itemRowCount = getItemRowCount();
         this.fluidRowCount = getFluidRowCount();
-        neiProperties.recipeBackgroundSize = new Size(170, 82 + (Math.max(itemRowCount + fluidRowCount - 4, 0)) * 18);
+        Invoke.client(()-> neiProperties.recipeBackgroundSize = new Size(170, 82 + (Math.max(itemRowCount + fluidRowCount - 4, 0)) * 18));
     }
 
     @Override

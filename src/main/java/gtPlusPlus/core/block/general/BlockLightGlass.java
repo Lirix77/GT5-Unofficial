@@ -16,6 +16,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gtPlusPlus.core.creative.AddToCreativeTab;
+import ru.justagod.cutter.invoke.Invoke;
 
 /*
  * public class LightGlass extends BlockBreakable {
@@ -38,7 +39,7 @@ public class BlockLightGlass extends BlockAir {
         setStepSound(Block.soundTypeGlass);
         GameRegistry.registerBlock(this, "blockMFEffect");
 
-        API.hideItem(new ItemStack(this));
+        Invoke.client(()-> API.hideItem(new ItemStack(this)));
     }
 
     /**

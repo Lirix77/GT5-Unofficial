@@ -1,6 +1,7 @@
 package gtPlusPlus.xmod.gregtech.common.items;
 
 import static gregtech.api.enums.Mods.GTPlusPlus;
+import static gregtech.api.enums.Mods.NotEnoughItems;
 
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class MetaCustomCoverItem extends Item {
         // CommonProxy.registerItemRendererGlobal(this, new CustomItemBlockRenderer());
         for (int i = 0; i < icons.length; i++) {
             ItemStack thisStack = ItemUtils.simpleMetaStack(this, i, 1);
-            if (i > 0 && hide()) {
+            if (i > 0 && hide() && NotEnoughItems.isModLoaded()) {
                 ItemUtils.hideItemFromNEI(thisStack);
             }
             GregTechAPI.registerCover(

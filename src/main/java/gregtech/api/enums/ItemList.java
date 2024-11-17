@@ -16,6 +16,7 @@ import gregtech.api.util.GTLog;
 import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
+import ru.justagod.cutter.invoke.Invoke;
 
 /**
  * Class containing all non-OreDict Items of GregTech.
@@ -2637,7 +2638,7 @@ public enum ItemList implements IItemContainer {
 
     @Override
     public IItemContainer hidden() {
-        codechicken.nei.api.API.hideItem(get(1L));
+        Invoke.client(()-> codechicken.nei.api.API.hideItem(get(1L)));
         return this;
     }
 

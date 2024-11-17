@@ -40,6 +40,8 @@ import gtPlusPlus.xmod.gregtech.common.render.FlaskRenderer;
 import gtPlusPlus.xmod.gregtech.common.render.MachineBlockRenderer;
 import ic2.core.item.ItemFluidCell;
 
+import static gregtech.api.enums.Mods.NotEnoughItems;
+
 public class ClientProxy extends CommonProxy {
 
     @Override
@@ -89,7 +91,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void onLoadComplete(FMLLoadCompleteEvent event) {
-        if (Configuration.features.hideUniversalCells) {
+        if (Configuration.features.hideUniversalCells && NotEnoughItems.isModLoaded()) {
             hideUniversalCells();
         }
         super.onLoadComplete(event);

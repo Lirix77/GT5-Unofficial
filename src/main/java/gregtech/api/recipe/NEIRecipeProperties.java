@@ -15,6 +15,8 @@ import gregtech.api.util.FieldsAreNonnullByDefault;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.MethodsReturnNonnullByDefault;
 import gregtech.nei.formatter.INEISpecialInfoFormatter;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 
 /**
  * Data object storing info exclusively used to draw NEI recipe GUI. Not all the properties used to draw NEI
@@ -25,6 +27,7 @@ import gregtech.nei.formatter.INEISpecialInfoFormatter;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @FieldsAreNonnullByDefault
+@GradleSideOnly(GradleSide.CLIENT)
 public final class NEIRecipeProperties {
 
     static NEIRecipePropertiesBuilder builder() {

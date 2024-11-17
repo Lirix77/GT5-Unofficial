@@ -23,6 +23,7 @@ import gregtech.nei.RecipeDisplayInfo;
 import gregtech.nei.formatter.INEISpecialInfoFormatter;
 import gtPlusPlus.xmod.gregtech.common.tileentities.machines.multi.production.MTETreeFarm;
 import gtPlusPlus.xmod.gregtech.common.tileentities.machines.multi.production.MTETreeFarm.Mode;
+import ru.justagod.cutter.invoke.Invoke;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -43,7 +44,7 @@ public class TGSFrontend extends RecipeMapFrontend {
                 .addNEITransferRect(
                     new Rectangle(INPUTS_X + SLOT_SIZE * 2, INPUTS_Y + SLOT_SIZE / 2, SLOT_SIZE * 2, SLOT_SIZE))
                 .progressBarPos(new Pos2d(CENTER_X - 10, INPUTS_Y + SLOT_SIZE / 2)),
-            neiPropertiesBuilder.neiSpecialInfoFormatter(new TGSSpecialValueFormatter()));
+            Invoke.clientValue(()-> neiPropertiesBuilder.neiSpecialInfoFormatter(new TGSSpecialValueFormatter())));
     }
 
     @Override

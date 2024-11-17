@@ -94,7 +94,7 @@ public abstract class BlockOresAbstract extends GTGenericBlock implements ITileE
                                     : "",
                                 new ItemStack(this, 1, i + (j * 1000)));
                         }
-                        if (tHideOres) {
+                        if (tHideOres && NotEnoughItems.isModLoaded()) {
                             if (!(j == 0 && !aHideFirstMeta)) {
                                 codechicken.nei.api.API.hideItem(new ItemStack(this, 1, i + (j * 1000)));
                             }

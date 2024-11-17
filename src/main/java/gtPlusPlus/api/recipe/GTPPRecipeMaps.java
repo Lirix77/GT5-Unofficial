@@ -24,6 +24,7 @@ import gtPlusPlus.core.util.math.MathUtils;
 import gtPlusPlus.core.util.minecraft.ItemUtils;
 import gtPlusPlus.xmod.gregtech.api.gui.GTPPUITextures;
 import gtPlusPlus.xmod.gregtech.common.tileentities.machines.multi.production.MTETreeFarm;
+import ru.justagod.cutter.invoke.Invoke;
 
 public class GTPPRecipeMaps {
 
@@ -130,8 +131,8 @@ public class GTPPRecipeMaps {
             (index, isFluid, isOutput, isSpecial) -> !isFluid && !isOutput ? GTUITextures.OVERLAY_SLOT_MICROSCOPE
                 : null)
         .neiHandlerInfo(
-            builder -> builder
-                .setDisplayStack(ItemUtils.getItemStackFromFQRN("AdvancedSolarPanel:BlockMolecularTransformer", 1)))
+            Invoke.clientValue(()-> builder -> builder
+                .setDisplayStack(ItemUtils.getItemStackFromFQRN("AdvancedSolarPanel:BlockMolecularTransformer", 1))))
         .build();
     public static final RecipeMap<RecipeMapBackend> chemicalPlantRecipes = RecipeMapBuilder
         .of("gtpp.recipe.fluidchemicaleactor")

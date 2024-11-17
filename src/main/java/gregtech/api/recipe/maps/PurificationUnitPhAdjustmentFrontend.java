@@ -22,6 +22,7 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.MethodsReturnNonnullByDefault;
 import gregtech.common.tileentities.machines.multi.purification.MTEPurificationUnitPhAdjustment;
 import gregtech.nei.GTNEIDefaultHandler;
+import ru.justagod.cutter.invoke.Invoke;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -34,7 +35,7 @@ public class PurificationUnitPhAdjustmentFrontend extends PurificationUnitRecipe
             uiPropertiesBuilder.logoPos(new Pos2d(160, 100))
                 .progressBarTexture(new FallbackableUITexture(GTUITextures.PROGRESSBAR_PH_NEUTRALIZATION))
                 .logoPos(new Pos2d(152, 90)),
-            neiPropertiesBuilder.recipeBackgroundSize(new Size(170, 120)));
+            Invoke.clientValue(()-> neiPropertiesBuilder.recipeBackgroundSize(new Size(170, 120))));
     }
 
     @Override

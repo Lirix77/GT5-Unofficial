@@ -15,11 +15,13 @@ import codechicken.nei.recipe.GuiCraftingRecipe;
 import codechicken.nei.recipe.GuiUsageRecipe;
 import codechicken.nei.recipe.HandlerInfo;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
+import gregtech.api.enums.Mods;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.RecipeMapWorkable;
 import gregtech.api.recipe.RecipeCategory;
@@ -37,6 +39,7 @@ import gregtech.nei.dumper.MetaTileEntityDumper;
 import gregtech.nei.dumper.RecipeLockingSupportDumper;
 import gregtech.nei.dumper.VoidProtectionSupportDumper;
 
+@Optional.Interface(iface = "codechicken.nei.api.IConfigureNEI", modid = Mods.Names.NOT_ENOUGH_ITEMS)
 public class NEIGTConfig implements IConfigureNEI {
 
     /**

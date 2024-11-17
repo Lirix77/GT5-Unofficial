@@ -57,7 +57,8 @@ public final class FlaskRenderer implements IItemRenderer {
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glDepthFunc(GL11.GL_EQUAL);
             GL11.glColor3ub((byte) (fluidColor >> 16), (byte) (fluidColor >> 8), (byte) fluidColor);
-            GTRenderUtil.renderItem(type, fluidIcon);
+            if(fluidIcon != null)
+                GTRenderUtil.renderItem(type, fluidIcon);
             GL11.glColor3ub((byte) -1, (byte) -1, (byte) -1);
             GL11.glDepthFunc(GL11.GL_LEQUAL);
         }

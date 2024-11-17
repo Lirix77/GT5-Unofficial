@@ -40,6 +40,9 @@ import gregtech.api.util.MethodsReturnNonnullByDefault;
 import gregtech.common.gui.modularui.UIHelper;
 import gregtech.nei.GTNEIDefaultHandler;
 import gregtech.nei.RecipeDisplayInfo;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
+import ru.justagod.cutter.invoke.Invoke;
 
 /**
  * Responsible for managing GUI tied to recipemap. It has two property objects, {@link NEIRecipeProperties} and
@@ -58,7 +61,7 @@ public class RecipeMapFrontend {
     /**
      * Properties specific to this frontend, only for NEI specific settings.
      */
-    protected final NEIRecipeProperties neiProperties;
+    protected NEIRecipeProperties neiProperties;
 
     protected final GUIColorOverride colorOverride = GUIColorOverride
         .get(GTUITextures.BACKGROUND_NEI_SINGLE_RECIPE.location);
@@ -71,7 +74,7 @@ public class RecipeMapFrontend {
             .fluidInputPositionsGetter(this::getFluidInputPositions)
             .fluidOutputPositionsGetter(this::getFluidOutputPositions)
             .build();
-        this.neiProperties = neiPropertiesBuilder.build();
+        Invoke.client(()-> this.neiProperties = neiPropertiesBuilder.build());
     }
 
     /**
@@ -274,7 +277,7 @@ public class RecipeMapFrontend {
             }
         }
     }
-
+    @GradleSideOnly(GradleSide.CLIENT)
     public List<String> handleNEIItemTooltip(ItemStack stack, List<String> currentTip,
         GTNEIDefaultHandler.CachedDefaultRecipe neiCachedRecipe) {
         for (PositionedStack pStack : neiCachedRecipe.mInputs) {
@@ -299,7 +302,7 @@ public class RecipeMapFrontend {
         }
         return currentTip;
     }
-
+    @GradleSideOnly(GradleSide.CLIENT)
     protected List<String> handleNEIItemInputTooltip(List<String> currentTip,
         GTNEIDefaultHandler.FixedPositionedStack pStack) {
         if (pStack.isNotConsumed()) {
@@ -308,6 +311,7 @@ public class RecipeMapFrontend {
         return currentTip;
     }
 
+    @GradleSideOnly(GradleSide.CLIENT)
     protected List<String> handleNEIItemOutputTooltip(List<String> currentTip,
         GTNEIDefaultHandler.FixedPositionedStack pStack) {
         if (pStack.isChanceBased()) {
@@ -316,6 +320,7 @@ public class RecipeMapFrontend {
         return currentTip;
     }
 
+    @GradleSideOnly(GradleSide.CLIENT)
     public void drawNEIOverlays(GTNEIDefaultHandler.CachedDefaultRecipe neiCachedRecipe) {
         for (PositionedStack stack : neiCachedRecipe.mInputs) {
             if (stack instanceof GTNEIDefaultHandler.FixedPositionedStack) {
@@ -329,18 +334,21 @@ public class RecipeMapFrontend {
         }
     }
 
+    @GradleSideOnly(GradleSide.CLIENT)
     protected void drawNEIOverlayForInput(GTNEIDefaultHandler.FixedPositionedStack stack) {
         if (stack.isNotConsumed()) {
             drawNEIOverlayText("NC", stack);
         }
     }
 
+    @GradleSideOnly(GradleSide.CLIENT)
     protected void drawNEIOverlayForOutput(GTNEIDefaultHandler.FixedPositionedStack stack) {
         if (stack.isChanceBased()) {
             drawNEIOverlayText(stack.getChanceText(), stack);
         }
     }
 
+    @GradleSideOnly(GradleSide.CLIENT)
     @SuppressWarnings("SameParameterValue")
     protected void drawNEIOverlayText(String text, PositionedStack stack, int color, float scale, boolean shadow,
         Alignment alignment) {
@@ -356,6 +364,7 @@ public class RecipeMapFrontend {
         GlStateManager.popMatrix();
     }
 
+    @GradleSideOnly(GradleSide.CLIENT)
     protected void drawNEIOverlayText(String text, PositionedStack stack) {
         drawNEIOverlayText(
             text,

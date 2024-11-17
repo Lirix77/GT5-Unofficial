@@ -13,6 +13,7 @@ import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.MetaPipeEntity;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTLanguageManager;
+import ru.justagod.cutter.invoke.Invoke;
 
 public class MTEFrame extends MetaPipeEntity {
 
@@ -24,7 +25,7 @@ public class MTEFrame extends MetaPipeEntity {
         super(aID, aName, aNameRegional, 0);
         mMaterial = aMaterial;
         // Hide TileEntity frame in NEI, since we have the block version now that should always be used
-        codechicken.nei.api.API.hideItem(this.getStackForm(1));
+        Invoke.client(()-> codechicken.nei.api.API.hideItem(this.getStackForm(1)));
     }
 
     public MTEFrame(String aName, Materials aMaterial) {

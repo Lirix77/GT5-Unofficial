@@ -13,6 +13,7 @@ import gregtech.api.recipe.RecipeMapFrontend;
 import gregtech.api.util.MethodsReturnNonnullByDefault;
 import gregtech.nei.RecipeDisplayInfo;
 import gregtech.nei.formatter.INEISpecialInfoFormatter;
+import ru.justagod.cutter.invoke.Invoke;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -20,7 +21,7 @@ public class RadioHatchFrontend extends RecipeMapFrontend {
 
     public RadioHatchFrontend(BasicUIPropertiesBuilder uiPropertiesBuilder,
         NEIRecipePropertiesBuilder neiPropertiesBuilder) {
-        super(uiPropertiesBuilder, neiPropertiesBuilder.neiSpecialInfoFormatter(new RadioHatchSpecialInfoFormatter()));
+        super(uiPropertiesBuilder, Invoke.clientValue(()-> neiPropertiesBuilder.neiSpecialInfoFormatter(new RadioHatchSpecialInfoFormatter())));
     }
 
     @Override

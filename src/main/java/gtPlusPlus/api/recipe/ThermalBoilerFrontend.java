@@ -14,6 +14,7 @@ import gregtech.api.util.MethodsReturnNonnullByDefault;
 import gregtech.common.gui.modularui.UIHelper;
 import gregtech.nei.RecipeDisplayInfo;
 import gregtech.nei.formatter.INEISpecialInfoFormatter;
+import ru.justagod.cutter.invoke.Invoke;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -28,7 +29,7 @@ public class ThermalBoilerFrontend extends LargeNEIFrontend {
         NEIRecipePropertiesBuilder neiPropertiesBuilder) {
         super(
             uiPropertiesBuilder,
-            neiPropertiesBuilder.neiSpecialInfoFormatter(new ThermalBoilerSpecialValueFormatter()));
+            Invoke.clientValue(()-> neiPropertiesBuilder.neiSpecialInfoFormatter(new ThermalBoilerSpecialValueFormatter())));
     }
 
     @Override

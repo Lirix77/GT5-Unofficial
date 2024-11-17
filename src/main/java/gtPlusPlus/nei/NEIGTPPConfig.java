@@ -2,6 +2,7 @@ package gtPlusPlus.nei;
 
 import java.util.Arrays;
 
+import cpw.mods.fml.common.Optional;
 import net.minecraft.item.ItemStack;
 
 import codechicken.nei.api.API;
@@ -19,6 +20,7 @@ import gtPlusPlus.core.util.Utils;
 import gtPlusPlus.core.util.minecraft.ItemUtils;
 import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 
+@Optional.Interface(iface = "codechicken.nei.api.IConfigureNEI", modid = Mods.Names.NOT_ENOUGH_ITEMS)
 public class NEIGTPPConfig implements IConfigureNEI {
 
     public static boolean sIsAdded = true;

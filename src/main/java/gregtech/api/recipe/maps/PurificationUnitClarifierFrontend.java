@@ -18,6 +18,7 @@ import gregtech.api.util.MethodsReturnNonnullByDefault;
 import gregtech.common.gui.modularui.UIHelper;
 import gregtech.common.tileentities.machines.multi.purification.MTEPurificationUnitClarifier;
 import gregtech.nei.GTNEIDefaultHandler;
+import ru.justagod.cutter.invoke.Invoke;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -30,7 +31,7 @@ public class PurificationUnitClarifierFrontend extends PurificationUnitRecipeMap
             uiPropertiesBuilder.logoPos(new Pos2d(160, 100))
                 .progressBarTexture(new FallbackableUITexture(GTUITextures.PROGRESSBAR_CLARIFIER))
                 .logoPos(new Pos2d(152, 90)),
-            neiPropertiesBuilder.recipeBackgroundSize(new Size(170, 120)));
+            Invoke.clientValue(()-> neiPropertiesBuilder.recipeBackgroundSize(new Size(170, 120))));
     }
 
     @Override

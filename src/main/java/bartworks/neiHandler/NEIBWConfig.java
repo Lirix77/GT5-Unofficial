@@ -13,6 +13,8 @@
 
 package bartworks.neiHandler;
 
+import cpw.mods.fml.common.Optional;
+import gregtech.api.enums.Mods;
 import net.minecraft.item.ItemStack;
 
 import bartworks.API.recipe.BartWorksRecipeMaps;
@@ -25,6 +27,7 @@ import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
 import gregtech.api.enums.OrePrefixes;
 
+@Optional.Interface(iface = "codechicken.nei.api.IConfigureNEI", modid = Mods.Names.NOT_ENOUGH_ITEMS)
 public class NEIBWConfig implements IConfigureNEI {
 
     static boolean sIsAdded = true;

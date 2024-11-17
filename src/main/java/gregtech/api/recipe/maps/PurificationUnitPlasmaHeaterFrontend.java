@@ -17,6 +17,7 @@ import gregtech.api.recipe.NEIRecipePropertiesBuilder;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MethodsReturnNonnullByDefault;
 import gregtech.nei.GTNEIDefaultHandler;
+import ru.justagod.cutter.invoke.Invoke;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -28,7 +29,7 @@ public class PurificationUnitPlasmaHeaterFrontend extends PurificationUnitRecipe
             120,
             uiPropertiesBuilder.logoPos(new Pos2d(152, 90))
                 .progressBarTexture(new FallbackableUITexture(GTUITextures.PROGRESSBAR_PLASMA_HEATER)),
-            neiPropertiesBuilder.recipeBackgroundSize(new Size(170, 120)));
+            Invoke.clientValue(()-> neiPropertiesBuilder.recipeBackgroundSize(new Size(170, 120))));
     }
 
     @Override

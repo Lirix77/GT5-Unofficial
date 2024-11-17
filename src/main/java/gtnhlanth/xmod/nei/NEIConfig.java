@@ -1,8 +1,11 @@
 package gtnhlanth.xmod.nei;
 
 import codechicken.nei.api.IConfigureNEI;
+import cpw.mods.fml.common.Optional;
+import gregtech.api.enums.Mods;
 import gtnhlanth.Tags;
 
+@Optional.Interface(iface = "codechicken.nei.api.IConfigureNEI", modid = Mods.Names.NOT_ENOUGH_ITEMS)
 public class NEIConfig implements IConfigureNEI {
 
     public static boolean isAdded = true;

@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cpw.mods.fml.common.Optional;
+import gregtech.api.enums.Mods;
 import net.minecraft.item.ItemStack;
 
 import codechicken.nei.api.API;
@@ -22,6 +24,7 @@ import gtneioreplugin.plugin.gregtech5.PluginGT5UndergroundFluid;
 import gtneioreplugin.plugin.gregtech5.PluginGT5VeinStat;
 
 @SuppressWarnings("unused")
+@Optional.Interface(iface = "codechicken.nei.api.IConfigureNEI", modid = Mods.Names.NOT_ENOUGH_ITEMS)
 public class NEIPluginConfig implements IConfigureNEI {
 
     @Override

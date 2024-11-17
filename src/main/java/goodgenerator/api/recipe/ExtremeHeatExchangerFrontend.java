@@ -17,6 +17,7 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.MethodsReturnNonnullByDefault;
 import gregtech.nei.RecipeDisplayInfo;
 import gregtech.nei.formatter.INEISpecialInfoFormatter;
+import ru.justagod.cutter.invoke.Invoke;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -24,7 +25,7 @@ public class ExtremeHeatExchangerFrontend extends RecipeMapFrontend {
 
     public ExtremeHeatExchangerFrontend(BasicUIPropertiesBuilder uiPropertiesBuilder,
         NEIRecipePropertiesBuilder neiPropertiesBuilder) {
-        super(uiPropertiesBuilder, neiPropertiesBuilder.neiSpecialInfoFormatter(new EHESpecialValueFormatter()));
+        super(uiPropertiesBuilder, Invoke.clientValue(()-> neiPropertiesBuilder.neiSpecialInfoFormatter(new EHESpecialValueFormatter())));
     }
 
     @Override

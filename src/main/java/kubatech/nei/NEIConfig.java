@@ -38,9 +38,12 @@ import static kubatech.api.enums.ItemList.LegendaryYellowTea;
 
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
+import cpw.mods.fml.common.Optional;
+import gregtech.api.enums.Mods;
 import kubatech.Tags;
 import kubatech.api.enums.ItemList;
 
+@Optional.Interface(iface = "codechicken.nei.api.IConfigureNEI", modid = Mods.Names.NOT_ENOUGH_ITEMS)
 public class NEIConfig implements IConfigureNEI {
 
     @Override

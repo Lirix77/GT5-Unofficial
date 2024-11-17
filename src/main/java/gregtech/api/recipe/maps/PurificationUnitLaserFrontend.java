@@ -17,6 +17,7 @@ import gregtech.api.recipe.BasicUIPropertiesBuilder;
 import gregtech.api.recipe.NEIRecipePropertiesBuilder;
 import gregtech.common.tileentities.machines.multi.purification.MTEPurificationUnitUVTreatment;
 import gregtech.nei.GTNEIDefaultHandler;
+import ru.justagod.cutter.invoke.Invoke;
 
 public class PurificationUnitLaserFrontend extends PurificationUnitRecipeMapFrontend {
 
@@ -26,7 +27,7 @@ public class PurificationUnitLaserFrontend extends PurificationUnitRecipeMapFron
             120,
             uiPropertiesBuilder.logoPos(new Pos2d(147, 102))
                 .progressBarTexture(new FallbackableUITexture(GTUITextures.PROGRESSBAR_UV_TREATMENT)),
-            neiPropertiesBuilder.recipeBackgroundSize(new Size(170, 120)));
+            Invoke.clientValue(()-> neiPropertiesBuilder.recipeBackgroundSize(new Size(170, 120))));
     }
 
     @Override

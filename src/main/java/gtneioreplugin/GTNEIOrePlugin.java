@@ -26,12 +26,13 @@ import gtneioreplugin.util.CSVMaker;
 import gtneioreplugin.util.GT5OreLayerHelper;
 import gtneioreplugin.util.GT5OreSmallHelper;
 import gtneioreplugin.util.GT5UndergroundFluidHelper;
+import ru.justagod.cutter.invoke.Invoke;
 
 @Mod(
     modid = GTNEIOrePlugin.MODID,
     name = GTNEIOrePlugin.NAME,
     version = GTNEIOrePlugin.VERSION,
-    dependencies = "required-after:gregtech;required-after:NotEnoughItems")
+    dependencies = "required-after:gregtech;after:NotEnoughItems")
 public class GTNEIOrePlugin {
 
     static {
@@ -68,7 +69,9 @@ public class GTNEIOrePlugin {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         ModBlocks.init();
-        MinecraftForge.EVENT_BUS.register(new NEIPluginConfig());
+        Invoke.client(() ->
+            MinecraftForge.EVENT_BUS.register(new NEIPluginConfig())
+        );
     }
 
     @EventHandler

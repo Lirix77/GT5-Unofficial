@@ -18,6 +18,9 @@ import gregtech.api.util.MethodsReturnNonnullByDefault;
 import gregtech.nei.GTNEIDefaultHandler;
 import gregtech.nei.RecipeDisplayInfo;
 import gregtech.nei.formatter.INEISpecialInfoFormatter;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
+import ru.justagod.cutter.invoke.Invoke;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -27,7 +30,7 @@ public class BacterialVatFrontend extends RecipeMapFrontend {
         NEIRecipePropertiesBuilder neiPropertiesBuilder) {
         super(
             uiPropertiesBuilder,
-            neiPropertiesBuilder.neiSpecialInfoFormatter(new BacterialVatSpecialValueFormatter()));
+            Invoke.clientValue(()-> neiPropertiesBuilder.neiSpecialInfoFormatter(new BacterialVatSpecialValueFormatter())));
     }
 
     @Override
@@ -60,6 +63,7 @@ public class BacterialVatFrontend extends RecipeMapFrontend {
         drawFluidOverlay(stack);
     }
 
+    @GradleSideOnly(GradleSide.CLIENT)
     private void drawFluidOverlay(GTNEIDefaultHandler.FixedPositionedStack stack) {
         if (stack.isFluid()) {
             drawNEIOverlayText(

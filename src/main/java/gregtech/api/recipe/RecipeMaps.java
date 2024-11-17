@@ -89,6 +89,7 @@ import gtPlusPlus.core.block.ModBlocks;
 import gtPlusPlus.core.item.ModItems;
 import mods.railcraft.common.blocks.aesthetics.cube.EnumCube;
 import mods.railcraft.common.items.RailcraftToolItems;
+import ru.justagod.cutter.invoke.Invoke;
 
 @SuppressWarnings("SimplifyOptionalCallChains")
 public final class RecipeMaps {
@@ -140,7 +141,7 @@ public final class RecipeMaps {
                 .<GTRecipe, Integer>comparing(recipe -> recipe.getMetadataOrDefault(CompressionTierKey.INSTANCE, 0))
                 .thenComparing(GTRecipe::compareTo))
         // Avoid steam machine being used as handler icon
-        .neiHandlerInfo(builder -> builder.setDisplayStack(ItemList.Machine_LV_Compressor.get(1)))
+        .neiHandlerInfo(Invoke.clientValue(()-> builder -> builder.setDisplayStack(ItemList.Machine_LV_Compressor.get(1))))
         .build();
     public static final RecipeMap<RecipeMapBackend> neutroniumCompressorRecipes = RecipeMapBuilder
         .of("gt.recipe.neutroniumcompressor")
@@ -149,7 +150,7 @@ public final class RecipeMaps {
             (index, isFluid, isOutput, isSpecial) -> !isFluid && !isOutput ? GTUITextures.OVERLAY_SLOT_COMPRESSOR
                 : null)
         .progressBar(GTUITextures.PROGRESSBAR_COMPRESS)
-        .neiHandlerInfo(builder -> builder.setDisplayStack(getModItem(Avaritia.ID, "Singularity", 1L, 0)))
+        .neiHandlerInfo(Invoke.clientValue(()-> builder -> builder.setDisplayStack(getModItem(Avaritia.ID, "Singularity", 1L, 0))))
         .disableOptimize()
         .neiRecipeComparator(
             Comparator
@@ -168,7 +169,7 @@ public final class RecipeMaps {
                 : null)
         .progressBarSteam(GTUITextures.PROGRESSBAR_EXTRACT_STEAM)
         // Avoid steam machine being used as handler icon
-        .neiHandlerInfo(builder -> builder.setDisplayStack(ItemList.Machine_LV_Extractor.get(1)))
+        .neiHandlerInfo(Invoke.clientValue(()-> builder -> builder.setDisplayStack(ItemList.Machine_LV_Extractor.get(1))))
         .build();
     public static final RecipeMap<RecyclerBackend> recyclerRecipes = RecipeMapBuilder
         .of("ic.recipe.recycler", RecyclerBackend::new)
@@ -371,7 +372,7 @@ public final class RecipeMaps {
         .progressBar(GTUITextures.PROGRESSBAR_MACERATE)
         .progressBarSteam(GTUITextures.PROGRESSBAR_MACERATE_STEAM)
         // Avoid steam machine being used as handler icon
-        .neiHandlerInfo(builder -> builder.setDisplayStack(ItemList.Machine_LV_Macerator.get(1)))
+        .neiHandlerInfo(Invoke.clientValue(()-> builder -> builder.setDisplayStack(ItemList.Machine_LV_Macerator.get(1))))
         .build();
     public static final RecipeMap<RecipeMapBackend> chemicalBathRecipes = RecipeMapBuilder.of("gt.recipe.chemicalbath")
         .maxIO(1, 3, 1, 1)
@@ -582,8 +583,8 @@ public final class RecipeMaps {
         .disableOptimize()
         .neiSpecialInfoFormatter(HeatingCoilSpecialValueFormatter.INSTANCE)
         .neiHandlerInfo(
-            builder -> builder.setDisplayStack(ItemList.Machine_Multi_PlasmaForge.get(1))
-                .setMaxRecipesPerPage(1))
+            Invoke.clientValue(()-> builder -> builder.setDisplayStack(ItemList.Machine_Multi_PlasmaForge.get(1))
+                .setMaxRecipesPerPage(1)))
         .frontend(LargeNEIFrontend::new)
         .build();
     public static final RecipeMap<RecipeMapBackend> transcendentPlasmaMixerRecipes = RecipeMapBuilder
@@ -593,8 +594,8 @@ public final class RecipeMaps {
         .logoPos(87, 99)
         .neiRecipeBackgroundSize(170, 118)
         .neiHandlerInfo(
-            builder -> builder.setDisplayStack(ItemList.Machine_Multi_TranscendentPlasmaMixer.get(1))
-                .setMaxRecipesPerPage(1))
+            Invoke.clientValue(()-> builder -> builder.setDisplayStack(ItemList.Machine_Multi_TranscendentPlasmaMixer.get(1))
+                .setMaxRecipesPerPage(1)))
         .frontend(TranscendentPlasmaMixerFrontend::new)
         .disableOptimize()
         .build();
@@ -883,7 +884,7 @@ public final class RecipeMaps {
                     .validateOutputCount(1, 1));
         })
         // Avoid steam machine being used as handler icon
-        .neiHandlerInfo(builder -> builder.setDisplayStack(ItemList.Machine_LV_AlloySmelter.get(1)))
+        .neiHandlerInfo(Invoke.clientValue(()-> builder -> builder.setDisplayStack(ItemList.Machine_LV_AlloySmelter.get(1))))
         .build();
     public static final RecipeMap<AssemblerBackend> assemblerRecipes = RecipeMapBuilder
         .of("gt.recipe.assembler", AssemblerBackend::new)
@@ -1007,7 +1008,7 @@ public final class RecipeMaps {
         .progressBarSteam(GTUITextures.PROGRESSBAR_HAMMER_STEAM)
         .addSpecialTextureSteam(78, 42, 20, 6, GTUITextures.PROGRESSBAR_HAMMER_BASE_STEAM)
         // Avoid steam machine being used as handler icon
-        .neiHandlerInfo(builder -> builder.setDisplayStack(ItemList.Machine_LV_Hammer.get(1)))
+        .neiHandlerInfo(Invoke.clientValue(()-> builder -> builder.setDisplayStack(ItemList.Machine_LV_Hammer.get(1))))
         .build();
     public static final RecipeMap<RecipeMapBackend> amplifierRecipes = RecipeMapBuilder.of("gt.recipe.uuamplifier")
         .maxIO(1, 0, 0, 1)
@@ -1143,9 +1144,9 @@ public final class RecipeMaps {
                 .thenComparing(GTRecipe::compareTo))
         .frontend(PurificationUnitOzonationFrontend::new)
         .neiHandlerInfo(
-            builder -> builder.setMaxRecipesPerPage(1)
+            Invoke.clientValue(()-> builder -> builder.setMaxRecipesPerPage(1)
                 // When setting a builder, apparently setting a display stack is also necessary
-                .setDisplayStack(ItemList.Machine_Multi_PurificationUnitOzonation.get(1)))
+                .setDisplayStack(ItemList.Machine_Multi_PurificationUnitOzonation.get(1))))
         .disableOptimize()
         .build();
     public static final RecipeMap<RecipeMapBackend> purificationFlocculationRecipes = RecipeMapBuilder
@@ -1209,7 +1210,7 @@ public final class RecipeMaps {
         .logo(GTUITextures.PICTURE_RADIATION_WARNING)
         .logoPos(152, 41)
         .neiRecipeBackgroundSize(170, 60)
-        .neiHandlerInfo(builder -> builder.setDisplayStack(GTModHandler.getIC2Item("nuclearReactor", 1, null)))
+        .neiHandlerInfo(Invoke.clientValue(()-> builder -> builder.setDisplayStack(GTModHandler.getIC2Item("nuclearReactor", 1, null))))
         .build();
 
     static {

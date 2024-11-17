@@ -32,6 +32,7 @@ import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
+import ru.justagod.cutter.invoke.Invoke;
 
 public class GTMetaItemEnhancer {
 
@@ -76,8 +77,10 @@ public class GTMetaItemEnhancer {
             // addFluidData(m, new ItemStack(Items.glass_bottle), bottles, 250, i + 1001, false);
         }
 
-        API.hideItem(new ItemStack(capsuls, 1, WILDCARD));
-        API.hideItem(new ItemStack(moltenCapsuls, 1, WILDCARD));
+        Invoke.client(()-> {
+            API.hideItem(new ItemStack(capsuls, 1, WILDCARD));
+            API.hideItem(new ItemStack(moltenCapsuls, 1, WILDCARD));
+        });
     }
 
     private static void addFluidData(Materials m, ItemStack container, Item filled, int amount, int it, boolean empty) {

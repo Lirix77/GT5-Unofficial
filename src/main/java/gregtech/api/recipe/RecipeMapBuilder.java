@@ -27,6 +27,9 @@ import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.MethodsReturnNonnullByDefault;
 import gregtech.nei.formatter.INEISpecialInfoFormatter;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
+import ru.justagod.cutter.invoke.Invoke;
 
 // spotless:off spotless likes formatting @code to &#64;code
 /**
@@ -53,7 +56,8 @@ public final class RecipeMapBuilder<B extends RecipeMapBackend> {
     private final RecipeMapBackendPropertiesBuilder backendPropertiesBuilder = RecipeMapBackendProperties.builder();
     private final RecipeMapBackend.BackendCreator<B> backendCreator;
     private final BasicUIPropertiesBuilder uiPropertiesBuilder;
-    private final NEIRecipePropertiesBuilder neiPropertiesBuilder = NEIRecipeProperties.builder();
+    @GradleSideOnly(GradleSide.CLIENT)
+    private NEIRecipePropertiesBuilder neiPropertiesBuilder;
     private RecipeMapFrontend.FrontendCreator frontendCreator = RecipeMapFrontend::new;
 
     /**
@@ -81,6 +85,7 @@ public final class RecipeMapBuilder<B extends RecipeMapBackend> {
     }
 
     private RecipeMapBuilder(String unlocalizedName, RecipeMapBackend.BackendCreator<B> backendCreator) {
+        Invoke.client(() -> neiPropertiesBuilder = NEIRecipeProperties.builder());
         this.unlocalizedName = unlocalizedName;
         this.backendCreator = backendCreator;
         this.uiPropertiesBuilder = BasicUIProperties.builder()
@@ -400,7 +405,7 @@ public final class RecipeMapBuilder<B extends RecipeMapBackend> {
      * for the machine GUI.
      */
     public RecipeMapBuilder<B> disableRegisterNEI() {
-        neiPropertiesBuilder.disableRegisterNEI();
+        Invoke.client(()-> neiPropertiesBuilder.disableRegisterNEI());
         return this;
     }
 
@@ -417,7 +422,7 @@ public final class RecipeMapBuilder<B extends RecipeMapBackend> {
      * by this method will be used for default category where most of the recipes belong to.
      */
     public RecipeMapBuilder<B> neiHandlerInfo(UnaryOperator<HandlerInfo.Builder> handlerInfoCreator) {
-        neiPropertiesBuilder.handlerInfoCreator(handlerInfoCreator);
+        Invoke.client(() -> neiPropertiesBuilder.handlerInfoCreator(handlerInfoCreator));
         return this;
     }
 
@@ -425,7 +430,7 @@ public final class RecipeMapBuilder<B extends RecipeMapBackend> {
      * Sets offset of background shown on NEI.
      */
     public RecipeMapBuilder<B> neiRecipeBackgroundSize(int width, int height) {
-        neiPropertiesBuilder.recipeBackgroundSize(new Size(width, height));
+        Invoke.client(() -> neiPropertiesBuilder.recipeBackgroundSize(new Size(width, height)));
         return this;
     }
 
@@ -433,7 +438,7 @@ public final class RecipeMapBuilder<B extends RecipeMapBackend> {
      * Sets size of background shown on NEI.
      */
     public RecipeMapBuilder<B> neiRecipeBackgroundOffset(int x, int y) {
-        neiPropertiesBuilder.recipeBackgroundOffset(new Pos2d(x, y));
+        Invoke.client(() -> neiPropertiesBuilder.recipeBackgroundOffset(new Pos2d(x, y)));
         return this;
     }
 
@@ -441,7 +446,7 @@ public final class RecipeMapBuilder<B extends RecipeMapBackend> {
      * Sets formatter for special description for the recipe, mainly {@link GTRecipe#mSpecialValue}.
      */
     public RecipeMapBuilder<B> neiSpecialInfoFormatter(INEISpecialInfoFormatter neiSpecialInfoFormatter) {
-        neiPropertiesBuilder.neiSpecialInfoFormatter(neiSpecialInfoFormatter);
+        Invoke.client(() -> neiPropertiesBuilder.neiSpecialInfoFormatter(neiSpecialInfoFormatter));
         return this;
     }
 
@@ -449,7 +454,7 @@ public final class RecipeMapBuilder<B extends RecipeMapBackend> {
      * Sets whether to show oredict equivalent item outputs on NEI.
      */
     public RecipeMapBuilder<B> unificateOutputNEI(boolean unificateOutputNEI) {
-        neiPropertiesBuilder.unificateOutput(unificateOutputNEI);
+        Invoke.client(() -> neiPropertiesBuilder.unificateOutput(unificateOutputNEI));
         return this;
     }
 
@@ -463,7 +468,7 @@ public final class RecipeMapBuilder<B extends RecipeMapBackend> {
      * {@link gregtech.api.interfaces.tileentity.IOverclockDescriptionProvider}.
      */
     public RecipeMapBuilder<B> useCustomFilterForNEI() {
-        neiPropertiesBuilder.useCustomFilter();
+        Invoke.client(() -> neiPropertiesBuilder.useCustomFilter());
         return this;
     }
 
@@ -471,7 +476,7 @@ public final class RecipeMapBuilder<B extends RecipeMapBackend> {
      * Stops rendering the actual stack size of items on NEI.
      */
     public RecipeMapBuilder<B> disableRenderRealStackSizes() {
-        neiPropertiesBuilder.disableRenderRealStackSizes();
+        Invoke.client(()-> neiPropertiesBuilder.disableRenderRealStackSizes());
         return this;
     }
 
@@ -479,7 +484,7 @@ public final class RecipeMapBuilder<B extends RecipeMapBackend> {
      * Sets custom comparator for NEI recipe sort.
      */
     public RecipeMapBuilder<B> neiRecipeComparator(Comparator<GTRecipe> comparator) {
-        neiPropertiesBuilder.recipeComparator(comparator);
+        Invoke.client(() -> neiPropertiesBuilder.recipeComparator(comparator));
         return this;
     }
 
@@ -502,7 +507,7 @@ public final class RecipeMapBuilder<B extends RecipeMapBackend> {
         return new RecipeMap<>(
             unlocalizedName,
             backendCreator.create(backendPropertiesBuilder),
-            frontendCreator.create(uiPropertiesBuilder, neiPropertiesBuilder));
+            frontendCreator.create(uiPropertiesBuilder, Invoke.clientValue(() -> neiPropertiesBuilder)));
     }
 
     private static <T> Function<? super T, ? extends T> withIdentityReturn(Consumer<T> func) {

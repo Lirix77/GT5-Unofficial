@@ -23,6 +23,7 @@ import gregtech.api.util.MethodsReturnNonnullByDefault;
 import gregtech.common.gui.modularui.UIHelper;
 import gregtech.common.tileentities.machines.multi.purification.MTEPurificationUnitFlocculation;
 import gregtech.nei.GTNEIDefaultHandler;
+import ru.justagod.cutter.invoke.Invoke;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -35,7 +36,7 @@ public class PurificationUnitFlocculatorFrontend extends PurificationUnitRecipeM
             uiPropertiesBuilder.logoPos(new Pos2d(160, 100))
                 .progressBarTexture(new FallbackableUITexture(GTUITextures.PROGRESSBAR_FLOCCULATION))
                 .logoPos(new Pos2d(152, 100)),
-            neiPropertiesBuilder.recipeBackgroundSize(new Size(170, 120)));
+            Invoke.clientValue(()-> neiPropertiesBuilder.recipeBackgroundSize(new Size(170, 120))));
     }
 
     @Override

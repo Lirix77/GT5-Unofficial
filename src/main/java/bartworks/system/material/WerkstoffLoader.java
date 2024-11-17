@@ -137,6 +137,7 @@ import ic2.api.recipe.IRecipeInput;
 import ic2.api.recipe.RecipeInputOreDict;
 import ic2.api.recipe.RecipeOutput;
 import ic2.api.recipe.Recipes;
+import ru.justagod.cutter.invoke.Invoke;
 
 @SuppressWarnings("deprecation")
 public class WerkstoffLoader {
@@ -1862,7 +1863,7 @@ public class WerkstoffLoader {
             WerkstoffLoader.items.put(cell, new BWMetaGeneratedItems(cell));
             if (Forestry.isModLoaded()) {
                 BWMetaGeneratedItems capsuleClass = new BWMetaGeneratedItems(capsule);
-                API.hideItem(new ItemStack(capsuleClass, 1, WILDCARD));
+                Invoke.client(()-> API.hideItem(new ItemStack(capsuleClass, 1, WILDCARD)));
                 WerkstoffLoader.items.put(capsule, capsuleClass);
             }
         }
@@ -1873,7 +1874,7 @@ public class WerkstoffLoader {
             WerkstoffLoader.items.put(OrePrefixes.cellMolten, new BWMetaGeneratedItems(OrePrefixes.cellMolten));
             if (Forestry.isModLoaded()) {
                 BWMetaGeneratedItems capsuleMoltenClass = new BWMetaGeneratedItems(OrePrefixes.capsuleMolten);
-                API.hideItem(new ItemStack(capsuleMoltenClass, 1, WILDCARD));
+                Invoke.client(()-> API.hideItem(new ItemStack(capsuleMoltenClass, 1, WILDCARD)));
                 WerkstoffLoader.items.put(OrePrefixes.capsuleMolten, capsuleMoltenClass);
             }
         }

@@ -15,6 +15,10 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModContainer;
 import gregtech.api.util.FieldsAreNonnullByDefault;
 import gregtech.api.util.MethodsReturnNonnullByDefault;
+import gregtech.common.config.Client;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
+import ru.justagod.cutter.invoke.Invoke;
 
 /**
  * Allows certain recipes to be displayed on different tabs on NEI.
@@ -34,7 +38,8 @@ public final class RecipeCategory {
     public final ModContainer ownerMod;
     public final Supplier<RecipeCategorySetting> settingSupplier;
     @Nullable
-    public final UnaryOperator<HandlerInfo.Builder> handlerInfoCreator;
+    @GradleSideOnly(GradleSide.CLIENT)
+    public UnaryOperator<HandlerInfo.Builder> handlerInfoCreator;
 
     /**
      * @param unlocalizedName    Unlocalized name of this category. Must be unique.
@@ -50,7 +55,7 @@ public final class RecipeCategory {
         this.ownerMod = Loader.instance()
             .activeModContainer();
         this.settingSupplier = settingSupplier;
-        this.handlerInfoCreator = handlerInfoCreator;
+        Invoke.client(() -> this.handlerInfoCreator = handlerInfoCreator);
         if (ALL_RECIPE_CATEGORIES.containsKey(unlocalizedName)) {
             throw new IllegalArgumentException(
                 "Cannot register recipe category with duplicated unlocalized name: " + unlocalizedName);
@@ -63,7 +68,7 @@ public final class RecipeCategory {
             recipeMap.unlocalizedName,
             recipeMap,
             RecipeCategorySetting::getDefault,
-            recipeMap.getFrontend().neiProperties.handlerInfoCreator);
+            Invoke.clientValue(() -> recipeMap.getFrontend().neiProperties.handlerInfoCreator));
     }
 
     @Override
@@ -81,6 +86,7 @@ public final class RecipeCategory {
     /**
      * Util method for creating icon for recipe category. Size is 16px.
      */
+    @GradleSideOnly(GradleSide.CLIENT)
     public static DrawableResource createIcon(String resourceLocation) {
         return new DrawableBuilder(resourceLocation, 0, 0, 16, 16)
             // GuiRecipeTab#drawForeground draws icon with 1px offset to make fuel icon (14px) prettier

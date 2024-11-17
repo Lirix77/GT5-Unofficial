@@ -14,6 +14,7 @@ import gregtech.api.recipe.BasicUIPropertiesBuilder;
 import gregtech.api.recipe.NEIRecipePropertiesBuilder;
 import gregtech.api.util.MethodsReturnNonnullByDefault;
 import gregtech.common.gui.modularui.UIHelper;
+import ru.justagod.cutter.invoke.Invoke;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -26,7 +27,7 @@ public class PurificationUnitOzonationFrontend extends PurificationUnitRecipeMap
             uiPropertiesBuilder.logoPos(new Pos2d(160, 100))
                 .progressBarTexture(new FallbackableUITexture(GTUITextures.PROGRESSBAR_OZONATION))
                 .logoPos(new Pos2d(152, 97)),
-            neiPropertiesBuilder.recipeBackgroundSize(new Size(170, 180)));
+            Invoke.clientValue(()-> neiPropertiesBuilder.recipeBackgroundSize(new Size(170, 180))));
     }
 
     @Override
