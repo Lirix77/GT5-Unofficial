@@ -21,8 +21,8 @@ public class RecipeLoaderTreeFarm {
         generateGTPPTrees();
 
         if (Mods.TwilightForest.isModLoaded()) generateTwilightForestTrees();
-        if (Mods.GalaxySpace.isModLoaded()) generateGalaxySpaceTrees();
-        if (Mods.GalacticraftAmunRa.isModLoaded()) generateAmunRaTrees();
+        //if (Mods.GalaxySpace.isModLoaded()) generateGalaxySpaceTrees();
+        //if (Mods.GalacticraftAmunRa.isModLoaded()) generateAmunRaTrees();
 
         if (Mods.Thaumcraft.isModLoaded()) generateThaumcraftTrees();
         if (Mods.ThaumicBases.isModLoaded()) generateThaumicBasesTrees();

@@ -44,6 +44,7 @@ public class WorldGeneratorSpace implements IWorldGenerator {
     private long mProfilingEnd;
 
     public WorldGeneratorSpace() {
+        GalacticGreg.Logger.trace("Triggered registerWorldGenerator: WorldGeneratorSpace");
         GameRegistry.registerWorldGenerator(this, Integer.MAX_VALUE);
     }
 
@@ -51,14 +52,8 @@ public class WorldGeneratorSpace implements IWorldGenerator {
         IChunkProvider pChunkProvider) {
         pX *= 16;
         pZ *= 16;
-
-        String tBiome = pWorld.getBiomeGenForCoords(pX + 8, pZ + 8).biomeName;
-        pRandom = new Random(pRandom.nextInt());
-        if (tBiome == null) {
-            tBiome = BiomeGenBase.plains.biomeName;
-        }
         GalacticGreg.Logger
-            .trace("Triggered generate: [ChunkGenerator %s] [Biome %s]", pChunkGenerator.toString(), tBiome);
+            .trace("Triggered generate: [ChunkGenerator %s]", pChunkGenerator.toString());
 
         ModDimensionDef tDimDef = GalacticGregRegistry.getDimensionTypeByChunkGenerator(pChunkGenerator);
 

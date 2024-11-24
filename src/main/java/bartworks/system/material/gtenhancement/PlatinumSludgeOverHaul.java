@@ -1205,12 +1205,6 @@ public class PlatinumSludgeOverHaul {
             .getItem()) {
             return true;
         }
-        if (GalaxySpace.isModLoaded()) {
-            if (stack.getItem() == GTModHandler.getModItem(GalaxySpace.ID, "metalsblock", 1L, 7)
-                .getItem()) {
-                return true;
-            }
-        }
         if (NewHorizonsCoreMod.isModLoaded()) {
             if (stack.getItem() == GTModHandler.getModItem(NewHorizonsCoreMod.ID, "item.IndustryFrame", 1L)
                 .getItem()) {

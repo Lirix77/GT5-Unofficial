@@ -7026,7 +7026,7 @@ public class AssemblerRecipes implements Runnable {
                 ItemList.Electric_Pump_MV.get(1),
                 GTUtility.getIntegratedCircuit(9))
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorMV, 3))
-            .fluidInputs(new FluidStack(FluidRegistry.getFluid("liquid helium"), 2000))
+            .fluidInputs(Materials.Helium.getGas(2000))
             .duration(16 * SECONDS)
             .eut(TierEU.RECIPE_MV)
             .addTo(assemblerRecipes);
@@ -7038,7 +7038,7 @@ public class AssemblerRecipes implements Runnable {
                 ItemList.Electric_Pump_HV.get(1),
                 GTUtility.getIntegratedCircuit(9))
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorHV, 6))
-            .fluidInputs(new FluidStack(FluidRegistry.getFluid("liquid helium"), 4000))
+            .fluidInputs(Materials.Helium.getGas(4000))
             .duration(16 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(assemblerRecipes);
@@ -7050,7 +7050,7 @@ public class AssemblerRecipes implements Runnable {
                 ItemList.Electric_Pump_EV.get(1),
                 GTUtility.getIntegratedCircuit(9))
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorEV, 9))
-            .fluidInputs(new FluidStack(FluidRegistry.getFluid("liquid helium"), 6000))
+            .fluidInputs(Materials.Helium.getGas(6000))
             .duration(16 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(assemblerRecipes);
@@ -7062,7 +7062,7 @@ public class AssemblerRecipes implements Runnable {
                 ItemList.Electric_Pump_IV.get(1),
                 GTUtility.getIntegratedCircuit(9))
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorIV, 12))
-            .fluidInputs(new FluidStack(FluidRegistry.getFluid("liquid helium"), 8000))
+            .fluidInputs(Materials.Helium.getGas(8000))
             .duration(32 * SECONDS)
             .eut(TierEU.RECIPE_IV)
             .addTo(assemblerRecipes);
@@ -7077,7 +7077,7 @@ public class AssemblerRecipes implements Runnable {
                 ItemList.Electric_Pump_LuV.get(1),
                 GTUtility.getIntegratedCircuit(9))
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorLuV, 15))
-            .fluidInputs(new FluidStack(FluidRegistry.getFluid("liquid helium"), 12000))
+            .fluidInputs(Materials.Helium.getGas(12000))
             .duration(32 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(assemblerRecipes);
@@ -7089,7 +7089,7 @@ public class AssemblerRecipes implements Runnable {
                 ItemList.Electric_Pump_ZPM.get(1),
                 GTUtility.getIntegratedCircuit(9))
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorZPM, 18))
-            .fluidInputs(new FluidStack(FluidRegistry.getFluid("liquid helium"), 16000))
+            .fluidInputs(Materials.Helium.getGas(16000))
             .duration(1 * MINUTES + 4 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(assemblerRecipes);
@@ -7101,7 +7101,7 @@ public class AssemblerRecipes implements Runnable {
                 ItemList.Electric_Pump_UV.get(1),
                 GTUtility.getIntegratedCircuit(9))
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorUV, 21))
-            .fluidInputs(new FluidStack(FluidRegistry.getFluid("liquid helium"), 20000))
+            .fluidInputs(Materials.Helium.getGas(20000))
             .duration(1 * MINUTES + 4 * SECONDS)
             .eut(TierEU.RECIPE_UV)
             .addTo(assemblerRecipes);
@@ -7113,7 +7113,7 @@ public class AssemblerRecipes implements Runnable {
                 ItemList.Electric_Pump_UHV.get(1),
                 GTUtility.getIntegratedCircuit(9))
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorUHV, 24))
-            .fluidInputs(new FluidStack(FluidRegistry.getFluid("liquid helium"), 24000))
+            .fluidInputs(Materials.Helium.getGas(24000))
             .duration(2 * MINUTES + 8 * SECONDS)
             .eut(TierEU.RECIPE_UHV)
             .addTo(assemblerRecipes);
@@ -7125,7 +7125,7 @@ public class AssemblerRecipes implements Runnable {
                 ItemList.Electric_Pump_UEV.get(1),
                 GTUtility.getIntegratedCircuit(9))
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorUEV, 27))
-            .fluidInputs(new FluidStack(FluidRegistry.getFluid("liquid helium"), 28000))
+            .fluidInputs(Materials.Helium.getGas(28000))
             .duration(2 * MINUTES + 40 * SECONDS)
             .eut(TierEU.RECIPE_UEV)
             .addTo(assemblerRecipes);

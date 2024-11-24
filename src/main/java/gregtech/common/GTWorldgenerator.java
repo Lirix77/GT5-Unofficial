@@ -12,6 +12,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Random;
 
+import galacticgreg.GalacticGreg;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -78,6 +79,8 @@ public class GTWorldgenerator implements IWorldGenerator {
     @Override
     public void generate(Random aRandom, int aX, int aZ, World aWorld, IChunkProvider aChunkGenerator,
         IChunkProvider aChunkProvider) {
+        GalacticGreg.Logger
+            .trace("Triggered generate GT Main: [ChunkGenerator %s]", aChunkGenerator.toString());
         synchronized (listLock) {
             mList.add(
                 new WorldGenContainer(

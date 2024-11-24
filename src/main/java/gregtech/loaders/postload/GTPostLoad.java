@@ -233,22 +233,6 @@ public class GTPostLoad {
                     .fake()
                     .addTo(scannerFakeRecipes);
             }
-            if (GalaxySpace.isModLoaded()) {
-                for (int i = 4; i < 9; i++) {
-                    GTValues.RA.stdBuilder()
-                        .itemInputs(
-                            GTModHandler.getModItem(GalaxySpace.ID, "item.SchematicTier" + i, 1)
-                                .setStackDisplayName("Any Schematic"))
-                        .itemOutputs(ItemList.Tool_DataStick.getWithName(1L, "Scanned Schematic"))
-                        .special(ItemList.Tool_DataStick.getWithName(1L, "Stick to save it to"))
-                        .duration(30 * MINUTES)
-                        .eut(TierEU.RECIPE_HV)
-                        .noOptimize()
-                        .ignoreCollision()
-                        .fake()
-                        .addTo(scannerFakeRecipes);
-                }
-            }
         }
         Materials.getMaterialsMap()
             .values()

@@ -1788,8 +1788,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         @Override
         public void accept(GTBeeDefinition dis) {
             IBeeMutationCustom tMutation = dis.registerMutation(LEAD, OBERON, 5);
-            if (GalaxySpace.isModLoaded())
-                tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "metalsblock"), 6);
             tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(46, "Oberon")); // Oberon Dim
         }
     }),
@@ -1902,8 +1900,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         beeSpecies.setNocturnal();
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(MARS, MOON, 20);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "phobosblocks"), 2);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(38, "Phobos")); // Phobos Dim
     }),
     DEIMOS(GTBranchDefinition.PLANET, "Deimos", true, new Color(0x220D05), new Color(0x7a3206), beeSpecies -> {
@@ -1914,8 +1910,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         beeSpecies.setNocturnal();
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(MARS, SPACE, 20);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "deimosblocks"), 1);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(40, "Deimos")); // Deimos Dim
     }),
     CERES(GTBranchDefinition.PLANET, "Ceres", true, new Color(0x3ca5b7), new Color(0x1e7267), beeSpecies -> {
@@ -1926,8 +1920,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         beeSpecies.setNocturnal();
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(MARS, METEORICIRON, 20);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "ceresblocks"), 1);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(42, "Ceres")); // Ceres Dim
     }),
     JUPITER(GTBranchDefinition.PLANET, "Jupiter", false, new Color(0x734B2E), new Color(0xD0CBC4), beeSpecies -> {
@@ -1956,7 +1948,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(JUPITER, getSpecies(EXTRABEES, "volcanic"), 15);
         tMutation.restrictTemperature(HELLISH);
-        if (GalaxySpace.isModLoaded()) tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "ioblocks"), 0);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(36, "IO")); // IO Dim
     }),
     EUROPA(GTBranchDefinition.PLANET, "Europa", true, new Color(0x5982ea), new Color(0x0b36a3), beeSpecies -> {
@@ -1969,8 +1960,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(JUPITER, IRON, 15);
         tMutation.restrictTemperature(ICY);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "europagrunt"), 0);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(35, "Europa")); // Europa Dim
     }),
     GANYMEDE(GTBranchDefinition.PLANET, "Ganymede", true, new Color(0x3d1b10), new Color(0x190c07), beeSpecies -> {
@@ -1980,8 +1969,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         beeSpecies.setTemperature(COLD);
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(JUPITER, TITANIUM, 15);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "ganymedeblocks"), 0);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(43, "Ganymede")); // Ganymede Dim
     }),
     CALLISTO(GTBranchDefinition.PLANET, "Callisto", true, new Color(0x0f333d), new Color(0x0d84a5), beeSpecies -> {
@@ -1993,8 +1980,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         beeSpecies.setNocturnal();
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(JUPITER, getSpecies(EXTRABEES, "artic"), 15);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "callistoblocks"), 0);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(45, "Callisto")); // Callisto Dim
     }),
     SATURN(GTBranchDefinition.PLANET, "Saturn", false, new Color(0xD2A472), new Color(0xF8C37B), beeSpecies -> {
@@ -2020,8 +2005,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         beeSpecies.setHasEffect();
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(SATURN, CHROME, 25, 2);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "enceladusblocks"), 0);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(41, "Enceladus")); // Enceladus Dim
     }),
     TITAN(GTBranchDefinition.PLANET, "Titan", true, new Color(0xa0641b), new Color(0x7c1024), beeSpecies -> {
@@ -2031,8 +2014,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         beeSpecies.setTemperature(HOT);
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(SATURN, NICKEL, 25, 2);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "titanblocks"), 0);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(44, "Titan")); // Titan Dim
     }),
     URANUS(GTBranchDefinition.PLANET, "Uranus", false, new Color(0x75C0C9), new Color(0x84D8EC), beeSpecies -> {
@@ -2044,8 +2025,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         beeSpecies.setHasEffect();
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(SATURN, TRINIUM, 10);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "metalsblock"), 6);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(30, "Asteroids")); // Asteroids Dim
     }),
     MIRANDA(GTBranchDefinition.PLANET, "Miranda", true, new Color(0x75C0C9), new Color(0x0d211c), beeSpecies -> {
@@ -2056,8 +2035,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         beeSpecies.setNocturnal();
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(URANUS, TIN, 10);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "mirandablocks"), 0);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(86, "Miranda")); // Miranda Dim
     }),
     OBERON(GTBranchDefinition.PLANET, "Oberon", true, new Color(0x4A4033), new Color(0xB5A288), beeSpecies -> {
@@ -2067,8 +2044,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         beeSpecies.setTemperature(ICY);
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(URANUS, IRIDIUM, 10);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "oberonblocks"), 0);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(46, "Oberon")); // Oberon Dim
     }),
     NEPTUNE(GTBranchDefinition.PLANET, "Neptune", false, new Color(0x334CFF), new Color(0x576DFF), beeSpecies -> {
@@ -2093,8 +2068,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         beeSpecies.setNocturnal();
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(NEPTUNE, COPPER, 7);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "proteusblocks"), 0);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(47, "Proteus")); // Proteus Dim
     }),
     TRITON(GTBranchDefinition.PLANET, "Triton", true, new Color(0x334CFF), new Color(0x421118), beeSpecies -> {
@@ -2105,8 +2078,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         beeSpecies.setNocturnal();
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(NEPTUNE, GOLD, 7);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "tritonblocks"), 0);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(48, "Triton")); // Triton Dim
     }),
     PLUTO(GTBranchDefinition.PLANET, "Pluto", false, new Color(0x34271E), new Color(0x69503D), beeSpecies -> {
@@ -2119,8 +2090,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         beeSpecies.setHasEffect();
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(NEPTUNE, PLUTONIUM, 5);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "plutoblocks"), 0);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(49, "Pluto")); // Pluto Dim
     }),
     HAUMEA(GTBranchDefinition.PLANET, "Haumea", false, new Color(0x1C1413), new Color(0x392B28), beeSpecies -> {
@@ -2130,8 +2099,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         beeSpecies.setTemperature(ICY);
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(PLUTO, NAQUADAH, 7, 2);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "haumeablocks"), 0);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(83, "Haumea")); // Haumea Dim
     }),
     MAKEMAKE(GTBranchDefinition.PLANET, "MakeMake", false, new Color(0x301811), new Color(0x120A07), beeSpecies -> {
@@ -2141,8 +2108,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         beeSpecies.setTemperature(HOT);
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(PLUTO, NAQUADRIA, 7, 2);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "makemakegrunt"), 0);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(25, "MakeMake")); // MakeMake Dim
     }),
     CENTAURI(GTBranchDefinition.PLANET, "Centauri", false, new Color(0x2F2A14), new Color(0xB06B32), beeSpecies -> {
@@ -2154,8 +2119,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         beeSpecies.setHasEffect();
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(MAKEMAKE, DESH, 3);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "acentauribbgrunt"), 0);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(33, "Kuiper Belt")); // Kuiper Belt Dim
     }),
     ACENTAURI(GTBranchDefinition.PLANET, "aCentauri", false, new Color(0x2F2A14), new Color(0xa01e14), beeSpecies -> {
@@ -2169,8 +2132,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         @Override
         public void accept(GTBeeDefinition dis) {
             IBeeMutationCustom tMutation = dis.registerMutation(CENTAURI, INFINITYCATALYST, 3);
-            if (GalaxySpace.isModLoaded())
-                tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "acentauribbgrunt"), 0);
             tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(31, "aCentauri")); // aCentauri Dim
         }
     }),
@@ -2183,8 +2144,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         beeSpecies.setHasEffect();
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(MAKEMAKE, HAUMEA, 5, 2);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "tcetieblocks"), 0);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(33, "Kuiper Belt")); // Kuiper Belt Dim
     }),
     TCETIE(GTBranchDefinition.PLANET, "tCetiE", false, new Color(0x2d561b), new Color(0x0c0f60), beeSpecies -> {
@@ -2195,8 +2154,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         beeSpecies.setHasEffect();
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(TCETI, getSpecies(MAGICBEES, "TCWater"), 5, 2);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "tcetieblocks"), 0);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(85, "tCeti E")); // tCeti E Dim
     }),
     // Parents: TCETI and TCETIE, 25% combchance, needs Damp Humidity and Normal temperature. Is Mycophilic
@@ -2215,8 +2172,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         AlleleHelper.instance.set(template, EFFECT, AlleleEffect.effectMycophilic);
     }, dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(TCETI, TCETIE, 5, 2);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "tcetieblocks"), 0);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(85, "tCeti E")); // tCeti E Dim
     }),
 
@@ -2229,8 +2184,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
         beeSpecies.setHasEffect();
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(MAKEMAKE, THORIUM, 3, 2);
-        if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "barnardaEgrunt"), 0);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(33, "Kuiper Belt")); // Kuiper Belt Dim
     }),
     BARNARDAC(GTBranchDefinition.PLANET, "BarnardaC", false, new Color(0x0D5A0D), new Color(0x473f0a), beeSpecies -> {
@@ -2243,7 +2196,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
     }, dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(BARNARDA, AMERICIUM, 3, 2);
         if (GalaxySpace.isModLoaded()) {
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "barnardaEgrunt"), 0);
             tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(32, "Barnarda C")); // Barnarda C Dim
         }
     }),
@@ -2255,7 +2207,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(BARNARDA, DIVIDED, 3, 2);
         if (GalaxySpace.isModLoaded()) {
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "barnardaEgrunt"), 0);
             tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(81, "Barnard E")); // "Barnard E Dim
         }
     }),
@@ -2267,7 +2218,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(BARNARDA, NEUTRONIUM, 3, 2);
         if (GalaxySpace.isModLoaded()) {
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "barnardaFgrunt"), 0);
             tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(82, "Barnard F")); // "Barnard F Dim
         }
     }),
@@ -2280,7 +2230,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(MAKEMAKE, NAQUADAH, 2);
         if (GalaxySpace.isModLoaded()) {
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "vegabgrunt"), 0);
             tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(33, "Kuiper Belt")); // Kuiper Belt
                                                                                                       // Dim
         }
@@ -2294,7 +2243,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(VEGA, NAQUADRIA, 2);
         if (GalaxySpace.isModLoaded()) {
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "vegabgrunt"), 0);
             tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(84, "VegaB")); // VegaB Dim
         }
     }),
@@ -2306,7 +2254,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(JUPITER, TUNGSTEN, 25, 2);
         if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "mercuryblocks"), 0);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(37, "Mercury")); // Mercury Dim
     }),
     VENUS(GTBranchDefinition.PLANET, "Venus", false, new Color(0x4A4033), new Color(0xB5A288), beeSpecies -> {
@@ -2317,7 +2264,6 @@ public enum GTBeeDefinition implements IBeeDefinition {
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(JUPITER, MITHRIL, 25, 2);
         if (GalaxySpace.isModLoaded())
-            tMutation.requireResource(GameRegistry.findBlock(GalaxySpace.ID, "venusblocks"), 0);
         tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(39, "Venus")); // Venus Dim
     }),
 
