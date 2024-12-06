@@ -7,7 +7,6 @@ import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.IIconContainer;
 import gregtech.api.objects.GTRenderedTexture;
 import tectech.TecTech;
-import tectech.thing.cover.CoverEnderFluidLink;
 import tectech.thing.cover.CoverPowerPassUpgrade;
 import tectech.thing.cover.CoverTeslaCoil;
 import tectech.thing.cover.CoverTeslaCoilUltimate;
@@ -34,10 +33,6 @@ public class CoverLoader implements Runnable {
             new ItemStack(ItemTeslaCoilCover.INSTANCE, 1, 1),
             new GTRenderedTexture(TESLA_OVERLAY_ULTIMATE),
             new CoverTeslaCoilUltimate());
-        GregTechAPI.registerCover(
-            new ItemStack(ItemEnderFluidLinkCover.INSTANCE, 1, 0),
-            new GTRenderedTexture(ENDERFLUIDLINK_OVERLAY),
-            new CoverEnderFluidLink());
         GregTechAPI.registerCover(
             new ItemStack(ItemPowerPassUpgradeCover.INSTANCE, 1, 0),
             new GTRenderedTexture(POWERPASSUPGRADE_OVERLAY),
