@@ -538,7 +538,7 @@ public class GTMod implements IGTMod {
         GTPostLoad.nerfVanillaTools();
 
         // Register postea transformers
-        //new PosteaTransformers().run();
+        new PosteaTransformers().run();
 
         /*
          * Until this point most crafting recipe additions, and removals, have been buffered. Go through, execute the
