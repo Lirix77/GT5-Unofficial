@@ -1,0 +1,133 @@
+#This file is a translation file for KubaTech
+
+#RecipeMaps
+kubatech.defusioncrafter=Инжектор слияния Draconic Evo
+
+#NEI
+kubatech.defusioncrafter.tier=Уровень корпуса: %s
+kubatech.mobhandler.eec_chance=§5Вероятность выпадения в EEC: %.2f%%
+kubatech.mobhandler.eec_disabled=§5Не выпадает в EEC
+
+#Commands
+kubatech.commandhandler.invalid=§cНедопустимое использование! Правильное использование этой команды: /%s
+kubatech.commandhandler.cant_find=§cНе могу найти параметр команды %s
+kubatech.commandhandler.generic_help=§cВы также можете использовать "/kubatech help" для получения возможных команд
+kubatech.commandhandler.usage=<опция>
+kubatech.command.help.possible_commands=Возможные команды:
+kubatech.command.help.usage=- Показывает все возможные команды
+kubatech.command.config.invalid_option=§cНеверный вариант! Возможные варианты: перезагрузка
+kubatech.command.config.success=§aКонфигурация успешно перезагружена!
+kubatech.command.config.usage=<опция>
+
+kubatech.command.tea.invalid_option=§cНедопустимое использование!
+kubatech.command.tea.player_not_found=§cИгрок не найден!
+kubatech.command.tea.success_get=Игрок %s имеет %d чай
+kubatech.command.tea.success_set=Игрок %s теперь имеет %d чай
+kubatech.command.tea.success_add=Игрок %s теперь имеет %d чай
+kubatech.command.tea.usage=<имя пользователя> получить/установить/добавить (<количество>)
+
+#GUI
+GT5U.gui.text.EEC_nospawner=Нет активного спавнера!
+GT5U.gui.text.EEC_invalidspawner=Неверный спавнер!
+GT5U.gui.text.EEC_peaceful=Вставленный моб не может появиться в мирном режиме!
+GT5U.gui.text.MegaApiary_slotoverflow=Слишком много пчел внутри!
+GT5U.gui.text.MegaApiary_noflowers=Пропали цветы!
+GT5U.gui.text.EIG_slotoverflow=Слишком много разных семян внутри!
+GT5U.gui.text.EIG_seedOverflow=Слишком много семян внутри!
+GT5U.gui.text.EIG_missingwater=Нет воды!
+GT5U.gui.text.EIG_ic2glass=Нверный уровень стекла!
+
+#Blocks
+kubablock.tea_acceptor.name=§4§lПриемник чая
+kubablock.tea_storage.name=§4§lРасширитель для хранения чая
+
+#DEFC Casings
+defc.casing.tip=Корпус инжектора слияния Draconic Evolution, Уровень %d
+
+#Items
+kubaitem.fromcollection=Этот предмет из
+kubaitem.notyours=Похоже, этот предмет не ваш
+kubaitem.defc_schematic_t1.name=Схема ядра дракона
+kubaitem.defc_schematic_t1.tip=Эту схему можно найти в подземельях Плутона
+kubaitem.defc_schematic_t2.name=Схема ядра виверны
+kubaitem.defc_schematic_t3.name=Схема пробужденного ядра дракона
+kubaitem.defc_schematic_t4.name=Схема хаотического ядра
+
+#Tea
+kubaitem.tea.black_tea.name=Черный чай
+kubaitem.tea.earl_gray_tea.name=Чай Эрл Грей
+kubaitem.tea.green_tea.name=Зеленый чай
+kubaitem.tea.lemon_tea.name=Лимонный чай
+kubaitem.tea.milk_tea.name=Чай с молоком
+kubaitem.tea.oolong_tea.name=Чай улун
+kubaitem.tea.peppermint_tea.name=Мятный чай
+kubaitem.tea.pu-erh_tea.name=Чай Пуэр
+kubaitem.tea.white_tea.name=Белый чай
+kubaitem.tea.yellow_tea.name=Желтый чай
+kubaitem.teaingredient.black_tea_leaf.name=Черный чайный лист
+kubaitem.teaingredient.green_tea_leaf.name=Зеленый чайный лист
+kubaitem.teaingredient.oolong_tea_leaf.name=Лист чая улун
+kubaitem.teaingredient.pu-erh_tea_leaf.name=Лист чая Пуэр
+kubaitem.teaingredient.white_tea_leaf.name=Белый чайный лист
+kubaitem.teaingredient.yellow_tea_leaf.name=Желтый чайный лист
+kubaitem.teaingredient.tea_leaf_dehydrated.name=Обезвоженный чайный лист
+kubaitem.teaingredient.steamed_tea_leaf.name=Пропаренный чайный лист
+kubaitem.teaingredient.rolled_tea_leaf.name=Скрученный чайный лист
+kubaitem.teaingredient.oxidized_tea_leaf.name=Окисленный чайный лист
+kubaitem.teaingredient.fermented_tea_leaf.name=Ферментированный чайный лист
+kubaitem.teaingredient.bruised_tea_leaf.name=Измятый чайный лист
+kubaitem.teaingredient.partially_oxidized_tea_leaf.name=Частично окисленный чайный лист
+
+#Legendary Tea collection
+kubaitem.teacollection=Турбо Легендарная Секретная Коллекция Чая
+kubaitem.teacollection.mmm=Мммм чай
+kubaitem.teacollection.black_tea.name=§6§lЧерный чай от Kuba
+kubaitem.teacollection.butterfly_tea.name=§1§lЧай из горошка-бабочки от Kuba
+kubaitem.teacollection.earl_gray_tea.name=§6§lЧай Эрл Грей от Kuba
+kubaitem.teacollection.green_tea.name=§2§lЗеленый чай от Kuba
+kubaitem.teacollection.lemon_tea.name=§e§lЛимонный чай от Kuba
+kubaitem.teacollection.milk_tea.name=§f§lМолочный чай от Kuba
+kubaitem.teacollection.oolong_tea.name=§e§lЧай улун от Kuba
+kubaitem.teacollection.peppermint_tea.name=§a§lМятный чай от Kuba
+kubaitem.teacollection.pu-erh_tea.name=§4§lЧай Пуэр от Kuba
+kubaitem.teacollection.red_tea.name=§c§lЧай из гибискуса от Kuba
+kubaitem.teacollection.white_tea.name=§e§lБелый чай от Kuba
+kubaitem.teacollection.yellow_tea.name=§6§lЖелтый чай от Kuba
+kubaitem.teacollection.ultimate_tea.name=§6§l %s §6§lчай от Kuba
+
+kubaitem.tea_acceptor_research_note.name=Исследовательская записка по приемнику чая
+
+#Achievements
+achievement.teacollection.black_tea=§6§lЧерный чай от Kuba
+achievement.teacollection.butterfly_tea=§1§lЧай из горошка-бабочки от Kuba
+achievement.teacollection.earl_gray_tea=§6§lЧай Эрл Грей от Kuba
+achievement.teacollection.green_tea=§2§lЗеленый чай от Kuba
+achievement.teacollection.lemon_tea=§e§lЛимонный чай от Kuba
+achievement.teacollection.milk_tea=§f§lМолочный чай от Kuba
+achievement.teacollection.oolong_tea=§e§lЧай улун от Kuba
+achievement.teacollection.peppermint_tea=§a§lМятный чай от Kuba
+achievement.teacollection.pu-erh_tea=§4§lЧай Пуэр от Kuba
+achievement.teacollection.red_tea=§c§lЧай из гибискуса от Kuba
+achievement.teacollection.white_tea=§e§lБелый чай от Kuba
+achievement.teacollection.yellow_tea=§6§lЖелтый чай от Kuba
+achievement.teacollection.ultimate_tea=§4§l§k??????
+
+achievement.teacollection.black_tea.desc=§6Самый распространённый и популярный вид чая
+achievement.teacollection.butterfly_tea.desc=§1Даже не чай
+achievement.teacollection.earl_gray_tea.desc=§6Для настоящих британцев
+achievement.teacollection.green_tea.desc=§2Основанный на
+achievement.teacollection.lemon_tea.desc=§eЧерный чай с лимоном, чего вы ожидали?
+achievement.teacollection.milk_tea.desc=§fЧерный чай с молоком, мой любимый
+achievement.teacollection.oolong_tea.desc=§e對於真正的鑑賞家
+achievement.teacollection.peppermint_tea.desc=§aХорошо помогает при болях в животе
+achievement.teacollection.pu-erh_tea.desc=§4Полезен для пищеварения, но на вкус как грязь
+achievement.teacollection.red_tea.desc=§cЗачем кому-то это пить?
+achievement.teacollection.white_tea.desc=§eСамый здоровый
+achievement.teacollection.yellow_tea.desc=§6Зеленый чай с более травянистым вкусом
+achievement.teacollection.ultimate_tea.desc=§4§lОдин чай, чтобы выпить их всех
+
+#Thaumcraft
+tc.research_category.KUBATECH=§lКамелия китайская
+tc.research_name.KT_UltimateTea=%s §6§lЧай
+tc.research_text.KT_UltimateTea=§4§lЧистая энергия
+KT.research.ultimatetea=Вы нашли способ преобразовать весь этот чай в чистую энергию, создав %s §6§lчай

@@ -1,0 +1,167 @@
+# RecipeMaps
+gtnhlanth.recipe.digester=Дигестер
+gtnhlanth.recipe.disstank=Бак для растворения
+gtnhlanth.recipe.tc=Целевая камера
+gtnhlanth.recipe.sc=Камера источника
+
+gtnhlanth.tt.beaminfo=Используйте §bпортативный сканер §7для получения информации о входе/выходе этого мультиблока.
+gtnhlanth.tt.blueprint=Следуйте §9Structure§2Lib §7голографическому проектору, чтобы построить основную структуру.
+gtnhlanth.tt.pc=§6Частично потребляется: §7Получает урон в процессе
+
+gtnhlanth.tt.hintdot=Блок-подсказка в точке %s
+
+GT5U.gui.text.gtnhlanth.nocoolant=В машине отсутствует охлаждающая жидкость!
+GT5U.gui.text.gtnhlanth.inscoolant=Недостаточно охлаждающей жидкости в машине!
+GT5U.gui.text.gtnhlanth.noaccel=Тип частиц не может быть ускорен!
+GT5U.gui.text.gtnhlanth.low_input_rate=Вы ввели слишком маленькое кол-во!
+GT5U.gui.text.gtnhlanth.scerror=Математическая ошибка, неверный рецепт?
+
+# NEI
+value.disstank=Соотношение: %s:1
+
+DissolutionTank.hint.0=Точка 1: Чистые машинные корпуса из нержавеющей стали
+DissolutionTank.hint.1=24x блока боросиликатного стекла
+DissolutionTank.hint.2=9x теплоустойчивых корпусов
+DissolutionTank.hint.3=Входная шина, выходная шина, входные люки, выходной люк
+DissolutionTank.hint.4=Энергетический люк, люк для обслуживания
+
+Digester.hint.0=Точка 1: Прочный машинный корпус из вольфрамовой стали
+Digester.hint.1=9x чистых машинных корпусов из нержавеющей стали
+Digester.hint.2=16x теплоустойчивых корпусов
+Digester.hint.3=16x блоков катушек
+Digester.hint.4=Входная шина, выходная шина, входной люк, выходной люк
+Digester.hint.5=Энергетический люк, люк для обслуживания
+
+SourceChamber.hint.0=56x экранированных ускорительных корпусов
+SourceChamber.hint.1=52x экранированного ускорительного стекла
+SourceChamber.hint.2=16x корпусов электрода
+SourceChamber.hint.3=Точка 1: Входная шина
+SourceChamber.hint.4=Точка 2: Выходная шина
+SourceChamber.hint.5=Точка 3: Энергетический люк, люк для обслуживания
+SourceChamber.hint.6=Точка 4: Выходной люк линии луча
+
+LINAC.hint.0=325-1285x экранированных ускорительных корпусов
+LINAC.hint.1=148-852x корпусов подачи охлаждающей жидкости
+LINAC.hint.2=127-703x экранированного ускорительного стекла
+LINAC.hint.3=56-312x блоков сверхпроводящих катушек
+LINAC.hint.4=156-732x корпусов электрода
+LINAC.hint.5=47x решетчатых машинных корпусов
+LINAC.hint.6=48x блоков боросиликатного стекла (LuV+)
+LINAC.hint.7=Точка 1: Энергетический люк, люк для обслуживания
+LINAC.hint.8=Точка 2: Входной люк, выходной люк
+LINAC.hint.9=Точка 3: Входной люк линии луча
+LINAC.hint.10=Точка 4: Выходной люк линии луча
+
+Synchrotron.hint.0=676x экранированных ускорительных корпусов
+Synchrotron.hint.1=90x блоков сверхпроводящих катушек
+Synchrotron.hint.2=64x машинных корпуса с полостью из ниобия
+Synchrotron.hint.3=28x корпусов подачи охлаждающей жидкости
+Synchrotron.hint.4=16x блоков боросиликатного стекла (LuV+)
+Synchrotron.hint.5=4x корпуса антенны
+Synchrotron.hint.6=Точка 1: Входной люк линии луча
+Synchrotron.hint.7=Точка 2: Выходной люк линии луча
+Synchrotron.hint.8=Точка 3: Люк для обслуживания
+Synchrotron.hint.9=Точка 4: Входной люк
+Synchrotron.hint.10=Точка 5: Выходной люк
+Synchrotron.hint.11=Точка 6: Энергетический люк
+
+TargetChamber.hint.0=28x экранированных ускорительных корпусов
+TargetChamber.hint.1=34x экранированного ускорительного стекла
+TargetChamber.hint.2=16x блоков боросиликатного стекла
+TargetChamber.hint.3=29x решетчатых машинных корпусов
+TargetChamber.hint.4=4x корпуса управления фокусом
+TargetChamber.hint.5=4x корпуса целевого приемника
+TargetChamber.hint.6=1x Держатель фокуса
+TargetChamber.hint.7=1x Держатель цели
+TargetChamber.hint.8=Точка 1: Входная шина фокуса
+TargetChamber.hint.9=Точка 2: Энергетический люк, люк для обслуживанияh
+TargetChamber.hint.10=Точка 3: Входная шина
+TargetChamber.hint.11=Точка 4: Выходная шина
+TargetChamber.hint.12=Точка 5: Входной люк линии луча
+
+
+fluid.Antimony Pentafluoride Solution=Раствор пентафторида сурьмы
+fluid.Hafnium Tetrachloride Solution=Раствор тетрахлорида гафния
+fluid.Zirconium Tetrachloride Solution=Раствор тетрахлорида циркония
+fluid.Iodine=Йод
+fluid.Muddy Monazite Rare Earth Solution=Мутный монацитовый раствор редкоземельных металлов
+fluid.Diluted Monazite Rare Earth Mud=Разбавленная монацитовая редкоземельная грязь
+fluid.Diluted Monazite Sulfate=Разбавленный сульфат монацита
+fluid.Nitrogenated Monazite Rare Earth Concentrate=Азотированный монацитовый редкоземельный концентрат
+fluid.Nitric Monazite Leached Concentrate=Концентрат выщелоченного азотного монацита
+fluid.Ammonium Nitrate Solution=Раствор аммиачной селитры
+fluid.Seaweed Concentrate=Концентрат морских водорослей
+fluid.Potassium Permanganate Solution=Раствор перманганата калия
+fluid.Seaweed Byproducts=Побочные продукты из морских водорослей
+fluid.Nitric-Leached Monazite Mixture=Смесь монацита, выщелоченного азотом
+fluid.Muddy Bastnasite Rare Earth Solution=Мутный бастнезитовый раствор редкоземельных элементов
+fluid.Sodiumfluorosilicate=Фторсиликат натрия
+fluid.Steam-Cracked Bastnasite Mud=Бастназитовая грязь, полученный паровым крекингом
+fluid.Conditioned Bastnasite Mud=Кондиционированная бастназитовая грязь
+fluid.Diluted Bastnasite Mud=Разбавленная бастнезитовая грязь
+fluid.Filtered Bastnasite Mud=Фильтрованный бастназитовая грязь
+fluid.Nitrogenated Bastnasite Rarer Earth Oxides=Азотированные бастнезитовые редкоземельные оксиды
+fluid.Bastnasite Rarer Earth Oxide Suspension=Бастнезитовая суспензия оксида редкоземельного металла
+fluid.Calcium Fluoride=Фторид кальция
+fluid.Tetrahydrofuran=Тетрагидрофуран
+"fluid.1,4-Butanediol"="1,4-бутандиол"
+"fluid.Acidicised 1,4-Butanediol"="подкисленный 1,4-бутандиол"
+fluid.Polytetrahydrofuran=Политетрагидрофуран
+fluid.Tungstophosphoric Acid=Вольфрамофосфорная кислота
+fluid.Toluene Diisocyanate=Толуолдиизоцианат
+fluid.Dinitrotoluene=Динитротолуол
+fluid.Diaminotoluene=Диаминотолуол
+fluid.Toluene Tetramethyl Diisocyanate=Толуолтетраметилдиизоцианат
+fluid.Diluted Acetone=Разбавленный ацетон
+
+tile.casing.shielded_accelerator_glass.name=Экранированное ускорительное стекло
+casing.electrode.name=Корпус электрода
+casing.coolant_delivery.name=Корпус подачи охлаждающей жидкости
+casing.antenna_t1.name=Корпус антенны (T1)
+casing.antenna_t2.name=Корпус антенны (T2)
+casing.niobium_cavity.name=Машинный корпус с полостью из ниобия
+casing.focus_manipulator.name=Манипулятор фокуса
+casing.focus_holder.name=Держатель фокуса
+casing.target_receptacle.name=Целевой приемник
+casing.target_holder.name=Держатель цели
+casing.shielded_accelerator.name=Экранированный ускорительный корпус
+
+item.capillary_exchange.name=Капиллярный обмен
+item.mm_lattice.name=Mu-Металлическая решетка
+item.iron_quartz_plate.name=Железо-кварцевая пластина
+item.mask_substrate.name=Маска-субстрат
+item.etched_mask1.name=Гравированная маска
+item.substrate_precursor.name=Субстрат-предшественник
+item.masked_mask_substrate.name=Обработанная маска-субстрат
+
+
+
+
+beamline.info=Информация о машине
+
+beamline.in_pre=Входной лучевой канал многоблока
+beamline.particle=Частица
+beamline.energy=Энергия
+beamline.focus=Фокус
+beamline.amount=Кол-во
+beamline.rate=Ставка
+
+beamline.temperature=Температура
+beamline.coolusage=Использование охлаждающей жидкости
+
+beamline.out_pre=Выходной лучевой канал многоблока
+
+beamline.particleinput=Информация в входных частицах:
+
+beamline.pipe.desc.0=Транспорт для частиц
+beamline.pipe.desc.1=Сигнал не пересекается и не изгибается
+
+tile.recipe.tc=Целевая камера
+tile.recipe.sc=Камера источника
+
+particle.electron=Электрон
+particle.photon=Фотон
+particle.alpha=Альфа
+particle.neutron=Нейтрон
+particle.proton=Протон
+GT5U.gui.text.dissolution_ratio=§7Неправильное соотношение подачи жидкости

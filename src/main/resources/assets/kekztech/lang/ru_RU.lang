@@ -1,0 +1,110 @@
+item.kekztech_error_item.name=Ошибочная монета KekzTech
+
+# -------- Multiblock Tooltip Builder Keywords
+# -------- Context can be found in the class util.MultiBlockTooltipBuilder
+mbdesc.beginStructureBlock.Dimensions=Измерения
+mbdesc.beginStructureBlock.Structure=Структура
+mbdesc.addController.Controller=Контроллер
+mbdesc.addCasing.atleast=(Не менее)
+mbdesc.addEnergyHatch.EnergyHatch=Энергетический люк
+mbdesc.addDynamoHatch.DynamoHatch=Динамо люк
+mbdesc.addMaintenanceHatch.MaintenanceHatch=Люк для обслуживания
+mbdesc.addIOHatches.IOHatches=Люки ввода/вывода
+mbdesc.addInputBus.InputBus=Входная шина/Входные шина
+mbdesc.addInputHatch.InputHatch=Входной люк/Входные люки
+mbdesc.addOutputBus.OutputBus=Выходная шина/Выходные шина
+mbdesc.addOutputHatch.OutputHatch=Выходной люк/Выходные люки
+mbdesc.signAndFinalize.Hold=Удерживайте
+mbdesc.signAndFinalize.todisplay=для отображения рекомендаций по структуре
+mbdesc.signAndFinalize.createdby=Создано
+
+# -------- Fuel Cell: Structure Blocks
+tile.kekztech_gdcceramicelectrolyteunit_block.name=Керамический электролитический блок GDC
+tile.kekztech_yszceramicelectrolyteunit_block.name=Керамический электролитный блок YSZ
+
+# -------- Fuel Cell: Crafting Components
+item.kekztech_crafting_item.9.name=Керамическая пыль YSZ
+item.kekztech_crafting_item.10.name=Керамическая пыль GDC
+item.kekztech_crafting_item.11.name=Пыль оксида иттрия
+item.kekztech_crafting_item.12.name=Пыль оксида циркония
+item.kekztech_crafting_item.13.name=Пыль оксида церия
+item.kekztech_crafting_item.14.name=Керамическая пластина YSZ
+item.kekztech_crafting_item.15.name=Керамическая пластина GDC
+
+# -------- TFFT: Structure Blocks
+tile.kekztech_tfftstoragefield_block.0.name=T.F.F.T корпус
+tile.kekztech_tfftstoragefield_block.1.name=T.F.F.T блок поля хранения (Уровень I)
+tile.kekztech_tfftstoragefield_block.2.name=T.F.F.T блок поля хранения (Уровень II)
+tile.kekztech_tfftstoragefield_block.3.name=T.F.F.T блок поля хранения (Уровень III)
+tile.kekztech_tfftstoragefield_block.4.name=T.F.F.T блок поля хранения (Уровень IV)
+tile.kekztech_tfftstoragefield_block.5.name=T.F.F.T блок поля хранения (Уровень V)
+tile.kekztech_tfftstoragefield_block.6.name=T.F.F.T блок поля хранения (Уровень VI)
+tile.kekztech_tfftstoragefield_block.7.name=T.F.F.T блок поля хранения (Уровень VII)
+tile.kekztech_tfftstoragefield_block.8.name=T.F.F.T блок поля хранения (Уровень VIII)
+tile.kekztech_tfftstoragefield_block.9.name=T.F.F.T блок поля хранения (Уровень IX)
+tile.kekztech_tfftstoragefield_block.10.name=T.F.F.T блок поля хранения (Уровень X)
+tile.kekztech_tfftstoragefield_block.desc=Это не резервуар для жидкости
+tile.kekztech_tfftstoragefield_block.hint.1=Подсказка в точке 1: T.F.F.T корпус
+tile.kekztech_tfftstoragefield_block.hint.2=Подсказка в точке 2: T.F.F.T корпус, Люк для обслуживания, многофункциональный люк ввода-вывода T.F.F.T., люк ввода-вывода, энергетический люк
+tile.kekztech_tfftstoragefield_block.hint.3=Подсказка в точке 3: EV+ уровень стекла, T.F.F.T. многофункциональный вход/выходной люк, входной/выходной люк
+tile.kekztech_tfftstoragefield_block.hint.4=Подсказка в точке 4: EV+ уровень стекла
+
+# -------- Lapotronic Super Capacitor: Structure Blocks
+tile.kekztech_lapotronicenergyunit_block.0.name=Корпус лазуротронового суперконденсатора
+tile.kekztech_lapotronicenergyunit_block.1.name=Лазуротроновый конденсатор (IV)
+tile.kekztech_lapotronicenergyunit_block.2.name=Лазуротроновый конденсатор (LuV)
+tile.kekztech_lapotronicenergyunit_block.3.name=Лазуротроновый конденсатор (ZPM)
+tile.kekztech_lapotronicenergyunit_block.4.name=Лазуротроновый конденсатор (UV)
+tile.kekztech_lapotronicenergyunit_block.5.name=Совершенный конденсатор (UHV)
+tile.kekztech_lapotronicenergyunit_block.6.name=Пустой конденсатор (-)
+tile.kekztech_lapotronicenergyunit_block.7.name=Лазуротроновый конденсатор (EV)
+tile.kekztech_lapotronicenergyunit_block.8.name=Экстремально совершенный конденсатор (UEV)
+tile.kekztech_lapotronicenergyunit_block.9.name=Безумно совершенный конденсатор (UIV)
+tile.kekztech_lapotronicenergyunit_block.10.name=Мега совершенный конденсатор (UMV)
+tile.kekztech_lapotronicenergyunit_block.desc=Часть лазуротронового суперконденсатора
+
+# -------- Thaumium Reinforced Jar: Block
+tile.kekztech_thaumiumreinforcedjar_block.0.name=Банка, усиленная таумием
+tile.kekztech_thaumiumreinforcedjar_block.3.name=Пустотная банка, усиленная таумием
+
+# -------- Thaumium Reinforced Jar: Research
+# This is the name of the research
+tc.research_name.THAUMIUMREINFORCEDJAR=Усиленные банки из таумиума
+# This is the subtext for the research note
+tc.research_text.THAUMIUMREINFORCEDJAR=Немного лучшие банки
+# Lore text for the research pages
+kekztech.research_page.THAUMIUMREINFORCEDJAR.0=Вы слышали, как ваши коллеги-тауматурги говорили о преимуществах оцифрованного хранения эссенции.<BR><BR>Хранение достаточного количества эссенции для ваших продвинутых инфузий действительно было проблемой и для вас. Однако эти банки просто слишком приятны на вид, чтобы даже рассматривать идею замены их на какую-то компактную технологическую конструкцию.<BR><BR>Благодаря этому новому открытию вам удалось увеличить вместимость ваших банок в четыре раза, улучшив их с помощью толстой подкладки из таумия. Это должно дать вам немного больше времени, чтобы придумать лучшее решение.
+kekztech.research_page.THAUMIUMREINFORCEDJAR.1=Сжатие такого количества эссенции в таком маленьком пространстве вызывает некоторую нестабильность. Подбирать усиленные банки, вероятно, плохая идея...<BR><BR>Вы представляете, что могли бы получить еще больше из своих банок, если бы у вас был какой-то материал, который тверже алмаза или любого другого магического металла, который вы видели до сих пор.
+
+# -------- Ichor Jar: Block
+tile.kekztech_ichorjar_block.0.name=Ихоровая банка
+tile.kekztech_ichorjar_block.3.name=Ихоровая пустотная банка
+
+# -------- Ichor Jar: Research
+tc.research_name.ICHORJAR=Ихоровые банки
+tc.research_text.ICHORJAR=Гораздо лучшие банки
+kekztech.research_page.ICHORJAR.0=Вот оно!<BR><BR>Добавив в банку всего один кусочек Ихора, вы создали нечто, способное соперничать с оцифрованным хранилищем Эссенции, не жертвуя при этом красотой Защищенных банок.<BR><BR>Банки Ихора могут вместить поразительные 4096 Эссенции и прекрасно вписываются в ваш недавно приобретенный набор достижений на основе Ихора.<BR><BR>Вы определенно не захотите тревожить эти банки. К счастью, Ихор достаточно устойчив, чтобы случайное уничтожение одной из них было маловероятным.
+
+# -------- Cosmetic Blocks
+tile.kekztech_largehextile_block.name=Большая шестигранная плитка
+
+# -------- Achievements
+achievement.tile.kekztech_lapotronicenergyunit_block.2.desc=Выберите этот предмет, чтобы увидеть рецепт в NEI
+achievement.tile.kekztech_lapotronicenergyunit_block.2=Лазуротроновый конденсатор (LuV)
+achievement.tile.kekztech_lapotronicenergyunit_block.3.desc=Выберите этот предмет, чтобы увидеть рецепт в NEI
+achievement.tile.kekztech_lapotronicenergyunit_block.3=Лазуротроновый конденсатор (ZPM)
+achievement.tile.kekztech_lapotronicenergyunit_block.4.desc=Выберите этот предмет, чтобы увидеть рецепт в NEI
+achievement.tile.kekztech_lapotronicenergyunit_block.4=Лазуротроновый конденсатор (UV)
+achievement.tile.kekztech_lapotronicenergyunit_block.5.desc=Выберите этот предмет, чтобы увидеть рецепт в NEI
+achievement.tile.kekztech_lapotronicenergyunit_block.5=Совершенный конденсатор (UHV)
+achievement.tile.kekztech_lapotronicenergyunit_block.8.desc=За пределами ранга Богов
+achievement.tile.kekztech_lapotronicenergyunit_block.8=Экстремально совершенный конденсатор (UEV)
+achievement.tile.kekztech_lapotronicenergyunit_block.9.desc=Наступает безумие!
+achievement.tile.kekztech_lapotronicenergyunit_block.9=Безумно совершенный конденсатор (UIV)
+achievement.tile.kekztech_lapotronicenergyunit_block.10.desc=Как далеко мы можем зайти?
+achievement.tile.kekztech_lapotronicenergyunit_block.10=Мега совершенный конденсатор (UMV)
+
+
+# -------- GUI
+gui.kekztech_lapotronicenergyunit.wireless=Беспроводной режим
+gui.kekztech_lapotronicenergyunit.wireless_rebalance=Ребаланс беспроводной связи (однократное использование)
