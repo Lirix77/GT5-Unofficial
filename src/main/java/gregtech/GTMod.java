@@ -249,7 +249,7 @@ public class GTMod implements IGTMod {
     }
 
     public static int calculateTotalGTVersion(int majorVersion, int minorVersion, int patchVersion) {
-        return majorVersion * 1000000 + minorVersion * 1000 + patchVersion;
+        return majorVersion * 100000 + minorVersion * 1000 + patchVersion;
     }
 
     @Mod.EventHandler
@@ -538,7 +538,7 @@ public class GTMod implements IGTMod {
         GTPostLoad.nerfVanillaTools();
 
         // Register postea transformers
-        new PosteaTransformers().run();
+        //new PosteaTransformers().run();
 
         /*
          * Until this point most crafting recipe additions, and removals, have been buffered. Go through, execute the

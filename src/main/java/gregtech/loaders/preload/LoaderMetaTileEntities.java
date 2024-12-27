@@ -12331,29 +12331,6 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
                     (GTLanguageManager.i18nPlaceholder ? "%material" : material.mDefaultLocalName)
                         + " Frame Box (TileEntity)",
                     material);
-
-                // Generate recipes for frame box
-                BlockFrameBox block = (BlockFrameBox) GregTechAPI.sBlockFrames;
-                GTOreDictUnificator.registerOre(OrePrefixes.frameGt, material, block.getStackForm(1, meta));
-                if (material.getProcessingMaterialTierEU() < TierEU.IV) {
-                    GTModHandler.addCraftingRecipe(
-                        block.getStackForm(2, meta),
-                        GTModHandler.RecipeBits.NOT_REMOVABLE | GTModHandler.RecipeBits.BUFFERED,
-                        new Object[] { "SSS", "SwS", "SSS", 'S', OrePrefixes.stick.get(material) });
-                }
-
-                if (!material.contains(SubTag.NO_RECIPES)
-                    && GTOreDictUnificator.get(OrePrefixes.stick, material, 1) != null) {
-                    // Auto generate frame box recipe in an assembler.
-                    GTValues.RA.stdBuilder()
-                        .itemInputs(
-                            GTOreDictUnificator.get(OrePrefixes.stick, material, 4),
-                            GTUtility.getIntegratedCircuit(4))
-                        .itemOutputs(block.getStackForm(1, meta))
-                        .duration(3 * SECONDS + 4 * TICKS)
-                        .eut(calculateRecipeEU(material, 7))
-                        .addTo(assemblerRecipes);
-                }
             }
         }
 

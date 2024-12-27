@@ -17,6 +17,8 @@ import java.util.function.ToIntFunction;
 
 import javax.annotation.Nonnull;
 
+import gregtech.api.metatileentity.BaseMetaPipeEntity;
+import gregtech.api.metatileentity.implementations.MTEFrame;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -115,11 +117,11 @@ public class GTStructureUtility {
 
             @Override
             public boolean check(T t, World world, int x, int y, int z) {
-                Block block = world.getBlock(x, y, z);
-                if (block instanceof BlockFrameBox frameBox) {
-                    int meta = world.getBlockMetadata(x, y, z);
-                    Materials material = BlockFrameBox.getMaterial(meta);
-                    return aFrameMaterial == material;
+                TileEntity tBase = world.getTileEntity(x, y, z);
+                if (tBase instanceof BaseMetaPipeEntity tPipeBase) {
+                    if (tPipeBase.isInvalidTileEntity()) return false;
+                    if (tPipeBase.getMetaTileEntity() instanceof MTEFrame tFrame)
+                        return aFrameMaterial == tFrame.mMaterial;
                 }
                 return false;
             }

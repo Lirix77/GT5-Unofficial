@@ -1,12 +1,13 @@
 package gregtech.api.metatileentity.implementations;
 
+import gregtech.api.enums.*;
+import gregtech.api.util.GTModHandler;
+import gregtech.api.util.GTOreDictUnificator;
+import gregtech.api.util.GTUtility;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import gregtech.api.enums.Dyes;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.OrePrefixes;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
@@ -14,6 +15,11 @@ import gregtech.api.metatileentity.MetaPipeEntity;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTLanguageManager;
 import ru.justagod.cutter.invoke.Invoke;
+
+import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
+import static gregtech.api.util.GTRecipeBuilder.TICKS;
+import static gregtech.api.util.GTUtility.calculateRecipeEU;
 
 public class MTEFrame extends MetaPipeEntity {
 
@@ -24,8 +30,27 @@ public class MTEFrame extends MetaPipeEntity {
     public MTEFrame(int aID, String aName, String aNameRegional, Materials aMaterial) {
         super(aID, aName, aNameRegional, 0);
         mMaterial = aMaterial;
-        // Hide TileEntity frame in NEI, since we have the block version now that should always be used
-        Invoke.client(()-> codechicken.nei.api.API.hideItem(this.getStackForm(1)));
+
+        GTOreDictUnificator.registerOre(OrePrefixes.frameGt, aMaterial, getStackForm(1));
+        if (aMaterial.getProcessingMaterialTierEU() < TierEU.IV) {
+            GTModHandler.addCraftingRecipe(
+                getStackForm(2),
+                GTModHandler.RecipeBits.NOT_REMOVABLE | GTModHandler.RecipeBits.BUFFERED,
+                new Object[] { "SSS", "SwS", "SSS", 'S', OrePrefixes.stick.get(mMaterial) });
+        }
+
+        if (!aMaterial.contains(SubTag.NO_RECIPES)
+            && GTOreDictUnificator.get(OrePrefixes.stick, aMaterial, 1) != null) {
+            // Auto generate frame box recipe in an assembler.
+            GTValues.RA.stdBuilder()
+                .itemInputs(
+                    GTOreDictUnificator.get(OrePrefixes.stick, aMaterial, 4),
+                    GTUtility.getIntegratedCircuit(4))
+                .itemOutputs(getStackForm(1))
+                .duration(3 * SECONDS + 4 * TICKS)
+                .eut(calculateRecipeEU(aMaterial, 7))
+                .addTo(assemblerRecipes);
+        }
     }
 
     public MTEFrame(String aName, Materials aMaterial) {
