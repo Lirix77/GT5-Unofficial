@@ -15,7 +15,6 @@ import static gregtech.api.enums.Mods.NewHorizonsCoreMod;
 import static gregtech.api.enums.Mods.OpenComputers;
 import static gregtech.api.enums.Mods.Railcraft;
 import static gregtech.api.enums.Mods.TinkerConstruct;
-import static gregtech.api.enums.Mods.TwilightForest;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.util.GTModHandler.getModItem;
 import static gregtech.api.util.GTRecipeBuilder.EIGHTH_INGOT;
@@ -1441,48 +1440,6 @@ public class AssemblerRecipes implements Runnable {
             .fluidInputs(Materials.Plastic.getMolten(144))
             .duration(5 * SECONDS)
             .eut(4)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(getModItem(TwilightForest.ID, "item.charmOfLife1", 4L, 0), GTUtility.getIntegratedCircuit(4))
-            .itemOutputs(getModItem(TwilightForest.ID, "item.charmOfLife2", 1L, 0))
-            .duration(5 * SECONDS)
-            .eut(8)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(getModItem(TwilightForest.ID, "item.charmOfKeeping1", 4L, 0), GTUtility.getIntegratedCircuit(4))
-            .itemOutputs(getModItem(TwilightForest.ID, "item.charmOfKeeping2", 1L, 0))
-            .duration(5 * SECONDS)
-            .eut(8)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(getModItem(TwilightForest.ID, "item.charmOfKeeping2", 4L, 0), GTUtility.getIntegratedCircuit(4))
-            .itemOutputs(getModItem(TwilightForest.ID, "item.charmOfKeeping3", 1L, 0))
-            .duration(5 * SECONDS)
-            .eut(8)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(getModItem(TwilightForest.ID, "item.charmOfLife2", 1L, 0), GTUtility.getIntegratedCircuit(1))
-            .itemOutputs(getModItem(TwilightForest.ID, "item.charmOfLife1", 4L, 0))
-            .duration(5 * SECONDS)
-            .eut(8)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(getModItem(TwilightForest.ID, "item.charmOfKeeping2", 1L, 0), GTUtility.getIntegratedCircuit(1))
-            .itemOutputs(getModItem(TwilightForest.ID, "item.charmOfKeeping1", 4L, 0))
-            .duration(5 * SECONDS)
-            .eut(8)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(getModItem(TwilightForest.ID, "item.charmOfKeeping3", 1L, 0), GTUtility.getIntegratedCircuit(1))
-            .itemOutputs(getModItem(TwilightForest.ID, "item.charmOfKeeping2", 4L, 0))
-            .duration(5 * SECONDS)
-            .eut(8)
             .addTo(assemblerRecipes);
 
         GTValues.RA.stdBuilder()

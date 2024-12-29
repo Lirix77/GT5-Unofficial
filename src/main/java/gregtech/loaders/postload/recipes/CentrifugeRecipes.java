@@ -5,7 +5,6 @@ import static gregtech.api.enums.Mods.ExtraUtilities;
 import static gregtech.api.enums.Mods.Forestry;
 import static gregtech.api.enums.Mods.Thaumcraft;
 import static gregtech.api.enums.Mods.ThaumicTinkerer;
-import static gregtech.api.enums.Mods.TwilightForest;
 import static gregtech.api.recipe.RecipeMaps.centrifugeRecipes;
 import static gregtech.api.util.GTModHandler.getModItem;
 import static gregtech.api.util.GTRecipeBuilder.MINUTES;
@@ -302,36 +301,6 @@ public class CentrifugeRecipes implements Runnable {
 
         GTValues.RA.stdBuilder()
             .itemInputs(GTModHandler.getIC2Item("terraWart", 16), GTUtility.getIntegratedCircuit(1))
-            .fluidOutputs(Materials.Methane.getGas(576))
-            .duration(3 * MINUTES + 50 * SECONDS + 8 * TICKS)
-            .eut(5)
-            .addTo(centrifugeRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(getModItem(TwilightForest.ID, "item.meefRaw", 12L, 32767), GTUtility.getIntegratedCircuit(1))
-            .fluidOutputs(Materials.Methane.getGas(576))
-            .duration(3 * MINUTES + 50 * SECONDS + 8 * TICKS)
-            .eut(5)
-            .addTo(centrifugeRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(getModItem(TwilightForest.ID, "item.meefSteak", 16L, 32767), GTUtility.getIntegratedCircuit(1))
-            .fluidOutputs(Materials.Methane.getGas(576))
-            .duration(3 * MINUTES + 50 * SECONDS + 8 * TICKS)
-            .eut(5)
-            .addTo(centrifugeRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(getModItem(TwilightForest.ID, "item.venisonRaw", 12L, 32767), GTUtility.getIntegratedCircuit(1))
-            .fluidOutputs(Materials.Methane.getGas(576))
-            .duration(3 * MINUTES + 50 * SECONDS + 8 * TICKS)
-            .eut(5)
-            .addTo(centrifugeRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                getModItem(TwilightForest.ID, "item.venisonCooked", 16L, 32767),
-                GTUtility.getIntegratedCircuit(1))
             .fluidOutputs(Materials.Methane.getGas(576))
             .duration(3 * MINUTES + 50 * SECONDS + 8 * TICKS)
             .eut(5)
