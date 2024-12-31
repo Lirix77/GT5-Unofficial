@@ -81,6 +81,8 @@ import gregtech.api.util.OverclockCalculator;
 import gregtech.common.tileentities.machines.IDualInputHatch;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyMulti;
 
 public class MTEPreciseAssembler extends MTEExtendedPowerMultiBlockBase<MTEPreciseAssembler>
@@ -508,6 +510,7 @@ public class MTEPreciseAssembler extends MTEExtendedPowerMultiBlockBase<MTEPreci
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
         int z) {
         super.getWailaNBTData(player, tile, tag, world, x, y, z);

@@ -41,6 +41,8 @@ import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MTEHatchSteam
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MteHatchSteamBusInput;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 
 public abstract class MTESteamMultiBase<T extends MTESteamMultiBase<T>> extends GTPPMultiBlockBase<T> {
 
@@ -370,6 +372,7 @@ public abstract class MTESteamMultiBase<T extends MTESteamMultiBase<T>> extends 
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
         IWailaConfigHandler config) {
         final NBTTagCompound tag = accessor.getNBTData();

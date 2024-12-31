@@ -114,6 +114,8 @@ import it.unimi.dsi.fastutil.objects.Object2ReferenceOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Reference2ReferenceOpenHashMap;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 
 public abstract class MTEMultiBlockBase extends MetaTileEntity
     implements IControllerWithOptionalFeatures, IAddGregtechLogo, IAddUIWidgets, IBindPlayerInventoryUI {
@@ -1905,6 +1907,7 @@ public abstract class MTEMultiBlockBase extends MetaTileEntity
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
         IWailaConfigHandler config) {
         final NBTTagCompound tag = accessor.getNBTData();
@@ -1971,6 +1974,7 @@ public abstract class MTEMultiBlockBase extends MetaTileEntity
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
         int z) {
         super.getWailaNBTData(player, tile, tag, world, x, y, z);

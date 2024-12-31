@@ -67,6 +67,8 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.common.blocks.BlockCasings10;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 
 public class MTEMultiAutoclave extends MTEExtendedPowerMultiBlockBase<MTEMultiAutoclave>
     implements ISurvivalConstructable {
@@ -330,6 +332,7 @@ public class MTEMultiAutoclave extends MTEExtendedPowerMultiBlockBase<MTEMultiAu
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
         int z) {
         super.getWailaNBTData(player, tile, tag, world, x, y, z);
@@ -343,6 +346,7 @@ public class MTEMultiAutoclave extends MTEExtendedPowerMultiBlockBase<MTEMultiAu
     private static final DecimalFormat dfNone = new DecimalFormat("#");
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor,
         IWailaConfigHandler config) {
         super.getWailaBody(itemStack, currenttip, accessor, config);

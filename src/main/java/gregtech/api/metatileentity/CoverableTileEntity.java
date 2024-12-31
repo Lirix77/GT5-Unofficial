@@ -69,6 +69,8 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 
 public abstract class CoverableTileEntity extends BaseTileEntity implements ICoverable, IGregtechWailaProvider {
 
@@ -553,6 +555,7 @@ public abstract class CoverableTileEntity extends BaseTileEntity implements ICov
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
         IWailaConfigHandler config) {
         final NBTTagCompound tag = accessor.getNBTData();
@@ -586,6 +589,7 @@ public abstract class CoverableTileEntity extends BaseTileEntity implements ICov
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
         int z) {
         // No super implementation

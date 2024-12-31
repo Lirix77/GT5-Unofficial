@@ -58,6 +58,8 @@ import gregtech.common.items.MetaGeneratedItem01;
 import gtPlusPlus.core.util.minecraft.PlayerUtils;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 
 public class MTEIndustrialElectromagneticSeparator
     extends MTEExtendedPowerMultiBlockBase<MTEIndustrialElectromagneticSeparator> implements ISurvivalConstructable {
@@ -351,6 +353,7 @@ public class MTEIndustrialElectromagneticSeparator
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
         int z) {
         super.getWailaNBTData(player, tile, tag, world, x, y, z);
@@ -358,6 +361,7 @@ public class MTEIndustrialElectromagneticSeparator
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
         IWailaConfigHandler config) {
         super.getWailaBody(itemStack, currentTip, accessor, config);

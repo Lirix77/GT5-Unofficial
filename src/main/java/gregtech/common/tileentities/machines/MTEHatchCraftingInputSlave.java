@@ -28,6 +28,8 @@ import gregtech.api.metatileentity.implementations.MTEHatchInputBus;
 import gregtech.api.render.TextureFactory;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 
 public class MTEHatchCraftingInputSlave extends MTEHatchInputBus implements IDualInputHatch, IDataCopyable {
 
@@ -254,6 +256,7 @@ public class MTEHatchCraftingInputSlave extends MTEHatchInputBus implements IDua
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor,
         IWailaConfigHandler config) {
         NBTTagCompound tag = accessor.getNBTData();
@@ -273,6 +276,7 @@ public class MTEHatchCraftingInputSlave extends MTEHatchInputBus implements IDua
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
         int z) {
 

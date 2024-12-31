@@ -55,6 +55,8 @@ import gregtech.api.util.GTUtility;
 import gregtech.common.blocks.BlockCasingsAbstract;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 
 /**
  * Base class for purification units. This class handles all shared behaviour between units.
@@ -686,6 +688,7 @@ public abstract class MTEPurificationUnitBase<T extends MTEExtendedPowerMultiBlo
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor,
         IWailaConfigHandler config) {
         NBTTagCompound tag = accessor.getNBTData();
@@ -709,6 +712,7 @@ public abstract class MTEPurificationUnitBase<T extends MTEExtendedPowerMultiBlo
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
         int z) {
 

@@ -81,6 +81,8 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.shutdown.ShutDownReasonRegistry;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 
 public class MTEHatchInputME extends MTEHatchInput implements IPowerChannelState, IAddGregtechLogo, IAddUIWidgets,
     IRecipeProcessingAwareHatch, ISmartInputHatch, IDataCopyable {
@@ -892,6 +894,7 @@ public class MTEHatchInputME extends MTEHatchInput implements IPowerChannelState
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor,
         IWailaConfigHandler config) {
         if (!autoPullAvailable) {
@@ -914,6 +917,7 @@ public class MTEHatchInputME extends MTEHatchInput implements IPowerChannelState
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
         int z) {
         if (!autoPullAvailable) {

@@ -66,6 +66,8 @@ import ic2.api.energy.tile.IEnergyTile;
 import ic2.api.reactor.IReactorChamber;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 
 public class MTECable extends MetaPipeEntity implements IMetaTileEntityCable {
 
@@ -623,6 +625,7 @@ public class MTECable extends MetaPipeEntity implements IMetaTileEntityCable {
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor,
         IWailaConfigHandler config) {
 

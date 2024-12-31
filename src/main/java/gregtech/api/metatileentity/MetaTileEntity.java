@@ -57,6 +57,8 @@ import gregtech.common.GTClient;
 import gregtech.common.covers.CoverInfo;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 import tectech.thing.metaTileEntity.pipe.MTEPipeData;
 import tectech.thing.metaTileEntity.pipe.MTEPipeEnergy;
 
@@ -1225,6 +1227,7 @@ public abstract class MetaTileEntity implements IMetaTileEntity, ICleanroomRecei
     // === Waila compat ===
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor,
         IWailaConfigHandler config) {
         currenttip.add(

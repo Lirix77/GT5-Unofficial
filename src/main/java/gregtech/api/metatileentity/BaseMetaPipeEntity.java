@@ -48,6 +48,8 @@ import gregtech.api.util.GTUtility;
 import gregtech.common.covers.CoverInfo;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 
 /**
  * NEVER INCLUDE THIS FILE IN YOUR MOD!!!
@@ -1405,6 +1407,7 @@ public class BaseMetaPipeEntity extends CommonMetaTileEntity
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
         IWailaConfigHandler config) {
         super.getWailaBody(itemStack, currentTip, accessor, config);

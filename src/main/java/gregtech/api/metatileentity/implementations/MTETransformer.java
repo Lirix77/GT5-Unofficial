@@ -32,6 +32,8 @@ import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.util.GTUtility;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 
 /**
  * NEVER INCLUDE THIS FILE IN YOUR MOD!!!
@@ -272,6 +274,7 @@ public class MTETransformer extends MTETieredMachineBlock {
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor,
         IWailaConfigHandler config) {
         final ForgeDirection facing = getBaseMetaTileEntity().getFrontFacing();
@@ -313,6 +316,7 @@ public class MTETransformer extends MTETieredMachineBlock {
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
         int z) {
         super.getWailaNBTData(player, tile, tag, world, x, y, z);

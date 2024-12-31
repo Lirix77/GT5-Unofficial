@@ -55,6 +55,8 @@ import gregtech.api.metatileentity.implementations.MTEBasicHullNonElectric;
 import gregtech.api.util.GTUtility;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 
 public abstract class MTELongDistancePipelineBase extends MTEBasicHullNonElectric {
 
@@ -372,6 +374,7 @@ public abstract class MTELongDistancePipelineBase extends MTEBasicHullNonElectri
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
         IWailaConfigHandler config) {
         final ForgeDirection facing = getBaseMetaTileEntity().getFrontFacing();
@@ -400,6 +403,7 @@ public abstract class MTELongDistancePipelineBase extends MTEBasicHullNonElectri
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
         int z) {
         super.getWailaNBTData(player, tile, tag, world, x, y, z);

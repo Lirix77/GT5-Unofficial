@@ -47,6 +47,8 @@ import gregtech.api.util.GTLanguageManager;
 import gregtech.api.util.GTUtility;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 
 public abstract class MTEDigitalChestBase extends MTETieredMachineBlock
     implements IMEMonitor<IAEItemStack>, IAddUIWidgets {
@@ -491,6 +493,7 @@ public abstract class MTEDigitalChestBase extends MTETieredMachineBlock
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor,
         IWailaConfigHandler config) {
         super.getWailaBody(itemStack, currenttip, accessor, config);
@@ -506,6 +509,7 @@ public abstract class MTEDigitalChestBase extends MTETieredMachineBlock
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
         int z) {
         super.getWailaNBTData(player, tile, tag, world, x, y, z);

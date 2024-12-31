@@ -74,6 +74,8 @@ import ic2.core.init.BlocksItems;
 import ic2.core.init.InternalName;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 
 public class MTEIndustrialWashPlant extends GTPPMultiBlockBase<MTEIndustrialWashPlant>
     implements ISurvivalConstructable {
@@ -373,6 +375,7 @@ public class MTEIndustrialWashPlant extends GTPPMultiBlockBase<MTEIndustrialWash
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
         int z) {
         super.getWailaNBTData(player, tile, tag, world, x, y, z);
@@ -380,6 +383,7 @@ public class MTEIndustrialWashPlant extends GTPPMultiBlockBase<MTEIndustrialWash
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
         IWailaConfigHandler config) {
         super.getWailaBody(itemStack, currentTip, accessor, config);

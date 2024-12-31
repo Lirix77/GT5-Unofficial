@@ -65,6 +65,8 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.shutdown.ShutDownReason;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 import tectech.recipe.TecTechRecipeMaps;
 import tectech.thing.casing.BlockGTCasingsTT;
 import tectech.thing.casing.TTCasingsContainer;
@@ -588,6 +590,7 @@ public class MTEResearchStation extends TTMultiblockBase implements ISurvivalCon
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
         int z) {
         tag.setBoolean("hasProblems", (getIdealStatus() - getRepairStatus()) > 0);

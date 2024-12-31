@@ -53,6 +53,8 @@ import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.base.GTPPMult
 import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 
 public class MTEIndustrialCuttingMachine extends GTPPMultiBlockBase<MTEIndustrialCuttingMachine>
     implements ISurvivalConstructable {
@@ -250,6 +252,7 @@ public class MTEIndustrialCuttingMachine extends GTPPMultiBlockBase<MTEIndustria
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
         int z) {
         super.getWailaNBTData(player, tile, tag, world, x, y, z);
@@ -257,6 +260,7 @@ public class MTEIndustrialCuttingMachine extends GTPPMultiBlockBase<MTEIndustria
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
         IWailaConfigHandler config) {
         super.getWailaBody(itemStack, currentTip, accessor, config);

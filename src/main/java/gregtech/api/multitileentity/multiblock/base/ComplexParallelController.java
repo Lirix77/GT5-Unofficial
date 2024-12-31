@@ -19,6 +19,8 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.GTWaila;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 
 public abstract class ComplexParallelController<C extends ComplexParallelController<C, P>, P extends ComplexParallelProcessingLogic<P>>
     extends Controller<C, P> {
@@ -69,6 +71,7 @@ public abstract class ComplexParallelController<C extends ComplexParallelControl
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
         int z) {
         super.getWailaNBTData(player, tile, tag, world, x, y, z);
