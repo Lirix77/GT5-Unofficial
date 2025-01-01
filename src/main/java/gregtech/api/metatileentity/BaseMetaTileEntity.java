@@ -2476,7 +2476,11 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
 
     void onChunkUnloadAE() {
         final AENetworkProxy gp = getProxy();
-        if (gp != null) gp.onChunkUnload();
+        if (gp != null)
+            try {
+                gp.onChunkUnload();
+            } catch (Exception ignored){
+            }
     }
 
     void invalidateAE() {
