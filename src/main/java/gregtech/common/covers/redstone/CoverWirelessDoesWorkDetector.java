@@ -76,6 +76,8 @@ public class CoverWirelessDoesWorkDetector
         final long hash = hashCoverCoords(aTileEntity, side);
         setSignalAt(aCoverVariable.getUuid(), aCoverVariable.getFrequency(), hash, signal);
 
+        aTileEntity.setOutputRedstoneSignal(side, signal);
+
         return aCoverVariable;
     }
 
@@ -93,6 +95,12 @@ public class CoverWirelessDoesWorkDetector
 
     @Override
     public int getTickRateImpl(ForgeDirection side, int aCoverID, ActivityTransmitterData aCoverVariable,
+        ICoverable aTileEntity) {
+        return 1;
+    }
+
+    @Override
+    protected int getDefaultTickRateImpl(ForgeDirection side, int aCoverID, ActivityTransmitterData aCoverVariable,
         ICoverable aTileEntity) {
         return 5;
     }

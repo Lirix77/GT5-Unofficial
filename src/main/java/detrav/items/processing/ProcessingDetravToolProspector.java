@@ -10,6 +10,7 @@ import static detrav.enums.IDDetraveMetaGeneratedTool01.ProspectorScannerUHV;
 import static detrav.enums.IDDetraveMetaGeneratedTool01.ProspectorScannerUV;
 import static detrav.enums.IDDetraveMetaGeneratedTool01.ProspectorScannerZPM;
 
+import gregtech.api.enums.GTValues;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -26,7 +27,7 @@ import gregtech.api.util.GTModHandler;
 public class ProcessingDetravToolProspector implements gregtech.api.interfaces.IOreRecipeRegistrator {
 
     public ProcessingDetravToolProspector() {
-        OrePrefixes.toolHeadPickaxe.add(this);
+        OrePrefixes.toolHeadDrill.add(this);
     }
 
     public void registerOre(OrePrefixes aPrefix, Materials material, String aOreDictName, String aModName,
@@ -136,6 +137,59 @@ public class ProcessingDetravToolProspector implements gregtech.api.interfaces.I
                     .get(0),
                 'H', OrePrefixes.toolHeadDrill.get(material), 'P', OrePrefixes.plate.get(material), 'C',
                 OrePrefixes.circuit.get(Materials.UHV), 'X', ItemList.Sensor_UHV });
+
+        GTModHandler.addCraftingRecipe(
+            DetravMetaGeneratedTool01.INSTANCE.getToolWithStats(
+                100,
+                1,
+                material,
+                Materials.Iridium,
+                new long[] { 102400000L, GTValues.V[6], 6L, -1L }),
+            GTModHandler.RecipeBits.DISMANTLEABLE | GTModHandler.RecipeBits.DO_NOT_CHECK_FOR_COLLISIONS
+                | GTModHandler.RecipeBits.BUFFERED,
+            new Object[] { "EHR", "CSC", "PBP", 'S', ItemList.Cover_Screen, 'R', ItemList.Sensor_LuV, 'H',
+                OrePrefixes.toolHeadDrill.get(material), 'E', ItemList.Emitter_LuV, 'C',
+                OrePrefixes.circuit.get(Materials.LuV), 'P', OrePrefixes.plate.get(Materials.Iridium), 'B',
+                ItemList.BatteryHull_LuV_Full.get(1L) });
+        GTModHandler.addCraftingRecipe(
+            DetravMetaGeneratedTool01.INSTANCE.getToolWithStats(
+                102,
+                1,
+                material,
+                Materials.Osmium,
+                new long[] { 409600000L, GTValues.V[7], 7L, -1L }),
+            GTModHandler.RecipeBits.DISMANTLEABLE | GTModHandler.RecipeBits.DO_NOT_CHECK_FOR_COLLISIONS
+                | GTModHandler.RecipeBits.BUFFERED,
+            new Object[] { "EHR", "CSC", "PBP", 'S', ItemList.Cover_Screen, 'R', ItemList.Sensor_ZPM, 'H',
+                OrePrefixes.toolHeadDrill.get(material), 'E', ItemList.Emitter_ZPM, 'C',
+                OrePrefixes.circuit.get(Materials.ZPM), 'P', OrePrefixes.plate.get(Materials.Osmium), 'B',
+                ItemList.BatteryHull_ZPM_Full.get(1L) });
+        GTModHandler.addCraftingRecipe(
+            DetravMetaGeneratedTool01.INSTANCE.getToolWithStats(
+                104,
+                1,
+                material,
+                Materials.Neutronium,
+                new long[] { 1638400000L, GTValues.V[8], 8L, -1L }),
+            GTModHandler.RecipeBits.DISMANTLEABLE | GTModHandler.RecipeBits.DO_NOT_CHECK_FOR_COLLISIONS
+                | GTModHandler.RecipeBits.BUFFERED,
+            new Object[] { "EHR", "CSC", "PBP", 'S', ItemList.Cover_Screen, 'R', ItemList.Sensor_UV, 'H',
+                OrePrefixes.toolHeadDrill.get(material), 'E', ItemList.Emitter_UV, 'C',
+                OrePrefixes.circuit.get(Materials.UV), 'P', OrePrefixes.plate.get(Materials.Neutronium), 'B',
+                ItemList.BatteryHull_UV_Full.get(1L) });
+        GTModHandler.addCraftingRecipe(
+            DetravMetaGeneratedTool01.INSTANCE.getToolWithStats(
+                106,
+                1,
+                material,
+                Materials.Infinity,
+                new long[] { 6553600000L, GTValues.V[9], 9L, -1L }),
+            GTModHandler.RecipeBits.DISMANTLEABLE | GTModHandler.RecipeBits.DO_NOT_CHECK_FOR_COLLISIONS
+                | GTModHandler.RecipeBits.BUFFERED,
+            new Object[] { "EHR", "CSC", "PBP", 'S', ItemList.Cover_Screen, 'R', ItemList.Sensor_UHV, 'H',
+                OrePrefixes.toolHeadDrill.get(material), 'E', ItemList.Emitter_UHV, 'C',
+                OrePrefixes.circuit.get(Materials.UHV), 'P', OrePrefixes.plate.get(Materials.Infinity), 'B',
+                ItemList.BatteryHull_UHV_Full.get(1L) });
 
     }
 }

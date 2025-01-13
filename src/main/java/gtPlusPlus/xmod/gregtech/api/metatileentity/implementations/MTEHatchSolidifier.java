@@ -94,7 +94,8 @@ public class MTEHatchSolidifier extends MTEHatchInput {
     public void addUIWidgets(ModularWindow.Builder builder, UIBuildContext buildContext) {
         super.addUIWidgets(builder, buildContext);
         builder.widget(
-            new SlotWidget(new MoldSlot(inventoryHandler, moldSlot)).setPos(125, 35)
+            new SlotWidget(new MoldSlot(inventoryHandler, moldSlot)).setShiftClickPriority(-1)
+                .setPos(125, 35)
                 .setBackground(getGUITextureSet().getItemSlot(), GTUITextures.OVERLAY_SLOT_MOLD)
                 .setSize(18, 18));
     }

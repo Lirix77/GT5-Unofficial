@@ -182,7 +182,10 @@ public class GTRecipeRegistrator {
             || aData.mMaterial.mAmount <= 0
             || GTUtility.getFluidForFilledItem(aStack, false) != null
             || aData.mMaterial.mMaterial.mSubTags.contains(SubTag.NO_RECIPES)) return;
-        registerReverseMacerating(GTUtility.copyAmount(1, aStack), aData, aData.mPrefix == null);
+        // Prevents registering a quartz block -> 9x quartz dust recipe
+        if (!GTUtility.areStacksEqual(new ItemStack(Blocks.quartz_block, 1), aStack)) {
+            registerReverseMacerating(GTUtility.copyAmount(1, aStack), aData, aData.mPrefix == null, true);
+        }
         if (!GTUtility.areStacksEqual(GTModHandler.getIC2Item("iridiumOre", 1L), aStack)) {
             registerReverseSmelting(
                 GTUtility.copyAmount(1, aStack),
@@ -193,7 +196,8 @@ public class GTRecipeRegistrator {
                 GTUtility.copyAmount(1, aStack),
                 aData.mMaterial.mMaterial,
                 aData.mMaterial.mAmount,
-                aData.getByProduct(0));
+                aData.getByProduct(0),
+                true);
             registerReverseArcSmelting(GTUtility.copyAmount(1, aStack), aData);
         }
     }
@@ -202,9 +206,10 @@ public class GTRecipeRegistrator {
      * @param aStack          the stack to be recycled.
      * @param aMaterial       the Material.
      * @param aMaterialAmount the amount of it in Material Units.
+     * @param isRecycling     whether to put in recycling tab.
      */
     public static void registerReverseFluidSmelting(ItemStack aStack, Materials aMaterial, long aMaterialAmount,
-        MaterialStack aByproduct) {
+        MaterialStack aByproduct, boolean isRecycling) {
         if (aStack == null || aMaterial == null
             || aMaterial.mSmeltInto.mStandardMoltenFluid == null
             || !aMaterial.contains(SubTag.SMELTING_TO_FLUID)
@@ -232,9 +237,9 @@ public class GTRecipeRegistrator {
         }
         builder.fluidOutputs(aMaterial.mSmeltInto.getMolten((L * aMaterialAmount) / (M * aStack.stackSize)))
             .duration((int) Math.max(1, (24 * aMaterialAmount) / M))
-            .eut(powerUsage)
-            .recipeCategory(RecipeCategories.fluidExtractorRecycling)
-            .addTo(fluidExtractionRecipes);
+            .eut(powerUsage);
+        if (isRecycling) builder.recipeCategory(RecipeCategories.fluidExtractorRecycling);
+        builder.addTo(fluidExtractionRecipes);
     }
 
     /**
@@ -355,7 +360,8 @@ public class GTRecipeRegistrator {
     }
 
     public static void registerReverseMacerating(ItemStack aStack, Materials aMaterial, long aMaterialAmount,
-        MaterialStack aByProduct01, MaterialStack aByProduct02, MaterialStack aByProduct03, boolean aAllowHammer) {
+        MaterialStack aByProduct01, MaterialStack aByProduct02, MaterialStack aByProduct03, boolean aAllowHammer,
+        boolean isRecycling) {
         registerReverseMacerating(
             aStack,
             new ItemData(
@@ -363,10 +369,12 @@ public class GTRecipeRegistrator {
                 aByProduct01,
                 aByProduct02,
                 aByProduct03),
-            aAllowHammer);
+            aAllowHammer,
+            isRecycling);
     }
 
-    public static void registerReverseMacerating(ItemStack aStack, ItemData aData, boolean aAllowHammer) {
+    public static void registerReverseMacerating(ItemStack aStack, ItemData aData, boolean aAllowHammer,
+        boolean isRecycling) {
         if (aStack == null || aData == null) return;
         aData = new ItemData(aData);
 
@@ -401,9 +409,9 @@ public class GTRecipeRegistrator {
                     .itemOutputs(outputsArray)
                     .duration(
                         (aData.mMaterial.mMaterial == Materials.Marble ? 1 : (int) Math.max(16, tAmount / M)) * TICKS)
-                    .eut(4)
-                    .recipeCategory(RecipeCategories.maceratorRecycling)
-                    .addTo(maceratorRecipes);
+                    .eut(4);
+                if (isRecycling) recipeBuilder.recipeCategory(RecipeCategories.maceratorRecycling);
+                recipeBuilder.addTo(maceratorRecipes);
             }
         }
 

@@ -2,6 +2,7 @@ package goodgenerator.blocks.tileEntity;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
+import static gregtech.api.util.GTStructureUtility.chainAllGlasses;
 import static gregtech.api.util.GTStructureUtility.ofFrame;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.modularui.api.NumberFormatMUI;
+import com.gtnewhorizons.modularui.api.math.Alignment;
 import com.gtnewhorizons.modularui.common.widget.DynamicPositionedColumn;
 import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
@@ -46,7 +48,6 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEHatch;
-import gregtech.api.multitileentity.multiblock.casing.Glasses;
 import gregtech.api.objects.XSTR;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.check.CheckRecipeResult;
@@ -151,11 +152,6 @@ public class MTENeutronActivator extends MTETooltipMultiBlockBaseEM implements I
     }
 
     @Override
-    public int getPollutionPerTick(ItemStack aStack) {
-        return 0;
-    }
-
-    @Override
     public void loadNBTData(NBTTagCompound aNBT) {
         eV = aNBT.getInteger("mKeV");
         mCeil = aNBT.getInteger("mCeil");
@@ -180,7 +176,7 @@ public class MTENeutronActivator extends MTETooltipMultiBlockBaseEM implements I
 
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Neutron Activator")
+        tt.addMachineType("Neutron Activator, NA")
             .addInfo("Superluminal-velocity Motion.")
             .addInfo("The minimum height of the Speeding Pipe Casing is 4.")
             .addInfo("Per extra Speeding Pipe Casing will give time discount.")
@@ -233,7 +229,7 @@ public class MTENeutronActivator extends MTETooltipMultiBlockBaseEM implements I
                         onElementPass(MTENeutronActivator::onCasingFound, ofBlock(GregTechAPI.sBlockCasings4, 1))))
                 .addElement('D', ofBlock(GregTechAPI.sBlockCasings2, 6))
                 .addElement('F', ofFrame(Materials.Steel))
-                .addElement('G', Glasses.chainAllGlasses())
+                .addElement('G', chainAllGlasses())
                 .addElement('P', ofBlock(Loaders.speedingPipe, 0))
                 .addElement(
                     'X',
@@ -465,9 +461,12 @@ public class MTENeutronActivator extends MTETooltipMultiBlockBaseEM implements I
         screenElements
             .widget(
                 new TextWidget(StatCollector.translateToLocal("gui.NeutronActivator.0"))
-                    .setDefaultColor(COLOR_TEXT_WHITE.get()))
+                    .setTextAlignment(Alignment.CenterLeft)
+                    .setDefaultColor(COLOR_TEXT_WHITE.get())
+                    .setEnabled(widget -> getBaseMetaTileEntity().getErrorDisplayID() == 0))
             .widget(
                 new TextWidget().setStringSupplier(() -> numberFormat.format(eV / 1_000_000d) + " MeV")
+                    .setTextAlignment(Alignment.CenterLeft)
                     .setDefaultColor(COLOR_TEXT_WHITE.get())
                     .setEnabled(widget -> getBaseMetaTileEntity().getErrorDisplayID() == 0))
             .widget(new FakeSyncWidget.IntegerSyncer(() -> eV, val -> eV = val));

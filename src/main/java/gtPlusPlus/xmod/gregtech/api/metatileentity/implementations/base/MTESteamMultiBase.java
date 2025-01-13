@@ -37,8 +37,8 @@ import gregtech.api.util.HatchElementBuilder;
 import gregtech.api.util.IGTHatchAdder;
 import gregtech.api.util.shutdown.ShutDownReasonRegistry;
 import gtPlusPlus.core.util.minecraft.FluidUtils;
+import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MTEHatchSteamBusInput;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MTEHatchSteamBusOutput;
-import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MteHatchSteamBusInput;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import ru.justagod.cutter.GradleSide;
@@ -46,7 +46,7 @@ import ru.justagod.cutter.GradleSideOnly;
 
 public abstract class MTESteamMultiBase<T extends MTESteamMultiBase<T>> extends GTPPMultiBlockBase<T> {
 
-    public ArrayList<MteHatchSteamBusInput> mSteamInputs = new ArrayList<>();
+    public ArrayList<MTEHatchSteamBusInput> mSteamInputs = new ArrayList<>();
     public ArrayList<MTEHatchSteamBusOutput> mSteamOutputs = new ArrayList<>();
     public ArrayList<MTEHatchCustomFluidBase> mSteamInputFluids = new ArrayList<>();
 
@@ -175,7 +175,7 @@ public abstract class MTESteamMultiBase<T extends MTESteamMultiBase<T>> extends 
         if (aMetaTileEntity instanceof MTEHatchCustomFluidBase) {
             log("Adding Steam Input Hatch");
             aDidAdd = addToMachineListInternal(mSteamInputFluids, aMetaTileEntity, aBaseCasingIndex);
-        } else if (aMetaTileEntity instanceof MteHatchSteamBusInput) {
+        } else if (aMetaTileEntity instanceof MTEHatchSteamBusInput) {
             log(
                 "Trying to set recipe map. Type: "
                     + (getRecipeMap() != null ? getRecipeMap().unlocalizedName : "Null"));
@@ -230,7 +230,7 @@ public abstract class MTESteamMultiBase<T extends MTESteamMultiBase<T>> extends 
                 }
             }
         }
-        for (MteHatchSteamBusInput tHatch : validMTEList(mSteamInputs)) {
+        for (MTEHatchSteamBusInput tHatch : validMTEList(mSteamInputs)) {
             tHatch.mRecipeMap = getRecipeMap();
             for (int i = tHatch.getBaseMetaTileEntity()
                 .getSizeInventory() - 1; i >= 0; i--) {
@@ -267,7 +267,7 @@ public abstract class MTESteamMultiBase<T extends MTESteamMultiBase<T>> extends 
     @Override
     public ArrayList<ItemStack> getStoredInputs() {
         ArrayList<ItemStack> rList = new ArrayList<>();
-        for (MteHatchSteamBusInput tHatch : validMTEList(mSteamInputs)) {
+        for (MTEHatchSteamBusInput tHatch : validMTEList(mSteamInputs)) {
             tHatch.mRecipeMap = getRecipeMap();
             for (int i = tHatch.getBaseMetaTileEntity()
                 .getSizeInventory() - 1; i >= 0; i--) {
@@ -337,7 +337,7 @@ public abstract class MTESteamMultiBase<T extends MTESteamMultiBase<T>> extends 
     @Override
     public void updateSlots() {
         for (MTEHatchCustomFluidBase tHatch : validMTEList(mSteamInputFluids)) tHatch.updateSlots();
-        for (MteHatchSteamBusInput tHatch : validMTEList(mSteamInputs)) tHatch.updateSlots();
+        for (MTEHatchSteamBusInput tHatch : validMTEList(mSteamInputs)) tHatch.updateSlots();
     }
 
     @Override
@@ -357,7 +357,7 @@ public abstract class MTESteamMultiBase<T extends MTESteamMultiBase<T>> extends 
     @Override
     public boolean resetRecipeMapForAllInputHatches(RecipeMap<?> aMap) {
         boolean ret = super.resetRecipeMapForAllInputHatches(aMap);
-        for (MteHatchSteamBusInput hatch : mSteamInputs) {
+        for (MTEHatchSteamBusInput hatch : mSteamInputs) {
             if (resetRecipeMapForHatch(hatch, aMap)) {
                 ret = true;
             }
@@ -431,7 +431,7 @@ public abstract class MTESteamMultiBase<T extends MTESteamMultiBase<T>> extends 
 
             @Override
             public List<? extends Class<? extends IMetaTileEntity>> mteClasses() {
-                return Collections.singletonList(MteHatchSteamBusInput.class);
+                return Collections.singletonList(MTEHatchSteamBusInput.class);
             }
 
             @Override
