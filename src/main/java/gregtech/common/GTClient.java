@@ -75,7 +75,6 @@ import gregtech.api.metatileentity.BaseMetaPipeEntity;
 import gregtech.api.metatileentity.BaseMetaTileEntity;
 import gregtech.api.metatileentity.MetaPipeEntity;
 import gregtech.api.metatileentity.implementations.MTEBasicMachine;
-import gregtech.api.multitileentity.multiblock.base.MultiBlockPart;
 import gregtech.api.net.GTPacketClientPreference;
 import gregtech.api.objects.GTItemStack;
 import gregtech.api.recipe.RecipeCategory;
@@ -103,7 +102,6 @@ import gregtech.common.render.GTCapeRenderer;
 import gregtech.common.render.GTRendererBlock;
 import gregtech.common.render.LaserRenderer;
 import gregtech.common.render.MetaGeneratedToolRenderer;
-import gregtech.common.render.MultiTileRenderer;
 import gregtech.common.render.WormholeRenderer;
 import gregtech.common.render.items.DataStickRenderer;
 import gregtech.common.render.items.InfiniteSprayCanRenderer;
@@ -633,7 +631,6 @@ public class GTClient extends GTProxy implements Runnable {
     public void onLoad() {
         super.onLoad();
         GTRendererBlock.register();
-        new MultiTileRenderer();
         new DroneRender();
         new LaserRenderer();
         new WormholeRenderer();
@@ -841,8 +838,7 @@ public class GTClient extends GTProxy implements Runnable {
 
         if (GTUtility.isStackInList(aEvent.currentItem, GregTechAPI.sWireCutterList)
             || GTUtility.isStackInList(aEvent.currentItem, GregTechAPI.sSolderingToolList)
-            || (GTUtility.isStackInList(aEvent.currentItem, GregTechAPI.sSoftHammerList)
-                && aTileEntity instanceof MultiBlockPart) && aEvent.player.isSneaking()) {
+                && aEvent.player.isSneaking()) {
             if (((ICoverable) aTileEntity).getCoverIDAtSide(ForgeDirection.getOrientation(aEvent.target.sideHit)) == 0)
                 drawGrid(aEvent, false, false, aEvent.player.isSneaking());
             return;
@@ -1072,7 +1068,6 @@ public class GTClient extends GTProxy implements Runnable {
                 }
             }
             if (GTUtility.isStackInList(tCurrentItem, GregTechAPI.sWrenchList)
-                || GTUtility.isStackInList(tCurrentItem, GregTechAPI.sScrewdriverList)
                 || GTUtility.isStackInList(tCurrentItem, GregTechAPI.sHardHammerList)
                 || GTUtility.isStackInList(tCurrentItem, GregTechAPI.sSoftHammerList)
                 || GTUtility.isStackInList(tCurrentItem, GregTechAPI.sWireCutterList)

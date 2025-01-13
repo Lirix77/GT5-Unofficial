@@ -50,6 +50,7 @@ import com.gtnewhorizon.structurelib.structure.IStructureElementNoPlacement;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.modularui.api.drawable.ItemDrawable;
+import com.gtnewhorizons.modularui.api.math.Alignment;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
@@ -150,6 +151,12 @@ public class MTEWindmill extends MTEEnhancedMultiBlockBase<MTEWindmill>
             public boolean check(MTEWindmill t, World world, int x, int y, int z) {
                 TileEntity tileEntity = world.getTileEntity(x, y, z);
                 return t.setRotorBlock(tileEntity);
+            }
+
+            @Override
+            public boolean couldBeValid(MTEWindmill mteWindmill, World world, int x, int y, int z, ItemStack trigger) {
+                TileEntity tileEntity = world.getTileEntity(x, y, z);
+                return tileEntity instanceof TileEntityRotorBlock;
             }
 
             @Override
@@ -407,11 +414,6 @@ public class MTEWindmill extends MTEEnhancedMultiBlockBase<MTEWindmill>
     }
 
     @Override
-    public int getPollutionPerTick(ItemStack itemStack) {
-        return 0;
-    }
-
-    @Override
     public int getDamageToComponent(ItemStack itemStack) {
         return 0;
     }
@@ -617,7 +619,7 @@ public class MTEWindmill extends MTEEnhancedMultiBlockBase<MTEWindmill>
                     val -> this.getBaseMetaTileEntity()
                         .setActive(val)))
             .widget(
-                new TextWidget(GTUtility.trans("138", "Incomplete Structure."))
+                new TextWidget(GTUtility.trans("138", "Incomplete Structure.")).setTextAlignment(Alignment.CenterLeft)
                     .setDefaultColor(this.COLOR_TEXT_WHITE.get())
                     .setMaxWidth(150)
                     .setEnabled(widget -> !this.mMachine)

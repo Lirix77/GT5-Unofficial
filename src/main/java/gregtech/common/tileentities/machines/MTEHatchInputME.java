@@ -15,7 +15,6 @@ import java.util.stream.IntStream;
 
 import javax.annotation.Nullable;
 
-import gregtech.api.util.GTWaila;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -59,6 +58,7 @@ import appeng.api.networking.security.MachineSource;
 import appeng.api.storage.IMEMonitor;
 import appeng.api.storage.data.IAEFluidStack;
 import appeng.api.util.AECableType;
+import appeng.core.localization.WailaText;
 import appeng.me.GridAccessException;
 import appeng.me.helpers.AENetworkProxy;
 import appeng.me.helpers.IGridProxyable;
@@ -124,7 +124,7 @@ public class MTEHatchInputME extends MTEHatchInput implements IPowerChannelState
     }
 
     public MTEHatchInputME(String aName, boolean autoPullAvailable, int aTier, String[] aDescription,
-        ITexture[][][] aTextures) {
+                           ITexture[][][] aTextures) {
         super(aName, 1, aTier, aDescription, aTextures);
         this.autoPullAvailable = autoPullAvailable;
     }
@@ -327,7 +327,7 @@ public class MTEHatchInputME extends MTEHatchInput implements IPowerChannelState
 
     @Override
     public boolean onWireCutterRightClick(ForgeDirection side, ForgeDirection wrenchingSide, EntityPlayer aPlayer,
-        float aX, float aY, float aZ) {
+                                          float aX, float aY, float aZ) {
         additionalConnection = !additionalConnection;
         updateValidGridProxySides();
         aPlayer.addChatComponentMessage(
@@ -619,7 +619,7 @@ public class MTEHatchInputME extends MTEHatchInput implements IPowerChannelState
 
     @Override
     public boolean onRightclick(IGregTechTileEntity aBaseMetaTileEntity, EntityPlayer aPlayer, ForgeDirection side,
-        float aX, float aY, float aZ) {
+                                float aX, float aY, float aZ) {
         if (!(aPlayer instanceof EntityPlayerMP))
             return super.onRightclick(aBaseMetaTileEntity, aPlayer, side, aX, aY, aZ);
         ItemStack dataStick = aPlayer.inventory.getCurrentItem();
@@ -673,10 +673,10 @@ public class MTEHatchInputME extends MTEHatchInput implements IPowerChannelState
 
         builder.widget(
             SlotGroup.ofFluidTanks(
-                IntStream.range(0, SLOT_COUNT)
-                    .mapToObj(index -> createTankForFluidStack(storedFluids, index, 1))
-                    .collect(Collectors.toList()),
-                4)
+                    IntStream.range(0, SLOT_COUNT)
+                        .mapToObj(index -> createTankForFluidStack(storedFluids, index, 1))
+                        .collect(Collectors.toList()),
+                    4)
                 .phantom(true)
                 .widgetCreator((slotIndex, h) -> (FluidSlotWidget) new FluidSlotWidget(h) {
 
@@ -736,10 +736,10 @@ public class MTEHatchInputME extends MTEHatchInput implements IPowerChannelState
 
         builder.widget(
             SlotGroup.ofFluidTanks(
-                IntStream.range(0, SLOT_COUNT)
-                    .mapToObj(index -> createTankForFluidStack(storedInformationFluids, index, Integer.MAX_VALUE))
-                    .collect(Collectors.toList()),
-                4)
+                    IntStream.range(0, SLOT_COUNT)
+                        .mapToObj(index -> createTankForFluidStack(storedInformationFluids, index, Integer.MAX_VALUE))
+                        .collect(Collectors.toList()),
+                    4)
                 .phantom(true)
                 .widgetCreator((slotIndex, h) -> (FluidSlotWidget) new FluidSlotWidget(h) {
 
@@ -774,44 +774,44 @@ public class MTEHatchInputME extends MTEHatchInput implements IPowerChannelState
 
         if (autoPullAvailable) {
             builder.widget(new ButtonWidget().setOnClick((clickData, widget) -> {
-                if (clickData.mouseButton == 0) {
-                    setAutoPullFluidList(!autoPullFluidList);
-                } else if (clickData.mouseButton == 1 && !widget.isClient()) {
-                    widget.getContext()
-                        .openSyncedWindow(CONFIG_WINDOW_ID);
-                }
-            })
-                .setPlayClickSound(true)
-                .setBackground(() -> {
-                    if (autoPullFluidList) {
-                        return new IDrawable[] { GTUITextures.BUTTON_STANDARD_PRESSED,
-                            GTUITextures.OVERLAY_BUTTON_AUTOPULL_ME };
-                    } else {
-                        return new IDrawable[] { GTUITextures.BUTTON_STANDARD,
-                            GTUITextures.OVERLAY_BUTTON_AUTOPULL_ME_DISABLED };
-                    }
-                })
-                .addTooltips(
-                    Arrays.asList(
-                        StatCollector.translateToLocal("GT5U.machines.stocking_hatch.auto_pull.tooltip.1"),
-                        StatCollector.translateToLocal("GT5U.machines.stocking_hatch.auto_pull.tooltip.2")))
-                .setSize(16, 16)
-                .setPos(80, 10))
+                        if (clickData.mouseButton == 0) {
+                            setAutoPullFluidList(!autoPullFluidList);
+                        } else if (clickData.mouseButton == 1 && !widget.isClient()) {
+                            widget.getContext()
+                                .openSyncedWindow(CONFIG_WINDOW_ID);
+                        }
+                    })
+                    .setPlayClickSound(true)
+                    .setBackground(() -> {
+                        if (autoPullFluidList) {
+                            return new IDrawable[] { GTUITextures.BUTTON_STANDARD_PRESSED,
+                                GTUITextures.OVERLAY_BUTTON_AUTOPULL_ME };
+                        } else {
+                            return new IDrawable[] { GTUITextures.BUTTON_STANDARD,
+                                GTUITextures.OVERLAY_BUTTON_AUTOPULL_ME_DISABLED };
+                        }
+                    })
+                    .addTooltips(
+                        Arrays.asList(
+                            StatCollector.translateToLocal("GT5U.machines.stocking_hatch.auto_pull.tooltip.1"),
+                            StatCollector.translateToLocal("GT5U.machines.stocking_hatch.auto_pull.tooltip.2")))
+                    .setSize(16, 16)
+                    .setPos(80, 10))
                 .widget(new FakeSyncWidget.BooleanSyncer(() -> autoPullFluidList, this::setAutoPullFluidList));
         }
 
         builder.widget(
-            new DrawableWidget().setDrawable(GTUITextures.PICTURE_ARROW_DOUBLE)
-                .setPos(82, 30)
-                .setSize(12, 12))
+                new DrawableWidget().setDrawable(GTUITextures.PICTURE_ARROW_DOUBLE)
+                    .setPos(82, 30)
+                    .setSize(12, 12))
             .widget(TextWidget.dynamicString(() -> {
-                boolean isActive = isActive();
-                boolean isPowered = isPowered();
-                boolean isBooting = isBooting();
-                EnumChatFormatting color = (isActive && isPowered) ? EnumChatFormatting.GREEN
-                    : EnumChatFormatting.DARK_RED;
-                return color + GTWaila.getPowerState(isActive, isPowered, isBooting);
-            })
+                    boolean isActive = isActive();
+                    boolean isPowered = isPowered();
+                    boolean isBooting = isBooting();
+                    EnumChatFormatting color = (isActive && isPowered) ? EnumChatFormatting.GREEN
+                        : EnumChatFormatting.DARK_RED;
+                    return color + WailaText.getPowerState(isActive, isPowered, isBooting);
+                })
                 .setTextAlignment(Alignment.Center)
                 .setSize(90, 9)
                 .setPos(43, 84));
@@ -842,9 +842,9 @@ public class MTEHatchInputME extends MTEHatchInput implements IPowerChannelState
                     Alignment.TopRight.getAlignedPos(new Size(PARENT_WIDTH, PARENT_HEIGHT), new Size(WIDTH, HEIGHT))
                         .add(WIDTH - 3, 0)));
         builder.widget(
-            TextWidget.localised("GT5U.machines.stocking_hatch.min_amount")
-                .setPos(3, 2)
-                .setSize(74, 14))
+                TextWidget.localised("GT5U.machines.stocking_hatch.min_amount")
+                    .setPos(3, 2)
+                    .setSize(74, 14))
             .widget(
                 new NumericWidget().setSetter(val -> minAutoPullAmount = (int) val)
                     .setGetter(() -> minAutoPullAmount)
@@ -856,9 +856,9 @@ public class MTEHatchInputME extends MTEHatchInput implements IPowerChannelState
                     .setPos(3, 18)
                     .setBackground(GTUITextures.BACKGROUND_TEXT_FIELD));
         builder.widget(
-            TextWidget.localised("GT5U.machines.stocking_bus.refresh_time")
-                .setPos(3, 42)
-                .setSize(74, 14))
+                TextWidget.localised("GT5U.machines.stocking_bus.refresh_time")
+                    .setPos(3, 42)
+                    .setSize(74, 14))
             .widget(
                 new NumericWidget().setSetter(val -> autoPullRefreshTime = (int) val)
                     .setGetter(() -> autoPullRefreshTime)
@@ -870,9 +870,9 @@ public class MTEHatchInputME extends MTEHatchInput implements IPowerChannelState
                     .setPos(3, 58)
                     .setBackground(GTUITextures.BACKGROUND_TEXT_FIELD));
         builder.widget(
-            TextWidget.localised("GT5U.machines.stocking_bus.force_check")
-                .setPos(3, 88)
-                .setSize(50, 14))
+                TextWidget.localised("GT5U.machines.stocking_bus.force_check")
+                    .setPos(3, 88)
+                    .setSize(50, 14))
             .widget(
                 new CycleButtonWidget().setToggle(() -> expediteRecipeCheck, val -> setRecipeCheck(val))
                     .setTextureGetter(
@@ -896,7 +896,7 @@ public class MTEHatchInputME extends MTEHatchInput implements IPowerChannelState
     @Override
     @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor,
-        IWailaConfigHandler config) {
+                             IWailaConfigHandler config) {
         if (!autoPullAvailable) {
             super.getWailaBody(itemStack, currenttip, accessor, config);
             return;
@@ -919,7 +919,7 @@ public class MTEHatchInputME extends MTEHatchInput implements IPowerChannelState
     @Override
     @GradleSideOnly(GradleSide.CLIENT)
     public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
-        int z) {
+                                int z) {
         if (!autoPullAvailable) {
             super.getWailaNBTData(player, tile, tag, world, x, y, z);
             return;

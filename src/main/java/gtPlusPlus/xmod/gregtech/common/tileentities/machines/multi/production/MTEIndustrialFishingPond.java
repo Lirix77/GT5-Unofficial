@@ -175,8 +175,18 @@ public class MTEIndustrialFishingPond extends GTPPMultiBlockBase<MTEIndustrialFi
     }
 
     @Override
+    protected IIconContainer getActiveGlowOverlay() {
+        return Textures.BlockIcons.OVERLAY_FRONT_VACUUM_FREEZER_ACTIVE_GLOW;
+    }
+
+    @Override
     protected IIconContainer getInactiveOverlay() {
         return Textures.BlockIcons.OVERLAY_FRONT_VACUUM_FREEZER;
+    }
+
+    @Override
+    protected IIconContainer getInactiveGlowOverlay() {
+        return Textures.BlockIcons.OVERLAY_FRONT_VACUUM_FREEZER_GLOW;
     }
 
     @Override
@@ -222,6 +232,10 @@ public class MTEIndustrialFishingPond extends GTPPMultiBlockBase<MTEIndustrialFi
         setModeFromInputStacks(tItemInputs);
 
         ItemStack[] mFishOutput = generateLoot();
+        if (mFishOutput == null) {
+            return CheckRecipeResultRegistry.NO_RECIPE;
+        }
+
         mFishOutput = removeNulls(mFishOutput);
         GTRecipe g = new GTRecipe(
             true,

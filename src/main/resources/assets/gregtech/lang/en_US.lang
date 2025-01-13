@@ -10,14 +10,56 @@ itemGroup.GregTech.Materials=Materials
 itemGroup.GregTech.Ores=Ores
 
 item.gt.advancedsensorcard.name=GregTech Advanced Sensor Card
+gt.blackholerenderer.name=Black Hole Renderer
+gt.block.longdistancepipe.name=Long Distance Pipeline Pipe
+gt.blockcasings.cyclotron_coils.name=Solenoid Superconductor Coil
+gt.blockcasings.name=Machine Casing
+gt.blockcasings2.name=Machine Casing
+gt.blockcasings3.name=Machine Casing
+gt.blockcasings4.name=Machine Casing
+gt.blockcasings5.name=Machine Casing
+gt.blockcasings6.name=Machine Casing
+gt.blockcasings8.name=Machine Casing
+gt.blockcasings9.name=Machine Casing
+gt.blockcasings10.name=Machine Casing
+gt.blockcasings11.name=Machine Casing
+gt.blockconcretes.name=Concrete
+gt.blockframes.name=Frame
+gt.blockgem1.name=Block
+gt.blockgem2.name=Block
+gt.blockgem3.name=Block
+gt.blockglass1.name=Glass
+gt.blockgranites.name=Granite
+gt.blockmachines.name=Machine
+gt.blockmetal1.name=Block
+gt.blockmetal2.name=Block
+gt.blockmetal3.name=Block
+gt.blockmetal4.name=Block
+gt.blockmetal5.name=Block
+gt.blockmetal6.name=Block
+gt.blockmetal7.name=Block
+gt.blockmetal8.name=Block
+gt.blockmetal9.name=Block
+gt.blockores.name=Ore
+gt.blockreinforced.name=Reinforced Block
+gt.blockstones.name=Stone
+gt.blocktintedglass.name=Tinted Industrial Glass
+gt.wormholerenderer.name=Wormhole Renderer
+item.gt.comb.name=Comb
+item.gt.drop.name=Drop
+item.gt.pollen.name=Pollen
+item.gt.propolis.name=Propolis
+tile.gt.dronerender.name=Drone Renderer
 
 GT5U.autoplace.error.no_hatch=§cSuggested to place hatch §4%s§c but none was found
 GT5U.autoplace.error.no_mte.id=§cSuggested to place machine with meta ID §4%s§c but none was found
 GT5U.autoplace.error.no_mte.class_name=§cSuggested to place machine with class name §4%d§c but none was found
+GT5U.providesfullhazmatprotection=Provides full hazmat protection.
 
 # Multiblock Tooltip Builder Keywords
 # Context can be found in the class gregtech.api.util.MultiblockTooltipBuilder
 GT5U.MBTT.MachineType=Machine Type
+GT5U.MBTT.Parallels=Processes up to %d recipes at once
 GT5U.MBTT.Dimensions=Dimensions
 GT5U.MBTT.Hollow=(Hollow)
 GT5U.MBTT.Structure=Structure
@@ -32,6 +74,7 @@ GT5U.MBTT.InputBus=Input Bus
 GT5U.MBTT.InputHatch=Input Hatch
 GT5U.MBTT.OutputBus=Output Bus
 GT5U.MBTT.OutputHatch=Output Hatch
+GT5U.MBTT.TecTechHatch=Supports TecTech Multi-Amp and Laser Hatches!
 GT5U.MBTT.Causes=Causes
 GT5U.MBTT.PPS=pollution per second
 GT5U.MBTT.Hold=Hold
@@ -101,6 +144,8 @@ GT5U.coil.UXV=Hypogen
 GT5U.coil.MAX=Eternal
 
 GT5U.MS.multismelting=Multi smelting
+
+gt.casing.tiertooltip=Casing Tier: %s
 
 # Machine types
 gt.recipe.alloysmelter=Alloy Smelter
@@ -631,13 +676,20 @@ GT5U.item.tank.locked_to=Content locked to %s
 gt.behaviour.paintspray.infinite.gui.header=Select a Color
 gt.behaviour.paintspray.infinite.gui.lock_error=§eSpray can is §clocked§e! §bSneak middle-click to unlock.
 gt.behaviour.paintspray.infinite.gui.solvent=Solvent
+gt.behaviour.paintspray.infinite.gui.shake_toggle=Allow/disallow color iteration
 
 gt.behaviour.paintspray.infinite.tooltip.infinite=Infinite uses
 gt.behaviour.paintspray.infinite.tooltip.more_info=Hold SHIFT for more information
+gt.behaviour.paintspray.infinite.tooltip.locked=Locked
+gt.behaviour.paintspray.infinite.tooltip.preventing_shake=Left click action disabled
+
 gt.behaviour.paintspray.infinite.tooltip.switch=Left Click: Change color (sneak to reverse direction)
 gt.behaviour.paintspray.infinite.tooltip.pick=Middle Click block: Copy color to spray can
 gt.behaviour.paintspray.infinite.tooltip.lock=Sneak Middle Click: Lock or unlock spray can
 gt.behaviour.paintspray.infinite.tooltip.gui=Middle Click: Open color choice GUI
+gt.behaviour.paintspray.infinite.tooltip.prevent_shake=%s-Middle Click: Allow/prevent left click action
+gt.behaviour.paintspray.infinite.tooltip.ctrl_pc=Ctrl
+gt.behaviour.paintspray.infinite.tooltip.ctrl_mac=Command
 
 GT5U.hatch.disableFilter.true=Input Filter §cOff§r
 GT5U.hatch.disableFilter.false=Input Filter §aOn§r
@@ -782,6 +834,9 @@ GT5U.waila.drone_downlink.noConnection=Not connected
 GT5U.waila.drone_downlink.connection=Connect to centre:
 GT5U.waila.drone_downlink.connectionCount=Connection Count:
 GT5U.waila.drone_downlink.droneLevel=Drone Level:
+GT5U.waila.producing=Producing:
+GT5U.waila.producing.andmore=  And %d More...
+
 
 achievement.flintpick=First Tools
 achievement.flintpick.desc=Craft a flint pick

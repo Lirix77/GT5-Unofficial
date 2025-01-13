@@ -4,18 +4,24 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_ME_HATCH;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_ME_HATCH_ACTIVE;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
@@ -35,9 +41,11 @@ import appeng.items.storage.ItemBasicStorageCell;
 import appeng.me.GridAccessException;
 import appeng.me.helpers.AENetworkProxy;
 import appeng.me.helpers.IGridProxyable;
-import appeng.util.IWideReadableNumberConverter;
 import appeng.util.Platform;
 import appeng.util.ReadableNumberConverter;
+import appeng.util.item.AEItemStack;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import gregtech.GTMod;
 import gregtech.api.enums.ItemList;
 import gregtech.api.gui.modularui.GTUIInfos;
@@ -47,6 +55,10 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.implementations.MTEHatchOutputBus;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTUtility;
+import mcp.mobius.waila.api.IWailaConfigHandler;
+import mcp.mobius.waila.api.IWailaDataAccessor;
+import ru.justagod.cutter.GradleSide;
+import ru.justagod.cutter.GradleSideOnly;
 
 public class MTEHatchOutputBusME extends MTEHatchOutputBus implements IPowerChannelState {
 
@@ -185,7 +197,7 @@ public class MTEHatchOutputBusME extends MTEHatchOutputBus implements IPowerChan
 
     @Override
     public boolean onWireCutterRightClick(ForgeDirection side, ForgeDirection wrenchingSide, EntityPlayer aPlayer,
-        float aX, float aY, float aZ) {
+                                          float aX, float aY, float aZ) {
         additionalConnection = !additionalConnection;
         updateValidGridProxySides();
         aPlayer.addChatComponentMessage(
@@ -262,7 +274,7 @@ public class MTEHatchOutputBusME extends MTEHatchOutputBus implements IPowerChan
             tooltip.add(
                 "Current cache capacity: " + EnumChatFormatting.YELLOW
                     + ReadableNumberConverter.INSTANCE
-                        .toWideReadableForm(stack.stackTagCompound.getLong("baseCapacity")));
+                    .toWideReadableForm(stack.stackTagCompound.getLong("baseCapacity")));
         }
     }
 
@@ -339,13 +351,97 @@ public class MTEHatchOutputBusME extends MTEHatchOutputBus implements IPowerChan
     }
 
     @Override
+    @GradleSideOnly(GradleSide.CLIENT)
+    public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
+                                int z) {
+        super.getWailaNBTData(player, tile, tag, world, x, y, z);
+        tag.setLong("cacheCapacity", getCacheCapacity());
+        tag.setInteger("stackCount", itemCache.size());
+
+        IAEItemStack[] stacks = itemCache.toArray(new IAEItemStack[0]);
+
+        Arrays.sort(
+            stacks,
+            Comparator.comparingLong(IAEItemStack::getStackSize)
+                .reversed());
+
+        if (stacks.length > 10) {
+            stacks = Arrays.copyOf(stacks, 10);
+        }
+
+        NBTTagList tagList = new NBTTagList();
+        tag.setTag("stacks", tagList);
+
+        for (IAEItemStack stack : stacks) {
+            NBTTagCompound stackTag = new NBTTagCompound();
+            stack.writeToNBT(stackTag);
+            tagList.appendTag(stackTag);
+        }
+    }
+
+    @Override
+    @GradleSideOnly(GradleSide.CLIENT)
+    public void getWailaBody(ItemStack itemStack, List<String> ss, IWailaDataAccessor accessor,
+                             IWailaConfigHandler config) {
+        super.getWailaBody(itemStack, ss, accessor, config);
+
+        NBTTagCompound tag = accessor.getNBTData();
+
+        ss.add(
+            String.format(
+                "Item cache capacity: %s%s%s",
+                EnumChatFormatting.GOLD,
+                GTUtility.formatNumbers(tag.getLong("cacheCapacity")),
+                EnumChatFormatting.RESET));
+
+        if (!GuiScreen.isShiftKeyDown()) {
+            ss.add("Hold Shift for more info");
+            return;
+        }
+
+        NBTTagList stacks = tag.getTagList("stacks", 10);
+        int stackCount = tag.getInteger("stackCount");
+
+        if (stackCount == 0) {
+            ss.add("This bus has no cached stacks");
+        } else {
+            ss.add(
+                String.format(
+                    "The bus contains %s%d%s cached stack%s: ",
+                    EnumChatFormatting.GOLD,
+                    stackCount,
+                    EnumChatFormatting.RESET,
+                    stackCount > 1 ? "s" : ""));
+
+            for (int i = 0; i < stacks.tagCount(); i++) {
+                IAEItemStack stack = AEItemStack.loadItemStackFromNBT(stacks.getCompoundTagAt(i));
+
+                ss.add(
+                    String.format(
+                        "%s: %s%s%s",
+                        stack.getItemStack()
+                            .getDisplayName(),
+                        EnumChatFormatting.GOLD,
+                        GTUtility.formatNumbers(stack.getStackSize()),
+                        EnumChatFormatting.RESET));
+            }
+
+            if (stackCount > stacks.tagCount()) {
+                ss.add(EnumChatFormatting.ITALIC + "And " + (stackCount - stacks.tagCount()) + " more...");
+            }
+        }
+    }
+
+    @Override
     public String[] getInfoData() {
         List<String> ss = new ArrayList<>();
         ss.add(
             "The bus is " + ((getProxy() != null && getProxy().isActive()) ? EnumChatFormatting.GREEN + "online"
                 : EnumChatFormatting.RED + "offline" + getAEDiagnostics()) + EnumChatFormatting.RESET);
-        IWideReadableNumberConverter nc = ReadableNumberConverter.INSTANCE;
-        ss.add("Item cache capacity: " + nc.toWideReadableForm(getCacheCapacity()));
+        ss.add(
+            "Item cache capacity: " + EnumChatFormatting.GOLD
+                + GTUtility.formatNumbers(getCacheCapacity())
+                + EnumChatFormatting.RESET);
         if (itemCache.isEmpty()) {
             ss.add("The bus has no cached items");
         } else {
@@ -356,7 +452,7 @@ public class MTEHatchOutputBusME extends MTEHatchOutputBus implements IPowerChan
                     s.getItem()
                         .getItemStackDisplayName(s.getItemStack()) + ": "
                         + EnumChatFormatting.GOLD
-                        + nc.toWideReadableForm(s.getStackSize())
+                        + GTUtility.formatNumbers(s.getStackSize())
                         + EnumChatFormatting.RESET);
                 if (++counter > 100) break;
             }
