@@ -1398,13 +1398,17 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
 
     @Override
     public void doExplosion(long aAmount) {
-        if (canAccessData()) {
+        if (!canAccessData()) {
+            return;
+        }
+        try {
             // This is only for Electric Machines
             if (GregTechAPI.sMachineWireFire && mMetaTileEntity.isElectric()) {
                 try {
                     mReleaseEnergy = true;
                     IEnergyConnected.Util.emitEnergyToNetwork(V[5], Math.max(1, getStoredEU() / V[5]), this);
-                } catch (Exception ignored) {}
+                } catch (Exception ignored) {
+                }
             }
             mReleaseEnergy = false;
             // Normal Explosion Code
@@ -1420,7 +1424,7 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
             }
             Pollution.addPollution((TileEntity) this, GTMod.gregtechproxy.mPollutionOnExplosion);
             mMetaTileEntity.doExplosion(aAmount);
-        }
+        } catch (Exception ignored){}
     }
 
     public void dropItems(ItemStack tItem) {
@@ -2536,11 +2540,6 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
     @Override
     public int[] getTimeStatistics() {
         return mTimeStatistics;
-    }
-
-    @Override
-    public boolean shouldJoinIc2Enet(){
-        return true;
     }
 
     @Override

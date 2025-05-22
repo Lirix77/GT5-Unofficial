@@ -2,6 +2,8 @@ package gtPlusPlus.core.proxy;
 
 import java.util.ArrayList;
 
+import gtPlusPlus.core.tileentities.general.TileEntityDecayablesChest;
+import gtPlusPlus.core.client.renderer.RenderDecayChest;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderFireball;
 import net.minecraft.entity.player.EntityPlayer;
@@ -78,7 +80,7 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntityLightningAttack.class, new RenderFireball(1F));
         // Tiles
         //Logger.INFO("Registering Custom Renderer for the Lead Lined Chest.");
-        //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDecayablesChest.class, new RenderDecayChest());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDecayablesChest.class, new RenderDecayChest());
     }
 
     @Override

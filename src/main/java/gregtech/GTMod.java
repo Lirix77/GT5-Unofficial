@@ -514,16 +514,6 @@ public class GTMod implements IGTMod {
             GTForestryCompat.transferSqueezerRecipes();
         }
         MTEDigitalChestBase.registerAEIntegration();
-        ItemStack facade = AEApi.instance()
-            .definitions()
-            .items()
-            .facade()
-            .maybeItem()
-            .transform(i -> new ItemStack(i, 1, GTValues.W))
-            .orNull();
-        if (facade != null) {
-            GregTechAPI.registerCover(facade, null, new CoverFacadeAE());
-        }
 
         Arrays
             .stream(

@@ -2838,33 +2838,6 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
                 8).getStackForm(1L));
     }
 
-    private static void registerBetterJukebox() {
-        ItemList.BetterJukebox_LV.set(
-            new MTEBetterJukebox(
-                BETTER_JUKEBOX_LV.ID,
-                "basicmachine.betterjukebox.tier.01",
-                "Basic Electric Jukebox",
-                1).getStackForm(1L));
-        ItemList.BetterJukebox_MV.set(
-            new MTEBetterJukebox(
-                BETTER_JUKEBOX_MV.ID,
-                "basicmachine.betterjukebox.tier.02",
-                "Advanced Electric Jukebox",
-                2).getStackForm(1L));
-        ItemList.BetterJukebox_HV.set(
-            new MTEBetterJukebox(
-                BETTER_JUKEBOX_HV.ID,
-                "basicmachine.betterjukebox.tier.03",
-                "Advanced Electric Jukebox II",
-                3).getStackForm(1L));
-        ItemList.BetterJukebox_EV.set(
-            new MTEBetterJukebox(BETTER_JUKEBOX_EV.ID, "basicmachine.betterjukebox.tier.04", "Extreme Music Mixer", 4)
-                .getStackForm(1L));
-        ItemList.BetterJukebox_IV.set(
-            new MTEBetterJukebox(BETTER_JUKEBOX_IV.ID, "basicmachine.betterjukebox.tier.05", "Duke Mix'em 3D", 5)
-                .getStackForm(1L));
-    }
-
     private static void registerChestBuffer() {
         ItemList.Automation_ChestBuffer_ULV.set(
             new MTEChestBuffer(
@@ -12894,7 +12867,6 @@ public class LoaderMetaTileEntities implements Runnable { // TODO CHECK CIRCUIT 
         registerElectrolyzer();
         registerCircuitAssembler();
         registerTurboCharger4By4();
-        registerBetterJukebox();
         registerUnpackager();
         registerPrinter();
         registerOven();

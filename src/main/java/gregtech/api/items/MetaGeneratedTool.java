@@ -56,7 +56,6 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.TurbineStatCalculator;
 import gregtech.common.tools.ToolTurbine;
 import mods.railcraft.api.core.items.IToolCrowbar;
-import mrtjp.projectred.api.IScrewdriver;
 
 /**
  * This is an example on how you can create a Tool ItemStack, in this case a Bismuth Wrench:
@@ -68,10 +67,9 @@ import mrtjp.projectred.api.IScrewdriver;
         @Optional.Interface(iface = "forestry.api.arboriculture.IToolGrafter", modid = "ForestryAPI|arboriculture"),
         @Optional.Interface(iface = "mods.railcraft.api.core.items.IToolCrowbar", modid = "RailcraftAPI|items"),
         @Optional.Interface(iface = "buildcraft.api.tools.IToolWrench", modid = "BuildCraftAPI|tools"),
-        @Optional.Interface(iface = "crazypants.enderio.api.tool.ITool", modid = "EnderIOAPI|Tools"),
-        @Optional.Interface(iface = "mrtjp.projectred.api.IScrewdriver", modid = "ProjRed|Core"), })
+        @Optional.Interface(iface = "crazypants.enderio.api.tool.ITool", modid = "EnderIOAPI|Tools") })
 public abstract class MetaGeneratedTool extends MetaBaseItem
-    implements IDamagableItem, IToolGrafter, IToolCrowbar, IToolWrench, ITool, IScrewdriver, IAEWrench {
+    implements IDamagableItem, IToolGrafter, IToolCrowbar, IToolWrench, ITool, IAEWrench {
 
     /**
      * All instances of this Item Class are listed here. This gets used to register the Renderer to all Items of this
@@ -810,23 +808,6 @@ public abstract class MetaGeneratedTool extends MetaBaseItem
     @Override
     public boolean canUse(ItemStack stack, EntityPlayer player, int x, int y, int z) {
         return canWrench(player, x, y, z);
-    }
-
-    // ProjectRed screwdriver
-    @Override
-    public boolean canUse(EntityPlayer player, ItemStack stack) {
-        if (player == null) return false;
-        if (GTUtility.isStackInvalid(stack) || !isItemStackUsable(stack)) return false;
-        IToolStats tStats = getToolStats(stack);
-        return tStats != null && tStats.isScrewdriver();
-    }
-
-    @Override
-    public void damageScrewdriver(EntityPlayer player, ItemStack stack) {
-        if (player == null) return;
-        if (GTUtility.isStackInvalid(stack) || !isItemStackUsable(stack)) return;
-        IToolStats tStats = getToolStats(stack);
-        if (tStats != null) doDamage(stack, tStats.getToolDamagePerEntityAttack());
     }
 
     @Override

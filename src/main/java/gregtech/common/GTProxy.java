@@ -2203,7 +2203,9 @@ public abstract class GTProxy implements IGTMod, IFuelHandler {
 
     @SubscribeEvent
     public void onWorldUnload(WorldEvent.Unload event) {
-        for (TileEntity tileEntity : event.world.loadedTileEntityList) {
+        List<TileEntity> tileEntities = new ArrayList<>(event.world.loadedTileEntityList);
+
+        for (TileEntity tileEntity : tileEntities) {
             if (tileEntity instanceof IGregTechTileEntity) {
                 tileEntity.onChunkUnload();
             }

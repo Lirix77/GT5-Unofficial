@@ -11,6 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -196,13 +197,11 @@ public class ToolWrench extends GTTool {
     @Override
     public void onBreakBlock(@Nonnull EntityPlayer player, int x, int y, int z, @Nonnull Block block, byte metadata,
         TileEntity tile, @Nonnull BlockEvent.BreakEvent event) {
+        final World world = player.worldObj;
         if (tile instanceof IWrenchable wrenchable) {
-            if (!wrenchable.wrenchCanRemove(player)) {
-                event.setCanceled(true);
-                return;
-            }
-            wrenchableDrop = wrenchable.getWrenchDrop(player);
-            wrenchableDropRate = wrenchable.getWrenchDropRate();
+                ItemStack drop = wrenchable.getWrenchDrop(player);
+                world.setBlockToAir(x, y, z);
+                world.spawnEntityInWorld(new EntityItem(world, x, y, z, drop));
         }
         if (block instanceof AEBaseTileBlock aeBaseTileBlock) {
             if (LastEventFromThis) {
@@ -242,29 +241,6 @@ public class ToolWrench extends GTTool {
                 player.setSneaking(sneak);
             }
         }
-    }
-
-    @Override
-    public int convertBlockDrops(List<ItemStack> drops, ItemStack Stack, EntityPlayer player, Block block, int x, int y,
-        int z, byte metaData, int fortune, boolean silkTouch, BlockEvent.HarvestDropsEvent event) {
-        ItemStack drop = null;
-        int modified = 0;
-        if (wrenchableDrop != null) {
-            drop = wrenchableDrop;
-            wrenchableDrop = null;
-            modified = wrenchableDropRate == 1.0f ? 3 : 10;
-            wrenchableDropRate = 0.0f;
-        } else if (block == Blocks.bookshelf || block == Blocks.ender_chest) {
-            drop = new ItemStack(block);
-            modified = 1;
-        }
-
-        if (drop != null) {
-            event.dropChance = 1.0f;
-            drops.clear();
-            drops.add(drop);
-        }
-        return modified;
     }
 
     @Override

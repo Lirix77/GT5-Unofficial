@@ -3910,9 +3910,11 @@ public class GTUtility {
 
     public static FakePlayer getFakePlayer(IGregTechTileEntity aBaseMetaTileEntity) {
         if (aBaseMetaTileEntity.getWorld() instanceof WorldServer) {
-            return FakePlayerFactory.get(
+            FakePlayer res = FakePlayerFactory.get(
                 (WorldServer) aBaseMetaTileEntity.getWorld(),
                 new GameProfile(aBaseMetaTileEntity.getOwnerUuid(), aBaseMetaTileEntity.getOwnerName()));
+            res.capabilities.allowEdit = true;
+            return res;
         }
         return null;
     }

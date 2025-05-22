@@ -93,9 +93,8 @@ public class TecTechRecipeMaps {
         .dontUseProgressBar()
         .neiTransferRect(83, 38, 30, 13)
         .frontend(GodforgeUpgradeCostFrontend::new)
-        .neiHandlerInfo(
-            builder -> builder.setDisplayStack(CustomItemList.Machine_Multi_ForgeOfGods.get(1))
-                .setHeight(100))
+        .neiHandlerInfo(Invoke.clientValue(()-> builder -> builder.setDisplayStack(CustomItemList.Machine_Multi_ForgeOfGods.get(1))
+                .setHeight(100)))
         .build();
 
 }

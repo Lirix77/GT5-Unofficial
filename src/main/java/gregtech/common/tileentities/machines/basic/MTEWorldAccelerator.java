@@ -308,42 +308,6 @@ public class MTEWorldAccelerator extends MTETieredMachineBlock {
 
     @Override
     public void onPostTick(IGregTechTileEntity pBaseMetaTileEntity, long pTick) {
-        try {
-            if (!pBaseMetaTileEntity.isServerSide()) {
-                return;
-            }
-
-            long tEnergyDemand = getEnergyDemand(getSpeedTierOverride(), getRadiusTierOverride(), mMode == 1);
-
-            // Do we have enough energy to run? Or are we not allowed to run?
-            if (pBaseMetaTileEntity.getStoredEU() < tEnergyDemand || !pBaseMetaTileEntity.isAllowedToWork()) {
-                // Check if machine was active before
-                if (pBaseMetaTileEntity.isActive()) {
-                    pBaseMetaTileEntity.setActive(false); // Then disable it now
-                }
-            } else {
-                // Continue to drain power
-                if (pBaseMetaTileEntity.decreaseStoredEnergyUnits(tEnergyDemand, false)) {
-                    World tWorld = pBaseMetaTileEntity.getWorld();
-                    // Limit the random ticks to once per second
-                    if (mMode == 0) {
-                        if (pTick % 20 == 0) {
-                            doAccelerateNormalBlocks(pBaseMetaTileEntity, tWorld);
-                        }
-                    } else {
-                        doAccelerateTileEntities(pBaseMetaTileEntity, tWorld);
-                    }
-
-                } else {
-                    // Energy drain failed. Disable machine
-                    if (pBaseMetaTileEntity.isActive()) {
-                        pBaseMetaTileEntity.setActive(false); // Then disable it now
-                    }
-                }
-            }
-        } catch (Exception e) {
-            GTLog.err.println("MTEWorldAccelerator.onPostTick.crash\n" + e.getMessage());
-        }
     }
 
     private void doAccelerateTileEntities(IGregTechTileEntity pBaseMetaTileEntity, World pWorld) {
