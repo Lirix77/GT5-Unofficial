@@ -2,38 +2,14 @@ package gregtech.api.enums;
 
 import static galacticgreg.api.enums.DimensionDef.Anubis;
 import static galacticgreg.api.enums.DimensionDef.Asteroids;
-import static galacticgreg.api.enums.DimensionDef.BarnardE;
-import static galacticgreg.api.enums.DimensionDef.BarnardF;
-import static galacticgreg.api.enums.DimensionDef.Callisto;
-import static galacticgreg.api.enums.DimensionDef.Ceres;
-import static galacticgreg.api.enums.DimensionDef.Deimos;
-import static galacticgreg.api.enums.DimensionDef.Enceladus;
 import static galacticgreg.api.enums.DimensionDef.EndAsteroids;
-import static galacticgreg.api.enums.DimensionDef.Ganymede;
-import static galacticgreg.api.enums.DimensionDef.Haumea;
 import static galacticgreg.api.enums.DimensionDef.Horus;
-import static galacticgreg.api.enums.DimensionDef.Io;
-import static galacticgreg.api.enums.DimensionDef.KuiperBelt;
-import static galacticgreg.api.enums.DimensionDef.MakeMake;
 import static galacticgreg.api.enums.DimensionDef.Mars;
 import static galacticgreg.api.enums.DimensionDef.MehenBelt;
-import static galacticgreg.api.enums.DimensionDef.Mercury;
-import static galacticgreg.api.enums.DimensionDef.Miranda;
 import static galacticgreg.api.enums.DimensionDef.Moon;
-import static galacticgreg.api.enums.DimensionDef.Oberon;
-import static galacticgreg.api.enums.DimensionDef.Phobos;
-import static galacticgreg.api.enums.DimensionDef.Pluto;
-import static galacticgreg.api.enums.DimensionDef.Proteus;
 import static galacticgreg.api.enums.DimensionDef.Seth;
-import static galacticgreg.api.enums.DimensionDef.TcetiE;
-import static galacticgreg.api.enums.DimensionDef.Titan;
-import static galacticgreg.api.enums.DimensionDef.Triton;
-import static galacticgreg.api.enums.DimensionDef.VegaB;
-import static galacticgreg.api.enums.DimensionDef.Venus;
 import static gregtech.common.SmallOreBuilder.NETHER;
 import static gregtech.common.SmallOreBuilder.OW;
-import static gregtech.common.SmallOreBuilder.THE_END;
-import static gregtech.common.SmallOreBuilder.TWILIGHT_FOREST;
 
 import galacticgreg.WorldgenOreSmallSpace;
 import gregtech.common.SmallOreBuilder;
@@ -46,21 +22,21 @@ public enum SmallOres {
         .heightRange(60, 180)
         .amount(32)
         .ore(Materials.Copper)
-        .enableInDim(Mars, Phobos, Proteus, Triton)
-        .enableInDim(NETHER, OW, THE_END)),
+        .enableInDim(Mars)
+        .enableInDim(NETHER, OW)),
 
     Tin(new SmallOreBuilder().name("ore.small.tin")
         .heightRange(80, 220)
         .amount(32)
         .ore(Materials.Tin)
-        .enableInDim(MehenBelt, Mars, Deimos, Ganymede, Proteus, Titan, EndAsteroids)
-        .enableInDim(NETHER, OW, THE_END)),
+        .enableInDim(MehenBelt, Mars, EndAsteroids)
+        .enableInDim(NETHER, OW)),
 
     Bismuth(new SmallOreBuilder().name("ore.small.bismuth")
         .heightRange(80, 120)
         .amount(8)
         .ore(Materials.Bismuth)
-        .enableInDim(Mars, Callisto, Ceres, Io, MakeMake, Mercury, Proteus, VegaB)
+        .enableInDim(Mars)
         .enableInDim(NETHER)),
 
     Coal(new SmallOreBuilder().name("ore.small.coal")
@@ -75,20 +51,8 @@ public enum SmallOres {
         .ore(Materials.Iron)
         .enableInDim(
             Asteroids,
-            Mars,
-            BarnardE,
-            BarnardF,
-            Callisto,
-            Enceladus,
-            Ganymede,
-            Haumea,
-            Io,
-            KuiperBelt,
-            Miranda,
-            Phobos,
-            Titan,
-            Triton)
-        .enableInDim(NETHER, OW, THE_END)),
+            Mars)
+        .enableInDim(NETHER, OW)),
 
     Lead(new SmallOreBuilder().name("ore.small.lead")
         .heightRange(40, 180)
@@ -97,26 +61,15 @@ public enum SmallOres {
         .enableInDim(
             Asteroids,
             Mars,
-            Ceres,
-            Deimos,
-            Ganymede,
-            KuiperBelt,
-            MakeMake,
-            Mercury,
-            Oberon,
-            Pluto,
-            Triton,
-            VegaB,
-            Venus,
             EndAsteroids)
-        .enableInDim(NETHER, THE_END, TWILIGHT_FOREST)),
+        .enableInDim(NETHER)),
 
     Zinc(new SmallOreBuilder().name("ore.small.zinc")
         .heightRange(80, 210)
         .amount(24)
         .ore(Materials.Zinc)
-        .enableInDim(Mars, BarnardE, Enceladus, Ganymede, Haumea, Io, Mercury, Proteus, Titan, EndAsteroids)
-        .enableInDim(NETHER, OW, THE_END)),
+        .enableInDim(Mars, EndAsteroids)
+        .enableInDim(NETHER, OW)),
 
     Gold(new SmallOreBuilder().name("ore.small.gold")
         .heightRange(20, 60)
@@ -125,23 +78,15 @@ public enum SmallOres {
         .enableInDim(
             Asteroids,
             Mars,
-            BarnardF,
-            Callisto,
-            Ceres,
-            KuiperBelt,
-            Miranda,
-            Phobos,
-            Pluto,
-            Venus,
             EndAsteroids)
-        .enableInDim(OW, THE_END)),
+        .enableInDim(OW)),
 
     Silver(new SmallOreBuilder().name("ore.small.silver")
         .heightRange(20, 60)
         .amount(20)
         .ore(Materials.Silver)
-        .enableInDim(Enceladus, Io, Oberon, Pluto, Proteus, Titan, Triton, VegaB, EndAsteroids)
-        .enableInDim(NETHER, OW, THE_END)),
+        .enableInDim(EndAsteroids)
+        .enableInDim(NETHER, OW)),
 
     Nickel(new SmallOreBuilder().name("ore.small.nickel")
         .heightRange(80, 150)
@@ -151,30 +96,21 @@ public enum SmallOres {
             MehenBelt,
             Asteroids,
             Mars,
-            BarnardE,
-            BarnardF,
-            Ceres,
-            Deimos,
-            KuiperBelt,
-            MakeMake,
-            Mercury,
-            Pluto,
-            Venus,
             EndAsteroids)
-        .enableInDim(OW, THE_END)),
+        .enableInDim(OW)),
 
     Lapis(new SmallOreBuilder().name("ore.small.lapis")
         .heightRange(10, 50)
         .amount(4)
         .ore(Materials.Lapis)
-        .enableInDim(MehenBelt, Enceladus, Ganymede, Io, Oberon, Phobos, TcetiE)
+        .enableInDim(MehenBelt)
         .enableInDim(OW)),
 
     Diamond(new SmallOreBuilder().name("ore.small.diamond")
         .heightRange(5, 15)
         .amount(2)
         .ore(Materials.Diamond)
-        .enableInDim(Asteroids, Callisto, Ceres, Deimos, KuiperBelt, Oberon, Titan, Triton, VegaB, Venus)
+        .enableInDim(Asteroids)
         .enableInDim(OW)),
 
     Emerald(new SmallOreBuilder().name("ore.small.emerald")
@@ -182,110 +118,109 @@ public enum SmallOres {
         .amount(2)
         .ore(Materials.Emerald)
         .enableInDim(Horus)
-        .enableInDim(TWILIGHT_FOREST)),
+        .enableInDim(OW)),
 
     Ruby(new SmallOreBuilder().name("ore.small.ruby")
         .heightRange(5, 35)
         .amount(2)
         .ore(Materials.Ruby)
         .enableInDim(Horus)
-        .enableInDim(TWILIGHT_FOREST)),
+        .enableInDim(OW)),
 
     Sapphire(new SmallOreBuilder().name("ore.small.sapphire")
         .heightRange(5, 35)
         .amount(2)
         .ore(Materials.Sapphire)
         .enableInDim(Horus)
-        .enableInDim(TWILIGHT_FOREST)),
+        .enableInDim(OW)),
 
     Greensapphire(new SmallOreBuilder().name("ore.small.greensapphire")
         .heightRange(5, 35)
         .amount(2)
         .ore(Materials.GreenSapphire)
         .enableInDim(Horus)
-        .enableInDim(TWILIGHT_FOREST)),
+        .enableInDim(OW)),
 
     Olivine(new SmallOreBuilder().name("ore.small.olivine")
         .heightRange(5, 35)
         .amount(2)
         .ore(Materials.Olivine)
         .enableInDim(Horus, MehenBelt)
-        .enableInDim(TWILIGHT_FOREST)),
+        .enableInDim(OW)),
 
     Topaz(new SmallOreBuilder().name("ore.small.topaz")
         .heightRange(5, 35)
         .amount(2)
         .ore(Materials.Topaz)
         .enableInDim(Horus)
-        .enableInDim(TWILIGHT_FOREST)),
+        .enableInDim(OW)),
 
     Tanzanite(new SmallOreBuilder().name("ore.small.tanzanite")
         .heightRange(5, 35)
         .amount(2)
         .ore(Materials.Tanzanite)
         .enableInDim(Horus)
-        .enableInDim(TWILIGHT_FOREST)),
+        .enableInDim(OW)),
 
     Amethyst(new SmallOreBuilder().name("ore.small.amethyst")
         .heightRange(5, 35)
         .amount(2)
         .ore(Materials.Amethyst)
         .enableInDim(Horus)
-        .enableInDim(TWILIGHT_FOREST)),
+        .enableInDim(OW)),
 
     Opal(new SmallOreBuilder().name("ore.small.opal")
         .heightRange(5, 35)
         .amount(2)
         .ore(Materials.Opal)
         .enableInDim(Horus)
-        .enableInDim(TWILIGHT_FOREST)),
+        .enableInDim(OW)),
 
     Jasper(new SmallOreBuilder().name("ore.small.jasper")
         .heightRange(5, 35)
         .amount(2)
         .ore(Materials.Jasper)
         .enableInDim(Horus)
-        .enableInDim(TWILIGHT_FOREST)),
+        .enableInDim(OW)),
 
     Bluetopaz(new SmallOreBuilder().name("ore.small.bluetopaz")
         .heightRange(5, 35)
         .amount(2)
         .ore(Materials.BlueTopaz)
         .enableInDim(Horus)
-        .enableInDim(TWILIGHT_FOREST)),
+        .enableInDim(OW)),
 
     Amber(new SmallOreBuilder().name("ore.small.amber")
         .heightRange(5, 35)
         .amount(2)
         .ore(Materials.Amber)
-        .enableInDim(TWILIGHT_FOREST)),
+        .enableInDim(OW)),
 
     Foolsruby(new SmallOreBuilder().name("ore.small.foolsruby")
         .heightRange(5, 35)
         .amount(2)
         .ore(Materials.FoolsRuby)
-        .enableInDim(Horus)
-        .enableInDim(TWILIGHT_FOREST)),
+        .enableInDim(Horus)),
 
     Garnetred(new SmallOreBuilder().name("ore.small.garnetred")
         .heightRange(5, 35)
         .amount(2)
         .ore(Materials.GarnetRed)
         .enableInDim(Horus)
-        .enableInDim(TWILIGHT_FOREST)),
+        .enableInDim(OW)),
 
     Garnetyellow(new SmallOreBuilder().name("ore.small.garnetyellow")
         .heightRange(5, 35)
         .amount(2)
         .ore(Materials.GarnetYellow)
         .enableInDim(Horus)
-        .enableInDim(TWILIGHT_FOREST)),
+        .enableInDim(OW)),
 
     Redstone(new SmallOreBuilder().name("ore.small.redstone")
         .heightRange(5, 25)
         .amount(8)
         .ore(Materials.Redstone)
-        .enableInDim(Mars, Ganymede, Io, Mercury, Proteus, Titan)
+        .enableInDim(Mars)
         .enableInDim(NETHER, OW)),
 
     Netherquartz(new SmallOreBuilder().name("ore.small.netherquartz")
@@ -298,8 +233,8 @@ public enum SmallOres {
         .heightRange(10, 60)
         .amount(8)
         .ore(Materials.Saltpeter)
-        .enableInDim(Mars, Deimos, Enceladus, Ganymede, Io, Proteus, Venus)
-        .enableInDim(NETHER, TWILIGHT_FOREST)),
+        .enableInDim(Mars)
+        .enableInDim(NETHER)),
 
     Sulfur(new SmallOreBuilder().name("ore.small.sulfur")
         .heightRange(5, 60)
@@ -314,27 +249,7 @@ public enum SmallOres {
         .enableInDim(
             MehenBelt,
             Asteroids,
-            Mars,
-            BarnardE,
-            BarnardF,
-            Callisto,
-            Ceres,
-            Deimos,
-            Enceladus,
-            Ganymede,
-            Haumea,
-            Io,
-            KuiperBelt,
-            MakeMake,
-            Mercury,
-            Miranda,
-            Oberon,
-            Phobos,
-            Pluto,
-            Proteus,
-            Titan,
-            Triton,
-            Venus)
+            Mars)
 
     ),
 
@@ -342,39 +257,25 @@ public enum SmallOres {
         .heightRange(10, 120)
         .amount(16)
         .ore(Materials.Tungsten)
-        .enableInDim(Io, Venus)),
+        .enableInDim(Mars)),
 
     Meteoriciron(new SmallOreBuilder().name("ore.small.meteoriciron")
         .heightRange(50, 70)
         .amount(8)
         .ore(Materials.MeteoricIron)
-        .enableInDim(Moon, Mars, Deimos, Io, Phobos, Pluto, Venus)),
+        .enableInDim(Moon, Mars)),
 
     Firestone(new SmallOreBuilder().name("ore.small.firestone")
         .heightRange(5, 15)
         .amount(2)
         .ore(Materials.Firestone)
-        .enableInDim(Io, Venus)),
+        .enableInDim(NETHER)),
 
     Neutronium(new SmallOreBuilder().name("ore.small.neutronium")
         .heightRange(5, 15)
         .amount(8)
         .ore(Materials.Neutronium)
-        .enableInDim(
-            MehenBelt,
-            BarnardE,
-            BarnardF,
-            Enceladus,
-            Haumea,
-            KuiperBelt,
-            MakeMake,
-            Oberon,
-            Pluto,
-            Proteus,
-            TcetiE,
-            Titan,
-            Triton,
-            VegaB)),
+        .enableInDim(MehenBelt)),
 
     Chromite(new SmallOreBuilder().name("ore.small.chromite")
         .heightRange(20, 40)
@@ -383,25 +284,7 @@ public enum SmallOres {
         .enableInDim(
             MehenBelt,
             Asteroids,
-            Mars,
-            Callisto,
-            Ceres,
-            Deimos,
-            Enceladus,
-            Ganymede,
-            Haumea,
-            Io,
-            KuiperBelt,
-            MakeMake,
-            Mercury,
-            Oberon,
-            Phobos,
-            Pluto,
-            Proteus,
-            Titan,
-            Triton,
-            VegaB,
-            Venus)),
+            Mars)),
 
     Tungstate(new SmallOreBuilder().name("ore.small.tungstate")
         .heightRange(20, 40)
@@ -409,83 +292,67 @@ public enum SmallOres {
         .ore(Materials.Tungstate)
         .enableInDim(
             Asteroids,
-            Mars,
-            Callisto,
-            Ceres,
-            Deimos,
-            Enceladus,
-            Ganymede,
-            Io,
-            KuiperBelt,
-            Mercury,
-            Miranda,
-            Oberon,
-            Phobos,
-            Pluto,
-            Proteus,
-            Titan,
-            Triton,
-            Venus)),
+            Mars)),
 
     Naquadah(new SmallOreBuilder().name("ore.small.naquadah")
         .heightRange(5, 25)
         .amount(8)
         .ore(Materials.Naquadah)
-        .enableInDim(BarnardE, BarnardF, Ceres, Enceladus, Io, KuiperBelt, Mercury, Pluto, Proteus, Venus)),
+        .enableInDim(Asteroids)),
 
     Quantium(new SmallOreBuilder().name("ore.small.quantium")
         .heightRange(5, 25)
         .amount(6)
         .ore(Materials.Quantium)
-        .enableInDim(Ceres, Haumea, Io, MakeMake, Pluto, Titan)),
+        .enableInDim(Seth)),
 
     Mythril(new SmallOreBuilder().name("ore.small.mythril")
         .heightRange(5, 25)
         .amount(6)
         .ore(Materials.Mytryl)
-        .enableInDim(Horus, Callisto, MakeMake, Miranda, Proteus, Venus)),
+        .enableInDim(Horus)),
 
     Ledox(new SmallOreBuilder().name("ore.small.ledox")
         .heightRange(40, 60)
         .amount(4)
         .ore(Materials.Ledox)
-        .enableInDim(Callisto, Enceladus, Haumea, Mercury, Oberon, Pluto)),
+        .enableInDim(MehenBelt)),
 
     Oriharukon(new SmallOreBuilder().name("ore.small.oriharukon")
         .heightRange(20, 40)
         .amount(6)
         .ore(Materials.Oriharukon)
-        .enableInDim(Mars, Ceres, Haumea, MakeMake, Mercury, Titan, Triton)),
+        .enableInDim(Mars)),
 
     Draconium(new SmallOreBuilder().name("ore.small.draconium")
         .heightRange(5, 15)
         .amount(4)
         .ore(Materials.Draconium)
-        .enableInDim(Seth, Deimos, Ganymede, Haumea, MakeMake, Oberon, Phobos, Pluto, Venus)),
+        .enableInDim(Seth)),
 
     Awdraconium(new SmallOreBuilder().name("ore.small.awdraconium")
         .heightRange(5, 15)
         .amount(2)
         .ore(Materials.DraconiumAwakened)
-        .enableInDim(Seth, BarnardE, BarnardF, TcetiE, VegaB)),
+        .enableInDim(Seth)),
 
     Desh(new SmallOreBuilder().name("ore.small.desh")
         .heightRange(10, 30)
         .amount(6)
         .ore(Materials.Desh)
-        .enableInDim(Callisto, Deimos, Haumea, MakeMake, Mercury, Miranda, Phobos, Proteus, Triton)),
+        .enableInDim(Asteroids)),
 
     Blackplutonium(new SmallOreBuilder().name("ore.small.blackplutonium")
         .heightRange(25, 45)
         .amount(6)
         .ore(Materials.BlackPlutonium)
-        .enableInDim(BarnardE, BarnardF, Haumea, MakeMake, Pluto, Triton, VegaB)),
+        .enableInDim(Anubis)),
 
     Infinitycatalyst(new SmallOreBuilder().name("ore.small.infinitycatalyst")
         .heightRange(40, 80)
         .amount(6)
         .ore(Materials.InfinityCatalyst)
-        .enableInDim(Anubis, VegaB)),
+        .enableInDim(Anubis)),
 
     Infinity(new SmallOreBuilder().name("ore.small.infinity")
         .heightRange(2, 40)
@@ -497,13 +364,12 @@ public enum SmallOres {
         .heightRange(5, 25)
         .amount(6)
         .ore(Materials.Bedrockium)
-        .enableInDim(BarnardF)),
+        .enableInDim(Seth)),
 
     Realgar(new SmallOreBuilder().name("ore.small.realgar")
         .heightRange(15, 85)
         .amount(32)
         .ore(Materials.Realgar)
-        .enableInDim(BarnardF)
         .enableInDim(NETHER)),
 
     Certusquartz(new SmallOreBuilder().name("ore.small.certusquartz")
@@ -518,13 +384,13 @@ public enum SmallOres {
         .amount(2)
         .ore(Materials.Jade)
         .enableInDim(Horus)
-        .enableInDim(TWILIGHT_FOREST)),
+        .enableInDim(OW)),
 
     Deepiron(new SmallOreBuilder().name("ore.small.deepiron")
         .heightRange(5, 40)
         .amount(8)
         .ore(Materials.DeepIron)
-        .enableInDim(Mercury)),
+        .enableInDim(Moon)),
 
     Redgarnet(new SmallOreBuilder().name("ore.small.redgarnet")
         .heightRange(5, 35)
