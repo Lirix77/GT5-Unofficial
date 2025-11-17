@@ -91,7 +91,7 @@ public final class ModBlocks {
 
         blockCircuitProgrammer = new BlockCircuitProgrammer();
 
-        //blockDecayablesChest = new BlockDecayablesChest();
+        blockDecayablesChest = new BlockDecayablesChest();
 
         blockCustomJukebox = new BlockSuperJukebox();
 
