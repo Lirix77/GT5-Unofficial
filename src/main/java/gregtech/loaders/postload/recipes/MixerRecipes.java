@@ -1157,61 +1157,6 @@ public class MixerRecipes implements Runnable {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 new ItemStack(Blocks.dirt, 1, 32767),
-                getModItem(BiomesOPlenty.ID, "plants", 4, 6),
-                GTUtility.getIntegratedCircuit(2))
-            .itemOutputs(getModItem(Forestry.ID, "fertilizerBio", 1L, 0))
-            .fluidInputs(Materials.Water.getFluid(100))
-            .duration(10 * SECONDS)
-            .eut(16)
-            .addTo(mixerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                new ItemStack(Blocks.dirt, 1, 32767),
-                getModItem(PamsHarvestCraft.ID, "oatsItem", 4),
-                GTUtility.getIntegratedCircuit(2))
-            .itemOutputs(getModItem(Forestry.ID, "fertilizerBio", 1L, 0))
-            .fluidInputs(Materials.Water.getFluid(100))
-            .duration(10 * SECONDS)
-            .eut(16)
-            .addTo(mixerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                new ItemStack(Blocks.dirt, 1, 32767),
-                getModItem(PamsHarvestCraft.ID, "ryeItem", 4),
-                GTUtility.getIntegratedCircuit(2))
-            .itemOutputs(getModItem(Forestry.ID, "fertilizerBio", 1L, 0))
-            .fluidInputs(Materials.Water.getFluid(100))
-            .duration(10 * SECONDS)
-            .eut(16)
-            .addTo(mixerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                new ItemStack(Blocks.dirt, 1, 32767),
-                getModItem(PamsHarvestCraft.ID, "barleyItem", 4),
-                GTUtility.getIntegratedCircuit(2))
-            .itemOutputs(getModItem(Forestry.ID, "fertilizerBio", 1L, 0))
-            .fluidInputs(Materials.Water.getFluid(100))
-            .duration(10 * SECONDS)
-            .eut(16)
-            .addTo(mixerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                new ItemStack(Blocks.dirt, 1, 32767),
-                getModItem(Natura.ID, "barleyFood", 4),
-                GTUtility.getIntegratedCircuit(2))
-            .itemOutputs(getModItem(Forestry.ID, "fertilizerBio", 1L, 0))
-            .fluidInputs(Materials.Water.getFluid(100))
-            .duration(10 * SECONDS)
-            .eut(16)
-            .addTo(mixerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                new ItemStack(Blocks.dirt, 1, 32767),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 4),
                 GTUtility.getIntegratedCircuit(3))
             .itemOutputs(getModItem(Forestry.ID, "fertilizerBio", 1L, 0))

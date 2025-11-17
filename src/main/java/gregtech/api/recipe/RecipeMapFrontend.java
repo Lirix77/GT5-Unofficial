@@ -273,7 +273,7 @@ public class RecipeMapFrontend {
             recipeInfo.drawText("stackTrace:");
             // todo: good way to show all stacktraces
             for (String stackTrace : recipe.stackTraces.get(0)) {
-                recipeInfo.drawText(stackTrace);
+                recipeInfo.drawText(stackTrace.split("\n")[0]);
             }
         }
     }

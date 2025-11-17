@@ -1978,8 +1978,9 @@ public class GTUtility {
          */
         if (ItemList.Cell_Empty.isStackEqual(aStack, false, true)) return null;
         if (aStack.getItem() == Items.potionitem || aStack.getItem() == Items.experience_bottle
-            || ItemList.TF_Vial_FieryBlood.isStackEqual(aStack)
-            || ItemList.TF_Vial_FieryTears.isStackEqual(aStack)) return ItemList.Bottle_Empty.get(1);
+            //|| ItemList.TF_Vial_FieryBlood.isStackEqual(aStack)
+            //|| ItemList.TF_Vial_FieryTears.isStackEqual(aStack)
+        ) return ItemList.Bottle_Empty.get(1);
 
         if (aCheckIFluidContainerItems && aStack.getItem() instanceof IFluidContainerItem
             && ((IFluidContainerItem) aStack.getItem()).getCapacity(aStack) > 0) {

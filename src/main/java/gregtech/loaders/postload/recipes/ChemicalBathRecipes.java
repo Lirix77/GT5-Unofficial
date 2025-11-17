@@ -225,42 +225,6 @@ public class ChemicalBathRecipes implements Runnable {
                 .addTo(chemicalBathRecipes);
         }
 
-        for (int j = 0; j < Dyes.dyeRed.getSizeOfFluidList(); j++) {
-            GTValues.RA.stdBuilder()
-                .itemInputs(GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.RedAlloy, 1))
-                .itemOutputs(getModItem(BuildCraftTransport.ID, "pipeWire", 4L, 0))
-                .fluidInputs(Dyes.dyeRed.getFluidDye(j, 72))
-                .duration(1 * SECONDS + 12 * TICKS)
-                .eut(16)
-                .addTo(chemicalBathRecipes);
-        }
-        for (int j = 0; j < Dyes.dyeBlue.getSizeOfFluidList(); j++) {
-            GTValues.RA.stdBuilder()
-                .itemInputs(GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.RedAlloy, 1))
-                .itemOutputs(getModItem(BuildCraftTransport.ID, "pipeWire", 4L, 1))
-                .fluidInputs(Dyes.dyeBlue.getFluidDye(j, 72))
-                .duration(1 * SECONDS + 12 * TICKS)
-                .eut(16)
-                .addTo(chemicalBathRecipes);
-        }
-        for (int j = 0; j < Dyes.dyeGreen.getSizeOfFluidList(); j++) {
-            GTValues.RA.stdBuilder()
-                .itemInputs(GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.RedAlloy, 1))
-                .itemOutputs(getModItem(BuildCraftTransport.ID, "pipeWire", 4L, 2))
-                .fluidInputs(Dyes.dyeGreen.getFluidDye(j, 72))
-                .duration(1 * SECONDS + 12 * TICKS)
-                .eut(16)
-                .addTo(chemicalBathRecipes);
-        }
-        for (int j = 0; j < Dyes.dyeYellow.getSizeOfFluidList(); j++) {
-            GTValues.RA.stdBuilder()
-                .itemInputs(GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.RedAlloy, 1))
-                .itemOutputs(getModItem(BuildCraftTransport.ID, "pipeWire", 4L, 3))
-                .fluidInputs(Dyes.dyeYellow.getFluidDye(j, 72))
-                .duration(1 * SECONDS + 12 * TICKS)
-                .eut(16)
-                .addTo(chemicalBathRecipes);
-        }
         for (byte i = 0; i < 16; i = (byte) (i + 1)) {
             for (int j = 0; j < Dyes.VALUES[i].getSizeOfFluidList(); j++) {
                 if (i != 15) {

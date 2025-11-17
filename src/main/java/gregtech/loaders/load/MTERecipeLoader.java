@@ -1,6 +1,5 @@
 package gregtech.loaders.load;
 
-import static gregtech.api.enums.Mods.BuildCraftFactory;
 import static gregtech.api.enums.Mods.Forestry;
 import static gregtech.api.enums.Mods.GalacticraftCore;
 import static gregtech.api.enums.Mods.Gendustry;
@@ -2259,13 +2258,13 @@ public class MTERecipeLoader implements Runnable {
         GTModHandler.addCraftingRecipe(
             ItemList.Hatch_Output_ULV.get(1L),
             bits,
-            new Object[] { "ASA", "AFA", "APA", 'S', GTModHandler.getModItem(BuildCraftFactory.ID, "tankBlock", 1L, 0),
+            new Object[] { "ASA", "AFA", "APA", 'S', GTOreDictUnificator.get(OrePrefixes.cell, Materials.Empty, 1),
                 'F', ItemList.Hull_ULV.get(1L), 'A', OrePrefixes.plate.get(Materials.Rubber), 'P',
                 OrePrefixes.ring.get(Materials.Rubber) });
         GTModHandler.addCraftingRecipe(
             ItemList.Hatch_Input_ULV.get(1L),
             bits,
-            new Object[] { "ASA", "AFA", "APA", 'S', GTModHandler.getModItem(BuildCraftFactory.ID, "tankBlock", 1L, 0),
+            new Object[] { "ASA", "AFA", "APA", 'S', GTOreDictUnificator.get(OrePrefixes.cell, Materials.Empty, 1),
                 'F', ItemList.Hull_ULV.get(1L), 'A', OrePrefixes.plate.get(Materials.Rubber), 'P',
                 OrePrefixes.gear.get(Materials.Rubber) });
         GTModHandler.addCraftingRecipe(
@@ -2668,7 +2667,7 @@ public class MTERecipeLoader implements Runnable {
             bitsd,
             new Object[] { aTextPlate, "PTP", aTextPlateMotor, 'M', ItemList.Hull_HP, 'P',
                 OrePrefixes.plate.get(Materials.Steel), 'T',
-                GTModHandler.getModItem(BuildCraftFactory.ID, "tankBlock", 1L, 0) });
+                GTOreDictUnificator.get(OrePrefixes.cell, Materials.Empty, 1) });
         GTModHandler.addCraftingRecipe(
             ItemList.Machine_Bronze_Boiler_Solar.get(1L),
             bitsd,

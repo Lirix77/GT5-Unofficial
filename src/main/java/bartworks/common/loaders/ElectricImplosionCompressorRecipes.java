@@ -156,7 +156,7 @@ public class ElectricImplosionCompressorRecipes implements Runnable {
             .itemInputs(
                 new Object[] { OrePrefixes.circuit.get(Materials.UHV), circuitMultiplier },
                 getModItem(SuperSolarPanels.ID, "solarsplitter", 1, 0),
-                getModItem(OpenComputers.ID, "hologram2", circuitMultiplier, 0),
+                //getModItem(OpenComputers.ID, "hologram2", circuitMultiplier, 0),
                 GTOreDictUnificator.get(part, MaterialsUEVplus.Eternity, multiplier))
             .itemOutputs(
                 GTOreDictUnificator

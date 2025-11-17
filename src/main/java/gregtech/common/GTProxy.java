@@ -1112,27 +1112,6 @@ public abstract class GTProxy implements IGTMod, IFuelHandler {
         addFullHazmatToGeneralItem(GraviSuite.ID, "graviChestPlate", 1L);
         addFullHazmatToGeneralItem(GraviSuite.ID, "advNanoChestPlate", 1L);
 
-        // EMT Hazmat
-        addFullHazmatToGeneralItem(ElectroMagicTools.ID, "itemArmorQuantumChestplate", 1L);
-        addFullHazmatToGeneralItem(ElectroMagicTools.ID, "NanoBootsTraveller", 1L);
-        addFullHazmatToGeneralItem(ElectroMagicTools.ID, "NanosuitGogglesRevealing", 1L);
-        addFullHazmatToGeneralItem(ElectroMagicTools.ID, "QuantumBootsTraveller", 1L);
-        addFullHazmatToGeneralItem(ElectroMagicTools.ID, "QuantumGogglesRevealing", 1L);
-        addFullHazmatToGeneralItem(ElectroMagicTools.ID, "SolarHelmetRevealing", 1L);
-        addFullHazmatToGeneralItem(ElectroMagicTools.ID, "NanosuitWing", 1L);
-        addFullHazmatToGeneralItem(ElectroMagicTools.ID, "QuantumWing", 1L);
-
-        // Thaumic Boots Hazmat
-        addFullHazmatToGeneralItem(ThaumicBoots.ID, "item.ItemQuantumVoid", 1L);
-        addFullHazmatToGeneralItem(ThaumicBoots.ID, "item.ItemQuantumMeteor", 1L);
-        addFullHazmatToGeneralItem(ThaumicBoots.ID, "item.ItemQuantumComet", 1L);
-        addFullHazmatToGeneralItem(ThaumicBoots.ID, "item.ItemNanoVoid", 1L);
-        addFullHazmatToGeneralItem(ThaumicBoots.ID, "item.ItemNanoMeteor", 1L);
-        addFullHazmatToGeneralItem(ThaumicBoots.ID, "item.ItemNanoComet", 1L);
-        addFullHazmatToGeneralItem(ThaumicBoots.ID, "item.ItemElectricVoid", 1L);
-        addFullHazmatToGeneralItem(ThaumicBoots.ID, "item.ItemVoidMeteor", 1L);
-        addFullHazmatToGeneralItem(ThaumicBoots.ID, "item.ItemVoidComet", 1L);
-
         // DraconicEvolution Hazmat
         addFullHazmatToGeneralItem(DraconicEvolution.ID, "draconicBoots", 1L, 0);
         addFullHazmatToGeneralItem(DraconicEvolution.ID, "draconicHelm", 1L, 0);
@@ -1148,37 +1127,6 @@ public abstract class GTProxy implements IGTMod, IFuelHandler {
         addFullHazmatToGeneralItem(AdvancedSolarPanel.ID, "hybrid_solar_helmet", 1L);
         addFullHazmatToGeneralItem(AdvancedSolarPanel.ID, "ultimate_solar_helmet", 1L);
 
-        // TaintedMagic Hazmat
-        addFullHazmatToGeneralItem(TaintedMagic.ID, "ItemVoidwalkerBoots", 1L);
-        addFullHazmatToGeneralItem(TaintedMagic.ID, "ItemShadowFortressHelmet", 1L);
-        addFullHazmatToGeneralItem(TaintedMagic.ID, "ItemShadowFortressChestplate", 1L);
-        addFullHazmatToGeneralItem(TaintedMagic.ID, "ItemShadowFortressLeggings", 1L);
-        addFullHazmatToGeneralItem(TaintedMagic.ID, "ItemVoidFortressHelmet", 1L);
-        addFullHazmatToGeneralItem(TaintedMagic.ID, "ItemVoidFortressChestplate", 1L);
-        addFullHazmatToGeneralItem(TaintedMagic.ID, "ItemVoidFortressLeggings", 1L);
-        addFullHazmatToGeneralItem(TaintedMagic.ID, "ItemVoidmetalGoggles", 1L);
-
-        // WitchingGadgets Hazmat
-        addFullHazmatToGeneralItem(WitchingGadgets.ID, "item.WG_PrimordialHelm", 1L);
-        addFullHazmatToGeneralItem(WitchingGadgets.ID, "item.WG_PrimordialChest", 1L);
-        addFullHazmatToGeneralItem(WitchingGadgets.ID, "item.WG_PrimordialLegs", 1L);
-        addFullHazmatToGeneralItem(WitchingGadgets.ID, "item.WG_PrimordialBoots", 1L);
-
-        // ThaumicTinkerer Hazmat
-        addFullHazmatToGeneralItem(ThaumicTinkerer.ID, "ichorclothChestGem", 1L);
-        addFullHazmatToGeneralItem(ThaumicTinkerer.ID, "ichorclothBootsGem", 1L);
-        addFullHazmatToGeneralItem(ThaumicTinkerer.ID, "ichorclothHelmGem", 1L);
-        addFullHazmatToGeneralItem(ThaumicTinkerer.ID, "ichorclothLegsGem", 1L);
-
-        // GalaxySpace Hazmat
-        addFullHazmatToGeneralItem(GalaxySpace.ID, "item.spacesuit_helmet", 1L);
-        addFullHazmatToGeneralItem(GalaxySpace.ID, "item.spacesuit_helmetglasses", 1L);
-        addFullHazmatToGeneralItem(GalaxySpace.ID, "item.spacesuit_plate", 1L);
-        addFullHazmatToGeneralItem(GalaxySpace.ID, "item.spacesuit_jetplate", 1L);
-        addFullHazmatToGeneralItem(GalaxySpace.ID, "item.spacesuit_leg", 1L);
-        addFullHazmatToGeneralItem(GalaxySpace.ID, "item.spacesuit_boots", 1L);
-        addFullHazmatToGeneralItem(GalaxySpace.ID, "item.spacesuit_gravityboots", 1L);
-
         // Extra Hazmat
         GregTechAPI.sElectroHazmatList.add(new ItemStack(Items.chainmail_helmet, 1, W));
         GregTechAPI.sElectroHazmatList.add(new ItemStack(Items.chainmail_chestplate, 1, W));
@@ -1190,16 +1138,6 @@ public abstract class GTProxy implements IGTMod, IFuelHandler {
         addFullHazmatToGeneralItem(Avaritia.ID, "Infinity_Chest", 1L);
         addFullHazmatToGeneralItem(Avaritia.ID, "Infinity_Pants", 1L);
         addFullHazmatToGeneralItem(Avaritia.ID, "Infinity_Shoes", 1L);
-
-        // EnderIO Hazmat
-        addFullHazmatToGeneralItem(EnderIO.ID, "item.endSteel_helmet", 1L);
-        addFullHazmatToGeneralItem(EnderIO.ID, "item.endSteel_chestplate", 1L);
-        addFullHazmatToGeneralItem(EnderIO.ID, "item.endSteel_leggings", 1L);
-        addFullHazmatToGeneralItem(EnderIO.ID, "item.endSteel_boots", 1L);
-        addFullHazmatToGeneralItem(EnderIO.ID, "item.stellar_helmet", 1L);
-        addFullHazmatToGeneralItem(EnderIO.ID, "item.stellar_chestplate", 1L);
-        addFullHazmatToGeneralItem(EnderIO.ID, "item.stellar_leggings", 1L);
-        addFullHazmatToGeneralItem(EnderIO.ID, "item.stellar_boots", 1L);
 
         GregTechAPI.sLoadStarted = true;
         for (FluidContainerRegistry.FluidContainerData tData : FluidContainerRegistry

@@ -1,11 +1,6 @@
 package gregtech.common.items;
 
-import static gregtech.api.enums.Mods.ExtraBees;
-import static gregtech.api.enums.Mods.Forestry;
-import static gregtech.api.enums.Mods.GregTech;
-import static gregtech.api.enums.Mods.HardcoreEnderExpansion;
-import static gregtech.api.enums.Mods.MagicBees;
-import static gregtech.api.enums.Mods.NewHorizonsCoreMod;
+import static gregtech.api.enums.Mods.*;
 import static gregtech.api.recipe.RecipeMaps.fluidExtractionRecipes;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 import static gregtech.api.util.GTRecipeBuilder.TICKS;
@@ -118,14 +113,14 @@ public class ItemDrop extends Item {
             40,
             new ItemStack[] { tDrop },
             new FluidStack(FluidRegistry.getFluid("ic2coolant"), 100),
-            GTModHandler.getModItem(MagicBees.ID, "propolis", 1L, 0),
+            GTModHandler.getModItem(Forestry.ID, "propolis", 1L, 0),
             30);
         tDrop = getStackForType(DropType.HOT_COOLANT);
         RecipeManagers.squeezerManager.addRecipe(
             40,
             new ItemStack[] { tDrop },
             new FluidStack(FluidRegistry.getFluid("ic2hotcoolant"), 100),
-            GTModHandler.getModItem(MagicBees.ID, "propolis", 1L, 2),
+            GTModHandler.getModItem(Forestry.ID, "propolis", 1L, 0),
             30);
         tDrop = getStackForType(DropType.SNOW_QUEEN);
         addProcessMV(
@@ -139,13 +134,13 @@ public class ItemDrop extends Item {
             400,
             new ItemStack[] { tDrop },
             new FluidStack(FluidRegistry.getFluid("ic2coolant"), 100),
-            GTModHandler.getModItem(MagicBees.ID, "propolis", 1L, 3),
+            GTModHandler.getModItem(Forestry.ID, "propolis", 1L, 0),
             30);
         tDrop = getStackForType(DropType.HYDRA);
         addProcessMV(
             tDrop,
             Materials.FierySteel.getFluid(50L),
-            GTModHandler.getModItem(MagicBees.ID, "propolis", 1L, 2),
+            GTModHandler.getModItem(Forestry.ID, "propolis", 1L, 0),
             3000,
             8);
         tDrop = getStackForType(DropType.OXYGEN);

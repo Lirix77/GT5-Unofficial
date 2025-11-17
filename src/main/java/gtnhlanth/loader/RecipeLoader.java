@@ -1022,10 +1022,6 @@ public class RecipeLoader {
             .addTo(multiblockChemicalReactorRecipes);
 
         // IODINE-START
-        // SeaweedAsh
-        GTModHandler.addSmeltingRecipe(
-            GTModHandler.getModItem(PamsHarvestCraft.ID, "seaweedItem", 1),
-            WerkstoffMaterialPool.SeaweedAsh.get(OrePrefixes.dustSmall, 1));
 
         // SeaweedConcentrate
         GTValues.RA.stdBuilder()

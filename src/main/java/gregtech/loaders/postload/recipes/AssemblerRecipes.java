@@ -1,18 +1,13 @@
 package gregtech.loaders.postload.recipes;
 
 import static gregtech.api.enums.Mods.AppliedEnergistics2;
-import static gregtech.api.enums.Mods.AvaritiaAddons;
-import static gregtech.api.enums.Mods.BuildCraftFactory;
 import static gregtech.api.enums.Mods.ExtraUtilities;
 import static gregtech.api.enums.Mods.Forestry;
 import static gregtech.api.enums.Mods.GalacticraftCore;
 import static gregtech.api.enums.Mods.GalacticraftMars;
-import static gregtech.api.enums.Mods.GalaxySpace;
 import static gregtech.api.enums.Mods.IC2NuclearControl;
 import static gregtech.api.enums.Mods.IronChests;
-import static gregtech.api.enums.Mods.IronTanks;
 import static gregtech.api.enums.Mods.NewHorizonsCoreMod;
-import static gregtech.api.enums.Mods.OpenComputers;
 import static gregtech.api.enums.Mods.Railcraft;
 import static gregtech.api.enums.Mods.TinkerConstruct;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
@@ -27,12 +22,11 @@ import static gregtech.api.util.GTRecipeBuilder.TICKS;
 import static gregtech.loaders.postload.MachineRecipeLoader.solderingMats;
 import static gtPlusPlus.core.material.MaterialsAlloy.INCONEL_690;
 
+import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
 
 import bartworks.common.loaders.ItemRegistry;
 import bartworks.system.material.WerkstoffLoader;
@@ -3330,7 +3324,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_ULV.get(1),
-                    getModItem(NewHorizonsCoreMod.ID, "BabyChest", 1),
+                    new ItemStack(Blocks.chest),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_Bus_ULV.get(1))
                 .fluidInputs(Materials.Glue.getFluid(1 * INGOTS))
@@ -3341,7 +3335,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_ULV.get(1),
-                    getModItem(NewHorizonsCoreMod.ID, "BabyChest", 1),
+                    new ItemStack(Blocks.chest),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_Bus_ULV.get(1))
                 .fluidInputs(Materials.Plastic.getMolten(1 * HALF_INGOT))
@@ -3352,7 +3346,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_ULV.get(1),
-                    getModItem(NewHorizonsCoreMod.ID, "BabyChest", 1),
+                    new ItemStack(Blocks.chest),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_Bus_ULV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(1 * EIGHTH_INGOT))
@@ -3363,7 +3357,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_ULV.get(1),
-                    getModItem(NewHorizonsCoreMod.ID, "BabyChest", 1),
+                    new ItemStack(Blocks.chest),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_Bus_ULV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(4))
@@ -3587,7 +3581,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_MAX.get(1),
-                    getModItem(AvaritiaAddons.ID, "CompressedChest", 1),
+                    getModItem(IronChests.ID, "BlockIronChest", 2, 6),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_Bus_MAX.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(16 * INGOTS))
@@ -3616,7 +3610,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_ULV.get(1),
-                    getModItem(NewHorizonsCoreMod.ID, "BabyChest", 1),
+                    new ItemStack(Blocks.chest),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_Bus_ULV.get(1))
                 .fluidInputs(Materials.Glue.getFluid(1 * INGOTS))
@@ -3627,7 +3621,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_ULV.get(1),
-                    getModItem(NewHorizonsCoreMod.ID, "BabyChest", 1),
+                    new ItemStack(Blocks.chest),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_Bus_ULV.get(1))
                 .fluidInputs(Materials.Plastic.getMolten(1 * HALF_INGOT))
@@ -3638,7 +3632,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_ULV.get(1),
-                    getModItem(NewHorizonsCoreMod.ID, "BabyChest", 1),
+                    new ItemStack(Blocks.chest),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_Bus_ULV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(1 * EIGHTH_INGOT))
@@ -3649,7 +3643,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_ULV.get(1),
-                    getModItem(NewHorizonsCoreMod.ID, "BabyChest", 1),
+                    new ItemStack(Blocks.chest),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_Bus_ULV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(4))
@@ -3872,16 +3866,12 @@ public class AssemblerRecipes implements Runnable {
                 .addTo(assemblerRecipes);
         }
 
-        if (!AvaritiaAddons.isModLoaded()) {
-            return;
-        }
-
         // UHV output bus
         {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_MAX.get(1),
-                    getModItem(AvaritiaAddons.ID, "CompressedChest", 1),
+                    getModItem(IronChests.ID, "BlockIronChest", 2, 6),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_Bus_MAX.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(16 * INGOTS))
@@ -3947,16 +3937,12 @@ public class AssemblerRecipes implements Runnable {
          * means we aren't in full pack
          */
 
-        if (!BuildCraftFactory.isModLoaded()) {
-            return;
-        }
-
         // LV input hatch
         {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_LV.get(1),
-                    getModItem(BuildCraftFactory.ID, "tankBlock", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_LV.get(1))
                 .fluidInputs(Materials.Glue.getFluid(5 * INGOTS))
@@ -3967,7 +3953,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_LV.get(1),
-                    getModItem(BuildCraftFactory.ID, "tankBlock", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_LV.get(1))
                 .fluidInputs(Materials.Plastic.getMolten(1 * INGOTS))
@@ -3978,7 +3964,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_LV.get(1),
-                    getModItem(BuildCraftFactory.ID, "tankBlock", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_LV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(1 * HALF_INGOT))
@@ -3989,7 +3975,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_LV.get(1),
-                    getModItem(BuildCraftFactory.ID, "tankBlock", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_LV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(9))
@@ -3998,16 +3984,12 @@ public class AssemblerRecipes implements Runnable {
                 .addTo(assemblerRecipes);
         }
 
-        if (!IronTanks.isModLoaded()) {
-            return;
-        }
-
         // MV input hatch
         {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_MV.get(1),
-                    getModItem(IronTanks.ID, "copperTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_MV.get(1))
                 .fluidInputs(Materials.Plastic.getMolten(2 * INGOTS))
@@ -4018,7 +4000,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_MV.get(1),
-                    getModItem(IronTanks.ID, "copperTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_MV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(1 * INGOTS))
@@ -4029,7 +4011,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_MV.get(1),
-                    getModItem(IronTanks.ID, "copperTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_MV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(1 * EIGHTH_INGOT))
@@ -4043,7 +4025,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_HV.get(1),
-                    getModItem(IronTanks.ID, "ironTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_HV.get(1))
                 .fluidInputs(Materials.Plastic.getMolten(3 * INGOTS))
@@ -4054,7 +4036,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_HV.get(1),
-                    getModItem(IronTanks.ID, "ironTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_HV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(2 * INGOTS))
@@ -4065,7 +4047,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_HV.get(1),
-                    getModItem(IronTanks.ID, "ironTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_HV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(1 * QUARTER_INGOT))
@@ -4079,7 +4061,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_EV.get(1),
-                    getModItem(IronTanks.ID, "silverTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_EV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(4 * INGOTS))
@@ -4090,7 +4072,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_EV.get(1),
-                    getModItem(IronTanks.ID, "silverTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_EV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(1 * HALF_INGOT))
@@ -4104,7 +4086,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_IV.get(1),
-                    getModItem(IronTanks.ID, "goldTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_IV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(8 * INGOTS))
@@ -4115,7 +4097,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_IV.get(1),
-                    getModItem(IronTanks.ID, "goldTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_IV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(1 * INGOTS))
@@ -4129,7 +4111,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_LuV.get(1),
-                    getModItem(IronTanks.ID, "diamondTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_LuV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(16 * INGOTS))
@@ -4140,7 +4122,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_LuV.get(1),
-                    getModItem(IronTanks.ID, "diamondTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_LuV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(2 * INGOTS))
@@ -4154,7 +4136,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_ZPM.get(1),
-                    getModItem(IronTanks.ID, "obsidianTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_ZPM.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(4 * INGOTS))
@@ -4242,16 +4224,13 @@ public class AssemblerRecipes implements Runnable {
          * means we aren't in full pack
          */
 
-        if (!BuildCraftFactory.isModLoaded()) {
-            return;
-        }
 
         // LV output hatch
         {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_LV.get(1),
-                    getModItem(BuildCraftFactory.ID, "tankBlock", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_LV.get(1))
                 .fluidInputs(Materials.Glue.getFluid(5 * INGOTS))
@@ -4262,7 +4241,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_LV.get(1),
-                    getModItem(BuildCraftFactory.ID, "tankBlock", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_LV.get(1))
                 .fluidInputs(Materials.Plastic.getMolten(1 * INGOTS))
@@ -4273,7 +4252,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_LV.get(1),
-                    getModItem(BuildCraftFactory.ID, "tankBlock", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_LV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(1 * HALF_INGOT))
@@ -4284,7 +4263,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_LV.get(1),
-                    getModItem(BuildCraftFactory.ID, "tankBlock", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_LV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(9))
@@ -4293,16 +4272,12 @@ public class AssemblerRecipes implements Runnable {
                 .addTo(assemblerRecipes);
         }
 
-        if (!IronTanks.isModLoaded()) {
-            return;
-        }
-
         // MV output hatch
         {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_MV.get(1),
-                    getModItem(IronTanks.ID, "copperTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_MV.get(1))
                 .fluidInputs(Materials.Plastic.getMolten(2 * INGOTS))
@@ -4313,7 +4288,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_MV.get(1),
-                    getModItem(IronTanks.ID, "copperTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_MV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(1 * INGOTS))
@@ -4324,7 +4299,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_MV.get(1),
-                    getModItem(IronTanks.ID, "copperTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_MV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(1 * EIGHTH_INGOT))
@@ -4338,7 +4313,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_HV.get(1),
-                    getModItem(IronTanks.ID, "ironTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_HV.get(1))
                 .fluidInputs(Materials.Plastic.getMolten(3 * INGOTS))
@@ -4349,7 +4324,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_HV.get(1),
-                    getModItem(IronTanks.ID, "ironTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_HV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(2 * INGOTS))
@@ -4360,7 +4335,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_HV.get(1),
-                    getModItem(IronTanks.ID, "ironTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_HV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(1 * QUARTER_INGOT))
@@ -4374,7 +4349,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_EV.get(1),
-                    getModItem(IronTanks.ID, "silverTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_EV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(4 * INGOTS))
@@ -4385,7 +4360,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_EV.get(1),
-                    getModItem(IronTanks.ID, "silverTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_EV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(1 * HALF_INGOT))
@@ -4399,7 +4374,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_IV.get(1),
-                    getModItem(IronTanks.ID, "goldTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_IV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(8 * INGOTS))
@@ -4410,7 +4385,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_IV.get(1),
-                    getModItem(IronTanks.ID, "goldTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_IV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(1 * INGOTS))
@@ -4424,7 +4399,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_LuV.get(1),
-                    getModItem(IronTanks.ID, "diamondTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_LuV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(16 * INGOTS))
@@ -4435,7 +4410,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_LuV.get(1),
-                    getModItem(IronTanks.ID, "diamondTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_LuV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(2 * INGOTS))
@@ -4449,7 +4424,7 @@ public class AssemblerRecipes implements Runnable {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     ItemList.Hull_ZPM.get(1),
-                    getModItem(IronTanks.ID, "obsidianTank", 1),
+                    GregtechItemList.GTFluidTank_ULV.get(1),
                     GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_ZPM.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(4 * INGOTS))
@@ -6268,21 +6243,6 @@ public class AssemblerRecipes implements Runnable {
                 .eut(TierEU.RECIPE_MV)
                 .addTo(assemblerRecipes);
 
-            // chunkloader upgrade OC
-
-            GTValues.RA.stdBuilder()
-                .itemInputs(
-                    ItemList.Circuit_Board_Plastic_Advanced.get(1),
-                    GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.Aluminium, 2),
-                    getModItem(Railcraft.ID, "machine.alpha", 1L, 0),
-                    getModItem(OpenComputers.ID, "item", 1L, 26),
-                    GTUtility.getIntegratedCircuit(1))
-                .itemOutputs(getModItem(OpenComputers.ID, "item", 1L, 62))
-                .fluidInputs(tMat.getMolten(144L * tMultiplier / 2))
-                .duration(12 * SECONDS + 10 * TICKS)
-                .eut(256)
-                .addTo(assemblerRecipes);
-
         }
 
         GTValues.RA.stdBuilder()
@@ -6437,318 +6397,6 @@ public class AssemblerRecipes implements Runnable {
             .itemOutputs(getModItem(Railcraft.ID, "machine.beta", 1L, 15))
             .duration(20 * SECONDS)
             .eut(64)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Aluminium, 2),
-                GTUtility.getIntegratedCircuit(20))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 1L, 0))
-            .duration(30 * SECONDS)
-            .eut(TierEU.RECIPE_MV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Aluminium, 2),
-                new ItemStack(Blocks.glass_pane, 2, 0),
-                GTUtility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 2L, 1))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_MV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Aluminium, 2),
-                getModItem(TinkerConstruct.ID, "GlassPane", 2L, 0),
-                GTUtility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 2L, 1))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_MV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.pipeLarge, Materials.Plastic, 2),
-                getModItem(NewHorizonsCoreMod.ID, "item.AluminiumBars", 2),
-                GTUtility.getIntegratedCircuit(22))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 1L, 2))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_MV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.StainlessSteel, 2),
-                GTUtility.getIntegratedCircuit(20))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 1L, 3))
-            .duration(10 * SECONDS)
-            .eut(256)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.StainlessSteel, 2),
-                new ItemStack(Blocks.glass_pane, 2, 0),
-                GTUtility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 2L, 4))
-            .duration(20 * SECONDS)
-            .eut(256)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.StainlessSteel, 2),
-                getModItem(TinkerConstruct.ID, "GlassPane", 2L, 0),
-                GTUtility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 2L, 4))
-            .duration(20 * SECONDS)
-            .eut(256)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.pipeLarge, Materials.StainlessSteel, 2),
-                getModItem(NewHorizonsCoreMod.ID, "item.StainlessSteelBars", 2),
-                GTUtility.getIntegratedCircuit(22))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 1L, 5))
-            .duration(20 * SECONDS)
-            .eut(256)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Titanium, 2),
-                GTUtility.getIntegratedCircuit(20))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 1L, 6))
-            .duration(30 * SECONDS)
-            .eut(TierEU.RECIPE_HV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Titanium, 2),
-                new ItemStack(Blocks.glass_pane, 2, 0),
-                GTUtility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 2L, 7))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_HV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Titanium, 2),
-                getModItem(TinkerConstruct.ID, "GlassPane", 2L, 0),
-                GTUtility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 2L, 7))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_HV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.pipeLarge, Materials.Titanium, 2),
-                getModItem(NewHorizonsCoreMod.ID, "item.TitaniumBars", 2),
-                GTUtility.getIntegratedCircuit(22))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 1L, 8))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_HV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.TungstenSteel, 2),
-                GTUtility.getIntegratedCircuit(20))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 1L, 9))
-            .duration(10 * SECONDS)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.TungstenSteel, 2),
-                new ItemStack(Blocks.glass_pane, 2, 0),
-                GTUtility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 2L, 10))
-            .duration(20 * SECONDS)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.TungstenSteel, 2),
-                getModItem(TinkerConstruct.ID, "GlassPane", 2L, 0),
-                GTUtility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 2L, 10))
-            .duration(20 * SECONDS)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.pipeLarge, Materials.TungstenSteel, 2),
-                getModItem(NewHorizonsCoreMod.ID, "item.TungstenSteelBars", 2),
-                GTUtility.getIntegratedCircuit(22))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 1L, 11))
-            .duration(20 * SECONDS)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Palladium, 2),
-                GTUtility.getIntegratedCircuit(20))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 1L, 12))
-            .duration(30 * SECONDS)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Palladium, 2),
-                new ItemStack(Blocks.glass_pane, 2, 0),
-                GTUtility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 2L, 13))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Palladium, 2),
-                getModItem(TinkerConstruct.ID, "GlassPane", 2L, 0),
-                GTUtility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 2L, 13))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.pipeLarge, Materials.NiobiumTitanium, 2),
-                getModItem(NewHorizonsCoreMod.ID, "item.ChromeBars", 2),
-                GTUtility.getIntegratedCircuit(22))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.zeta", 1L, 14))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Iridium, 2),
-                GTUtility.getIntegratedCircuit(20))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 1L, 0))
-            .duration(10 * SECONDS)
-            .eut(4096)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Iridium, 2),
-                new ItemStack(Blocks.glass_pane, 2, 0),
-                GTUtility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 2L, 1))
-            .duration(20 * SECONDS)
-            .eut(4096)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Iridium, 2),
-                getModItem(TinkerConstruct.ID, "GlassPane", 2L, 0),
-                GTUtility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 2L, 1))
-            .duration(20 * SECONDS)
-            .eut(4096)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.pipeLarge, Materials.Enderium, 2),
-                getModItem(NewHorizonsCoreMod.ID, "item.IridiumBars", 2),
-                GTUtility.getIntegratedCircuit(22))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 1L, 2))
-            .duration(20 * SECONDS)
-            .eut(4096)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Osmium, 2),
-                GTUtility.getIntegratedCircuit(20))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 1L, 3))
-            .duration(30 * SECONDS)
-            .eut(TierEU.RECIPE_IV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Osmium, 2),
-                new ItemStack(Blocks.glass_pane, 2, 0),
-                GTUtility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 2L, 4))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_IV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Osmium, 2),
-                getModItem(TinkerConstruct.ID, "GlassPane", 2L, 0),
-                GTUtility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 2L, 4))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_IV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.pipeLarge, Materials.Naquadah, 2),
-                getModItem(NewHorizonsCoreMod.ID, "item.OsmiumBars", 2),
-                GTUtility.getIntegratedCircuit(22))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 1L, 5))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_IV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Neutronium, 2),
-                GTUtility.getIntegratedCircuit(20))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 1L, 6))
-            .duration(10 * SECONDS)
-            .eut(TierEU.RECIPE_LuV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Neutronium, 2),
-                new ItemStack(Blocks.glass_pane, 2, 0),
-                GTUtility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 2L, 7))
-            .duration(20 * SECONDS)
-            .eut(TierEU.RECIPE_LuV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Neutronium, 2),
-                getModItem(TinkerConstruct.ID, "GlassPane", 2L, 0),
-                GTUtility.getIntegratedCircuit(21))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 2L, 7))
-            .duration(20 * SECONDS)
-            .eut(TierEU.RECIPE_LuV)
-            .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.pipeLarge, Materials.Neutronium, 2),
-                getModItem(NewHorizonsCoreMod.ID, "item.NeutroniumBars", 2),
-                GTUtility.getIntegratedCircuit(22))
-            .itemOutputs(getModItem(Railcraft.ID, "machine.eta", 1L, 8))
-            .duration(20 * SECONDS)
-            .eut(TierEU.RECIPE_LuV)
             .addTo(assemblerRecipes);
 
         // Water Tank

@@ -257,15 +257,6 @@ public class ProcessingCrafting implements gregtech.api.interfaces.IOreRecipeReg
 
                 GTValues.RA.stdBuilder()
                     .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Redstone, 1L),
-                        GTUtility.copyAmount(0, aStack))
-                    .itemOutputs(GTModHandler.getModItem(BuildCraftSilicon.ID, "redstoneChipset", 1L, 0))
-                    .duration(2 * SECONDS + 10 * TICKS)
-                    .eut(TierEU.RECIPE_MV)
-                    .addTo(laserEngraverRecipes);
-
-                GTValues.RA.stdBuilder()
-                    .itemInputs(
                         GTOreDictUnificator.get(OrePrefixes.foil, Materials.RedAlloy, 1L),
                         GTUtility.copyAmount(0, aStack))
                     .itemOutputs(GTModHandler.getModItem(NewHorizonsCoreMod.ID, "item.EtchedLowVoltageWiring", 1L, 0))
