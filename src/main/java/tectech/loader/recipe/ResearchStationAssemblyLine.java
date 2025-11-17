@@ -156,7 +156,7 @@ public class ResearchStationAssemblyLine implements Runnable {
             new FluidStack[] { Materials.Infinity.getMolten(576), },
             ItemList.Casing_Coil_Hypogen.get(1),
             60 * 20,
-            (int) TierEU.RECIPE_UIV);
+            (int) TierEU.RECIPE_UEV);
 
         // Eternal coil
         TTRecipeAdder.addResearchableAssemblylineRecipe(
