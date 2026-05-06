@@ -2,17 +2,13 @@ package detrav.net;
 
 import java.util.HashMap;
 
-import com.google.common.io.ByteArrayDataInput;
-import gregtech.GTMod;
-import gregtech.api.net.GTPacket;
-import gregtech.api.net.GTPacketTypes;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.google.common.base.Objects;
+import com.google.common.io.ByteArrayDataInput;
 
 import bartworks.system.material.Werkstoff;
 import detrav.DetravScannerMod;
@@ -20,9 +16,13 @@ import detrav.gui.DetravScannerGUI;
 import detrav.gui.textures.DetravMapTexture;
 import detrav.utils.FluidColors;
 import detrav.utils.GTppHelper;
+import gregtech.GTMod;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
+import gregtech.api.net.GTPacket;
+import gregtech.api.net.GTPacketTypes;
 import gregtech.api.util.GTLanguageManager;
+import io.netty.buffer.ByteBuf;
 
 /**
  * Created by wital_000 on 20.03.2016.
@@ -40,7 +40,8 @@ public class ProspectingPacket extends GTPacket {
     public HashMap<Short, String> metaMap;
 
     public int level = -1;
-    public ProspectingPacket(){
+
+    public ProspectingPacket() {
         super();
     }
 
@@ -104,7 +105,7 @@ public class ProspectingPacket extends GTPacket {
     }
 
     public GTPacket decode(ByteArrayDataInput in) {
-        //DataInput aData = new DataInputStream(new GZIPInputStream(in));
+        // DataInput aData = new DataInputStream(new GZIPInputStream(in));
         ProspectingPacket packet = new ProspectingPacket(
             in.readInt(),
             in.readInt(),
@@ -146,7 +147,7 @@ public class ProspectingPacket extends GTPacket {
 
     @Override
     public void encode(ByteBuf out) {
-        //DataOutputStream tOut = new DataOutputStream(new GZIPOutputStream(out));
+        // DataOutputStream tOut = new DataOutputStream(new GZIPOutputStream(out));
         out.writeInt(chunkX);
         out.writeInt(chunkZ);
         out.writeInt(posX);

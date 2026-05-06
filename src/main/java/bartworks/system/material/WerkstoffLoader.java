@@ -1924,7 +1924,7 @@ public class WerkstoffLoader {
             WerkstoffLoader.items.put(cell, new BWMetaGeneratedItems(cell));
             if (Forestry.isModLoaded()) {
                 BWMetaGeneratedItems capsuleClass = new BWMetaGeneratedItems(capsule);
-                Invoke.client(()-> API.hideItem(new ItemStack(capsuleClass, 1, WILDCARD)));
+                Invoke.client(() -> API.hideItem(new ItemStack(capsuleClass, 1, WILDCARD)));
                 WerkstoffLoader.items.put(capsule, capsuleClass);
             }
         }
@@ -1935,7 +1935,7 @@ public class WerkstoffLoader {
             WerkstoffLoader.items.put(OrePrefixes.cellMolten, new BWMetaGeneratedItems(OrePrefixes.cellMolten));
             if (Forestry.isModLoaded()) {
                 BWMetaGeneratedItems capsuleMoltenClass = new BWMetaGeneratedItems(OrePrefixes.capsuleMolten);
-                Invoke.client(()-> API.hideItem(new ItemStack(capsuleMoltenClass, 1, WILDCARD)));
+                Invoke.client(() -> API.hideItem(new ItemStack(capsuleMoltenClass, 1, WILDCARD)));
                 WerkstoffLoader.items.put(OrePrefixes.capsuleMolten, capsuleMoltenClass);
             }
         }

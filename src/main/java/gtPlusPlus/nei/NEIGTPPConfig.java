@@ -2,11 +2,11 @@ package gtPlusPlus.nei;
 
 import java.util.Arrays;
 
-import cpw.mods.fml.common.Optional;
 import net.minecraft.item.ItemStack;
 
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
+import cpw.mods.fml.common.Optional;
 import gregtech.api.enums.Mods;
 import gregtech.api.recipe.RecipeMaps;
 import gtPlusPlus.api.objects.Logger;

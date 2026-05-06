@@ -2258,14 +2258,14 @@ public class MTERecipeLoader implements Runnable {
         GTModHandler.addCraftingRecipe(
             ItemList.Hatch_Output_ULV.get(1L),
             bits,
-            new Object[] { "ASA", "AFA", "APA", 'S', GTOreDictUnificator.get(OrePrefixes.cell, Materials.Empty, 1),
-                'F', ItemList.Hull_ULV.get(1L), 'A', OrePrefixes.plate.get(Materials.Rubber), 'P',
+            new Object[] { "ASA", "AFA", "APA", 'S', GTOreDictUnificator.get(OrePrefixes.cell, Materials.Empty, 1), 'F',
+                ItemList.Hull_ULV.get(1L), 'A', OrePrefixes.plate.get(Materials.Rubber), 'P',
                 OrePrefixes.ring.get(Materials.Rubber) });
         GTModHandler.addCraftingRecipe(
             ItemList.Hatch_Input_ULV.get(1L),
             bits,
-            new Object[] { "ASA", "AFA", "APA", 'S', GTOreDictUnificator.get(OrePrefixes.cell, Materials.Empty, 1),
-                'F', ItemList.Hull_ULV.get(1L), 'A', OrePrefixes.plate.get(Materials.Rubber), 'P',
+            new Object[] { "ASA", "AFA", "APA", 'S', GTOreDictUnificator.get(OrePrefixes.cell, Materials.Empty, 1), 'F',
+                ItemList.Hull_ULV.get(1L), 'A', OrePrefixes.plate.get(Materials.Rubber), 'P',
                 OrePrefixes.gear.get(Materials.Rubber) });
         GTModHandler.addCraftingRecipe(
             ItemList.Casing_Firebox_Steel.get(1L),

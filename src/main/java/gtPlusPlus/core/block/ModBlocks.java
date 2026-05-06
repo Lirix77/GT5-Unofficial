@@ -1,6 +1,5 @@
 package gtPlusPlus.core.block;
 
-import gtPlusPlus.core.block.machine.*;
 import net.minecraft.block.Block;
 import net.minecraftforge.fluids.Fluid;
 
@@ -15,6 +14,7 @@ import gtPlusPlus.core.block.general.BlockHellFire;
 import gtPlusPlus.core.block.general.BlockLightGlass;
 import gtPlusPlus.core.block.general.BlockMiningExplosives;
 import gtPlusPlus.core.block.general.antigrief.BlockWitherProof;
+import gtPlusPlus.core.block.machine.*;
 import gtPlusPlus.core.fluids.FluidRegistryHandler;
 
 public final class ModBlocks {

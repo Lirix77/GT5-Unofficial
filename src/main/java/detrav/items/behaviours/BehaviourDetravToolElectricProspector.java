@@ -5,8 +5,6 @@ import static gregtech.api.enums.Mods.VisualProspecting;
 import java.util.ArrayList;
 import java.util.List;
 
-import gregtech.GTMod;
-import gregtech.api.enums.GTValues;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -25,6 +23,8 @@ import detrav.items.DetravMetaGeneratedTool01;
 import detrav.net.ProspectingPacket;
 import detrav.utils.BartWorksHelper;
 import detrav.utils.GTppHelper;
+import gregtech.GTMod;
+import gregtech.api.enums.GTValues;
 import gregtech.api.items.MetaBaseItem;
 import gregtech.api.objects.ItemData;
 import gregtech.api.util.GTLanguageManager;

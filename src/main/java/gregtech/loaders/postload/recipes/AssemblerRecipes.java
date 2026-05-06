@@ -22,7 +22,6 @@ import static gregtech.api.util.GTRecipeBuilder.TICKS;
 import static gregtech.loaders.postload.MachineRecipeLoader.solderingMats;
 import static gtPlusPlus.core.material.MaterialsAlloy.INCONEL_690;
 
-import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -44,6 +43,7 @@ import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
 import gtPlusPlus.core.material.MaterialsAlloy;
+import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 import tectech.thing.CustomItemList;
 
 public class AssemblerRecipes implements Runnable {
@@ -3322,10 +3322,7 @@ public class AssemblerRecipes implements Runnable {
         // ULV input bus
         {
             GTValues.RA.stdBuilder()
-                .itemInputs(
-                    ItemList.Hull_ULV.get(1),
-                    new ItemStack(Blocks.chest),
-                    GTUtility.getIntegratedCircuit(1))
+                .itemInputs(ItemList.Hull_ULV.get(1), new ItemStack(Blocks.chest), GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_Bus_ULV.get(1))
                 .fluidInputs(Materials.Glue.getFluid(1 * INGOTS))
                 .duration(24 * SECONDS)
@@ -3333,10 +3330,7 @@ public class AssemblerRecipes implements Runnable {
                 .addTo(assemblerRecipes);
 
             GTValues.RA.stdBuilder()
-                .itemInputs(
-                    ItemList.Hull_ULV.get(1),
-                    new ItemStack(Blocks.chest),
-                    GTUtility.getIntegratedCircuit(1))
+                .itemInputs(ItemList.Hull_ULV.get(1), new ItemStack(Blocks.chest), GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_Bus_ULV.get(1))
                 .fluidInputs(Materials.Plastic.getMolten(1 * HALF_INGOT))
                 .duration(24 * SECONDS)
@@ -3344,10 +3338,7 @@ public class AssemblerRecipes implements Runnable {
                 .addTo(assemblerRecipes);
 
             GTValues.RA.stdBuilder()
-                .itemInputs(
-                    ItemList.Hull_ULV.get(1),
-                    new ItemStack(Blocks.chest),
-                    GTUtility.getIntegratedCircuit(1))
+                .itemInputs(ItemList.Hull_ULV.get(1), new ItemStack(Blocks.chest), GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_Bus_ULV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(1 * EIGHTH_INGOT))
                 .duration(24 * SECONDS)
@@ -3355,10 +3346,7 @@ public class AssemblerRecipes implements Runnable {
                 .addTo(assemblerRecipes);
 
             GTValues.RA.stdBuilder()
-                .itemInputs(
-                    ItemList.Hull_ULV.get(1),
-                    new ItemStack(Blocks.chest),
-                    GTUtility.getIntegratedCircuit(1))
+                .itemInputs(ItemList.Hull_ULV.get(1), new ItemStack(Blocks.chest), GTUtility.getIntegratedCircuit(1))
                 .itemOutputs(ItemList.Hatch_Input_Bus_ULV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(4))
                 .duration(24 * SECONDS)
@@ -3608,10 +3596,7 @@ public class AssemblerRecipes implements Runnable {
         // ULV output bus
         {
             GTValues.RA.stdBuilder()
-                .itemInputs(
-                    ItemList.Hull_ULV.get(1),
-                    new ItemStack(Blocks.chest),
-                    GTUtility.getIntegratedCircuit(2))
+                .itemInputs(ItemList.Hull_ULV.get(1), new ItemStack(Blocks.chest), GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_Bus_ULV.get(1))
                 .fluidInputs(Materials.Glue.getFluid(1 * INGOTS))
                 .duration(24 * SECONDS)
@@ -3619,10 +3604,7 @@ public class AssemblerRecipes implements Runnable {
                 .addTo(assemblerRecipes);
 
             GTValues.RA.stdBuilder()
-                .itemInputs(
-                    ItemList.Hull_ULV.get(1),
-                    new ItemStack(Blocks.chest),
-                    GTUtility.getIntegratedCircuit(2))
+                .itemInputs(ItemList.Hull_ULV.get(1), new ItemStack(Blocks.chest), GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_Bus_ULV.get(1))
                 .fluidInputs(Materials.Plastic.getMolten(1 * HALF_INGOT))
                 .duration(24 * SECONDS)
@@ -3630,10 +3612,7 @@ public class AssemblerRecipes implements Runnable {
                 .addTo(assemblerRecipes);
 
             GTValues.RA.stdBuilder()
-                .itemInputs(
-                    ItemList.Hull_ULV.get(1),
-                    new ItemStack(Blocks.chest),
-                    GTUtility.getIntegratedCircuit(2))
+                .itemInputs(ItemList.Hull_ULV.get(1), new ItemStack(Blocks.chest), GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_Bus_ULV.get(1))
                 .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(1 * EIGHTH_INGOT))
                 .duration(24 * SECONDS)
@@ -3641,10 +3620,7 @@ public class AssemblerRecipes implements Runnable {
                 .addTo(assemblerRecipes);
 
             GTValues.RA.stdBuilder()
-                .itemInputs(
-                    ItemList.Hull_ULV.get(1),
-                    new ItemStack(Blocks.chest),
-                    GTUtility.getIntegratedCircuit(2))
+                .itemInputs(ItemList.Hull_ULV.get(1), new ItemStack(Blocks.chest), GTUtility.getIntegratedCircuit(2))
                 .itemOutputs(ItemList.Hatch_Output_Bus_ULV.get(1))
                 .fluidInputs(Materials.Polybenzimidazole.getMolten(4))
                 .duration(24 * SECONDS)
@@ -4223,7 +4199,6 @@ public class AssemblerRecipes implements Runnable {
          * those early exits prevents further hatches recipes from being registered, but it's probably fine, as that
          * means we aren't in full pack
          */
-
 
         // LV output hatch
         {

@@ -199,9 +199,9 @@ public class ToolWrench extends GTTool {
         TileEntity tile, @Nonnull BlockEvent.BreakEvent event) {
         final World world = player.worldObj;
         if (tile instanceof IWrenchable wrenchable) {
-                ItemStack drop = wrenchable.getWrenchDrop(player);
-                world.setBlockToAir(x, y, z);
-                world.spawnEntityInWorld(new EntityItem(world, x, y, z, drop));
+            ItemStack drop = wrenchable.getWrenchDrop(player);
+            world.setBlockToAir(x, y, z);
+            world.spawnEntityInWorld(new EntityItem(world, x, y, z, drop));
         }
         if (block instanceof AEBaseTileBlock aeBaseTileBlock) {
             if (LastEventFromThis) {

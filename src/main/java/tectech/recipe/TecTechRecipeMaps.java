@@ -32,9 +32,10 @@ public class TecTechRecipeMaps {
         .progressBarPos(78, 24 + 2)
         .logoPos(10, 10)
         .neiHandlerInfo(
-            Invoke.clientValue(()-> builder -> builder.setDisplayStack(CustomItemList.Machine_Multi_EyeOfHarmony.get(1))
-                .setHeight(314)
-                .setMaxRecipesPerPage(1)))
+            Invoke.clientValue(
+                () -> builder -> builder.setDisplayStack(CustomItemList.Machine_Multi_EyeOfHarmony.get(1))
+                    .setHeight(314)
+                    .setMaxRecipesPerPage(1)))
         .frontend(EyeOfHarmonyFrontend::new)
         .build();
     public static final RecipeMap<RecipeMapBackend> researchStationFakeRecipes = RecipeMapBuilder
@@ -58,7 +59,8 @@ public class TecTechRecipeMaps {
         .neiTransferRect(81, 33, 25, 18)
         .neiTransferRect(124, 33, 18, 29)
         .frontend(ResearchStationFrontend::new)
-        .neiHandlerInfo(Invoke.clientValue(()-> builder -> builder.setDisplayStack(CustomItemList.Machine_Multi_Research.get(1))))
+        .neiHandlerInfo(
+            Invoke.clientValue(() -> builder -> builder.setDisplayStack(CustomItemList.Machine_Multi_Research.get(1))))
         .build();
 
     public static final RecipeMap<RecipeMapBackend> godforgePlasmaRecipes = RecipeMapBuilder.of("gt.recipe.fog_plasma")
@@ -93,8 +95,10 @@ public class TecTechRecipeMaps {
         .dontUseProgressBar()
         .neiTransferRect(83, 38, 30, 13)
         .frontend(GodforgeUpgradeCostFrontend::new)
-        .neiHandlerInfo(Invoke.clientValue(()-> builder -> builder.setDisplayStack(CustomItemList.Machine_Multi_ForgeOfGods.get(1))
-                .setHeight(100)))
+        .neiHandlerInfo(
+            Invoke.clientValue(
+                () -> builder -> builder.setDisplayStack(CustomItemList.Machine_Multi_ForgeOfGods.get(1))
+                    .setHeight(100)))
         .build();
 
 }

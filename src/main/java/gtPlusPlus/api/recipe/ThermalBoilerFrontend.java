@@ -29,7 +29,8 @@ public class ThermalBoilerFrontend extends LargeNEIFrontend {
         NEIRecipePropertiesBuilder neiPropertiesBuilder) {
         super(
             uiPropertiesBuilder,
-            Invoke.clientValue(()-> neiPropertiesBuilder.neiSpecialInfoFormatter(new ThermalBoilerSpecialValueFormatter())));
+            Invoke.clientValue(
+                () -> neiPropertiesBuilder.neiSpecialInfoFormatter(new ThermalBoilerSpecialValueFormatter())));
     }
 
     @Override

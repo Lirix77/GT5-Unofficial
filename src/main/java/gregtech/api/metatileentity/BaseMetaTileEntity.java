@@ -1407,8 +1407,7 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
                 try {
                     mReleaseEnergy = true;
                     IEnergyConnected.Util.emitEnergyToNetwork(V[5], Math.max(1, getStoredEU() / V[5]), this);
-                } catch (Exception ignored) {
-                }
+                } catch (Exception ignored) {}
             }
             mReleaseEnergy = false;
             // Normal Explosion Code
@@ -1424,7 +1423,7 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
             }
             Pollution.addPollution((TileEntity) this, GTMod.gregtechproxy.mPollutionOnExplosion);
             mMetaTileEntity.doExplosion(aAmount);
-        } catch (Exception ignored){}
+        } catch (Exception ignored) {}
     }
 
     public void dropItems(ItemStack tItem) {
@@ -2492,11 +2491,9 @@ public class BaseMetaTileEntity extends CommonMetaTileEntity
 
     void onChunkUnloadAE() {
         final AENetworkProxy gp = getProxy();
-        if (gp != null)
-            try {
-                gp.onChunkUnload();
-            } catch (Exception ignored){
-            }
+        if (gp != null) try {
+            gp.onChunkUnload();
+        } catch (Exception ignored) {}
     }
 
     void invalidateAE() {

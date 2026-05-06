@@ -273,7 +273,6 @@ public class FluidExtractorRecipes implements Runnable {
             .recipeCategory(RecipeCategories.fluidExtractorRecycling)
             .addTo(fluidExtractionRecipes);
 
-
         GTValues.RA.stdBuilder()
             .itemInputs(new ItemStack(Items.wheat_seeds, 1, 32767))
             .fluidOutputs(Materials.SeedOil.getFluid(10))

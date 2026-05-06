@@ -1,14 +1,10 @@
 package gregtech.api.enums;
 
-import java.util.Arrays;
-
 import static gregtech.api.enums.OrePrefixes.*;
-import gregtech.api.objects.MaterialStack;
 
 public class MaterialsCubix {
 
-    public static Materials Energy = new MaterialBuilder(389, TextureSet.SET_METALLIC, "Energy")
-        .setName("Energy")
+    public static Materials Energy = new MaterialBuilder(389, TextureSet.SET_METALLIC, "Energy").setName("Energy")
         .setRGBA(229, 255, 0, 255)
         .addOreItems()
         .addDustItems()
@@ -21,8 +17,7 @@ public class MaterialsCubix {
         .setToolQuality(4)
         .constructMaterial();
 
-    public static Materials Power = new MaterialBuilder(390, TextureSet.SET_METALLIC, "Power")
-        .setName("Power")
+    public static Materials Power = new MaterialBuilder(390, TextureSet.SET_METALLIC, "Power").setName("Power")
         .setRGBA(144, 0, 244, 255)
         .addDustItems()
         .addMetalItems()

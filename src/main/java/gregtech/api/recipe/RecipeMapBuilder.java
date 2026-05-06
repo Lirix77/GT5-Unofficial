@@ -405,7 +405,7 @@ public final class RecipeMapBuilder<B extends RecipeMapBackend> {
      * for the machine GUI.
      */
     public RecipeMapBuilder<B> disableRegisterNEI() {
-        Invoke.client(()-> neiPropertiesBuilder.disableRegisterNEI());
+        Invoke.client(() -> neiPropertiesBuilder.disableRegisterNEI());
         return this;
     }
 
@@ -476,7 +476,7 @@ public final class RecipeMapBuilder<B extends RecipeMapBackend> {
      * Stops rendering the actual stack size of items on NEI.
      */
     public RecipeMapBuilder<B> disableRenderRealStackSizes() {
-        Invoke.client(()-> neiPropertiesBuilder.disableRenderRealStackSizes());
+        Invoke.client(() -> neiPropertiesBuilder.disableRenderRealStackSizes());
         return this;
     }
 

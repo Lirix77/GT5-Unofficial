@@ -3,11 +3,8 @@ package gregtech.api.enums;
 import static galacticgreg.api.enums.DimensionDef.*;
 import static gregtech.common.OreMixBuilder.NETHER;
 import static gregtech.common.OreMixBuilder.OW;
-import static gregtech.common.OreMixBuilder.THE_END;
-import static gregtech.common.OreMixBuilder.TWILIGHT_FOREST;
 
 import galacticgreg.WorldgenOreLayerSpace;
-import galacticgreg.api.enums.DimensionDef;
 import gregtech.common.OreMixBuilder;
 import gregtech.common.WorldgenGTOreLayer;
 
@@ -19,9 +16,7 @@ public enum OreMixes {
         .weight(30)
         .density(4)
         .size(32)
-        .enableInDim(
-            EndAsteroids,
-            Asteroids)
+        .enableInDim(EndAsteroids, Asteroids)
         .primary(Materials.Naquadah)
         .secondary(Materials.Naquadah)
         .inBetween(Materials.Naquadah)
@@ -153,10 +148,7 @@ public enum OreMixes {
         .weight(80)
         .density(3)
         .size(24)
-        .enableInDim(
-            Seth,
-            Moon,
-            Asteroids)
+        .enableInDim(Seth, Moon, Asteroids)
         .primary(Materials.Bauxite)
         .secondary(Materials.Ilmenite)
         .inBetween(Materials.Aluminium)

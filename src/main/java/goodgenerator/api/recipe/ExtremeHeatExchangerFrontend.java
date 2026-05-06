@@ -25,7 +25,9 @@ public class ExtremeHeatExchangerFrontend extends RecipeMapFrontend {
 
     public ExtremeHeatExchangerFrontend(BasicUIPropertiesBuilder uiPropertiesBuilder,
         NEIRecipePropertiesBuilder neiPropertiesBuilder) {
-        super(uiPropertiesBuilder, Invoke.clientValue(()-> neiPropertiesBuilder.neiSpecialInfoFormatter(new EHESpecialValueFormatter())));
+        super(
+            uiPropertiesBuilder,
+            Invoke.clientValue(() -> neiPropertiesBuilder.neiSpecialInfoFormatter(new EHESpecialValueFormatter())));
     }
 
     @Override

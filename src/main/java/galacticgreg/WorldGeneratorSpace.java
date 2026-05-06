@@ -7,7 +7,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.util.Vec3;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.common.ChestGenHooks;
@@ -52,8 +51,7 @@ public class WorldGeneratorSpace implements IWorldGenerator {
         IChunkProvider pChunkProvider) {
         pX *= 16;
         pZ *= 16;
-        GalacticGreg.Logger
-            .trace("Triggered generate: [ChunkGenerator %s]", pChunkGenerator.toString());
+        GalacticGreg.Logger.trace("Triggered generate: [ChunkGenerator %s]", pChunkGenerator.toString());
 
         ModDimensionDef tDimDef = GalacticGregRegistry.getDimensionTypeByChunkGenerator(pChunkGenerator);
 

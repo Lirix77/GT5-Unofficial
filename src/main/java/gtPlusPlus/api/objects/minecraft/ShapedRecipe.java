@@ -17,7 +17,7 @@ public class ShapedRecipe {
     ItemStack[] mBlackList = null;
 
     public ShapedRecipe(Object aInput1, Object aInput2, Object aInput3, Object aInput4, Object aInput5, Object aInput6,
-                        Object aInput7, Object aInput8, Object aInput9, ItemStack aOutput) {
+        Object aInput7, Object aInput8, Object aInput9, ItemStack aOutput) {
 
         this(new Object[] { aInput1, aInput2, aInput3, aInput4, aInput5, aInput6, aInput7, aInput8, aInput9 }, aOutput);
     }
@@ -94,7 +94,8 @@ public class ShapedRecipe {
                         Logger.RECIPE(
                             "Storing '" + CHARS.charAt(aCharSlot)
                                 + "' with an object of type "
-                                + stack.getClass().getSimpleName()
+                                + stack.getClass()
+                                    .getSimpleName()
                                 + " and a value of "
                                 + mInfo);
                         aChar[aMemSlot++] = CHARS.charAt(aCharSlot);
@@ -157,7 +158,8 @@ public class ShapedRecipe {
                             Logger.RECIPE(
                                 "Registering Pair of '" + CHARS.charAt(aCharSlot)
                                     + "' and a "
-                                    + stack.getClass().getSimpleName()
+                                    + stack.getClass()
+                                        .getSimpleName()
                                     + " object. Object has a value of "
                                     + mInfo);
                             aCharSlot++;

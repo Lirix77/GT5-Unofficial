@@ -1,19 +1,22 @@
 package gregtech.common.blocks;
 
-import com.google.common.base.Strings;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.util.StatCollector;
-import gregtech.common.items.ItemDimensionDisplay;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.util.StatCollector;
+
+import com.google.common.base.Strings;
+
+import cpw.mods.fml.common.registry.GameRegistry;
+import gregtech.common.items.ItemDimensionDisplay;
+
 public class DimBlocks {
+
     public static final Map<String, Block> blocks = new HashMap<>();
 
     public static final String[] DimName = {
@@ -29,8 +32,10 @@ public class DimBlocks {
         "Underdark", };
     public static final String[] DimNameTrimmed = Arrays.stream(DimName)
         .map(
-            n -> n.replaceAll("GalacticraftCore_", "").replaceAll("GalacticraftMars_", "")
-                .replaceAll("GalaxySpace_", "").replaceAll("GalacticraftAmunRa_", "")
+            n -> n.replaceAll("GalacticraftCore_", "")
+                .replaceAll("GalacticraftMars_", "")
+                .replaceAll("GalaxySpace_", "")
+                .replaceAll("GalacticraftAmunRa_", "")
                 .replaceAll("Vanilla_", "Vanilla "))
         .toArray(String[]::new);
     public static final String[] DimNameDisplayed = { // first 2 letters if one word else 1 letter of every word, except
@@ -79,10 +84,7 @@ public class DimBlocks {
         }
 
         if (dims.length > 11) {
-            dims = stringsToSpacedColumns(
-                dims,
-                dims.length / 11 + (dims.length % 11 == 0 ? 0 : 1),
-                2);
+            dims = stringsToSpacedColumns(dims, dims.length / 11 + (dims.length % 11 == 0 ? 0 : 1), 2);
         }
 
         return Arrays.asList(dims);
@@ -189,7 +191,6 @@ public class DimBlocks {
         }
         return dims;
     }
-
 
     public static void init() {
         for (String dimension : DimNameDisplayed) {

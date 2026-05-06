@@ -73,7 +73,6 @@ import gregtech.api.metatileentity.implementations.MTEBasicMachineWithRecipe;
 import gregtech.api.objects.GTHashSet;
 import gregtech.api.objects.GTItemStack;
 import gregtech.api.objects.ItemData;
-import gregtech.api.recipe.RecipeCategories;
 import gregtech.api.recipe.RecipeMap;
 import ic2.api.item.IBoxable;
 import ic2.api.item.IC2Items;
@@ -543,7 +542,7 @@ public class GTModHandler {
         recipeBuilder.itemOutputs(aOutput)
             .duration(6 * SECONDS + 10 * TICKS)
             .eut(3);
-            //.recipeCategory(RecipeCategories.alloySmelterRecycling);
+        // .recipeCategory(RecipeCategories.alloySmelterRecycling);
         if (hidden) {
             recipeBuilder.hidden();
         }

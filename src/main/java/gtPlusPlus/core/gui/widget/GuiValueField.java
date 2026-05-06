@@ -1,5 +1,7 @@
 package gtPlusPlus.core.gui.widget;
 
+import static gregtech.GTMod.DEV_ENVIRONMENT;
+
 import java.lang.reflect.Field;
 
 import net.minecraft.client.gui.FontRenderer;
@@ -7,8 +9,6 @@ import net.minecraft.client.gui.GuiTextField;
 
 import gtPlusPlus.core.gui.machine.GUIVolumetricFlaskSetter;
 import gtPlusPlus.core.util.reflect.ReflectionUtils;
-
-import static gregtech.GTMod.DEV_ENVIRONMENT;
 
 public class GuiValueField extends GuiTextField {
 

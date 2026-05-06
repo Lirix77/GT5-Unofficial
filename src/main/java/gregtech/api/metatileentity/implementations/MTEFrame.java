@@ -1,24 +1,24 @@
 package gregtech.api.metatileentity.implementations;
 
-import gregtech.api.enums.*;
-import gregtech.api.util.GTModHandler;
-import gregtech.api.util.GTOreDictUnificator;
-import gregtech.api.util.GTUtility;
+import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
+import static gregtech.api.util.GTRecipeBuilder.TICKS;
+import static gregtech.api.util.GTUtility.calculateRecipeEU;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import gregtech.api.enums.*;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.MetaPipeEntity;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTLanguageManager;
-
-import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
-import static gregtech.api.util.GTRecipeBuilder.SECONDS;
-import static gregtech.api.util.GTRecipeBuilder.TICKS;
-import static gregtech.api.util.GTUtility.calculateRecipeEU;
+import gregtech.api.util.GTModHandler;
+import gregtech.api.util.GTOreDictUnificator;
+import gregtech.api.util.GTUtility;
 
 public class MTEFrame extends MetaPipeEntity {
 
@@ -42,9 +42,7 @@ public class MTEFrame extends MetaPipeEntity {
             && GTOreDictUnificator.get(OrePrefixes.stick, aMaterial, 1) != null) {
             // Auto generate frame box recipe in an assembler.
             GTValues.RA.stdBuilder()
-                .itemInputs(
-                    GTOreDictUnificator.get(OrePrefixes.stick, aMaterial, 4),
-                    GTUtility.getIntegratedCircuit(4))
+                .itemInputs(GTOreDictUnificator.get(OrePrefixes.stick, aMaterial, 4), GTUtility.getIntegratedCircuit(4))
                 .itemOutputs(getStackForm(1))
                 .duration(3 * SECONDS + 4 * TICKS)
                 .eut(calculateRecipeEU(aMaterial, 7))

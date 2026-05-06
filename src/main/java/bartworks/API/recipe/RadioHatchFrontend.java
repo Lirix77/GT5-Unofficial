@@ -21,7 +21,10 @@ public class RadioHatchFrontend extends RecipeMapFrontend {
 
     public RadioHatchFrontend(BasicUIPropertiesBuilder uiPropertiesBuilder,
         NEIRecipePropertiesBuilder neiPropertiesBuilder) {
-        super(uiPropertiesBuilder, Invoke.clientValue(()-> neiPropertiesBuilder.neiSpecialInfoFormatter(new RadioHatchSpecialInfoFormatter())));
+        super(
+            uiPropertiesBuilder,
+            Invoke
+                .clientValue(() -> neiPropertiesBuilder.neiSpecialInfoFormatter(new RadioHatchSpecialInfoFormatter())));
     }
 
     @Override

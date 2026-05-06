@@ -12,7 +12,6 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Random;
 
-import galacticgreg.GalacticGreg;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -27,6 +26,7 @@ import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import galacticgreg.GalacticGreg;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
@@ -79,8 +79,7 @@ public class GTWorldgenerator implements IWorldGenerator {
     @Override
     public void generate(Random aRandom, int aX, int aZ, World aWorld, IChunkProvider aChunkGenerator,
         IChunkProvider aChunkProvider) {
-        GalacticGreg.Logger
-            .trace("Triggered generate GT Main: [ChunkGenerator %s]", aChunkGenerator.toString());
+        GalacticGreg.Logger.trace("Triggered generate GT Main: [ChunkGenerator %s]", aChunkGenerator.toString());
         synchronized (listLock) {
             mList.add(
                 new WorldGenContainer(

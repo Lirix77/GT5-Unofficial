@@ -2,7 +2,6 @@ package gtPlusPlus.everglades;
 
 import static gregtech.api.enums.Mods.GTPlusPlusEverglades;
 
-import bwcrossmod.galacticgreg.VoidMinerUtility;
 import net.minecraft.block.Block;
 import net.minecraftforge.common.DimensionManager;
 

@@ -38,7 +38,6 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
-import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
@@ -54,6 +53,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.SetMultimap;
 
+import cpw.mods.fml.relauncher.ReflectionHelper;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;

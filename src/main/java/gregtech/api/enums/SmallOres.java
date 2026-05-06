@@ -49,19 +49,14 @@ public enum SmallOres {
         .heightRange(40, 100)
         .amount(16)
         .ore(Materials.Iron)
-        .enableInDim(
-            Asteroids,
-            Mars)
+        .enableInDim(Asteroids, Mars)
         .enableInDim(NETHER, OW)),
 
     Lead(new SmallOreBuilder().name("ore.small.lead")
         .heightRange(40, 180)
         .amount(16)
         .ore(Materials.Lead)
-        .enableInDim(
-            Asteroids,
-            Mars,
-            EndAsteroids)
+        .enableInDim(Asteroids, Mars, EndAsteroids)
         .enableInDim(NETHER)),
 
     Zinc(new SmallOreBuilder().name("ore.small.zinc")
@@ -75,10 +70,7 @@ public enum SmallOres {
         .heightRange(20, 60)
         .amount(8)
         .ore(Materials.Gold)
-        .enableInDim(
-            Asteroids,
-            Mars,
-            EndAsteroids)
+        .enableInDim(Asteroids, Mars, EndAsteroids)
         .enableInDim(OW)),
 
     Silver(new SmallOreBuilder().name("ore.small.silver")
@@ -92,11 +84,7 @@ public enum SmallOres {
         .heightRange(80, 150)
         .amount(8)
         .ore(Materials.Nickel)
-        .enableInDim(
-            MehenBelt,
-            Asteroids,
-            Mars,
-            EndAsteroids)
+        .enableInDim(MehenBelt, Asteroids, Mars, EndAsteroids)
         .enableInDim(OW)),
 
     Lapis(new SmallOreBuilder().name("ore.small.lapis")
@@ -246,10 +234,7 @@ public enum SmallOres {
         .heightRange(10, 180)
         .amount(32)
         .ore(Materials.Titanium)
-        .enableInDim(
-            MehenBelt,
-            Asteroids,
-            Mars)
+        .enableInDim(MehenBelt, Asteroids, Mars)
 
     ),
 
@@ -281,18 +266,13 @@ public enum SmallOres {
         .heightRange(20, 40)
         .amount(8)
         .ore(Materials.Chromite)
-        .enableInDim(
-            MehenBelt,
-            Asteroids,
-            Mars)),
+        .enableInDim(MehenBelt, Asteroids, Mars)),
 
     Tungstate(new SmallOreBuilder().name("ore.small.tungstate")
         .heightRange(20, 40)
         .amount(8)
         .ore(Materials.Tungstate)
-        .enableInDim(
-            Asteroids,
-            Mars)),
+        .enableInDim(Asteroids, Mars)),
 
     Naquadah(new SmallOreBuilder().name("ore.small.naquadah")
         .heightRange(5, 25)

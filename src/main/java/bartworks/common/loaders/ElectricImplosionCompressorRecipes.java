@@ -10,7 +10,6 @@ import static goodgenerator.loader.Loaders.highDensityUraniumNugget;
 import static gregtech.api.enums.GTValues.M;
 import static gregtech.api.enums.Mods.Avaritia;
 import static gregtech.api.enums.Mods.EternalSingularity;
-import static gregtech.api.enums.Mods.OpenComputers;
 import static gregtech.api.enums.Mods.SuperSolarPanels;
 import static gregtech.api.enums.Mods.UniversalSingularities;
 import static gregtech.api.util.GTModHandler.getModItem;
@@ -156,7 +155,7 @@ public class ElectricImplosionCompressorRecipes implements Runnable {
             .itemInputs(
                 new Object[] { OrePrefixes.circuit.get(Materials.UHV), circuitMultiplier },
                 getModItem(SuperSolarPanels.ID, "solarsplitter", 1, 0),
-                //getModItem(OpenComputers.ID, "hologram2", circuitMultiplier, 0),
+                // getModItem(OpenComputers.ID, "hologram2", circuitMultiplier, 0),
                 GTOreDictUnificator.get(part, MaterialsUEVplus.Eternity, multiplier))
             .itemOutputs(
                 GTOreDictUnificator

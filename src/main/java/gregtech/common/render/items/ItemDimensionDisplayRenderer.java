@@ -1,14 +1,17 @@
 package gregtech.common.render.items;
 
-import gregtech.common.items.ItemDimensionDisplay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
+
 import org.lwjgl.opengl.GL11;
 
-public class ItemDimensionDisplayRenderer implements IItemRenderer{
+import gregtech.common.items.ItemDimensionDisplay;
+
+public class ItemDimensionDisplayRenderer implements IItemRenderer {
+
     private final RenderItem renderItem = new RenderItem();
 
     @Override
@@ -17,7 +20,8 @@ public class ItemDimensionDisplayRenderer implements IItemRenderer{
     }
 
     @Override
-    public boolean shouldUseRenderHelper(IItemRenderer.ItemRenderType type, ItemStack item, IItemRenderer.ItemRendererHelper helper) {
+    public boolean shouldUseRenderHelper(IItemRenderer.ItemRenderType type, ItemStack item,
+        IItemRenderer.ItemRendererHelper helper) {
         return false;
     }
 

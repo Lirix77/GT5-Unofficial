@@ -58,9 +58,7 @@ public class GTNEIOrePlugin {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         ModBlocks.init();
-        Invoke.client(() ->
-            MinecraftForge.EVENT_BUS.register(new NEIPluginConfig())
-        );
+        Invoke.client(() -> MinecraftForge.EVENT_BUS.register(new NEIPluginConfig()));
     }
 
     @EventHandler

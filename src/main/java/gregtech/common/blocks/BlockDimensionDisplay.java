@@ -1,11 +1,12 @@
 package gregtech.common.blocks;
 
-import gregtech.common.render.items.ItemDimensionDisplayRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+
+import gregtech.common.render.items.ItemDimensionDisplayRenderer;
 
 public class BlockDimensionDisplay extends Block {
 

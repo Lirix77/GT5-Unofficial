@@ -11,7 +11,6 @@ import static gregtech.api.enums.GTValues.NW;
 import static gregtech.api.enums.GTValues.V;
 import static gregtech.api.enums.GTValues.W;
 import static gregtech.api.enums.Materials.FLUID_MAP;
-import static gregtech.api.enums.Mods.Translocator;
 import static gregtech.common.UndergroundOil.undergroundOilReadInformation;
 import static net.minecraftforge.common.util.ForgeDirection.DOWN;
 import static net.minecraftforge.common.util.ForgeDirection.EAST;
@@ -535,7 +534,7 @@ public class GTUtility {
         if (TE_CHECK && tileEntity instanceof IItemDuct) return true;
         if (BC_CHECK && tileEntity instanceof buildcraft.api.transport.IPipeTile pipeTile)
             return pipeTile.isPipeConnected(side);
-        return Translocator.isModLoaded() && tileEntity instanceof codechicken.translocator.TileItemTranslocator;
+        return false;
     }
 
     /**
@@ -1978,8 +1977,8 @@ public class GTUtility {
          */
         if (ItemList.Cell_Empty.isStackEqual(aStack, false, true)) return null;
         if (aStack.getItem() == Items.potionitem || aStack.getItem() == Items.experience_bottle
-            //|| ItemList.TF_Vial_FieryBlood.isStackEqual(aStack)
-            //|| ItemList.TF_Vial_FieryTears.isStackEqual(aStack)
+        // || ItemList.TF_Vial_FieryBlood.isStackEqual(aStack)
+        // || ItemList.TF_Vial_FieryTears.isStackEqual(aStack)
         ) return ItemList.Bottle_Empty.get(1);
 
         if (aCheckIFluidContainerItems && aStack.getItem() instanceof IFluidContainerItem

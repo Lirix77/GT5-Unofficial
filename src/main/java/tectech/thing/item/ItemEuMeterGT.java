@@ -17,13 +17,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import org.apache.commons.lang3.reflect.FieldUtils;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.BaseMetaPipeEntity;
 import gregtech.api.metatileentity.BaseMetaTileEntity;
 import gregtech.api.metatileentity.implementations.MTECable;
 import gregtech.api.util.GTUtility;
-import org.apache.commons.lang3.reflect.FieldUtils;
 import tectech.Reference;
 import tectech.TecTech;
 import tectech.util.CommonValues;

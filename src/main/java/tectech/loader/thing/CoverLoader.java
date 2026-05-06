@@ -10,7 +10,6 @@ import tectech.TecTech;
 import tectech.thing.cover.CoverPowerPassUpgrade;
 import tectech.thing.cover.CoverTeslaCoil;
 import tectech.thing.cover.CoverTeslaCoilUltimate;
-import tectech.thing.item.ItemEnderFluidLinkCover;
 import tectech.thing.item.ItemPowerPassUpgradeCover;
 import tectech.thing.item.ItemTeslaCoilCover;
 

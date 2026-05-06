@@ -9,7 +9,6 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 import net.minecraft.client.Minecraft;
-import gregtech.common.GTClient;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -22,7 +21,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.input.Keyboard;
 
 import com.google.common.collect.ImmutableList;
-import com.gtnewhorizon.gtnhlib.GTNHLib;
 import com.gtnewhorizons.modularui.api.UIInfos;
 import com.gtnewhorizons.modularui.api.widget.Widget;
 
@@ -33,6 +31,7 @@ import gregtech.api.items.MetaBaseItem;
 import gregtech.api.net.GTPacketInfiniteSpraycan;
 import gregtech.api.util.ColoredBlockContainer;
 import gregtech.api.util.GTUtility;
+import gregtech.common.GTClient;
 import gregtech.common.config.Other;
 import gregtech.common.gui.modularui.uifactory.SelectItemUIFactory;
 
@@ -246,7 +245,7 @@ public class BehaviourSprayColorInfinite extends BehaviourSprayColor {
     }
 
     private static void displayLockedMessage() {
-       GTClient.printMessageAboveHotbar(
+        GTClient.printMessageAboveHotbar(
             StatCollector.translateToLocal("gt.behaviour.paintspray.infinite.gui.lock_error"),
             120,
             true,

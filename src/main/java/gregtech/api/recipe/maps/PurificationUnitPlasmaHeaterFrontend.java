@@ -29,7 +29,7 @@ public class PurificationUnitPlasmaHeaterFrontend extends PurificationUnitRecipe
             120,
             uiPropertiesBuilder.logoPos(new Pos2d(152, 90))
                 .progressBarTexture(new FallbackableUITexture(GTUITextures.PROGRESSBAR_PLASMA_HEATER)),
-            Invoke.clientValue(()-> neiPropertiesBuilder.recipeBackgroundSize(new Size(170, 120))));
+            Invoke.clientValue(() -> neiPropertiesBuilder.recipeBackgroundSize(new Size(170, 120))));
     }
 
     @Override

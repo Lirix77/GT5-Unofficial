@@ -1,8 +1,5 @@
 package gtPlusPlus.core.handler;
 
-import gtPlusPlus.core.container.*;
-import gtPlusPlus.core.gui.machine.*;
-import gtPlusPlus.core.tileentities.general.TileEntityDecayablesChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChunkCoordinates;
@@ -13,10 +10,13 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import gtPlusPlus.GTplusplus;
 import gtPlusPlus.api.objects.Logger;
 import gtPlusPlus.core.block.machine.BlockSuperJukebox.TileEntitySuperJukebox;
+import gtPlusPlus.core.container.*;
 import gtPlusPlus.core.gui.beta.GUIIDRegistry;
 import gtPlusPlus.core.gui.beta.MUGuild;
+import gtPlusPlus.core.gui.machine.*;
 import gtPlusPlus.core.interfaces.IGuiManager;
 import gtPlusPlus.core.tileentities.general.TileEntityCircuitProgrammer;
+import gtPlusPlus.core.tileentities.general.TileEntityDecayablesChest;
 import gtPlusPlus.core.tileentities.general.TileEntityFishTrap;
 import gtPlusPlus.core.tileentities.general.TileEntityVolumetricFlaskSetter;
 import gtPlusPlus.core.tileentities.machines.TileEntityPestKiller;
@@ -67,7 +67,7 @@ public class GuiHandler implements IGuiHandler {
                 return new ContainerFishTrap(player.inventory, (TileEntityFishTrap) te);
             } else if (ID == GUI8) {
                 return new ContainerCircuitProgrammer(player.inventory, (TileEntityCircuitProgrammer) te);
-            } else if (ID == GUI13){
+            } else if (ID == GUI13) {
                 return new ContainerDecayablesChest(player.inventory, (TileEntityDecayablesChest) te);
             } else if (ID == GUI14) {
                 return new ContainerSuperJukebox(player.inventory, (TileEntitySuperJukebox) te);
@@ -107,7 +107,7 @@ public class GuiHandler implements IGuiHandler {
                 return new GUIFishTrap(player.inventory, (TileEntityFishTrap) te);
             } else if (ID == GUI8) {
                 return new GUICircuitProgrammer(player.inventory, (TileEntityCircuitProgrammer) te);
-            } else if(ID == GUI13){
+            } else if (ID == GUI13) {
                 return new GUIDecayablesChest(player.inventory, (TileEntityDecayablesChest) te);
             } else if (ID == GUI14) {
                 return new GUISuperJukebox(player.inventory, (TileEntitySuperJukebox) te);

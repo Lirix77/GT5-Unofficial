@@ -44,7 +44,7 @@ public class TGSFrontend extends RecipeMapFrontend {
                 .addNEITransferRect(
                     new Rectangle(INPUTS_X + SLOT_SIZE * 2, INPUTS_Y + SLOT_SIZE / 2, SLOT_SIZE * 2, SLOT_SIZE))
                 .progressBarPos(new Pos2d(CENTER_X - 10, INPUTS_Y + SLOT_SIZE / 2)),
-            Invoke.clientValue(()-> neiPropertiesBuilder.neiSpecialInfoFormatter(new TGSSpecialValueFormatter())));
+            Invoke.clientValue(() -> neiPropertiesBuilder.neiSpecialInfoFormatter(new TGSSpecialValueFormatter())));
     }
 
     @Override

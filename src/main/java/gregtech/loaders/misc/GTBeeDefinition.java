@@ -274,9 +274,7 @@ public enum GTBeeDefinition implements IBeeDefinition {
         }),
     // Tea bee, Humidity: normal, Parents: Ash and Fertilizer, Mutationrate: 10%, combrate: 10%
     TEA(GTBranchDefinition.ORGANIC, "Tea", false, new Color(0x65D13A), new Color(0x9a9679), beeSpecies -> {
-        beeSpecies.addProduct(
-            ItemList.Crop_Drop_TeaLeaf.get(1),
-            0.10f);
+        beeSpecies.addProduct(ItemList.Crop_Drop_TeaLeaf.get(1), 0.10f);
         beeSpecies.setHumidity(EnumHumidity.NORMAL);
         beeSpecies.setTemperature(NORMAL);
         beeSpecies.setHasEffect();
@@ -1210,9 +1208,7 @@ public enum GTBeeDefinition implements IBeeDefinition {
         AlleleHelper.instance.set(template, CAVE_DWELLING, true);
         AlleleHelper.instance.set(template, FLOWER_PROVIDER, Flowers.VANILLA);
         AlleleHelper.instance.set(template, EFFECT, AlleleEffect.effectReanimation);
-    }, dis -> {
-        IBeeMutationCustom tMutation = dis.registerMutation(SHADOWMETAL, SPARKELING, 5);
-    }),
+    }, dis -> { IBeeMutationCustom tMutation = dis.registerMutation(SHADOWMETAL, SPARKELING, 5); }),
 
     DRAKE(GTBranchDefinition.THAUMIC, "Drake", true, new Color(0x100322), new Color(0x7A007A), beeSpecies -> {
         beeSpecies.addProduct(GTBees.combs.getStackForType(CombType.DRACONIC), 0.30f);
@@ -2219,7 +2215,7 @@ public enum GTBeeDefinition implements IBeeDefinition {
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(JUPITER, TUNGSTEN, 25, 2);
         if (GalaxySpace.isModLoaded())
-        tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(37, "Mercury")); // Mercury Dim
+            tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(37, "Mercury")); // Mercury Dim
     }),
     VENUS(GTBranchDefinition.PLANET, "Venus", false, new Color(0x4A4033), new Color(0xB5A288), beeSpecies -> {
         beeSpecies.addProduct(GTBees.combs.getStackForType(CombType.VENUS), 0.35f);
@@ -2229,7 +2225,7 @@ public enum GTBeeDefinition implements IBeeDefinition {
     }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
         IBeeMutationCustom tMutation = dis.registerMutation(JUPITER, MITHRIL, 25, 2);
         if (GalaxySpace.isModLoaded())
-        tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(39, "Venus")); // Venus Dim
+            tMutation.addMutationCondition(new GTBees.DimensionMutationCondition(39, "Venus")); // Venus Dim
     }),
 
     // Infinity Line
@@ -2268,9 +2264,8 @@ public enum GTBeeDefinition implements IBeeDefinition {
         beeSpecies.setTemperature(ICY);
         beeSpecies.setNocturnal();
         beeSpecies.setHasEffect();
-    }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST), dis -> {
-        IBeeMutationCustom tMutation = dis.registerMutation(INFINITYCATALYST, COSMICNEUTRONIUM, 1, 10);
-    }),
+    }, template -> AlleleHelper.instance.set(template, LIFESPAN, Lifespan.SHORTEST),
+        dis -> { IBeeMutationCustom tMutation = dis.registerMutation(INFINITYCATALYST, COSMICNEUTRONIUM, 1, 10); }),
     KEVLAR(GTBranchDefinition.IC2, "Kevlar", false, new Color(0x2d542f), new Color(0xa2baa3), beeSpecies -> {
         beeSpecies.addSpecialty(GTBees.combs.getStackForType(CombType.KEVLAR), 0.075f);
         beeSpecies.addSpecialty(MaterialsKevlar.Kevlar.getNuggets(1), 0.01f);

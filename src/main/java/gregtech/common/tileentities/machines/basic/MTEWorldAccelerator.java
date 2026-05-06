@@ -307,8 +307,7 @@ public class MTEWorldAccelerator extends MTETieredMachineBlock {
     }
 
     @Override
-    public void onPostTick(IGregTechTileEntity pBaseMetaTileEntity, long pTick) {
-    }
+    public void onPostTick(IGregTechTileEntity pBaseMetaTileEntity, long pTick) {}
 
     private void doAccelerateTileEntities(IGregTechTileEntity pBaseMetaTileEntity, World pWorld) {
         try {

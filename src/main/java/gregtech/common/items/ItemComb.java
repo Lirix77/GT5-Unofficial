@@ -4,7 +4,6 @@ import static gregtech.api.enums.GTValues.L;
 import static gregtech.api.enums.GTValues.NF;
 import static gregtech.api.enums.GTValues.NI;
 import static gregtech.api.enums.GTValues.V;
-import static gregtech.api.enums.Mods.AE2FluidCraft;
 import static gregtech.api.enums.Mods.ExtraBees;
 import static gregtech.api.enums.Mods.ExtraUtilities;
 import static gregtech.api.enums.Mods.Forestry;
@@ -346,8 +345,7 @@ public class ItemComb extends Item implements IGT_ItemWithMaterialRenderer {
         addProcessGT(CombType.THAUMIUMDUST, new Materials[] { Materials.Thaumium }, Voltage.MV);
         addCentrifugeToItemStack(
             CombType.THAUMIUMSHARD,
-            new ItemStack[] {
-                GTOreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfusedAir, 1),
+            new ItemStack[] { GTOreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfusedAir, 1),
                 GTOreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfusedOrder, 1),
                 GTOreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfusedFire, 1),
                 GTOreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfusedEarth, 1),
@@ -360,8 +358,7 @@ public class ItemComb extends Item implements IGT_ItemWithMaterialRenderer {
         addProcessGT(CombType.QUICKSILVER, new Materials[] { Materials.Cinnabar }, Voltage.LV);
         addCentrifugeToItemStack(
             CombType.SALISMUNDUS,
-            new ItemStack[] {
-                GTOreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfusedAir, 1),
+            new ItemStack[] { GTOreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfusedAir, 1),
                 GTOreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfusedOrder, 1),
                 GTOreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfusedFire, 1),
                 GTOreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfusedEarth, 1),
@@ -372,8 +369,7 @@ public class ItemComb extends Item implements IGT_ItemWithMaterialRenderer {
             Voltage.MV);
         addCentrifugeToItemStack(
             CombType.TAINTED,
-            new ItemStack[] {
-                GTOreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfusedAir, 1),
+            new ItemStack[] { GTOreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfusedAir, 1),
                 GTOreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfusedOrder, 1),
                 GTOreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfusedFire, 1),
                 GTOreDictUnificator.get(OrePrefixes.dustTiny, Materials.InfusedEarth, 1),
@@ -436,8 +432,7 @@ public class ItemComb extends Item implements IGT_ItemWithMaterialRenderer {
             50 * 100);
         addCentrifugeToItemStack(
             CombType.QUICKSILVER,
-            new ItemStack[] {
-                GTModHandler.getModItem(Forestry.ID, "beeswax", 1L, 0),
+            new ItemStack[] { GTModHandler.getModItem(Forestry.ID, "beeswax", 1L, 0),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Cinnabar, 1) },
             new int[] { 50 * 100, 100 * 100 },
             Voltage.ULV);

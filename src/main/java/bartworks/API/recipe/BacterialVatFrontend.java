@@ -31,7 +31,8 @@ public class BacterialVatFrontend extends RecipeMapFrontend {
         NEIRecipePropertiesBuilder neiPropertiesBuilder) {
         super(
             uiPropertiesBuilder,
-            Invoke.clientValue(()-> neiPropertiesBuilder.neiSpecialInfoFormatter(new BacterialVatSpecialValueFormatter())));
+            Invoke.clientValue(
+                () -> neiPropertiesBuilder.neiSpecialInfoFormatter(new BacterialVatSpecialValueFormatter())));
     }
 
     @Override

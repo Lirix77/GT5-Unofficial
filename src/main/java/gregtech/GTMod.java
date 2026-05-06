@@ -12,8 +12,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import appeng.helpers.InterfaceTerminalSupportedClassProvider;
-import gregtech.common.pollution.PollutionConfig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -86,11 +84,11 @@ import gregtech.common.config.MachineStats;
 import gregtech.common.config.OPStuff;
 import gregtech.common.config.Other;
 import gregtech.common.config.Worldgen;
-import gregtech.common.covers.CoverFacadeAE;
 import gregtech.common.misc.GTCommand;
 import gregtech.common.misc.spaceprojects.commands.SPCommand;
 import gregtech.common.misc.spaceprojects.commands.SPMCommand;
 import gregtech.common.misc.spaceprojects.commands.SpaceProjectCommand;
+import gregtech.common.pollution.PollutionConfig;
 import gregtech.common.tileentities.machines.MTEHatchCraftingInputME;
 import gregtech.common.tileentities.storage.MTEDigitalChestBase;
 import gregtech.crossmod.holoinventory.HoloInventory;
@@ -526,7 +524,7 @@ public class GTMod implements IGTMod {
         GTPostLoad.changeWoodenVanillaTools();
 
         // Register postea transformers
-        //new PosteaTransformers().run();
+        // new PosteaTransformers().run();
 
         /*
          * Until this point most crafting recipe additions, and removals, have been buffered. Go through, execute the

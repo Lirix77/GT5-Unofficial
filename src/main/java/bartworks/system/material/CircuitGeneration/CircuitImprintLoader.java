@@ -94,8 +94,7 @@ public class CircuitImprintLoader {
         if (unlocalizedName == null) return;
         if (isOrePass || unlocalizedName.contains("Circuit") || unlocalizedName.contains("circuit")) {
 
-            CircuitImprintLoader.recipeTagMap
-                .put(CircuitImprintLoader.getTagFromStack(output), circuitRecipe.copy());
+            CircuitImprintLoader.recipeTagMap.put(CircuitImprintLoader.getTagFromStack(output), circuitRecipe.copy());
 
             Fluid solderIndalloy = FluidRegistry.getFluid("molten.indalloy140") != null
                 ? FluidRegistry.getFluid("molten.indalloy140")

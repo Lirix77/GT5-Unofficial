@@ -21,13 +21,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import org.apache.commons.lang3.reflect.FieldUtils;
+
 import gregtech.api.enums.Dyes;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.implementations.MTEHatchDataAccess;
 import gregtech.api.objects.GTRenderedTexture;
-import org.apache.commons.lang3.reflect.FieldUtils;
 import tectech.mechanics.dataTransport.InventoryDataPacket;
 import tectech.mechanics.pipe.IConnectsToDataPipe;
 import tectech.recipe.TTRecipeAdder;

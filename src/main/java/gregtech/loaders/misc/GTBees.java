@@ -191,7 +191,7 @@ public class GTBees {
         @Override
         public float getChance(World world, int x, int y, int z, IAllele allele0, IAllele allele1, IGenome genome0,
             IGenome genome1) {
-            if (world.getBiomeGenForCoords(x,z).biomeID == biomeID) return 1;
+            if (world.getBiomeGenForCoords(x, z).biomeID == biomeID) return 1;
             return 0;
         }
 

@@ -13,8 +13,6 @@
 
 package bwcrossmod.galacticraft;
 
-import static gregtech.api.enums.Mods.GalacticraftMars;
-
 import java.util.Random;
 
 import net.minecraft.entity.Entity;

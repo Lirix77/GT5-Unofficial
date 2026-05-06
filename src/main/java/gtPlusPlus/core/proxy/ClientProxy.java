@@ -1,9 +1,9 @@
 package gtPlusPlus.core.proxy;
 
+import static gregtech.api.enums.Mods.NotEnoughItems;
+
 import java.util.ArrayList;
 
-import gtPlusPlus.core.tileentities.general.TileEntityDecayablesChest;
-import gtPlusPlus.core.client.renderer.RenderDecayChest;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderFireball;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,6 +26,7 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import gtPlusPlus.GTplusplus;
 import gtPlusPlus.core.client.renderer.CustomItemBlockRenderer;
 import gtPlusPlus.core.client.renderer.CustomOreBlockRenderer;
+import gtPlusPlus.core.client.renderer.RenderDecayChest;
 import gtPlusPlus.core.client.renderer.RenderMiningExplosivesPrimed;
 import gtPlusPlus.core.client.renderer.RenderSickBlaze;
 import gtPlusPlus.core.client.renderer.RenderStaballoyConstruct;
@@ -37,12 +38,11 @@ import gtPlusPlus.core.entity.monster.EntitySickBlaze;
 import gtPlusPlus.core.entity.monster.EntityStaballoyConstruct;
 import gtPlusPlus.core.entity.projectile.EntityLightningAttack;
 import gtPlusPlus.core.entity.projectile.EntityToxinballSmall;
+import gtPlusPlus.core.tileentities.general.TileEntityDecayablesChest;
 import gtPlusPlus.nei.NEIGTPPConfig;
 import gtPlusPlus.xmod.gregtech.common.render.FlaskRenderer;
 import gtPlusPlus.xmod.gregtech.common.render.MachineBlockRenderer;
 import ic2.core.item.ItemFluidCell;
-
-import static gregtech.api.enums.Mods.NotEnoughItems;
 
 public class ClientProxy extends CommonProxy {
 
@@ -79,7 +79,7 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntityToxinballSmall.class, new RenderToxinball(1F));
         RenderingRegistry.registerEntityRenderingHandler(EntityLightningAttack.class, new RenderFireball(1F));
         // Tiles
-        //Logger.INFO("Registering Custom Renderer for the Lead Lined Chest.");
+        // Logger.INFO("Registering Custom Renderer for the Lead Lined Chest.");
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDecayablesChest.class, new RenderDecayChest());
     }
 

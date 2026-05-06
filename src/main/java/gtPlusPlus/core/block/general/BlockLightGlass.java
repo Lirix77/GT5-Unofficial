@@ -39,7 +39,7 @@ public class BlockLightGlass extends BlockAir {
         setStepSound(Block.soundTypeGlass);
         GameRegistry.registerBlock(this, "blockMFEffect");
 
-        Invoke.client(()-> API.hideItem(new ItemStack(this)));
+        Invoke.client(() -> API.hideItem(new ItemStack(this)));
     }
 
     /**

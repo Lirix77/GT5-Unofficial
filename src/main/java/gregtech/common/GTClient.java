@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
 
-import com.gtnewhorizon.gtnhlib.util.AboveHotbarHUD;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GLAllocation;
@@ -46,6 +45,7 @@ import org.lwjgl.opengl.GL20;
 
 import com.glodblock.github.nei.recipes.FluidRecipe;
 import com.glodblock.github.nei.recipes.extractor.GregTech5RecipeExtractor;
+import com.gtnewhorizon.gtnhlib.util.AboveHotbarHUD;
 import com.gtnewhorizon.structurelib.alignment.IAlignment;
 import com.gtnewhorizon.structurelib.alignment.IAlignmentProvider;
 
@@ -799,7 +799,8 @@ public class GTClient extends GTProxy implements Runnable {
      * @param drawShadow      Should the message be drawn with a drawShadow
      * @param shouldFade      Should the message fade away with time
      */
-    public static void printMessageAboveHotbar(String message, int displayDuration, boolean drawShadow, boolean shouldFade) {
+    public static void printMessageAboveHotbar(String message, int displayDuration, boolean drawShadow,
+        boolean shouldFade) {
         AboveHotbarHUD.renderTextAboveHotbar(message, displayDuration, drawShadow, shouldFade);
     }
 

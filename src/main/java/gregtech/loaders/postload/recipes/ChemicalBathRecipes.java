@@ -1,9 +1,7 @@
 package gregtech.loaders.postload.recipes;
 
 import static gregtech.api.enums.GTValues.M;
-import static gregtech.api.enums.Mods.BuildCraftTransport;
 import static gregtech.api.recipe.RecipeMaps.chemicalBathRecipes;
-import static gregtech.api.util.GTModHandler.getModItem;
 import static gregtech.api.util.GTRecipeBuilder.MINUTES;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 import static gregtech.api.util.GTRecipeBuilder.TICKS;

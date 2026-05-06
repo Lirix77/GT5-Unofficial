@@ -57,7 +57,7 @@ public enum BWNonMetaMaterialItems implements IItemContainer {
 
     @Override
     public IItemContainer hidden() {
-        Invoke.client(()-> codechicken.nei.api.API.hideItem(get(1L)));
+        Invoke.client(() -> codechicken.nei.api.API.hideItem(get(1L)));
         return this;
     }
 

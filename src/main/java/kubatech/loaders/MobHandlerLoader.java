@@ -20,7 +20,6 @@
 
 package kubatech.loaders;
 
-import static gregtech.api.enums.Mods.InfernalMobs;
 import static kubatech.tileentity.gregtech.multiblock.MTEExtremeEntityCrusher.DIAMOND_SPIKES_DAMAGE;
 import static kubatech.tileentity.gregtech.multiblock.MTEExtremeEntityCrusher.MOB_SPAWN_INTERVAL;
 
@@ -48,7 +47,6 @@ import com.kuba6000.mobsinfo.api.event.MobNEIRegistrationEvent;
 import com.kuba6000.mobsinfo.api.event.PostMobRegistrationEvent;
 import com.kuba6000.mobsinfo.api.event.PreMobsRegistrationEvent;
 
-import atomicstryker.infernalmobs.common.InfernalMobsCore;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import gregtech.api.util.GTUtility;
 import kubatech.Tags;
@@ -149,50 +147,6 @@ public class MobHandlerLoader {
                         }
                     }
                     stacks.add(s);
-                }
-            }
-
-            if (InfernalMobs.isModLoaded()) {
-                InfernalMobsCore infernalMobsCore = InfernalMobsCore.instance();
-                if (recipe.infernalityAllowed && mEUt * 8 <= MTE.getMaxInputEu()
-                    && !infernalMobsCore.getDimensionBlackList()
-                        .contains(
-                            MTE.getBaseMetaTileEntity()
-                                .getWorld().provider.dimensionId)) {
-                    int p = 0;
-                    int mods = 0;
-                    if (recipe.alwaysinfernal
-                        || (preferInfernalDrops && rnd.nextInt(infernalMobsCore.getEliteRarity()) == 0)) {
-                        p = 1;
-                        if (rnd.nextInt(infernalMobsCore.getUltraRarity()) == 0) {
-                            p = 2;
-                            if (rnd.nextInt(infernalMobsCore.getInfernoRarity()) == 0) p = 3;
-                        }
-                    }
-                    ArrayList<ItemStack> infernalstacks = null;
-                    if (p > 0) if (p == 1) {
-                        infernalstacks = infernalMobsCore.getDropIdListElite();
-                        mods = infernalMobsCore.getMinEliteModifiers();
-                    } else if (p == 2) {
-                        infernalstacks = infernalMobsCore.getDropIdListUltra();
-                        mods = infernalMobsCore.getMinUltraModifiers();
-                    } else {
-                        infernalstacks = infernalMobsCore.getDropIdListInfernal();
-                        mods = infernalMobsCore.getMinInfernoModifiers();
-                    }
-                    if (infernalstacks != null) {
-                        ItemStack infernalstack = infernalstacks.get(rnd.nextInt(infernalstacks.size()))
-                            .copy();
-                        EnchantmentHelper.addRandomEnchantment(
-                            rnd,
-                            infernalstack,
-                            infernalstack.getItem()
-                                .getItemEnchantability());
-                        stacks.add(infernalstack);
-                        MTE.lEUt *= 8L;
-                        MTE.mMaxProgresstime *= mods * InfernalMobsCore.instance()
-                            .getMobModHealthFactor();
-                    }
                 }
             }
 

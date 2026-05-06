@@ -77,7 +77,7 @@ public class GTMetaItemEnhancer {
             // addFluidData(m, new ItemStack(Items.glass_bottle), bottles, 250, i + 1001, false);
         }
 
-        Invoke.client(()-> {
+        Invoke.client(() -> {
             API.hideItem(new ItemStack(capsuls, 1, WILDCARD));
             API.hideItem(new ItemStack(moltenCapsuls, 1, WILDCARD));
         });

@@ -86,8 +86,7 @@ public interface ISerializableObject {
             stack = new ItemStack(Item.getItemById(id), size, meta);
             try {
                 stack.stackTagCompound = readCompoundTagFromGreggyByteBuf(aBuf);
-            }
-            catch(Exception e) {
+            } catch (Exception e) {
                 stack.stackTagCompound = new NBTTagCompound();
             }
         }

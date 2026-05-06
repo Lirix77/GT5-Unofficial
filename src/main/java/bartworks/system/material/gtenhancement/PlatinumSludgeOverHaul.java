@@ -92,16 +92,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import bartworks.util.CachedReflectionUtils;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import bartworks.MainMod;
 import bartworks.system.material.BWMetaGeneratedItems;
 import bartworks.system.material.Werkstoff;
 import bartworks.util.BWUtil;
+import bartworks.util.CachedReflectionUtils;
 import bwcrossmod.BartWorksCrossmod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.enums.GTValues;
@@ -123,8 +125,6 @@ import gregtech.api.util.GTUtility;
 import gregtech.common.blocks.BlockOresAbstract;
 import gtPlusPlus.core.block.base.BlockBaseModular;
 import gtPlusPlus.core.item.base.BaseItemComponent;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class PlatinumSludgeOverHaul {
 
@@ -1053,8 +1053,10 @@ public class PlatinumSludgeOverHaul {
                 inputItemName = "recipeItems";
             } else if (GTPlusPlus.isModLoaded()) {
                 try {
-                    if (Class.forName("gtPlusPlus.api.objects.minecraft.ShapedRecipe").isAssignableFrom(obj.getClass()))
-                        obj = CachedReflectionUtils.getField(obj.getClass(), "mRecipe").get(obj);
+                    if (Class.forName("gtPlusPlus.api.objects.minecraft.ShapedRecipe")
+                        .isAssignableFrom(obj.getClass()))
+                        obj = CachedReflectionUtils.getField(obj.getClass(), "mRecipe")
+                            .get(obj);
                 } catch (ClassNotFoundException | IllegalAccessException e) {
                     e.printStackTrace();
                 }

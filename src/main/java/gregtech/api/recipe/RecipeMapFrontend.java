@@ -74,7 +74,7 @@ public class RecipeMapFrontend {
             .fluidInputPositionsGetter(this::getFluidInputPositions)
             .fluidOutputPositionsGetter(this::getFluidOutputPositions)
             .build();
-        Invoke.client(()-> this.neiProperties = neiPropertiesBuilder.build());
+        Invoke.client(() -> this.neiProperties = neiPropertiesBuilder.build());
     }
 
     /**
@@ -277,6 +277,7 @@ public class RecipeMapFrontend {
             }
         }
     }
+
     @GradleSideOnly(GradleSide.CLIENT)
     public List<String> handleNEIItemTooltip(ItemStack stack, List<String> currentTip,
         GTNEIDefaultHandler.CachedDefaultRecipe neiCachedRecipe) {
@@ -302,6 +303,7 @@ public class RecipeMapFrontend {
         }
         return currentTip;
     }
+
     @GradleSideOnly(GradleSide.CLIENT)
     protected List<String> handleNEIItemInputTooltip(List<String> currentTip,
         GTNEIDefaultHandler.FixedPositionedStack pStack) {

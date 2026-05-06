@@ -10,12 +10,12 @@ import static detrav.enums.IDDetraveMetaGeneratedTool01.ProspectorScannerUHV;
 import static detrav.enums.IDDetraveMetaGeneratedTool01.ProspectorScannerUV;
 import static detrav.enums.IDDetraveMetaGeneratedTool01.ProspectorScannerZPM;
 
-import gregtech.api.enums.GTValues;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import detrav.DetravScannerMod;
 import detrav.items.DetravMetaGeneratedTool01;
+import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;

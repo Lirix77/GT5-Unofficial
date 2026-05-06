@@ -94,7 +94,7 @@ public class ItemWirelessHeadphones extends GTGenericItem implements IBauble {
 
     @Override
     public BaubleType getBaubleType(ItemStack itemStack) {
-        return BaubleType.UNIVERSAL;
+        return BaubleType.AMULET;
     }
 
     @Override

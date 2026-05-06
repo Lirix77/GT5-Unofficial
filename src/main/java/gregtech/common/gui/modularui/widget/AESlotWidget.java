@@ -1,7 +1,6 @@
 package gregtech.common.gui.modularui.widget;
 
 import net.minecraft.client.gui.FontRenderer;
-import appeng.util.item.AEItemStack;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.inventory.Slot;
@@ -14,6 +13,7 @@ import com.gtnewhorizons.modularui.common.widget.SlotWidget;
 import appeng.api.storage.IItemDisplayRegistry.ItemRenderHook;
 import appeng.client.render.AppEngRenderItem;
 import appeng.core.AELog;
+import appeng.util.item.AEItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

@@ -57,8 +57,7 @@ import kubatech.network.LoadConfigPacket;
     version = Tags.VERSION,
     name = Tags.MODNAME,
     acceptedMinecraftVersions = "[1.7.10]",
-    dependencies = "required-after: gregtech; "
-        + "required-after: modularui; "
+    dependencies = "required-after: gregtech; " + "required-after: modularui; "
         + "after: mobsinfo; "
         + "after: EnderIO; "
         + "after: AWWayofTime; "

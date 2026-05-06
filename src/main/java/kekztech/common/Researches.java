@@ -7,7 +7,6 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.research.ResearchItem;
 import thaumcraft.api.research.ResearchPage;
-import thaumic.tinkerer.common.research.KamiResearchItem;
 
 public class Researches {
 
@@ -17,9 +16,9 @@ public class Researches {
     public static void preInit() {
         // Blacklist these researches from being a requirement to unlock TTKami
         KekzCore.LOGGER.info("Blacklisting research " + THAUMIUMREINFORCEDJAR + " from /iskamiunlocked");
-        KamiResearchItem.Blacklist.add(ICHORJAR);
+        // KamiResearchItem.Blacklist.add(ICHORJAR);
         KekzCore.LOGGER.info("Blacklisting research" + ICHORJAR + "from /iskamiunlocked");
-        KamiResearchItem.Blacklist.add(ICHORJAR);
+        // KamiResearchItem.Blacklist.add(ICHORJAR);
     }
 
     public static void postInit() {

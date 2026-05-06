@@ -36,7 +36,7 @@ public class PurificationUnitFlocculatorFrontend extends PurificationUnitRecipeM
             uiPropertiesBuilder.logoPos(new Pos2d(160, 100))
                 .progressBarTexture(new FallbackableUITexture(GTUITextures.PROGRESSBAR_FLOCCULATION))
                 .logoPos(new Pos2d(152, 100)),
-            Invoke.clientValue(()-> neiPropertiesBuilder.recipeBackgroundSize(new Size(170, 120))));
+            Invoke.clientValue(() -> neiPropertiesBuilder.recipeBackgroundSize(new Size(170, 120))));
     }
 
     @Override
