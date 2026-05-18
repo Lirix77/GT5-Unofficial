@@ -4,6 +4,10 @@ import com.sinthoras.visualprospecting.Tags;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.WorldServer;
+import ru.justagod.cutter.GradleSideOnly;
+import ru.justagod.cutter.invoke.Invoke;
+import ru.justagod.cutter.invoke.InvokeClient;
+import ru.justagod.cutter.invoke.InvokeClientValue;
 
 import java.util.UUID;
 
@@ -24,7 +28,7 @@ public class WorldIdHandler extends WorldSavedData {
         instance = (WorldIdHandler) world.mapStorage.loadData(WorldIdHandler.class, Tags.MODID);
         if (instance == null) {
             instance = new WorldIdHandler(Tags.MODID);
-            instance.worldId = world.func_73046_m().getFolderName() + "_" + UUID.randomUUID();
+            instance.worldId = Invoke.serverValue(()-> "CubixWorld") + Invoke.clientValue(() -> world.func_73046_m().getFolderName() + "_" + UUID.randomUUID());
             world.mapStorage.setData(Tags.MODID, instance);
             instance.markDirty();
         }

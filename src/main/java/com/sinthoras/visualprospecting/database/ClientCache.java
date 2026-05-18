@@ -23,17 +23,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static gregtech.GTMod.GT_FML_LOGGER;
-
 public class ClientCache extends WorldCache {
 
     public static final ClientCache instance = new ClientCache();
 
     protected File getStorageDirectory() {
         final EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-        return new File(
-            Utils.getSubDirectory(Tags.CLIENT_DIR),
-            player.getDisplayName() + "_" + player.getPersistentID().toString());
+        return new File(Utils.getSubDirectory(Tags.CLIENT_DIR), player.getDisplayName());
     }
 
 

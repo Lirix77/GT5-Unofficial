@@ -13,9 +13,6 @@ import cpw.mods.fml.common.network.FMLNetworkEvent;
 import forestry.farming.triggers.TriggerLowGermlings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-
-import static gregtech.GTMod.GT_FML_LOGGER;
-
 public class HooksFML {
 
     @SubscribeEvent
@@ -25,7 +22,6 @@ public class HooksFML {
 
     @SubscribeEvent
     public void onEvent(FMLNetworkEvent.ClientDisconnectionFromServerEvent event) {
-        GT_FML_LOGGER.info("ClientCache.instance.saveVeinCache();");
         ClientCache.instance.saveVeinCache();
     }
 
@@ -37,10 +33,8 @@ public class HooksFML {
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onEvent(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.player instanceof EntityPlayerMP playerMP) {
-            GT_FML_LOGGER.info("VP.network.sendTo(new WorldIdNotification(WorldIdHandler.getWorldId()), playerMP);");
             VP.network.sendTo(new WorldIdNotification(WorldIdHandler.getWorldId()), playerMP);
         } else if (event.player instanceof EntityPlayer) {
-            GT_FML_LOGGER.info("ClientCache.instance.loadVeinCache(WorldIdHandler.getWorldId());");
             ClientCache.instance.loadVeinCache(WorldIdHandler.getWorldId());
         }
     }
