@@ -1,0 +1,62 @@
+package com.sinthoras.visualprospecting.database.veintypes;
+
+import com.google.common.collect.ImmutableList;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import gregtech.api.GregTechAPI;
+import gregtech.api.enums.Materials;
+import gregtech.api.enums.OrePrefixes;
+import gregtech.api.interfaces.IIconContainer;
+import it.unimi.dsi.fastutil.shorts.ShortCollection;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class GregTechOreMaterialProvider implements IOreMaterialProvider {
+
+    private final Materials material;
+    private final int primaryOreColor;
+    private IIconContainer oreIconContainer;
+    private final String primaryOreName;
+    private ImmutableList<String> containedOres;
+
+    public GregTechOreMaterialProvider(Materials material) {
+        this.material = material;
+        this.primaryOreColor = (material.mRGBa[0] << 16) | (material.mRGBa[1]) << 8 | material.mRGBa[2];
+        this.primaryOreName = material.mLocalizedName;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIconContainer getIconContainer() {
+        if (oreIconContainer == null) {
+            oreIconContainer = material.mIconSet.mTextures[OrePrefixes.ore.mTextureIndex];
+        }
+        return oreIconContainer;
+    }
+
+    @Override
+    public int getColor() {
+        return primaryOreColor;
+    }
+
+    @Override
+    public String getLocalizedName() {
+        return primaryOreName;
+    }
+
+    @Override
+    public ImmutableList<String> getContainedOres(ShortCollection ores) {
+        if (containedOres == null) {
+            List<String> temp = new ArrayList<>();
+            for (short meta : ores) {
+                if (meta < 0) break;
+                Materials material = GregTechAPI.sGeneratedMaterials[meta];
+                if (material == null) continue;
+                temp.add(material.mLocalizedName);
+            }
+            containedOres = ImmutableList.copyOf(temp);
+        }
+        return containedOres;
+    }
+}

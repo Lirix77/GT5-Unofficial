@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.sinthoras.visualprospecting.database.ClientCache;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -48,6 +49,15 @@ public abstract class BlockOresAbstract extends GTGenericBlock implements ITileE
     public static boolean FUCKING_LOCK = false;
     public static boolean tHideOres;
     public static Set<Materials> aBlockedOres = new HashSet<>();
+
+    protected BlockOresAbstract() {
+        super(null, null, null);
+    }
+
+    @Override
+    public void onBlockClicked(World world, int blockX, int blockY, int blockZ, EntityPlayer player) {
+        ClientCache.instance.onOreInteracted(world, blockX, blockY, blockZ, player);
+    }
 
     protected BlockOresAbstract(String aUnlocalizedName, int aOreMetaCount, boolean aHideFirstMeta,
         Material aMaterial) {
@@ -160,6 +170,8 @@ public abstract class BlockOresAbstract extends GTGenericBlock implements ITileE
 
         boolean tNatural = (((TileEntityOres) tTileEntity).mNatural = !((TileEntityOres) tTileEntity).mNatural);
         GTUtility.sendChatToPlayer(aPlayer, "Ore \"mNatural\" flag set to: " + tNatural);
+
+        ClientCache.instance.onOreInteracted(aWorld, aX, aY, aZ, aPlayer);
         return true;
     }
 

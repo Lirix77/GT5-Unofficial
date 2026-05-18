@@ -2,6 +2,8 @@ package galacticgreg;
 
 import java.util.Random;
 
+import com.sinthoras.visualprospecting.Utils;
+import com.sinthoras.visualprospecting.database.ServerCache;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.Vec3;
@@ -516,6 +518,11 @@ public class WorldGeneratorSpace implements IWorldGenerator {
                                     pZ,
                                     pChunkGenerator,
                                     pChunkProvider)) {
+                                    ServerCache.instance.notifyOreVeinGeneration(
+                                        pWorld.provider.dimensionId,
+                                        Utils.mapToCenterOreChunkCoord(Utils.coordBlockToChunk(pX)),
+                                        Utils.mapToCenterOreChunkCoord(Utils.coordBlockToChunk(pZ)),
+                                        tWorldGen.mWorldGenName);
                                     temp = false;
                                 }
                             } catch (Throwable e) {

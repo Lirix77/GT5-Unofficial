@@ -1,0 +1,65 @@
+package com.sinthoras.visualprospecting.hooks;
+
+import com.gtnewhorizons.navigator.api.NavigatorApi;
+import com.sinthoras.visualprospecting.database.ResetClientCacheCommand;
+import com.sinthoras.visualprospecting.integration.model.layers.OreVeinLayerManager;
+import com.sinthoras.visualprospecting.integration.model.layers.UndergroundFluidLayerManager;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.event.*;
+import net.minecraftforge.client.ClientCommandHandler;
+
+public class HooksClient extends HooksShared {
+
+    @Override
+    // load "Do your mod setup. Build whatever data structures you care about. Register recipes."
+    public void fmlLifeCycleEvent(FMLPreInitializationEvent event) {
+        super.fmlLifeCycleEvent(event);
+        registerMapLayers();
+    }
+
+    @Override
+    // load "Do your mod setup. Build whatever data structures you care about. Register recipes."
+    public void fmlLifeCycleEvent(FMLInitializationEvent event) {
+        super.fmlLifeCycleEvent(event);
+        FMLCommonHandler.instance().bus().register(new HooksKey());
+    }
+
+    @Override
+    // postInit "Handle interaction with other mods, complete your setup based on this."
+    public void fmlLifeCycleEvent(FMLPostInitializationEvent event) {
+        super.fmlLifeCycleEvent(event);
+        ClientCommandHandler.instance.registerCommand(new ResetClientCacheCommand());
+    }
+
+    @Override
+    public void fmlLifeCycleEvent(FMLServerAboutToStartEvent event) {
+        super.fmlLifeCycleEvent(event);
+    }
+
+    @Override
+    public void fmlLifeCycleEvent(FMLServerStartingEvent event) {
+        super.fmlLifeCycleEvent(event);
+    }
+
+    @Override
+    public void fmlLifeCycleEvent(FMLServerStartedEvent event) {
+        super.fmlLifeCycleEvent(event);
+    }
+
+    @Override
+    public void fmlLifeCycleEvent(FMLServerStoppingEvent event) {
+        super.fmlLifeCycleEvent(event);
+    }
+
+    @Override
+    public void fmlLifeCycleEvent(FMLServerStoppedEvent event) {
+        super.fmlLifeCycleEvent(event);
+    }
+
+    public void registerMapLayers() {
+
+        NavigatorApi.registerLayerManager(OreVeinLayerManager.instance);
+        NavigatorApi.registerLayerManager(UndergroundFluidLayerManager.instance);
+
+    }
+}

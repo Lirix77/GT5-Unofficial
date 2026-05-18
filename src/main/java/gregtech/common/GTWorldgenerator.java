@@ -12,6 +12,8 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Random;
 
+import com.sinthoras.visualprospecting.Utils;
+import com.sinthoras.visualprospecting.database.ServerCache;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -363,6 +365,13 @@ public class GTWorldgenerator implements IWorldGenerator {
                                         oreseedZ * 16,
                                         this.mChunkGenerator,
                                         this.mChunkProvider);
+                                    if (placementResult == WorldgenGTOreLayer.ORE_PLACED && !tWorldGen.mWorldGenName.equals("NoOresInVein")) {
+                                        ServerCache.instance.notifyOreVeinGeneration(
+                                            this.mWorld.provider.dimensionId,
+                                            Utils.coordBlockToChunk(oreseedX * 16),
+                                            Utils.coordBlockToChunk(oreseedZ * 16),
+                                            tWorldGen.mWorldGenName);
+                                    }
                                     switch (placementResult) {
                                         case WorldgenGTOreLayer.ORE_PLACED -> {
                                             if (debugOrevein) GTLog.out.println(
@@ -486,6 +495,13 @@ public class GTWorldgenerator implements IWorldGenerator {
                     oreseedZ * 16,
                     this.mChunkGenerator,
                     this.mChunkProvider);
+                if (placementResult == WorldgenGTOreLayer.ORE_PLACED && !tWorldGen.mWorldGenName.equals("NoOresInVein")) {
+                    ServerCache.instance.notifyOreVeinGeneration(
+                        this.mWorld.provider.dimensionId,
+                        Utils.coordBlockToChunk(oreseedX * 16),
+                        Utils.coordBlockToChunk(oreseedZ * 16),
+                        tWorldGen.mWorldGenName);
+                }
                 switch (placementResult) {
                     case WorldgenGTOreLayer.NO_ORE_IN_BOTTOM_LAYER -> {
                         if (debugOrevein) GTLog.out.println(" No ore in bottom layer");

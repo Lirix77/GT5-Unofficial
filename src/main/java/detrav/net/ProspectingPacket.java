@@ -50,11 +50,8 @@ public class ProspectingPacket extends GTPacket {
         this.chunkZ = chunkZ;
         this.posX = posX;
         this.posZ = posZ;
-        GTMod.GT_FML_LOGGER.debug("posZ = " + posZ);
         this.size = size;
-        GTMod.GT_FML_LOGGER.debug("size2 = " + size);
         this.ptype = ptype;
-        GTMod.GT_FML_LOGGER.debug("ptype = " + ptype);
         this.map = new HashMap[(size * 2 + 1) * 16][(size * 2 + 1) * 16];
         this.ores = new HashMap<>();
         this.metaMap = new HashMap<>();

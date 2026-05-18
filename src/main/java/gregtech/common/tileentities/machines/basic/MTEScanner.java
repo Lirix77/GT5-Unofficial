@@ -3,31 +3,23 @@ package gregtech.common.tileentities.machines.basic;
 import static gregtech.api.enums.GTValues.D1;
 import static gregtech.api.enums.Mods.GalacticraftCore;
 import static gregtech.api.enums.Mods.GalacticraftMars;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_BOTTOM_SCANNER;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_BOTTOM_SCANNER_ACTIVE;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_BOTTOM_SCANNER_ACTIVE_GLOW;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_BOTTOM_SCANNER_GLOW;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_SCANNER;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_SCANNER_ACTIVE;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_SCANNER_ACTIVE_GLOW;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_SCANNER_GLOW;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_SIDE_SCANNER;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_SIDE_SCANNER_ACTIVE;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_SIDE_SCANNER_ACTIVE_GLOW;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_SIDE_SCANNER_GLOW;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_TOP_SCANNER;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_TOP_SCANNER_ACTIVE;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_TOP_SCANNER_ACTIVE_GLOW;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_TOP_SCANNER_GLOW;
+import static gregtech.api.enums.Textures.BlockIcons.*;
 import static gregtech.api.recipe.RecipeMaps.scannerFakeRecipes;
 
+import java.util.List;
 import java.util.Objects;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import com.sinthoras.visualprospecting.Tags;
+import com.sinthoras.visualprospecting.database.OreVeinPosition;
+import com.sinthoras.visualprospecting.database.ServerCache;
 
 import forestry.api.genetics.AlleleManager;
 import forestry.api.genetics.IIndividual;
@@ -251,11 +243,11 @@ public class MTEScanner extends MTEBasicMachine {
                     .getUnlocalizedName()
                     .contains("Schematic")
                     || aStack.getItem()
-                        .getUnlocalizedName()
-                        .contains("schematic"))
+                    .getUnlocalizedName()
+                    .contains("schematic"))
                     && !aStack.getItem()
-                        .getUnlocalizedName()
-                        .contains("Schematics")) {
+                    .getUnlocalizedName()
+                    .contains("Schematics")) {
                     if (mTier < 3) return FOUND_RECIPE_BUT_DID_NOT_MEET_REQUIREMENTS;
                     String sTier = "";
 
@@ -332,12 +324,134 @@ public class MTEScanner extends MTEBasicMachine {
                 }
             }
             if (getSpecialSlot() == null && ItemList.Tool_DataStick.isStackEqual(aStack, false, true)) {
-                if (GTUtility.ItemNBT.getBookTitle(aStack)
-                    .equals("Raw Prospection Data")) {
+                if (GTUtility.ItemNBT.getBookTitle(aStack).equals("Raw Prospection Data")) {
                     GTUtility.ItemNBT.setBookTitle(aStack, "Analyzed Prospection Data");
                     GTUtility.ItemNBT.convertProspectionData(aStack);
-                    aStack.stackSize -= 1;
 
+                    // ========== VisualProspecting integration start ==========
+                    final NBTTagCompound compound = aStack.getTagCompound();
+                    if (compound != null && compound.hasKey(Tags.VISUALPROSPECTING_FLAG)) {
+                        final int dimensionId = compound.getInteger(Tags.PROSPECTION_DIMENSION_ID);
+                        final int blockX = compound.getInteger(Tags.PROSPECTION_BLOCK_X);
+                        final int blockY = compound.getInteger(Tags.PROSPECTION_BLOCK_Y);
+                        final int blockZ = compound.getInteger(Tags.PROSPECTION_BLOCK_Z);
+                        final int blockRadius = compound.getInteger(Tags.PROSPECTION_ORE_RADIUS);
+                        final int numberOfUndergroundFluids = compound.getInteger(Tags.PROSPECTION_NUMBER_OF_UNDERGROUND_FLUID);
+                        final String position = "Dim: " + dimensionId + " X: " + blockX + " Y: " + blockY + " Z: " + blockZ;
+
+                        final NBTTagList bookPages = new NBTTagList();
+
+                        final String frontPage = "Prospector report\n" + position
+                            + "\n\n"
+                            + "Fluids: "
+                            + numberOfUndergroundFluids
+                            + "\n\n"
+                            + "Ores within "
+                            + blockRadius
+                            + " blocks\n\n"
+                            + "Location is center of orevein\n\n"
+                            + "Results are synchronized to your map";
+                        bookPages.appendTag(new NBTTagString(frontPage));
+
+                        final List<OreVeinPosition> foundOreVeins = ServerCache.instance
+                            .prospectOreBlockRadius(dimensionId, blockX, blockZ, blockRadius);
+                        if (!foundOreVeins.isEmpty()) {
+                            final int pageSize = 7;
+                            final int numberOfPages = (foundOreVeins.size() + pageSize) / pageSize;
+
+                            for (int pageNumber = 0; pageNumber < numberOfPages; pageNumber++) {
+                                final StringBuilder pageString = new StringBuilder();
+                                for (int i = 0; i < pageSize; i++) {
+                                    final int veinId = pageNumber * pageSize + i;
+                                    if (veinId < foundOreVeins.size()) {
+                                        final OreVeinPosition oreVein = foundOreVeins.get(veinId);
+                                        pageString.append(oreVein.getBlockX()).append(",").append(oreVein.getBlockZ()).append(" - ")
+                                            .append(oreVein.veinType.getVeinName()).append("\n");
+                                    }
+                                }
+                                String pageCounter = numberOfPages > 1 ? String.format(" %d/%d", pageNumber + 1, numberOfPages) : "";
+                                NBTTagString pageTag = new NBTTagString(
+                                    String.format("Ore Veins %s\n\n", pageCounter) + pageString);
+                                bookPages.appendTag(pageTag);
+                            }
+                        }
+
+                        if (compound.hasKey(Tags.PROSPECTION_FLUIDS)) {
+                            GTUtility.ItemNBT.fillBookWithList(
+                                bookPages,
+                                "Fluids%s\n\n",
+                                "\n",
+                                9,
+                                compound.getString(Tags.PROSPECTION_FLUIDS).split("\\|"));
+
+                            final String fluidCoverPage = "Fluid notes\n\n" + "Prospects from NW to SE 576 chunks"
+                                + "(9 8x8 fields)\n around and gives min-max amount"
+                                + "\n\n"
+                                + "[1][2][3]"
+                                + "\n"
+                                + "[4][5][6]"
+                                + "\n"
+                                + "[7][8][9]"
+                                + "\n"
+                                + "\n"
+                                + "[5] - Prospector in this 8x8 area";
+                            bookPages.appendTag(new NBTTagString(fluidCoverPage));
+
+                            String tFluidsPosStr = "X: " + Math.floorDiv(blockX, 16 * 8) * 16 * 8
+                                + " Z: "
+                                + Math.floorDiv(blockZ, 16 * 8) * 16 * 8
+                                + "\n";
+                            int xOff = blockX - Math.floorDiv(blockX, 16 * 8) * 16 * 8;
+                            xOff = xOff / 16;
+                            int xOffRemain = 7 - xOff;
+
+                            int zOff = blockZ - Math.floorDiv(blockZ, 16 * 8) * 16 * 8;
+                            zOff = zOff / 16;
+                            int zOffRemain = 7 - zOff;
+
+                            for (; zOff > 0; zOff--) {
+                                tFluidsPosStr = tFluidsPosStr.concat("--------\n");
+                            }
+                            for (; xOff > 0; xOff--) {
+                                tFluidsPosStr = tFluidsPosStr.concat("-");
+                            }
+
+                            tFluidsPosStr = tFluidsPosStr.concat("P");
+
+                            for (; xOffRemain > 0; xOffRemain--) {
+                                tFluidsPosStr = tFluidsPosStr.concat("-");
+                            }
+                            tFluidsPosStr = tFluidsPosStr.concat("\n");
+                            for (; zOffRemain > 0; zOffRemain--) {
+                                tFluidsPosStr = tFluidsPosStr.concat("--------\n");
+                            }
+                            tFluidsPosStr = tFluidsPosStr.concat(
+                                "            X: " + (Math.floorDiv(blockX, 16 * 8) + 1) * 16 * 8
+                                    + " Z: "
+                                    + (Math.floorDiv(blockZ, 16 * 8) + 1) * 16 * 8);
+                            final String fluidsPage = "Corners of [5] are \n" + tFluidsPosStr
+                                + "\n"
+                                + "P - Prospector in 8x8 field";
+                            bookPages.appendTag(new NBTTagString(fluidsPage));
+                        }
+
+                        compound.setString("author", position);
+                        compound.setTag("pages", bookPages);
+                        GTUtility.ItemNBT.setNBT(aStack, compound);
+
+                        // Mimic original behaviour
+                        aStack.stackSize -= 1;
+                        this.mOutputItems[0] = GTUtility.copyAmount(1L, aStack);
+                        calculateOverclockedNess(30, 1000);
+                        if (mMaxProgresstime == Integer.MAX_VALUE - 1 && mEUt == Integer.MAX_VALUE - 1) {
+                            return FOUND_RECIPE_BUT_DID_NOT_MEET_REQUIREMENTS;
+                        } else {
+                            return 2;
+                        }
+                    }
+                    // ========== VisualProspecting integration end ==========
+
+                    aStack.stackSize -= 1;
                     this.mOutputItems[0] = GTUtility.copyAmount(1, aStack);
                     calculateOverclockedNess(30, 1000);
                     // In case recipe is too OP for that machine
@@ -407,7 +521,7 @@ public class MTEScanner extends MTEBasicMachine {
 
     @Override
     protected boolean allowPutStackValidated(IGregTechTileEntity aBaseMetaTileEntity, int aIndex, ForgeDirection side,
-        ItemStack aStack) {
+                                             ItemStack aStack) {
         return super.allowPutStackValidated(aBaseMetaTileEntity, aIndex, side, aStack)
             && getRecipeMap().containsInput(aStack);
     }

@@ -16,6 +16,8 @@ package bartworks.system.oregen;
 import java.util.HashSet;
 import java.util.Random;
 
+import com.sinthoras.visualprospecting.Utils;
+import com.sinthoras.visualprospecting.database.ServerCache;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
@@ -119,6 +121,13 @@ public class BWWordGenerator implements IWorldGenerator {
                                             zCenter,
                                             this.mChunkGenerator,
                                             this.mChunkProvider);
+                                        if (placed) {
+                                            ServerCache.instance.notifyOreVeinGeneration(
+                                                this.mWorldProvider.dimensionId,
+                                                Utils.mapToCenterOreChunkCoord(Utils.coordBlockToChunk(xCenter)),
+                                                Utils.mapToCenterOreChunkCoord(Utils.coordBlockToChunk(zCenter)),
+                                                tWorldGen.mWorldGenName);
+                                        }
                                         ++attempts;
                                     } while (!placed && attempts < 25);
                                     temp = false;

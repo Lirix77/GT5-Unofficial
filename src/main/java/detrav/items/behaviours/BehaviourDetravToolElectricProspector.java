@@ -67,7 +67,6 @@ public class BehaviourDetravToolElectricProspector extends BehaviourDetravToolPr
                 for (int j = -size; j <= size; j++) if (i != -size && i != size && j != -size && j != size)
                     chunks.add(aWorld.getChunkFromChunkCoords(cX + i, cZ + j));
             size = size - 1;
-            GTMod.GT_FML_LOGGER.debug("size1 = " + size);
             final ProspectingPacket packet = new ProspectingPacket(
                 cX,
                 cZ,
