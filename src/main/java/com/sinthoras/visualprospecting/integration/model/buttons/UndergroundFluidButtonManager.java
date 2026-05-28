@@ -1,5 +1,6 @@
 package com.sinthoras.visualprospecting.integration.model.buttons;
 
+import com.gtnewhorizons.navigator.api.model.SupportedMods;
 import com.gtnewhorizons.navigator.api.model.buttons.ButtonManager;
 import com.sinthoras.visualprospecting.Tags;
 import net.minecraft.util.ResourceLocation;
@@ -10,7 +11,7 @@ public class UndergroundFluidButtonManager extends ButtonManager {
     public static final UndergroundFluidButtonManager instance = new UndergroundFluidButtonManager();
 
     @Override
-    public ResourceLocation getIcon(String theme) {
+    public ResourceLocation getIcon(SupportedMods jm, String theme) {
         return new ResourceLocation(Tags.MODID, "textures/icons/undergroundfluid.png");
     }
 

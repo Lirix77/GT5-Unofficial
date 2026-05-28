@@ -1,5 +1,6 @@
 package com.sinthoras.visualprospecting.integration.model.layers;
 
+import com.gtnewhorizons.navigator.api.model.SupportedMods;
 import com.gtnewhorizons.navigator.api.model.layers.LayerManager;
 import com.gtnewhorizons.navigator.api.model.layers.LayerRenderer;
 import com.gtnewhorizons.navigator.api.model.layers.UniversalLayerRenderer;
@@ -35,7 +36,7 @@ public class UndergroundFluidLayerManager extends LayerManager {
 
     @Nullable
     @Override
-    protected LayerRenderer addLayerRenderer(LayerManager manager) {
+    protected LayerRenderer addLayerRenderer(LayerManager manager, SupportedMods jm) {
         return new UniversalLayerRenderer(manager)
                 .withRenderStep(location -> new UndergroundFluidRenderStep((UndergroundFluidLocation) location));
     }

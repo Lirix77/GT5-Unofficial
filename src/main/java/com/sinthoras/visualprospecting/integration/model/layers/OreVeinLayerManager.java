@@ -1,6 +1,7 @@
 package com.sinthoras.visualprospecting.integration.model.layers;
 
 import com.gtnewhorizons.navigator.api.journeymap.waypoints.JMWaypointManager;
+import com.gtnewhorizons.navigator.api.model.SupportedMods;
 import com.gtnewhorizons.navigator.api.model.layers.InteractableLayerManager;
 import com.gtnewhorizons.navigator.api.model.layers.LayerRenderer;
 import com.gtnewhorizons.navigator.api.model.layers.UniversalInteractableRenderer;
@@ -33,14 +34,14 @@ public class OreVeinLayerManager extends InteractableLayerManager {
 
     @Nullable
     @Override
-    protected LayerRenderer addLayerRenderer(InteractableLayerManager manager) {
+    protected LayerRenderer addLayerRenderer(InteractableLayerManager manager, SupportedMods jm) {
         return new UniversalInteractableRenderer(manager)
                 .withRenderStep(location -> new OreVeinRenderStep((OreVeinLocation) location));
     }
 
     @Nullable
     @Override
-    protected WaypointManager addWaypointManager(InteractableLayerManager manager) {
+    protected WaypointManager addWaypointManager(InteractableLayerManager manager, SupportedMods jm) {
         return new JMWaypointManager(manager);
     }
 

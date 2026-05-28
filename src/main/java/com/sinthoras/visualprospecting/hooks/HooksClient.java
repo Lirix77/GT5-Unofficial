@@ -5,6 +5,7 @@ import com.sinthoras.visualprospecting.database.ResetClientCacheCommand;
 import com.sinthoras.visualprospecting.integration.model.layers.OreVeinLayerManager;
 import com.sinthoras.visualprospecting.integration.model.layers.UndergroundFluidLayerManager;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.*;
 import net.minecraftforge.client.ClientCommandHandler;
 
@@ -57,9 +58,9 @@ public class HooksClient extends HooksShared {
     }
 
     public void registerMapLayers() {
-
-        NavigatorApi.registerLayerManager(OreVeinLayerManager.instance);
-        NavigatorApi.registerLayerManager(UndergroundFluidLayerManager.instance);
-
+        if(Loader.isModLoaded("navigator")) {
+            NavigatorApi.registerLayerManager(OreVeinLayerManager.instance);
+            NavigatorApi.registerLayerManager(UndergroundFluidLayerManager.instance);
+        }
     }
 }
