@@ -12,7 +12,7 @@ import gregtech.crossmod.visualprospecting.VisualProspectingDatabase;
         version = Tags.VERSION,
         name = Tags.MODNAME,
         acceptedMinecraftVersions = "[1.7.10]",
-        dependencies = "required-after:gregtech;" + "required-after:NotEnoughItems;" + "after:navigator;")
+        dependencies = "required-after:gregtech;" + "after:NotEnoughItems;" + "after:navigator;")
 public class VPMod {
 
     @SidedProxy(clientSide = Tags.GROUPNAME + ".hooks.HooksClient", serverSide = Tags.GROUPNAME + ".hooks.HooksShared")
