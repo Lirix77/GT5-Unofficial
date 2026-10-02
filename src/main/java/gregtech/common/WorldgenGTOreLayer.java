@@ -119,7 +119,9 @@ public class WorldgenGTOreLayer extends GTWorldgen {
             return ORE_PLACED;
         }
 
-        if (!isGenerationAllowed(aWorld, blackListedProviders, mAllowedProviders)) {
+        boolean forceOverworldInRealm = (aWorld.provider.dimensionId < -99999999 && this.mOverworld);
+
+        if (!forceOverworldInRealm && !isGenerationAllowed(aWorld, blackListedProviders, mAllowedProviders)) {
             // The following code can be used for debugging, but it spams in logs
             // if (debugOrevein) { GTLog.out.println( "Wrong dimension" ); }
             return WRONG_DIMENSION;

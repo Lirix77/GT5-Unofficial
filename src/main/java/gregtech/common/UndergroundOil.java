@@ -35,6 +35,11 @@ public class UndergroundOil {
     private static final GT_UndergroundOilStore STORAGE = new GT_UndergroundOilStore();
     private static final ChunkData NIL_FLUID_STACK = new ChunkData(-1, null, null, false);
 
+    private static int getUOConfigDimensionId(World world) {
+        int dimensionId = world.provider.dimensionId;
+        return dimensionId < -99999999 ? 0 : dimensionId;
+    }
+
     /**
      * Effectively just call {@code undergroundOil(te, -1)} for you
      *
@@ -125,11 +130,15 @@ public class UndergroundOil {
      * @return UO fluid kind and amount, or null if nothing here.
      */
     public static Pair<GTUOFluid, Integer> getPristineAmount(World world, int chunkX, int chunkZ) {
-        int dimensionId = world.provider.dimensionId;
-        GTUODimension dimension = GTMod.gregtechproxy.mUndergroundOil.GetDimension(dimensionId);
+        int actualDim = world.provider.dimensionId;
+        int configDim = getUOConfigDimensionId(world);
+
+        GTUODimension dimension = GTMod.gregtechproxy.mUndergroundOil.GetDimension(configDim);
         if (dimension == null) return null;
-        // prepare RNG
-        final XSTR tVeinRNG = new XSTR(world.getSeed() + dimensionId * 2L + (chunkX >> 3) + 8267L * (chunkZ >> 3));
+
+        final XSTR tVeinRNG = new XSTR(
+            world.getSeed() + actualDim * 2L + (chunkX >> 3) + 8267L * (chunkZ >> 3));
+
         GTUOFluid uoFluid = dimension.getRandomFluid(tVeinRNG);
         // nothing here :(
         if (uoFluid == null || uoFluid.getFluid() == null) return null;
@@ -226,7 +235,7 @@ public class UndergroundOil {
             if (hash == 0) return NIL_FLUID_STACK;
             return new UndergroundOil.ChunkData(
                 amount,
-                GTMod.gregtechproxy.mUndergroundOil.GetDimension(world.provider.dimensionId)
+                GTMod.gregtechproxy.mUndergroundOil.GetDimension(getUOConfigDimensionId(world))
                     .getUOFluid(veinKey),
                 veinKey);
         }
@@ -235,8 +244,8 @@ public class UndergroundOil {
         protected UndergroundOil.ChunkData createElement(World world, int chunkX, int chunkZ) {
             Pair<GTUOFluid, Integer> pristine = getPristineAmount(world, chunkX, chunkZ);
             if (pristine == null) return NIL_FLUID_STACK;
-            int dimensionId = world.provider.dimensionId;
-            GTUODimension dimension = GTMod.gregtechproxy.mUndergroundOil.GetDimension(dimensionId);
+            int configDim = getUOConfigDimensionId(world);
+            GTUODimension dimension = GTMod.gregtechproxy.mUndergroundOil.GetDimension(configDim);
             return new UndergroundOil.ChunkData(
                 pristine.getRight(),
                 pristine.getLeft(),
