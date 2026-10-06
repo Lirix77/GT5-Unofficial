@@ -1,13 +1,19 @@
 package gregtech.common.blocks;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
+import java.util.Objects;
+import java.util.ArrayList;
 
+import gregtech.api.enums.ItemList;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -29,6 +35,8 @@ import gregtech.api.util.GTLanguageManager;
  */
 public abstract class BlockCasingsAbstract extends GTGenericBlock
     implements gregtech.api.interfaces.IHasIndexedTexture {
+
+    private final ArrayList<Supplier<String>> mTooltips = new ArrayList<>(32);
 
     public BlockCasingsAbstract(Class<? extends ItemBlock> aItemClass, String aName, Material aMaterial) {
         super(aItemClass, aName, aMaterial);
@@ -130,6 +138,41 @@ public abstract class BlockCasingsAbstract extends GTGenericBlock
             ItemStack aStack = new ItemStack(aItem, 1, i);
             if (!aStack.getDisplayName()
                 .contains(".name")) aList.add(aStack);
+        }
+    }
+
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advancedTooltips) {
+        int meta = stack.getItemDamage();
+
+        Supplier<String> tt = mTooltips.get(meta);
+
+        if (tt == null) return;
+
+        String str = tt.get();
+
+        if (str != null) {
+            tooltip.addAll(Arrays.asList(str.split("\n")));
+        }
+    }
+
+    protected void register(int meta, ItemList handle, String defaultLocalName) {
+        register(meta, handle, defaultLocalName, (Supplier<String>) null);
+    }
+
+//    protected void register(int meta, ItemList handle, String defaultLocalName, String tooltipLangKey) {
+//        register(meta, handle, defaultLocalName, () -> GTLanguageManager.formatString(tooltipLangKey));
+//    }
+
+    protected void register(int meta, ItemList handle, String defaultLocalName, Supplier<String> tooltip) {
+        GTLanguageManager.addStringLocalization(getUnlocalizedName() + "." + meta + ".name", defaultLocalName);
+
+        if (handle != null) {
+            handle.set(new ItemStack(this, 1, meta));
+        }
+
+        if (tooltip != null) {
+            if (mTooltips.size() < meta + 1) mTooltips.ensureCapacity(meta + 1);
+            mTooltips.set(meta, tooltip);
         }
     }
 
